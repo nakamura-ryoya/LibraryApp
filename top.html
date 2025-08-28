@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>おすすめ書籍スライダー</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Splide CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css"
+    />
+    <style>
+      .card-img {
+        width: 100px;
+        height: 140px;
+        object-fit: cover;
+      }
+      .splide__list {
+        transition: transform 0.8s ease-in-out !important;
+      }
+      .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* 表示する最大行数 */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <svg style="display: none">
+      <symbol id="icon-star" viewBox="0 0 24 24">
+        <path
+          d="M12 2l2.9 6.9L22 9.3l-5 4.9 1.2 7.1L12 18l-6.2 3.3L7 14.2 2 9.3l7.1-0.4L12 2z"
+          fill="gold"
+        />
+      </symbol>
+    </svg>
+    <svg style="display: none">
+      <defs>
+        <mask id="mask-0">
+          <rect x="0" y="0" width="0" height="24" fill="white" />
+          <rect x="0" y="0" width="24" height="24" fill="black" />
+        </mask>
+      </defs>
+      <defs>
+        <mask id="mask-20">
+          <rect x="0" y="0" width="4.8" height="24" fill="white" />
+          <rect x="4.8" y="0" width="19.2" height="24" fill="black" />
+        </mask>
+      </defs>
+      <defs>
+        <mask id="mask-40">
+          <rect x="0" y="0" width="9.6" height="24" fill="white" />
+          <rect x="9.6" y="0" width="14.4" height="24" fill="black" />
+        </mask>
+      </defs>
+      <defs>
+        <mask id="mask-60">
+          <rect x="0" y="0" width="14.4" height="24" fill="white" />
+          <rect x="14.4" y="0" width="9.6" height="24" fill="black" />
+        </mask>
+      </defs>
+      <defs>
+        <mask id="mask-80">
+          <rect x="0" y="0" width="19.2" height="24" fill="white" />
+          <rect x="19.2" y="0" width="4.8" height="24" fill="black" />
+        </mask>
+      </defs>
+    </svg>
+  </head>
+  <body style="background-color: #e5e5e5">
+    <!-- ナビバー -->
+    <nav class="navbar navbar-dark bg-dark">
+      <div
+        class="container-fluid d-flex justify-content-between align-items-center"
+      >
+        <!-- 左側：システム名 -->
+        <a class="navbar-brand fw-bold" href="#">📚 社内図書館システム</a>
+
+        <!-- 右側：ログインユーザー表示 -->
+        <div class="d-flex align-items-center">
+          <i class="bi bi-person-circle fs-4 text-white me-2"></i>
+          <span class="text-white fw-light">田中 太郎</span>
+        </div>
+      </div>
+    </nav>
+    <!-- 検索フォーム -->
+    <div class="container mt-4" style="max-width: 1000px">
+      <label for="searchInput" class="form-label">蔵書検索</label>
+      <form role="search" action="/searchResult.html">
+        <div class="input-group">
+          <input
+            id="searchInput"
+            type="text"
+            class="form-control"
+            placeholder="書籍名・著者名など"
+            aria-label="Search"
+          />
+          <button class="btn btn-primary" type="submit">
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+    <div
+      class="container-fluid px-3 px-md-5 mt-5 mx-auto"
+      style="max-width: 1200px"
+    >
+      <h2 class="text-center mb-4">
+        <i class="bi bi-book me-1"></i> おすすめ書籍
+      </h2>
+
+      <nav class="container mb-4">
+        <div class="d-flex flex-wrap justify-content-start gap-5">
+          おすすめタグ：
+          <a href="#" class="link-offset-3 link-opacity-25-hover">基本情報</a>
+          <a href="#" class="link-offset-3 link-opacity-25-hover">AWS</a>
+          <a href="#" class="link-offset-3 link-opacity-25-hover"
+            >アプリケーションエンジニア</a
+          >
+          <a href="#" class="link-offset-3 link-opacity-25-hover">インフラ系</a>
+          <a href="#" class="link-offset-3 link-opacity-25-hover">入門書</a>
+          <a href="#" class="link-offset-3 link-opacity-25-hover">単語集</a>
+        </div>
+      </nav>
+
+      <div id="splide-books" class="splide">
+        <div class="splide__track">
+          <ul class="splide__list">
+            <!-- Box 1 -->
+            <li class="splide__slide">
+              <div class="h-100 card d-flex flex-row align-items-start p-2">
+                <img
+                  src="/book1.png"
+                  class="img-fluid"
+                  style="width: 100px; height: 140px; object-fit: cover"
+                  alt="図解 AWSの仕組みとサービスがよくわかる！"
+                />
+
+                <div
+                  class="card-body d-flex flex-column justify-content-between"
+                >
+                  <div>
+                    <h5 class="card-title mb-2">
+                      図解 AWSの仕組みとサービスがよくわかる！
+                    </h5>
+                  </div>
+                  <div>
+                    <div class="d-flex align-items-center gap-0">
+                      <!-- ⭐ 塗りつぶし星（SVG） -->
+                      <svg width="18" height="18">
+                        <use href="#icon-star" />
+                      </svg>
+                      <svg width="18" height="18">
+                        <use href="#icon-star" />
+                      </svg>
+                      <svg width="18" height="18">
+                        <use href="#icon-star" />
+                      </svg>
+                      <svg width="18" height="18">
+                        <use href="#icon-star" />
+                      </svg>
+                      <svg width="18" height="18" viewBox="0 0 24 24">
+                        <path
+                          d="M12 2l2.9 6.9L22 9.3l-5 4.9 1.2 7.1L12 18l-6.2 3.3L7 14.2 2 9.3l7.1-0.4L12 2z"
+                          fill="gold"
+                          mask="url(#mask-40)"
+                        />
+                      </svg>
+                      <span class="text-muted small me-1">4.4</span>
+                      <a class="small" href="#">(16)</a>
+                    </div>
+                    <p class="card-text mb-0 line-clamp-2">
+                      <i class="bi bi-person-fill me-1"></i
+                      >「人生が変わる考え方に出会えました！いやーこれほんとにすごいですよ！絶対読んだほうが良いです！！」
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <!-- Box 2 -->
+            <li class="splide__slide">
+              <div class="h-100 card d-flex flex-row align-items-start p-2">
+                <img
+                  src="/book2.png"
+                  class="img-fluid"
+                  style="width: 100px; height: 140px; object-fit: cover"
+                  alt="AWSの仕組み・重要用語がわかる教科書"
+                />
+
+                <div
+                  class="card-body d-flex flex-column justify-content-between"
+                >
+                  <div>
+                    <h5 class="card-title mb-2">
+                      AWSの仕組み・重要用語がわかる教科書
+                    </h5>
+                  </div>
+                  <div>
+                    <div class="d-flex align-items-center gap-0">
+                      <!-- ⭐ 塗りつぶし星（SVG） -->
+                      <svg width="18" height="18">
+                        <use href="#icon-star" />
+                      </svg>
+                      <svg width="18" height="18">
+                        <use href="#icon-star" />
+                      </svg>
+                      <svg width="18" height="18">
+                        <use href="#icon-star" />
+                      </svg>
+                      <svg width="18" height="18">
+                        <use href="#icon-star" />
+                      </svg>
+                      <svg width="18" height="18" viewBox="0 0 24 24">
+                        <path
+                          d="M12 2l2.9 6.9L22 9.3l-5 4.9 1.2 7.1L12 18l-6.2 3.3L7 14.2 2 9.3l7.1-0.4L12 2z"
+                          fill="gold"
+                          mask="url(#mask-0)"
+                        />
+                      </svg>
+                      <span class="text-muted small me-1">4.0</span>
+                      <a class="small" href="#">(4)</a>
+                    </div>
+                    <p class="card-text mb-0 line-clamp-2">
+                      <i class="bi bi-person-fill me-1"></i>「これ、エグすぎ。」
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <!-- Box 3 -->
+            <li class="splide__slide">
+              <div class="h-100 card d-flex flex-row align-items-start p-2">
+                <img
+                  src="/book3.png"
+                  class="img-fluid"
+                  style="width: 100px; height: 140px; object-fit: cover"
+                  alt="はじめてのAWS"
+                />
+
+                <div
+                  class="card-body d-flex flex-column justify-content-between"
+                >
+                  <div>
+                    <h5 class="card-title mb-2 text-wrap">はじめてのAWS</h5>
+                  </div>
+                  <div>
+                    <div class="d-flex align-items-center gap-0">
+                      <!-- ⭐ 塗りつぶし星（SVG） -->
+                      <svg width="18" height="18">
+                        <use href="#icon-star" />
+                      </svg>
+                      <svg width="18" height="18">
+                        <use href="#icon-star" />
+                      </svg>
+                      <svg width="18" height="18">
+                        <use href="#icon-star" />
+                      </svg>
+                      <svg width="18" height="18">
+                        <use href="#icon-star" />
+                      </svg>
+                      <svg width="18" height="18" viewBox="0 0 24 24">
+                        <path
+                          d="M12 2l2.9 6.9L22 9.3l-5 4.9 1.2 7.1L12 18l-6.2 3.3L7 14.2 2 9.3l7.1-0.4L12 2z"
+                          fill="gold"
+                          mask="url(#mask-60)"
+                        />
+                      </svg>
+                      <span class="text-muted small me-1">4.6</span>
+                      <a class="small" href="#">(32)</a>
+                    </div>
+                    <p class="card-text mb-0 line-clamp-2">
+                      <i class="bi bi-person-fill me-1"></i
+                      >「また読みたくなる素敵な本です」
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <!-- Box 4 -->
+            <li class="splide__slide">
+              <div class="h-100 card d-flex flex-row align-items-start p-2">
+                <img
+                  src="/book4.png"
+                  class="img-fluid"
+                  style="width: 100px; height: 140px; object-fit: cover"
+                  alt="1日5分からはじめる資格勉強術"
+                />
+
+                <div
+                  class="card-body d-flex flex-column justify-content-between"
+                >
+                  <div>
+                    <h5 class="card-title mb-2">
+                      1日5分からはじめる資格勉強術
+                    </h5>
+                  </div>
+                  <div>
+                    <div class="d-flex align-items-center gap-0">
+                      <!-- ⭐ 塗りつぶし星（SVG） -->
+                      <svg width="18" height="18">
+                        <use href="#icon-star" />
+                      </svg>
+                      <svg width="18" height="18">
+                        <use href="#icon-star" />
+                      </svg>
+                      <svg width="18" height="18">
+                        <use href="#icon-star" />
+                      </svg>
+                      <svg width="18" height="18">
+                        <use href="#icon-star" />
+                      </svg>
+                      <svg width="18" height="18" viewBox="0 0 24 24">
+                        <path
+                          d="M12 2l2.9 6.9L22 9.3l-5 4.9 1.2 7.1L12 18l-6.2 3.3L7 14.2 2 9.3l7.1-0.4L12 2z"
+                          fill="gold"
+                          mask="url(#mask-40)"
+                        />
+                      </svg>
+                      <span class="text-muted small me-1">4.3</span>
+                      <a class="small" href="#">(7)</a>
+                    </div>
+                    <p class="card-text mb-0 line-clamp-2">
+                      <i class="bi bi-person-fill me-1"></i
+                      >「衝撃的！こんなのありえない」
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- 書籍イベントスライダー -->
+    <div
+      class="container-fluid px-3 px-md-5 mt-5 mx-auto"
+      style="max-width: 1200px"
+    >
+      <h2 class="text-center mb-4">
+        <i class="bi bi-calendar-event"></i> 書籍イベント
+      </h2>
+      <div id="splide-event" class="splide">
+        <div class="splide__track">
+          <ul class="splide__list">
+            <li class="splide__slide">
+              <div class="card p-2">
+                <h5 class="card-title">読書会：哲学と心理学</h5>
+                <p class="card-text">
+                  <i class="bi bi-geo-alt me-1"></i> 東京・渋谷｜<i
+                    class="bi bi-calendar-event me-1"
+                  ></i>
+                  9月15日（土）
+                </p>
+                <p class="card-text text-muted">
+                  「嫌われる勇気」について語り合う読書会です。
+                </p>
+              </div>
+            </li>
+            <li class="splide__slide">
+              <div class="card p-2">
+                <h5 class="card-title">著者トークイベント</h5>
+                <p class="card-text">
+                  <i class="bi bi-geo-alt me-1"></i> 大阪・梅田｜<i
+                    class="bi bi-calendar-event me-1"
+                  ></i>
+                  10月1日（日）
+                </p>
+                <p class="card-text text-muted">
+                  「スマホ脳」著者による講演とQ&Aセッション。
+                </p>
+              </div>
+            </li>
+            <!-- 他のイベントも追加可能 -->
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Splide JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+
+    <script>
+      new Splide("#splide-books", {
+        type: "loop",
+        perPage: 3,
+        perMove: 1,
+        gap: "1rem",
+        focus: "center",
+        breakpoints: {
+          1024: { perPage: 2 },
+          768: { perPage: 1 },
+        },
+      }).mount();
+
+      new Splide("#splide-event", {
+        type: "loop",
+        perPage: 3,
+        perMove: 1,
+        gap: "1rem",
+        focus: "center",
+        breakpoints: {
+          1024: { perPage: 2 },
+          768: { perPage: 1 },
+        },
+      }).mount();
+    </script>
+  </body>
+</html>
