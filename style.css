@@ -4,14 +4,14 @@
 body {
   background-color: #e5e5e5;
   color: #212529;
-  font-family: "Yu Gothic UI", sans-serif;
+  font-family: "Noto Sans", sans-serif;
 }
 
 /* =============================
    ナビバー
 ============================= */
 .navbar {
-  background-color: #000000;
+  background-color: #131921;
 }
 
 .navbar-brand {
@@ -30,6 +30,20 @@ body {
 
 .nav-link:hover {
   color: #f8f9fa;
+}
+
+h1 {
+  /* スマホサイズにすると、検索結果が隠れる */
+  font-size: 2rem;
+}
+
+.navbar-brand,
+.user-info {
+  flex-shrink: 0;
+}
+.search-form {
+  flex-grow: 1;
+  max-width: 600px;
 }
 
 /* =============================
@@ -59,6 +73,7 @@ body {
 
 .card-title {
   color: #000000;
+  font-weight: 700;
 }
 
 .card h2 {
@@ -108,6 +123,31 @@ body {
   text-align: center;
 }
 
+.badge-fixed.bg-success:hover {
+  cursor: pointer;
+  background-color: #218838;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  transform: scale(1.03);
+}
+
+.badge-fixed {
+  display: inline-block;
+  padding: 0.8em 1.2em; /* ← ここを調整 */
+  font-size: 0.9rem; /* ← 文字サイズはそのまま */
+  border-radius: 0.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.badge-fixed.bg-danger {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.badge-fixed.bg-danger:hover {
+  background-color: #dc3545;
+  box-shadow: none;
+  transform: none;
+}
 /* =============================
    あらすじテキストの切り詰め
 ============================= */
@@ -213,4 +253,56 @@ body {
 .unavailable {
   background-color: #f8d7da;
   color: #dc3545;
+}
+
+.pagination li a {
+  color: #007185;
+}
+.pagination .active .page-link {
+  background-color: #ffffff;
+  border-color: #131921;
+  color: #131921;
+}
+.pagination .page-link:hover {
+  background-color: #e2e2e2;
+}
+
+/* =============================
+   行数制限
+============================= */
+.review-clamp-2 {
+  display: box;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 表示する最大行数 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 3em; /* 2行分の高さを確保 */
+  max-height: 3em; /* 2行分の高さを確保 */
+}
+.title-clamp-2 {
+  display: box;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 表示する最大行数 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.5em; /* 2行分の高さを確保 */
+  max-height: 2.5em; /* 2行分の高さを確保 */
+}
+/* =============================
+   スライドアニメーション
+============================= */
+.splide__list {
+  transition: transform 0.8s ease-in-out !important;
+}
+
+/* =============================
+   ★★★評価リンクのホバー表現
+============================= */
+.rating-link:hover {
+  color: #0d6efd !important;
+  text-decoration: underline !important;
+}
+
+.rating-link:hover span.text-muted {
+  color: #0d6efd !important;
 }
