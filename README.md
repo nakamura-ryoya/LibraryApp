@@ -1,6 +1,6 @@
 ## 参加方法
 1. 以下のURLからGitをインストール  
-https://gitforwindows.org/
+https://gitforwindows.org/  
 (※インストール手順はこちらを参考に！：https://qiita.com/takeru-hirai/items/4fbe6593d42f9a844b1c)
 3. Git Hubのアカウントを作成する（ある人はスキップ）  
 Git Hubのアカウント作成はこちらから：https://github.com/signup?source=form-home-signup&user_email=
