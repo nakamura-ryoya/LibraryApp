@@ -1,10 +1,11 @@
 ## 参加方法
 1. 以下のURLからGitをインストール  
 https://gitforwindows.org/
-2. Git Hubのアカウントを作成する（ある人はスキップ）  
+(※インストール手順はこちらを参考に！：https://qiita.com/takeru-hirai/items/4fbe6593d42f9a844b1c)
+3. Git Hubのアカウントを作成する（ある人はスキップ）  
 Git Hubのアカウント作成はこちらから：https://github.com/signup?source=form-home-signup&user_email=
 ※ユーザを作成したら、ユーザー名を教えてください
-3. Git Bash（Gitをインストール時に自動でインストールされてるはず）を起動し、以下のコマンドを実行  
+4. Git Bash（Gitをインストール時に自動でインストールされてるはず）を起動し、以下のコマンドを実行  
 ~~~bash
 git config --global user.name "（自分の名前）"
 git config --global user.email "（社内メール）"
