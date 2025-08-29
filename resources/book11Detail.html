@@ -29,7 +29,7 @@
           class="navbar-brand fw-bold text-white"
           href="/resources/toppage.html"
         >
-          ★NSLibrary★
+          ★ 社内図書館システム
         </a>
 
         <!-- 中央：検索フォーム（伸縮対応） -->
@@ -37,6 +37,7 @@
           class="d-flex search-form mx-3"
           role="search"
           action="/resources/booksearch.html"
+          method="GET"
         >
           <input
             id="searchInput"
@@ -70,14 +71,14 @@
             class="col-md-3 d-flex justify-content-center align-items-center"
           >
             <img
-              src="/images/book8.png"
+              src="/images/book11.png"
               class="img-fluid rounded-start"
               alt="本の表紙"
             />
           </div>
           <div class="col-md-5">
             <div class="card-body d-flex flex-column h-100">
-              <h3 class="card-title">ビジネスでの話し方　全部、うまくいく</h3>
+              <h3 class="card-title">Amazon DynamoDB for Beginners</h3>
               <p class="card-text">
                 <strong>評価：</strong>
                 <a
@@ -85,30 +86,34 @@
                   class="rating-link text-warning text-decoration-none"
                 >
                   ★ ★ ★ ★ ☆
-                  <span class="text-muted">4.3 / 5.0（13件）</span>
+                  <span class="text-muted">4.0 / 5.0（1件）</span>
                 </a>
               </p>
               <p class="card-text">
                 <strong><i class="bi bi-person-fill"></i> 著者：</strong>
-                白石 悠真
+                レイチェル・モンロー
+              </p>
+              <p class="card-text">
+                <strong><i class="bi bi-person-fill"></i> 訳者：</strong>
+                伊藤 翔太
               </p>
               <p class="card-text">
                 <strong><i class="bi bi-diagram-2"></i> ISBN：</strong>
                 978-4-00-310101-8
               </p>
               <p class="card-text">
-                <strong><i class="bi bi-calendar"></i> 出版年：</strong> 2014年
+                <strong><i class="bi bi-calendar"></i> 出版年：</strong> 2024年
               </p>
               <p class="card-text">
                 <strong><i class="bi bi-bookshelf"></i> ジャンル：</strong>
-                <span class="badge bg-info me-1">＃若手にオススメ</span>
-                <span class="badge bg-info me-1">＃エンジニア向け</span>
-                <span class="badge bg-info me-1">＃思考法</span>
+                <span class="badge bg-info me-1">＃AWS</span>
+                <span class="badge bg-info me-1">＃初心者向け</span>
+                <span class="badge bg-info me-1">＃入門書</span>
               </p>
               <p class="card-text">
                 <strong><i class="bi bi-chat-left-text"></i> あらすじ：</strong
                 ><br />
-                ケーススタディ／思考トレーニング／技術と哲学の融合
+                ステップバイステップのチュートリアル形式、DynamoDBのユースケース別設計例、ベストプラクティスと落とし穴の解説、無料枠で試せるハンズオン付き
               </p>
               <!-- <div class="mt-auto pt-3">
                 <button class="btn btn-primary me-2">
@@ -163,7 +168,7 @@
         </div>
         <div class="card-body">
           <p class="card-text">
-            技術力だけでなく、問題解決力・設計力・チーム貢献力など、総合的な「思考力」を磨くための指南書。著者の経験談や、業界トップエンジニアの思考パターンを分析しながら、読者自身の成長を促す。
+            DynamoDBの基本概念から実践的な使い方までを、初心者向けに丁寧に解説した入門書。NoSQLの考え方、テーブル設計、クエリの書き方、パーティションキーとソートキーの使い分けなど、初学者がつまずきやすいポイントを図解とサンプルコードでわかりやすく紹介。AWSコンソールとCLIの両方に対応し、実際に手を動かしながら学べる構成。
           </p>
         </div>
       </div>
@@ -366,7 +371,7 @@
           </a>
 
           <!-- 7 -->
-          <!-- <a
+          <a
             href="book8Detail.html"
             style="text-decoration: none; color: inherit"
           >
@@ -394,7 +399,7 @@
                 </p>
               </div>
             </div>
-          </a> -->
+          </a>
 
           <!-- 8 -->
           <a
@@ -462,7 +467,7 @@
           </a>
 
           <!-- 10 -->
-          <a
+          <!-- <a
             href="book11Detail.html"
             style="text-decoration: none; color: inherit"
           >
@@ -490,7 +495,7 @@
                 </p>
               </div>
             </div>
-          </a>
+          </a> -->
         </div>
       </div>
 
@@ -519,17 +524,17 @@
               <small class="text-warning">★ ★ ★ ★ ☆</small>
             </div>
             <p class="mb-0">
-              会議やプレゼンで“伝わる”話し方が身につく。実践的なフレーズ集もありがたい。
+              DynamoDBって難しそう…と思っていたけど、この本で一気に理解が進んだ。図解が秀逸！
             </p>
           </div>
 
-          <div class="list-group-item">
+          <!-- <div class="list-group-item">
             <div class="d-flex justify-content-between align-items-center mb-1">
               <strong>佐藤 花子</strong>
               <small class="text-warning">★ ★ ★ ★ ★</small>
             </div>
             <p class="mb-0">
-              訳文が自然で読みやすく、原著のテンポ感も損なわれていない。ビジネス初心者にもおすすめ。
+              洋書ではあるが、EC2の全機能を網羅していて初心者から上級者まで使える。
             </p>
           </div>
 
@@ -541,7 +546,7 @@
             <p class="mb-0">
               内容は良かったですが、一部難しい表現もありました。
             </p>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
