@@ -311,7 +311,7 @@ h1 {
    スクロールバーの調整
 ============================= */
 .scroll-container::-webkit-scrollbar {
-  height: 8px; /* 横スクロールバーの高さ */
+  height: 20px; /* 横スクロールバーの高さ */
 }
 
 .scroll-container::-webkit-scrollbar-track {
