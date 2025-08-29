@@ -306,3 +306,24 @@ h1 {
 .rating-link:hover span.text-muted {
   color: #0d6efd !important;
 }
+
+/* =============================
+   スクロールバーの調整
+============================= */
+.scroll-container::-webkit-scrollbar {
+  height: 8px; /* 横スクロールバーの高さ */
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background-color: #e5e5e5; /* 背景色（バーの背面） */
+  border-radius: 4px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: #999; /* スクロールつまみの色 */
+  border-radius: 4px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background-color: #666; /* ホバー時の色 */
+}
