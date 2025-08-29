@@ -25,12 +25,20 @@
         style="max-width: 1200px; margin: auto"
       >
         <!-- 左側：システム名 -->
-        <a class="navbar-brand fw-bold text-white" href="/top.html">
+        <a
+          class="navbar-brand fw-bold text-white"
+          href="/resources/toppage.html"
+        >
           ★ 社内図書館システム
         </a>
 
         <!-- 中央：検索フォーム（伸縮対応） -->
-        <form class="d-flex search-form mx-3" role="search">
+        <form
+          class="d-flex search-form mx-3"
+          role="search"
+          action="/resources/booksearch.html"
+          method="GET"
+        >
           <input
             id="searchInput"
             type="text"
@@ -63,16 +71,14 @@
             class="col-md-3 d-flex justify-content-center align-items-center"
           >
             <img
-              src="/images/book1.png"
+              src="/images/book3.png"
               class="img-fluid rounded-start"
               alt="本の表紙"
             />
           </div>
           <div class="col-md-5">
             <div class="card-body d-flex flex-column h-100">
-              <h3 class="card-title">
-                図解AWSの仕組みとサービスがよく分かる！
-              </h3>
+              <h3 class="card-title">はじめてのAWS</h3>
               <p class="card-text">
                 <strong>評価：</strong>
                 <a
@@ -80,12 +86,12 @@
                   class="rating-link text-warning text-decoration-none"
                 >
                   ★ ★ ★ ★ ☆
-                  <span class="text-muted">4.6 / 5.0（13件）</span>
+                  <span class="text-muted">4.8 / 5.0（20件）</span>
                 </a>
               </p>
               <p class="card-text">
-                <strong><i class="bi bi-person-fill"></i> 著者：</strong> 佐藤
-                陽一
+                <strong><i class="bi bi-person-fill"></i> 著者：</strong>
+                中村 美咲
               </p>
               <p class="card-text">
                 <strong><i class="bi bi-diagram-2"></i> ISBN：</strong>
@@ -96,14 +102,13 @@
               </p>
               <p class="card-text">
                 <strong><i class="bi bi-bookshelf"></i> ジャンル：</strong>
-                <span class="badge bg-info me-1">＃文学</span>
-                <span class="badge bg-info me-1">＃歴史</span>
-                <span class="badge bg-info me-1">＃ミステリー</span>
+                <span class="badge bg-info me-1">＃AWS</span>
+                <span class="badge bg-info me-1">＃入門</span>
               </p>
               <p class="card-text">
                 <strong><i class="bi bi-chat-left-text"></i> あらすじ：</strong
                 ><br />
-                AWSの主要サービス（EC2、S3、Lambda、RDSなど）を図解でわかりやすく解説。インフラの構成図やデータフロー、料金体系などをビジュアルで理解できる構成になっており、初心者から中級者まで幅広く対応。
+                ステップバイステップで学べるAWS入門書。AWSの基本概念から主要サービスの使い方まで、初心者にもわかりやすく解説。実践的な例題も豊富に掲載。
               </p>
               <!-- <div class="mt-auto pt-3">
                 <button class="btn btn-primary me-2">
@@ -158,7 +163,7 @@
         </div>
         <div class="card-body">
           <p class="card-text">
-            AWSの主要サービス（EC2、S3、Lambda、RDSなど）を図解でわかりやすく解説。インフラの構成図やデータフロー、料金体系などをビジュアルで理解できる構成になっており、初心者から中級者まで幅広く対応。
+            「AWSって何？」という段階からスタートし、アカウント作成、無料枠の使い方、簡単なEC2の起動までを丁寧にガイド。クラウドの概念やオンプレとの違いも初心者目線で解説。
           </p>
         </div>
       </div>
@@ -203,7 +208,7 @@
           </div>
 
           <!-- 2 -->
-          <div
+          <!-- <div
             class="card"
             style="min-width: 200px; max-width: 200px; height: 320px"
           >
@@ -224,7 +229,7 @@
                 <small class="text-warning">★ ★ ★ ★ ★</small>
               </p>
             </div>
-          </div>
+          </div> -->
 
           <!-- 3 -->
           <div
