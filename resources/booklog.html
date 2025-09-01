@@ -67,10 +67,442 @@
 
     <!-- 検索結果カード -->
     <div class="container">
+      <!-- カード -->
+      <div
+        class="card card-hover mb-4 shadow-sm border-0"
+        style="max-width: 1200px; margin: auto"
+      >
+        <div class="row g-0 align-items-stretch">
+          <!-- 画像 -->
+          <div
+            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
+          >
+            <img
+              src="/images/book2.png"
+              class="img-fluid rounded"
+              alt="蔵書画像"
+              style="max-height: 100px; width: 75px; height: 100px"
+            />
+          </div>
+
+          <!-- タイトル・評価・あらまし -->
+          <div
+            class="col-md-6 d-flex flex-column justify-content-center p-3 border-end"
+          >
+            <h5 class="fw-bold mb-2">AWSの仕組み・重要用語がわかる教科書</h5>
+            <div id="reviewSection" class="d-none">
+              <div class="mb-2">
+                <span id="stars" class="text-warning"></span>
+                <small class="text-muted ms-2" id="difficultyLabel"></small>
+              </div>
+              <p
+                class="mb-0 text-muted"
+                style="font-size: 0.9rem"
+                id="commentText"
+              ></p>
+            </div>
+          </div>
+
+          <!-- 貸出状況 -->
+          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
+            <button
+              class="btn btn-outline-dark btn-sm mb-2"
+              data-bs-toggle="modal"
+              data-bs-target="#returnModal"
+            >
+              返却する
+            </button>
+            <ul class="list-unstyled mb-0" style="font-size: 0.85rem">
+              <li><strong>借りた日:</strong> 2025年8月25日</li>
+              <li><strong>返却場所:</strong> 千代田図書館</li>
+              <li id="returnDate" class="d-none">
+                <strong>返却日:</strong> 2025年9月1日
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- モーダル -->
+      <div
+        class="modal fade"
+        id="returnModal"
+        tabindex="-1"
+        aria-labelledby="returnModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">返却情報を入力</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="閉じる"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <!-- 星評価 -->
+              <label class="form-label">星評価:</label>
+              <select class="form-select mb-3" id="rating">
+                <option value="5">★★★★★</option>
+                <option value="4">★★★★☆</option>
+                <option value="3">★★★☆☆</option>
+                <option value="2">★★☆☆☆</option>
+                <option value="1">★☆☆☆☆</option>
+              </select>
+
+              <!-- 難易度 -->
+              <label class="form-label">難易度（1〜100）:</label>
+              <input
+                type="number"
+                class="form-control mb-3"
+                id="difficulty"
+                min="1"
+                max="100"
+              />
+
+              <!-- コメント -->
+              <label class="form-label">コメント（任意）:</label>
+              <textarea class="form-control" id="comment" rows="3"></textarea>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                キャンセル
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="submitReturn()"
+              >
+                確定する
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- JavaScript -->
+      <script>
+        function submitReturn() {
+          const rating = document.getElementById("rating").value;
+          const difficulty = document.getElementById("difficulty").value;
+          const comment = document.getElementById("comment").value;
+
+          // 星表示
+          const stars = "★".repeat(rating) + "☆".repeat(5 - rating);
+          document.getElementById("stars").textContent = stars;
+
+          // 難易度表示
+          document.getElementById(
+            "difficultyLabel"
+          ).textContent = `難易度: ${difficulty}/100`;
+
+          // コメント表示
+          document.getElementById("commentText").textContent =
+            comment || "（コメントなし）";
+
+          // 返却日表示
+          document.getElementById("returnDate").classList.remove("d-none");
+
+          // レビューセクション表示
+          document.getElementById("reviewSection").classList.remove("d-none");
+
+          // ボタンを返却済みに変更
+          const button = document.querySelector(
+            '[data-bs-target="#returnModal"]'
+          );
+          button.outerHTML = '<span class="badge bg-dark mb-2">返却済</span>';
+
+          // モーダルを閉じる
+          const modal = bootstrap.Modal.getInstance(
+            document.getElementById("returnModal")
+          );
+          modal.hide();
+        }
+      </script>
+
+      <div
+        class="card card-hover mb-4 shadow-sm border-0"
+        style="max-width: 1200px; margin: auto"
+      >
+        <a href="book2Detail.html" class="stretched-link"></a>
+        <div class="row g-0 align-items-stretch">
+          <!-- 画像ブロック（2割） -->
+          <div
+            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
+          >
+            <img
+              src="/images/book2.png"
+              class="img-fluid rounded"
+              alt="蔵書画像"
+              style="max-height: 100px; width: 75px; height: 100px"
+            />
+          </div>
+
+          <!-- タイトル・評価・あらましブロック（6割） -->
+          <div
+            class="col-md-6 d-flex flex-column justify-content-center p-3 border-end"
+          >
+            <h5 class="fw-bold mb-2">AWSの仕組み・重要用語がわかる教科書</h5>
+            <div class="mb-2">
+              <span class="text-warning">★ ★ ★ ★ ☆</span>
+              <small class="text-muted ms-2">4.0 / 5</small>
+            </div>
+            <p class="mb-0 text-muted" style="font-size: 0.9rem">
+              AWSの基本がとても分かりやすく整理されていて、初心者にもおすすめです。
+            </p>
+          </div>
+
+          <!-- 貸出状況・履歴ブロック（2割） -->
+          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
+            <span class="badge bg-dark mb-2">返却済</span>
+            <ul class="list-unstyled mb-0" style="font-size: 0.85rem">
+              <li><strong>借りた日:</strong> 2025年8月25日</li>
+              <li><strong>返却日:</strong> 2025年9月1日</li>
+              <li><strong>返却場所:</strong> 千代田図書館</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- カード -->
+      <div
+        class="card card-hover mb-4 shadow-sm border-0"
+        style="max-width: 1200px; margin: auto"
+      >
+        <a href="book2Detail.html" class="stretched-link"></a>
+        <div class="row g-0 align-items-stretch">
+          <!-- 画像 -->
+          <div
+            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
+          >
+            <img
+              src="/images/book2.png"
+              class="img-fluid rounded"
+              alt="蔵書画像"
+              style="max-height: 100px; width: 75px; height: 100px"
+            />
+          </div>
+
+          <!-- タイトル・評価・あらまし -->
+          <div
+            class="col-md-6 d-flex flex-column justify-content-center p-3 border-end"
+          >
+            <h5 class="fw-bold mb-2">AWSの仕組み・重要用語がわかる教科書</h5>
+            <div id="reviewSection" class="d-none">
+              <div class="mb-2">
+                <span id="stars" class="text-warning"></span>
+                <small class="text-muted ms-2" id="difficultyLabel"></small>
+              </div>
+              <p
+                class="mb-0 text-muted"
+                style="font-size: 0.9rem"
+                id="commentText"
+              ></p>
+            </div>
+          </div>
+
+          <!-- 貸出状況 -->
+          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
+            <button
+              class="btn btn-outline-dark btn-sm mb-2"
+              data-bs-toggle="modal"
+              data-bs-target="#returnModal"
+            >
+              返却する
+            </button>
+            <ul class="list-unstyled mb-0" style="font-size: 0.85rem">
+              <li><strong>借りた日:</strong> 2025年8月25日</li>
+              <li><strong>返却場所:</strong> 千代田図書館</li>
+              <li id="returnDate" class="d-none">
+                <strong>返却日:</strong> 2025年9月1日
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- モーダル -->
+      <div
+        class="modal fade"
+        id="returnModal"
+        tabindex="-1"
+        aria-labelledby="returnModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">返却情報を入力</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="閉じる"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <!-- 星評価 -->
+              <label class="form-label">星評価:</label>
+              <select class="form-select mb-3" id="rating">
+                <option value="5">★★★★★</option>
+                <option value="4">★★★★☆</option>
+                <option value="3">★★★☆☆</option>
+                <option value="2">★★☆☆☆</option>
+                <option value="1">★☆☆☆☆</option>
+              </select>
+
+              <!-- 難易度 -->
+              <label class="form-label">難易度（1〜100）:</label>
+              <input
+                type="number"
+                class="form-control mb-3"
+                id="difficulty"
+                min="1"
+                max="100"
+              />
+
+              <!-- コメント -->
+              <label class="form-label">コメント（任意）:</label>
+              <textarea class="form-control" id="comment" rows="3"></textarea>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                キャンセル
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="submitReturn()"
+              >
+                確定する
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- JavaScript -->
+      <script>
+        function submitReturn() {
+          const rating = document.getElementById("rating").value;
+          const difficulty = document.getElementById("difficulty").value;
+          const comment = document.getElementById("comment").value;
+
+          // 星表示
+          const stars = "★".repeat(rating) + "☆".repeat(5 - rating);
+          document.getElementById("stars").textContent = stars;
+
+          // 難易度表示
+          document.getElementById(
+            "difficultyLabel"
+          ).textContent = `難易度: ${difficulty}/100`;
+
+          // コメント表示
+          document.getElementById("commentText").textContent =
+            comment || "（コメントなし）";
+
+          // 返却日表示
+          document.getElementById("returnDate").classList.remove("d-none");
+
+          // レビューセクション表示
+          document.getElementById("reviewSection").classList.remove("d-none");
+
+          // ボタンを返却済みに変更
+          const button = document.querySelector(
+            '[data-bs-target="#returnModal"]'
+          );
+          button.outerHTML = '<span class="badge bg-dark mb-2">返却済</span>';
+
+          // モーダルを閉じる
+          const modal = bootstrap.Modal.getInstance(
+            document.getElementById("returnModal")
+          );
+          modal.hide();
+        }
+      </script>
+
+      <div
+        class="card card-hover mb-4 shadow-sm border-0"
+        style="max-width: 1200px; margin: auto"
+      >
+        <div class="row g-0 align-items-stretch">
+          <!-- 画像ブロック -->
+          <div
+            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
+          >
+            <img
+              src="/images/book2.png"
+              class="img-fluid rounded"
+              alt="蔵書画像"
+              style="max-height: 100px; width: 75px; height: 100px"
+            />
+          </div>
+
+          <!-- タイトル・評価・あらましブロック -->
+          <div
+            class="col-md-6 d-flex flex-column justify-content-center p-3 border-end"
+          >
+            <h5 class="fw-bold mb-2">AWSの仕組み・重要用語がわかる教科書</h5>
+            <div id="reviewSection" class="d-none">
+              <div class="mb-2">
+                <span class="text-warning">★ ★ ★ ★ ☆</span>
+                <small class="text-muted ms-2">4.0 / 5</small>
+              </div>
+              <p class="mb-0 text-muted" style="font-size: 0.9rem">
+                AWSの基本がとても分かりやすく整理されていて、初心者にもおすすめです。
+              </p>
+            </div>
+          </div>
+
+          <!-- 貸出状況・返却ボタンブロック -->
+          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
+            <div id="statusSection">
+              <button
+                class="btn btn-outline-primary btn-sm"
+                onclick="handleReturn()"
+              >
+                返却する
+              </button>
+            </div>
+            <ul
+              id="returnInfo"
+              class="list-unstyled mt-2 d-none"
+              style="font-size: 0.85rem"
+            >
+              <li><strong>返却日:</strong> 2025年9月1日</li>
+              <li><strong>返却場所:</strong> 千代田図書館</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        function handleReturn() {
+          // ボタンを返却済みに変更
+          const statusSection = document.getElementById("statusSection");
+          statusSection.innerHTML = '<span class="badge bg-dark">返却済</span>';
+
+          // 返却情報とレビューを表示
+          document.getElementById("returnInfo").classList.remove("d-none");
+          document.getElementById("reviewSection").classList.remove("d-none");
+        }
+      </script>
+
       <!-- カード1 -->
       <div
         class="card card-hover mb-4 shadow-sm border-0"
-        style="max-width: 1200px; max-height: 100px; margin: auto"
+        style="max-width: 1200px; max-height: 200px; margin: auto"
       >
         <a href="book1Detail.html" class="stretched-link"></a>
         <div class="row g-0 align-items-stretch">
@@ -83,10 +515,10 @@
               class="img-fluid rounded"
               alt="蔵書画像"
               style="
-                max-height: 200px;
+                max-height: 100px;
                 max-width: 100%;
-                width: 150px;
-                height: 200px;
+                width: 75px;
+                height: 100px;
               "
             />
           </div>
@@ -102,7 +534,7 @@
 
           <!-- 貸出状況ブロック（2割） -->
           <div class="col-md-3 d-flex flex-column justify-content-center p-3">
-              <span class="badge bg-primary badge-fixed">返却する</span>
+            <span class="badge bg-primary badge-fixed">返却する</span>
           </div>
         </div>
       </div>
@@ -110,7 +542,7 @@
       <!-- カード2 -->
       <div
         class="card card-hover mb-4 shadow-sm border-0"
-        style="max-width: 1200px; margin: auto"
+        style="max-width: 1200px; max-height: 200px; margin: auto"
       >
         <a href="book2Detail.html" class="stretched-link"></a>
         <div class="row g-0 align-items-stretch">
@@ -123,10 +555,10 @@
               class="img-fluid rounded"
               alt="蔵書画像"
               style="
-                max-height: 200px;
+                max-height: 100px;
                 max-width: 100%;
-                width: 150px;
-                height: 200px;
+                width: 75px;
+                height: 100px;
               "
             />
           </div>
@@ -140,187 +572,7 @@
 
           <!-- 貸出状況ブロック（2割） -->
           <div class="col-md-3 d-flex flex-column justify-content-center p-3">
-              <span class="badge bg-dark badge-fixed">返却済</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- カード3 -->
-      <div
-        class="card card-hover mb-4 shadow-sm border-0"
-        style="max-width: 1200px; margin: auto"
-      >
-        <a href="book3Detail.html" class="stretched-link"></a>
-        <div class="row g-0 align-items-stretch">
-          <!-- 画像ブロック（2割） -->
-          <div
-            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
-          >
-            <img
-              src="/images/book3.png"
-              class="img-fluid rounded"
-              alt="蔵書画像"
-              style="
-                max-height: 200px;
-                max-width: 100%;
-                width: 150px;
-                height: 200px;
-              "
-            />
-          </div>
-
-          <!-- タイトル・評価・あらましブロック（6割） -->
-          <div
-            class="col-md-6 d-flex flex-column justify-content-center p-3 border-end"
-          >
-            <h5 class="fw-bold mb-2">はじめてのAWS</h5>
-            <p class="mb-2">
-              <strong>評価：</strong>
-<i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-half text-warning"></i
-                  ></small>
-                <span class="text-muted small mx-1">4.8 (20件)</span>
-            </p>
-            <p class="text-muted small summary-text">
-              「AWSって何？」という段階からスタートし、アカウント作成、無料枠の使い方、簡単なEC2の起動までを丁寧にガイド。クラウドの概念やオンプレとの違いも初心者目線で解説。
-            </p>
-          </div>
-
-          <!-- 貸出状況ブロック（2割） -->
-          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
-            <div
-              class="d-flex justify-content-between align-items-center border-bottom py-2"
-            >
-              <span>虎ノ門</span>
-              <span class="badge bg-success badge-fixed">借りる</span>
-            </div>
-
-            <div
-              class="d-flex justify-content-between align-items-center border-bottom py-2"
-            >
-              <span>新川</span>
-              <span class="badge bg-success badge-fixed">借りる</span>
-            </div>
-            <div class="d-flex justify-content-between align-items-center py-2">
-              <span>みなとみらい</span>
-              <span class="badge bg-success badge-fixed">借りる</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- カード4 -->
-      <div
-        class="card card-hover mb-4 shadow-sm border-0"
-        style="max-width: 1200px; margin: auto"
-      >
-        <a href="book6Detail.html" class="stretched-link"></a>
-        <div class="row g-0 align-items-stretch">
-          <!-- 画像ブロック（2割） -->
-          <div
-            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
-          >
-            <img
-              src="/images/book6.png"
-              class="img-fluid rounded"
-              alt="蔵書画像"
-              style="
-                max-height: 200px;
-                max-width: 100%;
-                width: 150px;
-                height: 200px;
-              "
-            />
-          </div>
-
-          <!-- タイトル・評価・あらましブロック（6割） -->
-          <div
-            class="col-md-6 d-flex flex-column justify-content-center p-3 border-end"
-          >
-            <h5 class="fw-bold mb-2">
-              AWS　上級　プロレベルを目指す人へ　開発生産性を上げる
-            </h5>
-            <p class="mb-2">
-              <strong>評価：</strong>
-               <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-half text-warning"></i
-                  ></small>
-                <span class="text-muted small mx-1">4.7 (15件)</span>
-            </p>
-            <p class="text-muted small summary-text">
-              AWSを使いこなす上級者向けに、開発効率を最大化するための設計・運用・自動化のノウハウを解説。CI/CD、Infrastructure
-              as Code、監視・ログ設計など、実務に直結する内容が満載。
-            </p>
-          </div>
-
-          <!-- 貸出状況ブロック（2割） -->
-          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
-            <div class="d-flex justify-content-between align-items-center py-2">
-              <span>虎ノ門</span>
-              <span class="badge bg-danger badge-fixed">貸出中</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- カード5 -->
-      <div
-        class="card card-hover mb-4 shadow-sm border-0"
-        style="max-width: 1200px; margin: auto"
-      >
-        <a href="book9Detail.html" class="stretched-link"></a>
-        <div class="row g-0 align-items-stretch">
-          <!-- 画像ブロック（2割） -->
-          <div
-            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
-          >
-            <img
-              src="/images/book9.png"
-              class="img-fluid rounded"
-              alt="蔵書画像"
-              style="
-                max-height: 200px;
-                max-width: 100%;
-                width: 150px;
-                height: 200px;
-              "
-            />
-          </div>
-
-          <!-- タイトル・評価・あらましブロック（6割） -->
-          <div
-            class="col-md-6 d-flex flex-column justify-content-center p-3 border-end"
-          >
-            <h5 class="fw-bold mb-2">
-              AWS
-              Lambdaを正しく理解し、「サーバレス」を実現するプラットフォームを最大限に活用しよう
-            </h5>
-            <p class="mb-2">
-              <strong>評価：</strong>
-                <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-half text-warning"></i
-                  ></small>
-                <span class="text-muted small mx-1">4.5 (14件)</span>
-            </p>
-            <p class="text-muted small summary-text">
-              AWS
-              Lambdaの基本から応用までを体系的に解説。イベント駆動設計、セキュリティ、パフォーマンス最適化、他サービスとの連携など、サーバレスアーキテクチャを本気で活用したい人向け。
-            </p>
-          </div>
-
-          <!-- 貸出状況ブロック（2割） -->
-          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
-            <div class="d-flex justify-content-between align-items-center py-2">
-              <span>みなとみらい</span>
-              <span class="badge bg-success badge-fixed">借りる</span>
-            </div>
+            <span class="badge bg-dark badge-fixed">返却済</span>
           </div>
         </div>
       </div>
