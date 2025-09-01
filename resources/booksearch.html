@@ -64,34 +64,147 @@
             class="bg-light border rounded p-3 mt-2 shadow-sm"
             style="display: none; position: absolute; width: 100%; z-index: 10"
           >
-            <label class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                name="tag"
-                value="AWS"
-              />
-              <span class="form-check-label">AWS</span>
-            </label>
-            <label class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                name="tag"
-                value="Python"
-              />
-              <span class="form-check-label">Python</span>
-            </label>
-            <label class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                name="tag"
-                value="AI"
-              />
-              <span class="form-check-label">AI</span>
-            </label>
-            <!-- 必要に応じてタグを追加 -->
+            <table class="table table-bordered">
+              <tbody>
+                <!-- 難易度 -->
+                <tr>
+                  <td
+                    style="
+                      width: 120px;
+                      font-weight: bold;
+                      vertical-align: middle;
+                      background-color: #f0f8ff;
+                    "
+                  >
+                    難易度
+                  </td>
+                  <td>
+                    <label class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="tag"
+                        value="初級"
+                      />
+                      <span class="form-check-label">初級</span>
+                    </label>
+                    <label class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="tag"
+                        value="中級"
+                      />
+                      <span class="form-check-label">中級</span>
+                    </label>
+                    <label class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="tag"
+                        value="上級"
+                      />
+                      <span class="form-check-label">上級</span>
+                    </label>
+                  </td>
+                </tr>
+
+                <!-- ジャンル -->
+                <tr>
+                  <td
+                    style="
+                      font-weight: bold;
+                      vertical-align: middle;
+                      background-color: #f0f8ff;
+                    "
+                  >
+                    ジャンル
+                  </td>
+                  <td>
+                    <label class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="tag"
+                        value="AI"
+                      />
+                      <span class="form-check-label">資格</span>
+                    </label>
+                    <label class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="tag"
+                        value="Python"
+                      />
+                      <span class="form-check-label">ビジネス</span>
+                    </label>
+                    <label class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="tag"
+                        value="AWS"
+                      />
+                      <span class="form-check-label">自己啓発</span>
+                    </label>
+                    <label class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="tag"
+                        value="AWS"
+                      />
+                      <span class="form-check-label">自己啓発</span>
+                    </label>
+                  </td>
+                </tr>
+
+                <!-- 職種 -->
+                <tr>
+                  <td
+                    style="
+                      font-weight: bold;
+                      vertical-align: middle;
+                      background-color: #f0f8ff;
+                    "
+                  >
+                    職種
+                  </td>
+                  <td>
+                    <label class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="tag"
+                        value="エンジニア"
+                      />
+                      <span class="form-check-label">エンジニア</span>
+                    </label>
+                    <label class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="tag"
+                        value="データサイエンティスト"
+                      />
+                      <span class="form-check-label"
+                        >データサイエンティスト</span
+                      >
+                    </label>
+                    <label class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="tag"
+                        value="クラウドアーキテクト"
+                      />
+                      <span class="form-check-label">クラウドアーキテクト</span>
+                    </label>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
