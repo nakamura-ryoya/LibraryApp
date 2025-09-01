@@ -199,6 +199,9 @@ h1 {
 .search-card h4 {
   margin-top: 0.5rem;
   min-height: 3.5rem;
+  -webkit-line-clamp: 2; /* 表示する最大行数 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .search-card .tag-group .badge {
