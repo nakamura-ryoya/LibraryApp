@@ -75,7 +75,7 @@
         <div class="row g-0 align-items-stretch">
           <!-- 画像 -->
           <div
-            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
+            class="col-md-2 d-flex justify-content-center align-items-center py-2 px-1 border-end"
           >
             <img
               src="/images/book2.png"
@@ -87,9 +87,69 @@
 
           <!-- タイトル・評価・あらまし -->
           <div
-            class="col-md-6 d-flex flex-column justify-content-center p-3 border-end"
+            class="col-md-2 d-flex flex-column justify-content-center p-3 border-end"
           >
-            <h5 class="fw-bold mb-2">AWSの仕組み・重要用語がわかる教科書</h5>
+            <h5 class="fw-bold mb-2 text-center">タイトル</h5>
+            <h5 class="fw-bold mb-2 text-center">
+              AWSの仕組み・重要用語がわかる教科書
+            </h5>
+            <div id="reviewSection" class="d-none">
+              <div class="mb-2">
+                <span id="stars" class="text-warning"></span>
+                <small class="text-muted ms-2" id="difficultyLabel"></small>
+              </div>
+              <p
+                class="mb-0 text-muted"
+                style="font-size: 0.9rem"
+                id="commentText"
+              ></p>
+            </div>
+          </div>
+
+          <!-- タイトル・評価・あらまし -->
+          <div
+            class="col-md-2 d-flex flex-column justify-content-center p-3 border-end"
+          >
+            <h5 class="fw-bold mb-2 text-center">貸出日</h5>
+            <h5 class="fw-bold mb-2 text-center">2025/09/23</h5>
+            <div id="reviewSection" class="d-none">
+              <div class="mb-2">
+                <span id="stars" class="text-warning"></span>
+                <small class="text-muted ms-2" id="difficultyLabel"></small>
+              </div>
+              <p
+                class="mb-0 text-muted"
+                style="font-size: 0.9rem"
+                id="commentText"
+              ></p>
+            </div>
+          </div>
+
+          <!-- タイトル・評価・あらまし -->
+          <div
+            class="col-md-2 d-flex flex-column justify-content-center p-3 border-end"
+          >
+            <h5 class="fw-bold mb-2 text-center">返却日</h5>
+            <h5 class="fw-bold mb-2 text-center text-danger">未返却</h5>
+            <div id="reviewSection" class="d-none">
+              <div class="mb-2">
+                <span id="stars" class="text-warning"></span>
+                <small class="text-muted ms-2" id="difficultyLabel"></small>
+              </div>
+              <p
+                class="mb-0 text-muted"
+                style="font-size: 0.9rem"
+                id="commentText"
+              ></p>
+            </div>
+          </div>
+
+          <!-- タイトル・評価・あらまし -->
+          <div
+            class="col-md-2 d-flex flex-column justify-content-center p-3 border-end"
+          >
+            <h5 class="fw-bold mb-2 text-center">返却場所</h5>
+            <h5 class="fw-bold mb-2 text-center">千代田図書館</h5>
             <div id="reviewSection" class="d-none">
               <div class="mb-2">
                 <span id="stars" class="text-warning"></span>
@@ -104,7 +164,7 @@
           </div>
 
           <!-- 貸出状況 -->
-          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
+          <div class="col-md-2 d-flex flex-column justify-content-center p-3">
             <button
               class="btn btn-outline-dark btn-sm mb-2"
               data-bs-toggle="modal"
@@ -112,13 +172,6 @@
             >
               返却する
             </button>
-            <ul class="list-unstyled mb-0" style="font-size: 0.85rem">
-              <li><strong>借りた日:</strong> 2025年8月25日</li>
-              <li><strong>返却場所:</strong> 千代田図書館</li>
-              <li id="returnDate" class="d-none">
-                <strong>返却日:</strong> 2025年9月1日
-              </li>
-            </ul>
           </div>
         </div>
       </div>
