@@ -137,9 +137,13 @@
                   class="list-group-item d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center"
                 >
                   <span class="text-body">虎ノ門ヒルズビジネスタワー13F</span>
-                  <span class="badge bg-success mt-2 mt-sm-0 badge-fixed"
-                    >借りる</span
+                  <span
+                    class="badge bg-success mt-2 mt-sm-0 badge-fixed"
+                    data-bs-toggle="modal"
+                    data-bs-target="#borrowModal"
                   >
+                    借りる
+                  </span>
                 </li>
                 <li
                   class="list-group-item d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center"
@@ -152,12 +156,105 @@
                 <li
                   class="list-group-item d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center"
                 >
-                  <span class="text-body">UDXみなとみらいタワー13F</span>
-                  <span class="badge bg-success mt-2 mt-sm-0 badge-fixed"
-                    >借りる</span
+                  <span class="text-body">虎ノ門ヒルズビジネスタワー13F</span>
+                  <span
+                    class="badge bg-success mt-2 mt-sm-0 badge-fixed"
+                    data-bs-toggle="modal"
+                    data-bs-target="#borrowModal"
                   >
+                    借りる
+                  </span>
                 </li>
               </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 借りる確認モーダル -->
+      <div
+        class="modal fade"
+        id="borrowModal"
+        tabindex="-1"
+        aria-labelledby="borrowModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="borrowModalLabel">確認画面</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="閉じる"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <p><strong>この本を借りますか？</strong></p>
+              <strong>タイトル：</strong>
+              図解AWSの仕組みとサービスがよく分かる！
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                キャンセル
+              </button>
+              <button
+                type="button"
+                class="btn btn-success"
+                data-bs-target="#borrowResultModal"
+                data-bs-toggle="modal"
+                data-bs-dismiss="modal"
+              >
+                借りる
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 借りた結果モーダル -->
+      <div
+        class="modal fade"
+        id="borrowResultModal"
+        tabindex="-1"
+        aria-labelledby="borrowResultModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="borrowResultModalLabel">
+                以下の本を借りました
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="閉じる"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <p>
+                <strong>タイトル：</strong>
+                図解AWSの仕組みとサービスがよく分かる！
+              </p>
+
+              <strong>返却期限：</strong> 2025/09/30
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-dismiss="modal"
+              >
+                閉じる
+              </button>
             </div>
           </div>
         </div>
@@ -598,7 +695,7 @@
             <div class="d-flex justify-content-between align-items-center mb-1">
               <div class="d-flex align-items-center">
                 <i class="bi bi-person-fill me-2"></i>
-                <strong>匿名（シス研・SE・専門職）</strong>
+                <strong>山田 太郎（流通・SE・上級専門職）</strong>
               </div>
               <small class="text-warning">
                 <i class="bi bi-star-fill text-warning"></i>
@@ -617,7 +714,7 @@
             <div class="d-flex justify-content-between align-items-center mb-1">
               <div class="d-flex align-items-center">
                 <i class="bi bi-person-fill me-2"></i>
-                <strong>匿名（シス研・SE・専門職）</strong>
+                <strong>佐藤 花子（金融・営業・専門職）</strong>
               </div>
               <small class="text-warning">
                 <i class="bi bi-star-fill text-warning"></i>
