@@ -83,6 +83,10 @@ h1 {
   text-align: center;
 }
 
+.stretched-link {
+  z-index: 1;
+}
+
 /* =============================
    検索フォーム
 ============================= */
@@ -110,6 +114,12 @@ h1 {
 /* =============================
    バッジカラー（貸出状況）
 ============================= */
+
+.badge {
+  position: relative;
+  z-index: 2;
+}
+
 .badge.bg-success {
   background-color: #198754;
   cursor: pointer;
