@@ -85,14 +85,15 @@
             />
           </div>
 
-          <!-- タイトル・評価・あらまし -->
+          <!-- タイトル -->
           <div
-            class="col-md-2 d-flex flex-column justify-content-center p-3 border-end"
+            class="col-md-4 d-flex flex-column justify-content-center p-3 border-end"
           >
-            <h5 class="fw-bold mb-2 text-center">タイトル</h5>
-            <h5 class="fw-bold mb-2 text-center">
+            <small class="text-muted fw-semibold">タイトル</small>
+            <h5 class="fw-bold text-dark mt-2 text-truncate">
               AWSの仕組み・重要用語がわかる教科書
             </h5>
+
             <div id="reviewSection" class="d-none">
               <div class="mb-2">
                 <span id="stars" class="text-warning"></span>
@@ -106,12 +107,14 @@
             </div>
           </div>
 
-          <!-- タイトル・評価・あらまし -->
+          <!-- 貸出日 -->
           <div
             class="col-md-2 d-flex flex-column justify-content-center p-3 border-end"
           >
-            <h5 class="fw-bold mb-2 text-center">貸出日</h5>
-            <h5 class="fw-bold mb-2 text-center">2025/09/23</h5>
+            <small class="text-muted text-center fw-semibold">貸出日</small>
+            <h6 class="fw-bold text-primary text-center mt-2 mb-0">
+              2025/09/23
+            </h6>
             <div id="reviewSection" class="d-none">
               <div class="mb-2">
                 <span id="stars" class="text-warning"></span>
@@ -125,12 +128,13 @@
             </div>
           </div>
 
-          <!-- タイトル・評価・あらまし -->
+          <!-- 返却日 -->
           <div
             class="col-md-2 d-flex flex-column justify-content-center p-3 border-end"
           >
-            <h5 class="fw-bold mb-2 text-center">返却日</h5>
-            <h5 class="fw-bold mb-2 text-center text-danger">未返却</h5>
+            <small class="text-muted text-center fw-semibold">返却日</small>
+            <h6 class="fw-bold text-center mt-2 mb-0">ー</h6>
+            <h6 class="fw-bold text-center mt-2 mb-0">（虎ノ門オフィス）</h6>
             <div id="reviewSection" class="d-none">
               <div class="mb-2">
                 <span id="stars" class="text-warning"></span>
@@ -144,29 +148,67 @@
             </div>
           </div>
 
-          <!-- タイトル・評価・あらまし -->
-          <div
-            class="col-md-2 d-flex flex-column justify-content-center p-3 border-end"
-          >
-            <h5 class="fw-bold mb-2 text-center">返却場所</h5>
-            <h5 class="fw-bold mb-2 text-center">千代田図書館</h5>
-            <div id="reviewSection" class="d-none">
-              <div class="mb-2">
-                <span id="stars" class="text-warning"></span>
-                <small class="text-muted ms-2" id="difficultyLabel"></small>
-              </div>
-              <p
-                class="mb-0 text-muted"
-                style="font-size: 0.9rem"
-                id="commentText"
-              ></p>
-            </div>
-          </div>
-
-          <!-- 貸出状況 -->
+          <!-- 返却ボタン -->
           <div class="col-md-2 d-flex flex-column justify-content-center p-3">
             <button
               class="btn btn-outline-dark btn-sm mb-2"
+              data-bs-toggle="modal"
+              data-bs-target="#returnModal"
+            >
+              返却する
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1冊分の貸出カード -->
+      <div
+        class="card mb-4 shadow-lg border-0 rounded-4 overflow-hidden"
+        style="max-width: 1200px; margin: auto"
+      >
+        <div class="row g-0 align-items-center">
+          <!-- 画像 -->
+          <div
+            class="col-md-2 d-flex justify-content-center align-items-center p-3 bg-light"
+          >
+            <img
+              src="/images/book2.png"
+              class="img-fluid rounded shadow-sm"
+              alt="蔵書画像"
+              style="max-height: 110px; width: auto"
+            />
+          </div>
+
+          <!-- タイトル -->
+          <div class="col-md-2 d-flex flex-column justify-content-center p-3">
+            <small class="text-muted fw-semibold">タイトル</small>
+            <h5 class="fw-bold text-dark mt-2 text-truncate">
+              AWSの仕組み・重要用語がわかる教科書
+            </h5>
+          </div>
+
+          <!-- 貸出日 -->
+          <div class="col-md-2 text-center p-3">
+            <small class="text-muted fw-semibold">貸出日</small>
+            <h6 class="fw-bold text-primary mt-2 mb-0">2025/09/23</h6>
+          </div>
+
+          <!-- 返却日 -->
+          <div class="col-md-2 text-center p-3">
+            <small class="text-muted fw-semibold">返却日</small>
+            <h6 class="fw-bold text-danger mt-2 mb-0">未返却</h6>
+          </div>
+
+          <!-- 返却場所-->
+          <div class="col-md-2 text-center p-3">
+            <small class="text-muted fw-semibold">返却場所</small>
+            <h6 class="fw-bold text-primary mt-2 mb-0">虎ノ門オフィス</h6>
+          </div>
+
+          <!-- 返却ボタン -->
+          <div class="col-md-2 d-flex justify-content-center p-3">
+            <button
+              class="btn btn-dark btn-sm rounded-pill px-4 shadow-sm"
               data-bs-toggle="modal"
               data-bs-target="#returnModal"
             >
