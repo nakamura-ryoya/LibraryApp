@@ -327,3 +327,15 @@ h1 {
 .scroll-container::-webkit-scrollbar-thumb:hover {
   background-color: #666; /* ホバー時の色 */
 }
+
+/* =============================
+   戻るボタンのホバー表現
+============================= */
+.return-btn {
+  transition: all 0.3s ease-in-out;
+}
+
+.return-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(220, 53, 69, 0.4);
+}
