@@ -142,10 +142,7 @@
     <!-- 検索結果カード -->
     <div class="container">
       <!-- カード1 -->
-      <div
-        class="card card-hover mb-4 shadow-sm border-0"
-        style="max-width: 1200px; margin: auto"
-      >
+      <div class="card card-hover search-card mb-4 shadow-sm border-0">
         <a href="book1Detail.html" class="stretched-link"></a>
         <div class="row g-0 align-items-stretch">
           <!-- 画像ブロック（2割） -->
@@ -156,23 +153,15 @@
               src="/images/book1.png"
               class="img-fluid rounded"
               alt="蔵書画像"
-              style="
-                max-height: 200px;
-                max-width: 100%;
-                width: 150px;
-                height: 200px;
-              "
             />
           </div>
 
           <!-- タイトル・評価・あらましブロック（6割） -->
-          <div
-            class="col-md-6 d-flex flex-column justify-content-center p-3 border-end"
-          >
-            <h5 class="fw-bold mb-2">
+          <div class="col-md-6 p-3 border-end text-block">
+            <h4 class="fw-bold mb-2">
               図解 AWSの仕組みとサービスがよくわかる！
-            </h5>
-            <p class="mb-2">
+            </h4>
+            <p class="rating mb-2">
               <strong>評価：</strong>
               <i class="bi bi-star-fill text-warning"></i>
               <i class="bi bi-star-fill text-warning"></i>
@@ -182,8 +171,10 @@
               <span class="text-muted small mx-1">4.6 (13件)</span>
             </p>
 
-            <p class="text-muted small summary-text">
-              AWSの主要サービス（EC2、S3、Lambda、RDSなど）を図解でわかりやすく解説。インフラの構成図やデータフロー、料金体系などをビジュアルで理解できる構成になっており、初心者から中級者まで幅広く対応。
+            <p class="card-text tag-group">
+              <span class="badge bg-info me-1">初心者向け</span>
+              <span class="badge bg-info me-1">AWS</span>
+              <span class="badge bg-info me-1">インフラ系</span>
             </p>
           </div>
 
@@ -211,10 +202,7 @@
       </div>
 
       <!-- カード2 -->
-      <div
-        class="card card-hover mb-4 shadow-sm border-0"
-        style="max-width: 1200px; margin: auto"
-      >
+      <div class="card card-hover search-card mb-4 shadow-sm border-0">
         <a href="book2Detail.html" class="stretched-link"></a>
         <div class="row g-0 align-items-stretch">
           <!-- 画像ブロック（2割） -->
@@ -225,21 +213,13 @@
               src="/images/book2.png"
               class="img-fluid rounded"
               alt="蔵書画像"
-              style="
-                max-height: 200px;
-                max-width: 100%;
-                width: 150px;
-                height: 200px;
-              "
             />
           </div>
 
           <!-- タイトル・評価・あらましブロック（6割） -->
-          <div
-            class="col-md-6 d-flex flex-column justify-content-center p-3 border-end"
-          >
-            <h5 class="fw-bold mb-2">AWSの仕組み・重要用語がわかる教科書</h5>
-            <p class="mb-2">
+          <div class="col-md-6 p-3 border-end text-block">
+            <h4 class="fw-bold mb-2">AWSの仕組み・重要用語がわかる教科書</h4>
+            <p class="rating mb-2">
               <strong>評価：</strong>
               <i class="bi bi-star-fill text-warning"></i>
               <i class="bi bi-star-fill text-warning"></i>
@@ -249,9 +229,10 @@
               <span class="text-muted small mx-1">4.2 (9件)</span>
             </p>
 
-            <p class="text-muted small summary-text">
-              AWSを使う上で必須となる用語や概念（VPC、IAM、Auto
-              Scaling、CloudFormationなど）を体系的に整理した“辞書的”な一冊。各用語に対して、定義・使い方・注意点・関連サービスを網羅。
+            <p class="card-text tag-group">
+              <span class="badge bg-info me-1">初心者向け</span>
+              <span class="badge bg-info me-1">AWS</span>
+              <span class="badge bg-info me-1">インフラ系</span>
             </p>
           </div>
 
@@ -273,10 +254,7 @@
       </div>
 
       <!-- カード3 -->
-      <div
-        class="card card-hover mb-4 shadow-sm border-0"
-        style="max-width: 1200px; margin: auto"
-      >
+      <div class="card card-hover search-card mb-4 shadow-sm border-0">
         <a href="book3Detail.html" class="stretched-link"></a>
         <div class="row g-0 align-items-stretch">
           <!-- 画像ブロック（2割） -->
@@ -287,21 +265,13 @@
               src="/images/book3.png"
               class="img-fluid rounded"
               alt="蔵書画像"
-              style="
-                max-height: 200px;
-                max-width: 100%;
-                width: 150px;
-                height: 200px;
-              "
             />
           </div>
 
           <!-- タイトル・評価・あらましブロック（6割） -->
-          <div
-            class="col-md-6 d-flex flex-column justify-content-center p-3 border-end"
-          >
-            <h5 class="fw-bold mb-2">はじめてのAWS</h5>
-            <p class="mb-2">
+          <div class="col-md-6 p-3 border-end text-block">
+            <h4 class="fw-bold mb-2">はじめてのAWS</h4>
+            <p class="rating mb-2">
               <strong>評価：</strong>
               <i class="bi bi-star-fill text-warning"></i>
               <i class="bi bi-star-fill text-warning"></i>
@@ -310,8 +280,10 @@
               <i class="bi bi-star-half text-warning"></i>
               <span class="text-muted small mx-1">4.8 (20件)</span>
             </p>
-            <p class="text-muted small summary-text">
-              「AWSって何？」という段階からスタートし、アカウント作成、無料枠の使い方、簡単なEC2の起動までを丁寧にガイド。クラウドの概念やオンプレとの違いも初心者目線で解説。
+            <p class="card-text tag-group">
+              <span class="badge bg-info me-1">初心者向け</span>
+              <span class="badge bg-info me-1">AWS</span>
+              <span class="badge bg-info me-1">インフラ系</span>
             </p>
           </div>
 
@@ -338,10 +310,7 @@
         </div>
       </div>
       <!-- カード4 -->
-      <div
-        class="card card-hover mb-4 shadow-sm border-0"
-        style="max-width: 1200px; margin: auto"
-      >
+      <div class="card card-hover search-card mb-4 shadow-sm border-0">
         <a href="book6Detail.html" class="stretched-link"></a>
         <div class="row g-0 align-items-stretch">
           <!-- 画像ブロック（2割） -->
@@ -352,23 +321,15 @@
               src="/images/book6.png"
               class="img-fluid rounded"
               alt="蔵書画像"
-              style="
-                max-height: 200px;
-                max-width: 100%;
-                width: 150px;
-                height: 200px;
-              "
             />
           </div>
 
           <!-- タイトル・評価・あらましブロック（6割） -->
-          <div
-            class="col-md-6 d-flex flex-column justify-content-center p-3 border-end"
-          >
-            <h5 class="fw-bold mb-2">
+          <div class="col-md-6 p-3 border-end text-block">
+            <h4 class="fw-bold mb-2">
               AWS　上級　プロレベルを目指す人へ　開発生産性を上げる
-            </h5>
-            <p class="mb-2">
+            </h4>
+            <p class="rating mb-2">
               <strong>評価：</strong>
               <i class="bi bi-star-fill text-warning"></i>
               <i class="bi bi-star-fill text-warning"></i>
@@ -377,9 +338,10 @@
               <i class="bi bi-star-half text-warning"></i>
               <span class="text-muted small mx-1">4.7 (15件)</span>
             </p>
-            <p class="text-muted small summary-text">
-              AWSを使いこなす上級者向けに、開発効率を最大化するための設計・運用・自動化のノウハウを解説。CI/CD、Infrastructure
-              as Code、監視・ログ設計など、実務に直結する内容が満載。
+            <p class="card-text tag-group">
+              <span class="badge bg-info me-1">初心者向け</span>
+              <span class="badge bg-info me-1">AWS</span>
+              <span class="badge bg-info me-1">インフラ系</span>
             </p>
           </div>
 
@@ -393,10 +355,7 @@
         </div>
       </div>
       <!-- カード5 -->
-      <div
-        class="card card-hover mb-4 shadow-sm border-0"
-        style="max-width: 1200px; margin: auto"
-      >
+      <div class="card card-hover search-card mb-4 shadow-sm border-0">
         <a href="book9Detail.html" class="stretched-link"></a>
         <div class="row g-0 align-items-stretch">
           <!-- 画像ブロック（2割） -->
@@ -407,24 +366,16 @@
               src="/images/book9.png"
               class="img-fluid rounded"
               alt="蔵書画像"
-              style="
-                max-height: 200px;
-                max-width: 100%;
-                width: 150px;
-                height: 200px;
-              "
             />
           </div>
 
           <!-- タイトル・評価・あらましブロック（6割） -->
-          <div
-            class="col-md-6 d-flex flex-column justify-content-center p-3 border-end"
-          >
-            <h5 class="fw-bold mb-2">
+          <div class="col-md-6 p-3 border-end text-block">
+            <h4 class="fw-bold mb-2">
               AWS
               Lambdaを正しく理解し、「サーバレス」を実現するプラットフォームを最大限に活用しよう
-            </h5>
-            <p class="mb-2">
+            </h4>
+            <p class="rating mb-2">
               <strong>評価：</strong>
               <i class="bi bi-star-fill text-warning"></i>
               <i class="bi bi-star-fill text-warning"></i>
@@ -433,9 +384,10 @@
               <i class="bi bi-star-half text-warning"></i>
               <span class="text-muted small mx-1">4.5 (14件)</span>
             </p>
-            <p class="text-muted small summary-text">
-              AWS
-              Lambdaの基本から応用までを体系的に解説。イベント駆動設計、セキュリティ、パフォーマンス最適化、他サービスとの連携など、サーバレスアーキテクチャを本気で活用したい人向け。
+            <p class="card-text tag-group">
+              <span class="badge bg-info me-1">初心者向け</span>
+              <span class="badge bg-info me-1">AWS</span>
+              <span class="badge bg-info me-1">インフラ系</span>
             </p>
           </div>
 

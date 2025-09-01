@@ -181,6 +181,47 @@ h1 {
 }
 
 /* =============================
+   検索結果カード
+============================= */
+.search-card {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0.5rem;
+}
+
+.search-card img {
+  max-height: 200px;
+  max-width: 100%;
+  width: 135px;
+  height: 180px;
+}
+
+.search-card h4 {
+  margin-top: 0.5rem;
+  min-height: 3.5rem;
+}
+
+.search-card .tag-group .badge {
+  font-size: 0.9rem;
+  padding: 0.5em 0.75em;
+}
+
+.search-card .text-block {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.search-card .text-block .rating {
+  font-size: 1.1rem;
+  margin-top: auto;
+  margin-bottom: 0.8rem;
+}
+
+.search-card .text-block .tag-group {
+  margin-top: 0.8rem;
+}
+
+/* =============================
    地区別ステータスブロック
 ============================= */
 .area-status {
