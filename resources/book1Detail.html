@@ -104,13 +104,15 @@
                 978-4-00-310101-8
               </p>
               <p class="card-text">
-                <strong><i class="bi bi-calendar"></i> 出版年：</strong> 1905年
+                <strong><i class="bi bi-calendar"></i> 出版年：</strong> 2022年
               </p>
               <p class="card-text">
                 <strong><i class="bi bi-bookshelf"></i> ジャンル：</strong>
-                <span class="badge bg-info me-1">＃文学</span>
-                <span class="badge bg-info me-1">＃歴史</span>
-                <span class="badge bg-info me-1">＃ミステリー</span>
+                <span class="badge bg-info me-1">初心者向け</span>
+                <a href="/resources/booksearch.html">
+                  <span class="badge bg-info me-1">AWS</span>
+                </a>
+                <span class="badge bg-info me-1">インフラ系</span>
               </p>
               <p class="card-text">
                 <strong><i class="bi bi-chat-left-text"></i> あらすじ：</strong
@@ -179,10 +181,10 @@
         aria-labelledby="borrowModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="borrowModalLabel">借りる確認</h5>
+              <h5 class="modal-title" id="borrowModalLabel">確認画面</h5>
               <button
                 type="button"
                 class="btn-close"
@@ -190,7 +192,12 @@
                 aria-label="閉じる"
               ></button>
             </div>
-            <div class="modal-body">この本を借りますか？</div>
+            <div class="modal-body">
+              <p><strong>この本を借りますか？</strong></p>
+              <strong>タイトル：</strong>
+              図解AWSの仕組みとサービスがよく分かる！
+            </div>
+
             <div class="modal-footer">
               <button
                 type="button"
@@ -201,7 +208,7 @@
               </button>
               <button
                 type="button"
-                class="btn btn-primary"
+                class="btn btn-success"
                 data-bs-target="#borrowResultModal"
                 data-bs-toggle="modal"
                 data-bs-dismiss="modal"
@@ -221,7 +228,7 @@
         aria-labelledby="borrowResultModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="borrowResultModalLabel">
@@ -235,13 +242,12 @@
               ></button>
             </div>
             <div class="modal-body">
-              <ul style="list-style-type: none; padding-left: 0">
-                <li>
-                  <strong>タイトル：</strong>
-                  図解AWSの仕組みとサービスがよく分かる！
-                </li>
-                <li><strong>返却期限：</strong> 2025/09/30</li>
-              </ul>
+              <p>
+                <strong>タイトル：</strong>
+                図解AWSの仕組みとサービスがよく分かる！
+              </p>
+
+              <strong>返却期限：</strong> 2025/09/30
             </div>
             <div class="modal-footer">
               <button
