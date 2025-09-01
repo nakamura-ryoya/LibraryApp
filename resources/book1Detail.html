@@ -179,10 +179,10 @@
         aria-labelledby="borrowModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="borrowModalLabel">借りる確認</h5>
+              <h5 class="modal-title" id="borrowModalLabel">確認画面</h5>
               <button
                 type="button"
                 class="btn-close"
@@ -190,7 +190,12 @@
                 aria-label="閉じる"
               ></button>
             </div>
-            <div class="modal-body">この本を借りますか？</div>
+            <div class="modal-body">
+              <p><strong>この本を借りますか？</strong></p>
+              <strong>タイトル：</strong>
+              図解AWSの仕組みとサービスがよく分かる！
+            </div>
+
             <div class="modal-footer">
               <button
                 type="button"
@@ -221,7 +226,7 @@
         aria-labelledby="borrowResultModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="borrowResultModalLabel">
@@ -235,13 +240,12 @@
               ></button>
             </div>
             <div class="modal-body">
-              <ul style="list-style-type: none; padding-left: 0">
-                <li>
-                  <strong>タイトル：</strong>
-                  図解AWSの仕組みとサービスがよく分かる！
-                </li>
-                <li><strong>返却期限：</strong> 2025/09/30</li>
-              </ul>
+              <p>
+                <strong>タイトル：</strong>
+                図解AWSの仕組みとサービスがよく分かる！
+              </p>
+
+              <strong>返却期限：</strong> 2025/09/30
             </div>
             <div class="modal-footer">
               <button
