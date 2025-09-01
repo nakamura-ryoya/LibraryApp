@@ -391,11 +391,12 @@ h1 {
 
 /* navbarのホバー表現 */
 .hover-outline {
-  padding: 6px 12px;
+  border: 1px solid transparent;
+  transition: border-color 0.2s ease;
   border-radius: 6px;
-  transition: border 0.2s ease;
+  padding: 6px 12px;
 }
 
 .hover-outline:hover {
-  border: 1px solid white;
+  border-color: white;
 }
