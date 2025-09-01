@@ -34,6 +34,10 @@ origin  https://github.com/nakamura-ryoya/LibraryApp.git (push)
 
 ## json サーバーの起動方法
 
+1. 以下の URL から Node.js をインストール  
+   インストーラ：<https://nodejs.org/ja/>  
+   （必ず参照：<https://qiita.com/ryome/items/eec08b28aff294e8c3d6>）  
+   ※npm などががうまく機能しない場合は、npm.cmd で実行してください。
 1. 以下のコマンドを作業ディレクトリで実行
 
 ```bash
