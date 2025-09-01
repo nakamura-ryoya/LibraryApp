@@ -55,30 +55,46 @@
         </form>
 
         <!-- 右側：ログインユーザー表示 -->
-        <div class="d-flex align-items-center user-info">
-          <i class="bi bi-person-circle fs-4 text-white me-2"></i>
-          <span class="text-white fw-light">田中 太郎</span>
-        </div>
+        <a href="mypage.html" class="text-decoration-none">
+          <div class="d-flex align-items-center user-info">
+            <i class="bi bi-person-circle fs-4 text-white me-2"></i>
+            <span class="text-white fw-light">田中 太郎</span>
+          </div>
+        </a>
       </div>
     </nav>
 
-    <div
-      class="container mt-4 mb-4"
-      style="max-width: 1200px; position: relative"
-    >
-      <!-- タイトル（中央揃え） -->
-      <h1 class="text-center">「AWS」の検索結果（28件）</h1>
+    <!-- タイトルとプルダウンを同じ段に表示 -->
+    <div class="container mt-4 mb-4" style="max-width: 1200px">
+      <div class="position-relative">
+        <!-- タイトル（中央揃え） -->
+        <h1 class="text-center">「AWS」の検索結果（28件）</h1>
 
-      <!-- プルダウンメニュー（右上に絶対配置） -->
-      <div class="position-absolute top-0 end-0">
-        <select
-          class="form-select form-select w-auto mt-2 me-2"
-          id="sortSelect"
-          onchange="handleSortChange()"
-        >
-          <option value="high">評価の高い順</option>
-          <option value="low">評価の低い順</option>
-        </select>
+        <!-- プルダウンメニュー（右上に配置、PC表示） -->
+        <div class="d-none d-md-block position-absolute top-0 end-0 mt-2 me-2">
+          <select
+            class="form-select form-select w-auto"
+            id="sortSelect"
+            onchange="handleSortChange()"
+          >
+            <option value="high">評価の高い順</option>
+            <option value="low">評価の低い順</option>
+          </select>
+        </div>
+
+        <!-- スマホ用：下に表示（右寄せ） -->
+        <div class="d-block d-md-none mt-3">
+          <div class="d-flex justify-content-end w-100">
+            <select
+              class="form-select form-select w-auto"
+              id="sortSelectMobile"
+              onchange="handleSortChange()"
+            >
+              <option value="high">評価の高い順</option>
+              <option value="low">評価の低い順</option>
+            </select>
+          </div>
+        </div>
       </div>
     </div>
 

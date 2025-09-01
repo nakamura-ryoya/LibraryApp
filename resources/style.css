@@ -83,6 +83,10 @@ h1 {
   text-align: center;
 }
 
+.stretched-link {
+  z-index: 1;
+}
+
 /* =============================
    検索フォーム
 ============================= */
@@ -110,32 +114,20 @@ h1 {
 /* =============================
    バッジカラー（貸出状況）
 ============================= */
+
+.badge {
+  position: relative;
+  z-index: 2;
+}
+
 .badge.bg-success {
   background-color: #198754;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .badge.bg-danger {
   background-color: #dc3545;
-}
-
-.badge-fixed {
-  min-width: 70px;
-  text-align: center;
-}
-
-.badge-fixed.bg-success:hover {
-  cursor: pointer;
-  background-color: #218838;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  transform: scale(1.03);
-}
-
-.badge-fixed {
-  display: inline-block;
-  padding: 0.8em 1.2em; /* ← ここを調整 */
-  font-size: 0.9rem; /* ← 文字サイズはそのまま */
-  border-radius: 0.5rem;
-  transition: all 0.2s ease-in-out;
 }
 
 .badge-fixed.bg-danger {
@@ -143,11 +135,24 @@ h1 {
   cursor: not-allowed;
 }
 
-.badge-fixed.bg-danger:hover {
-  background-color: #dc3545;
-  box-shadow: none;
-  transform: none;
+.badge-fixed.bg-success:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 128, 0, 0.3); /* 緑系の影 */
 }
+
+.badge-fixed {
+  text-align: center;
+  display: inline-block;
+  padding: 0.8em 1.2em; /* ← ここを調整 */
+  font-size: 0.9rem; /* ← 文字サイズはそのまま */
+  border-radius: 0.5rem;
+}
+
+.badge-fixed.bg-success:active {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 128, 0, 0.4);
+}
+
 /* =============================
    あらすじテキストの切り詰め
 ============================= */
