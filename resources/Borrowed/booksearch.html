@@ -27,17 +27,16 @@
         style="max-width: 1200px; margin: auto"
       >
         <!-- 左側：システム名 -->
-        <div class="col-4 col-md-3">
-          <a
-            class="navbar-brand fw-bold text-white"
-            href="/resources/toppage.html"
-          >
-            <i class="bi bi-star-fill text-warning"></i>NSLibrary<i
-              class="bi bi-star-fill text-warning"
-            ></i>
-          </a>
-        </div>
+        <a
+          class="navbar-brand fw-bold text-white"
+          href="/resources/toppage.html"
+        >
+          <i class="bi bi-star-fill text-warning"></i>NSLibrary<i
+            class="bi bi-star-fill text-warning"
+          ></i>
+        </a>
         <!-- 中央：検索フォーム（伸縮対応） -->
+        <!-- 検索フォーム -->
         <div class="col-12 col-md-6 position-relative px-2">
           <form
             class="d-flex search-form"
@@ -51,155 +50,209 @@
               placeholder="書籍名・著者名など"
               aria-label="Search"
               onfocus="showTags()"
+              onblur="hideTags()"
             />
             <button class="btn btn-outline-light" type="submit">
               <i class="bi bi-search"></i>
             </button>
           </form>
 
-          <!-- タグボタン表示 -->
+          <!-- タグ検索チェックボックス（初期は非表示） -->
           <div
             id="tagContainer"
             class="bg-light border rounded p-3 mt-2 shadow-sm"
             style="display: none; position: absolute; width: 100%; z-index: 10"
           >
-            <div class="mb-2 fw-bold">難易度</div>
-            <div class="d-flex flex-wrap gap-2 mb-3">
-              <button
-                type="button"
-                class="btn btn-outline-primary btn-sm tag-btn"
-              >
-                初級
-              </button>
-              <button
-                type="button"
-                class="btn btn-outline-primary btn-sm tag-btn"
-              >
-                中級
-              </button>
-              <button
-                type="button"
-                class="btn btn-outline-primary btn-sm tag-btn"
-              >
-                上級
-              </button>
-            </div>
+            <table class="table table-bordered">
+              <tbody>
+                <!-- 難易度 -->
+                <tr>
+                  <td
+                    style="
+                      width: 120px;
+                      font-weight: bold;
+                      vertical-align: middle;
+                      background-color: #f0f8ff;
+                    "
+                  >
+                    難易度
+                  </td>
+                  <td>
+                    <label class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="tag"
+                        value="初級"
+                      />
+                      <span class="form-check-label">初級</span>
+                    </label>
+                    <label class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="tag"
+                        value="中級"
+                      />
+                      <span class="form-check-label">中級</span>
+                    </label>
+                    <label class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="tag"
+                        value="上級"
+                      />
+                      <span class="form-check-label">上級</span>
+                    </label>
+                  </td>
+                </tr>
 
-            <div class="mb-2 fw-bold">ジャンル</div>
-            <div class="d-flex flex-wrap gap-2 mb-3">
-              <button
-                type="button"
-                class="btn btn-outline-success btn-sm tag-btn"
-              >
-                文学・評論
-              </button>
-              <button
-                type="button"
-                class="btn btn-outline-success btn-sm tag-btn"
-              >
-                ビジネス
-              </button>
-              <button
-                type="button"
-                class="btn btn-outline-success btn-sm tag-btn"
-              >
-                資格
-              </button>
-              <button
-                type="button"
-                class="btn btn-outline-success btn-sm tag-btn"
-              >
-                自己啓発
-              </button>
-              <button
-                type="button"
-                class="btn btn-outline-success btn-sm tag-btn"
-              >
-                暮らし・健康
-              </button>
-              <button
-                type="button"
-                class="btn btn-outline-success btn-sm tag-btn"
-              >
-                アート・デザイン
-              </button>
-            </div>
+                <!-- ジャンル -->
+                <tr>
+                  <td
+                    style="
+                      font-weight: bold;
+                      vertical-align: middle;
+                      background-color: #f0f8ff;
+                    "
+                  >
+                    ジャンル
+                  </td>
+                  <td>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px">
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="文学・評論"
+                        />
+                        <span class="form-check-label">文学・評論</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="ビジネス"
+                        />
+                        <span class="form-check-label">ビジネス</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="資格"
+                        />
+                        <span class="form-check-label">資格</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="自己啓発"
+                        />
+                        <span class="form-check-label">自己啓発</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="暮らし・健康"
+                        />
+                        <span class="form-check-label">暮らし・健康</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="アート・デザイン"
+                        />
+                        <span class="form-check-label">アート・デザイン</span>
+                      </label>
+                    </div>
+                  </td>
+                </tr>
 
-            <div class="mb-2 fw-bold">職種</div>
-            <div class="d-flex flex-wrap gap-2">
-              <button
-                type="button"
-                class="btn btn-outline-warning btn-sm tag-btn"
-              >
-                インフラ
-              </button>
-              <button
-                type="button"
-                class="btn btn-outline-warning btn-sm tag-btn"
-              >
-                アプリ
-              </button>
-              <button
-                type="button"
-                class="btn btn-outline-warning btn-sm tag-btn"
-              >
-                コンサル
-              </button>
-              <button
-                type="button"
-                class="btn btn-outline-warning btn-sm tag-btn"
-              >
-                営業
-              </button>
-              <button
-                type="button"
-                class="btn btn-outline-warning btn-sm tag-btn"
-              >
-                マネジメント
-              </button>
-              <button
-                type="button"
-                class="btn btn-outline-warning btn-sm tag-btn"
-              >
-                データ
-              </button>
-            </div>
+                <!-- 職種 -->
+                <tr>
+                  <td
+                    style="
+                      font-weight: bold;
+                      vertical-align: middle;
+                      background-color: #f0f8ff;
+                    "
+                  >
+                    職種
+                  </td>
+                  <td>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px">
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="インフラ"
+                        />
+                        <span class="form-check-label">インフラ</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="アプリ"
+                        />
+                        <span class="form-check-label">アプリ</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="コンサル"
+                        />
+                        <span class="form-check-label">コンサル</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="営業"
+                        />
+                        <span class="form-check-label">営業</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="マネジメント"
+                        />
+                        <span class="form-check-label">マネジメント</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="データ"
+                        />
+                        <span class="form-check-label">データ</span>
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-        <script>
-          const tagContainer = document.getElementById("tagContainer");
-          const searchInput = document.getElementById("searchInput");
-
-          // フォーカス時に表示
-          searchInput.addEventListener("focus", () => {
-            tagContainer.style.display = "block";
-          });
-
-          document.addEventListener("click", (event) => {
-            const isClickInside =
-              searchInput.contains(event.target) ||
-              tagContainer.contains(event.target);
-            if (!isClickInside) {
-              tagContainer.style.display = "none";
-            }
-          });
-
-          document.querySelectorAll(".tag-btn").forEach((button) => {
-            button.addEventListener("click", () => {
-              const input = document.getElementById("searchInput");
-              const tag = button.textContent.trim();
-
-              // すでに含まれていない場合のみ追加
-              if (!input.value.includes(tag)) {
-                input.value += (input.value ? " " : "") + tag;
-              }
-            });
-          });
-
-          function showTags() {
-            document.getElementById("tagContainer").style.display = "block";
-          }
-        </script>
         <!-- 右側：貸出履歴表示 -->
         <a
           href="/resources/booklog.html"
@@ -304,13 +357,7 @@
               class="d-flex justify-content-between align-items-center border-bottom py-2"
             >
               <span>虎ノ門</span>
-              <span
-                class="badge bg-success mt-2 mt-sm-0 badge-fixed"
-                data-bs-toggle="modal"
-                data-bs-target="#borrowModal"
-              >
-                借りる
-              </span>
+              <span class="badge bg-danger badge-fixed">貸出中</span>
             </div>
 
             <div
@@ -668,6 +715,25 @@
           window.location.href = "booksearch.html";
         }
       }
+    </script>
+    <script>
+      const tagContainer = document.getElementById("tagContainer");
+      const searchInput = document.getElementById("searchInput");
+
+      // フォーカス時に表示
+      searchInput.addEventListener("focus", () => {
+        tagContainer.style.display = "block";
+      });
+
+      // ドキュメント全体のクリックを監視
+      document.addEventListener("click", (event) => {
+        const isClickInside =
+          searchInput.contains(event.target) ||
+          tagContainer.contains(event.target);
+        if (!isClickInside) {
+          tagContainer.style.display = "none";
+        }
+      });
     </script>
   </body>
 </html>
