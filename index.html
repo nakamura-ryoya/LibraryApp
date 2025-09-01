@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>APIデモ</title>
+  </head>
+  <body>
+    <h1>書籍一覧</h1>
+    <ul id="book-list"></ul>
+
+    <script>
+      // APIからデータを取得
+      fetch("http://localhost:3000/books")
+        .then((res) => res.json())
+        .then((data) => {
+          const list = document.getElementById("book-list");
+          data.forEach((book) => {
+            const li = document.createElement("li");
+            li.textContent = `${book.title} （著者: ${book.author}）`;
+            list.appendChild(li);
+          });
+        })
+        .catch((err) => console.error("エラー:", err));
+    </script>
+  </body>
+</html>
