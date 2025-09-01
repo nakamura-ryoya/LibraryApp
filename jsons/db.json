@@ -1,0 +1,6 @@
+{
+  "books": [
+    { "id": 1, "title": "はじめてのJavaScript", "author": "山田太郎" },
+    { "id": 2, "title": "HTML&CSS入門", "author": "佐藤花子" }
+  ]
+}

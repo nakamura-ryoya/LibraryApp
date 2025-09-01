@@ -1,0 +1,23 @@
+{
+  "name": "libraryapp",
+  "version": "1.0.0",
+  "description": "1. 以下のURLからGitをインストール  \r https://gitforwindows.org/  \r (※インストール手順はこちらを参考に！：https://qiita.com/takeru-hirai/items/4fbe6593d42f9a844b1c)\r 3. Git Hubのアカウントを作成する（ある人はスキップ）  \r Git Hubのアカウント作成はこちらから：https://github.com/signup?source=form-home-signup&user_email=\r ※ユーザを作成したら、ユーザー名を教えてください\r 4. Git Bash（Gitをインストール時に自動でインストールされてるはず）を起動し、以下のコマンドを実行  \r ~~~bash\r git config --global user.name \"（自分の名前）\"\r git config --global user.email \"（社内メール）\"\r ssh-keygen\r ~~~\r 4. VsCodeを開き、作業ディレクトリからターミナルで以下のコマンドを実行\r ~~~bash\r git remote add origin https://github.com/nakamura-ryoya/LibraryApp.git\r git remote -v\r ~~~\r 実行後、以下が表示されればOK\r ~~~bash\r origin  https://github.com/nakamura-ryoya/LibraryApp.git (fetch)\r origin  https://github.com/nakamura-ryoya/LibraryApp.git (push)\r ~~~\r 5. ctrl+shift+pでコマンドパレットを開き、「Git: クローン」と検索\r 6. リポジトリURL（<https://github.com/nakamura-ryoya/LibraryApp.git>）を指定し、デスクトップで開く\r 7. デスクトップに「LibraryApp」フォルダがあれば環境構築完了！",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nakamura-ryoya/LibraryApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nakamura-ryoya/LibraryApp/issues"
+  },
+  "homepage": "https://github.com/nakamura-ryoya/LibraryApp#readme",
+  "dependencies": {
+    "json-server": "^1.0.0-beta.3"
+  }
+}
