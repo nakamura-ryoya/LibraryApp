@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>社内図書館システム</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+
+    <link rel="stylesheet" href="/resources/style.css" />
+  </head>
+
+  <body>
+    <!-- ナビバー -->
+    <nav class="navbar sticky-top">
+      <div
+        class="container d-flex flex-wrap justify-content-between align-items-center"
+        style="max-width: 1200px; margin: auto"
+      >
+        <!-- 左側：システム名 -->
+        <a
+          class="navbar-brand fw-bold text-white"
+          href="/resources/toppage.html"
+        >
+          <i class="bi bi-star-fill text-warning"></i>NSLibrary<i
+            class="bi bi-star-fill text-warning"
+          ></i>
+        </a>
+        <!-- 中央：検索フォーム（伸縮対応） -->
+        <!-- 検索フォーム -->
+        <div class="col-12 col-md-6 position-relative px-2">
+          <form
+            class="d-flex search-form"
+            role="search"
+            action="/resources/booksearch.html"
+          >
+            <input
+              id="searchInput"
+              type="text"
+              class="form-control me-2"
+              placeholder="書籍名・著者名など"
+              aria-label="Search"
+              onfocus="showTags()"
+              onblur="hideTags()"
+            />
+            <button class="btn btn-outline-light" type="submit">
+              <i class="bi bi-search"></i>
+            </button>
+          </form>
+
+          <!-- タグ検索チェックボックス（初期は非表示） -->
+          <div
+            id="tagContainer"
+            class="bg-light border rounded p-3 mt-2 shadow-sm"
+            style="display: none; position: absolute; width: 100%; z-index: 10"
+          >
+            <table class="table table-bordered">
+              <tbody>
+                <!-- 難易度 -->
+                <tr>
+                  <td
+                    style="
+                      width: 120px;
+                      font-weight: bold;
+                      vertical-align: middle;
+                      background-color: #f0f8ff;
+                    "
+                  >
+                    難易度
+                  </td>
+                  <td>
+                    <label class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="tag"
+                        value="初級"
+                      />
+                      <span class="form-check-label">初級</span>
+                    </label>
+                    <label class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="tag"
+                        value="中級"
+                      />
+                      <span class="form-check-label">中級</span>
+                    </label>
+                    <label class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="tag"
+                        value="上級"
+                      />
+                      <span class="form-check-label">上級</span>
+                    </label>
+                  </td>
+                </tr>
+
+                <!-- ジャンル -->
+                <tr>
+                  <td
+                    style="
+                      font-weight: bold;
+                      vertical-align: middle;
+                      background-color: #f0f8ff;
+                    "
+                  >
+                    ジャンル
+                  </td>
+                  <td>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px">
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="文学・評論"
+                        />
+                        <span class="form-check-label">文学・評論</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="ビジネス"
+                        />
+                        <span class="form-check-label">ビジネス</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="資格"
+                        />
+                        <span class="form-check-label">資格</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="自己啓発"
+                        />
+                        <span class="form-check-label">自己啓発</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="暮らし・健康"
+                        />
+                        <span class="form-check-label">暮らし・健康</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="アート・デザイン"
+                        />
+                        <span class="form-check-label">アート・デザイン</span>
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- 職種 -->
+                <tr>
+                  <td
+                    style="
+                      font-weight: bold;
+                      vertical-align: middle;
+                      background-color: #f0f8ff;
+                    "
+                  >
+                    職種
+                  </td>
+                  <td>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px">
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="インフラ"
+                        />
+                        <span class="form-check-label">インフラ</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="アプリ"
+                        />
+                        <span class="form-check-label">アプリ</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="コンサル"
+                        />
+                        <span class="form-check-label">コンサル</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="営業"
+                        />
+                        <span class="form-check-label">営業</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="マネジメント"
+                        />
+                        <span class="form-check-label">マネジメント</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="データ"
+                        />
+                        <span class="form-check-label">データ</span>
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- 右側：貸出履歴表示 -->
+        <a
+          href="/resources/booklog.html"
+          class="d-flex align-items-center text-decoration-none hover-outline rounded px-2"
+        >
+          <i class="bi bi-book fs-5 text-white me-2"></i>
+          <span class="text-white fw-light">貸出<br />履歴</span>
+        </a>
+
+        <a
+          href="/resources/mypage.html"
+          class="d-flex align-items-center text-decoration-none hover-outline rounded px-2"
+        >
+          <i class="bi bi-person-circle fs-5 text-white me-2"></i>
+          <span class="text-white fw-light">田中 太郎</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- タイトルとプルダウンを同じ段に表示 -->
+    <div class="container mt-4 mb-4" style="max-width: 1200px">
+      <div class="position-relative">
+        <!-- タイトル（中央揃え） -->
+        <h1 class="text-center">「AWS」の検索結果（28件）</h1>
+
+        <!-- プルダウンメニュー（右上に配置、PC表示） -->
+        <div class="d-none d-md-block position-absolute top-0 end-0 mt-2 me-2">
+          <select
+            class="form-select form-select w-auto"
+            id="sortSelect"
+            onchange="handleSortChange()"
+          >
+            <option value="none" selected>おすすめ順</option>
+            <option value="high">評価の高い順</option>
+            <option value="low">評価の低い順</option>
+          </select>
+        </div>
+
+        <!-- スマホ用：下に表示（右寄せ） -->
+        <div class="d-block d-md-none mt-3">
+          <div class="d-flex justify-content-end w-100">
+            <select
+              class="form-select form-select w-auto"
+              id="sortSelectMobile"
+              onchange="handleSortChange()"
+            >
+              <option value="none" selected>おすすめ順</option>
+              <option value="high">評価の高い順</option>
+              <option value="low">評価の低い順</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 検索結果カード -->
+    <div class="container">
+      <!-- カード1 -->
+      <div class="card card-hover search-card mb-4 shadow-sm border-0">
+        <a href="book1Detail.html" class="stretched-link"></a>
+        <div class="row g-0 align-items-stretch">
+          <!-- 画像ブロック（2割） -->
+          <div
+            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
+          >
+            <img
+              src="/images/book1.png"
+              class="img-fluid rounded"
+              alt="蔵書画像"
+            />
+          </div>
+
+          <!-- タイトル・評価・あらましブロック（6割） -->
+          <div class="col-md-6 p-3 border-end text-block">
+            <h4 class="fw-bold mb-2 title-clamp-2">
+              図解 AWSの仕組みとサービスがよくわかる！
+            </h4>
+            <p class="rating mb-2">
+              <strong>評価：</strong>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-half text-warning"></i>
+              <span class="text-muted small mx-1">4.6 (13件)</span>
+            </p>
+
+            <p class="card-text tag-group">
+              <span class="badge rounded-pill badge-outline me-1"
+                >初心者向け</span
+              >
+              <span class="badge rounded-pill badge-outline me-1">AWS</span>
+              <span class="badge rounded-pill badge-outline me-1"
+                >インフラ系</span
+              >
+            </p>
+          </div>
+
+          <!-- 貸出状況ブロック（2割） -->
+          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
+            <div
+              class="d-flex justify-content-between align-items-center border-bottom py-2"
+            >
+              <span>虎ノ門</span>
+              <span class="badge bg-danger badge-fixed">貸出中</span>
+            </div>
+
+            <div
+              class="d-flex justify-content-between align-items-center border-bottom py-2"
+            >
+              <span>新川</span>
+              <span class="badge bg-danger badge-fixed">貸出中</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center py-2">
+              <span>みなとみらい</span>
+              <span class="badge bg-danger badge-fixed">貸出中</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- カード2 -->
+      <div class="card card-hover search-card mb-4 shadow-sm border-0">
+        <a href="book2Detail.html" class="stretched-link"></a>
+        <div class="row g-0 align-items-stretch">
+          <!-- 画像ブロック（2割） -->
+          <div
+            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
+          >
+            <img
+              src="/images/book2.png"
+              class="img-fluid rounded"
+              alt="蔵書画像"
+            />
+          </div>
+
+          <!-- タイトル・評価・あらましブロック（6割） -->
+          <div class="col-md-6 p-3 border-end text-block">
+            <h4 class="fw-bold mb-2 title-clamp-2">
+              AWSの仕組み・重要用語がわかる教科書
+            </h4>
+            <p class="rating mb-2">
+              <strong>評価：</strong>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-half text-warning"></i>
+              <span class="text-muted small mx-1">4.2 (9件)</span>
+            </p>
+
+            <p class="card-text tag-group">
+              <span class="badge rounded-pill badge-outline me-1"
+                >中級者向け</span
+              >
+              <span class="badge rounded-pill badge-outline me-1">AWS</span>
+              <span class="badge rounded-pill badge-outline me-1"
+                >インフラ系</span
+              >
+            </p>
+          </div>
+
+          <!-- 貸出状況ブロック（2割） -->
+          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
+            <div
+              class="d-flex justify-content-between align-items-center border-bottom py-2"
+            >
+              <span>虎ノ門</span>
+              <span class="badge bg-danger badge-fixed">貸出中</span>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center py-2">
+              <span>新川</span>
+              <span class="badge bg-danger badge-fixed">貸出中</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- カード3 -->
+      <div class="card card-hover search-card mb-4 shadow-sm border-0">
+        <a href="book3Detail.html" class="stretched-link"></a>
+        <div class="row g-0 align-items-stretch">
+          <!-- 画像ブロック（2割） -->
+          <div
+            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
+          >
+            <img
+              src="/images/book3.png"
+              class="img-fluid rounded"
+              alt="蔵書画像"
+            />
+          </div>
+
+          <!-- タイトル・評価・あらましブロック（6割） -->
+          <div class="col-md-6 p-3 border-end text-block">
+            <h4 class="fw-bold mb-2 title-clamp-2">はじめてのAWS</h4>
+            <p class="rating mb-2">
+              <strong>評価：</strong>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-half text-warning"></i>
+              <span class="text-muted small mx-1">4.8 (20件)</span>
+            </p>
+            <p class="card-text tag-group">
+              <span class="badge rounded-pill badge-outline me-1"
+                >初心者向け</span
+              >
+              <span class="badge rounded-pill badge-outline me-1">AWS</span>
+              <span class="badge rounded-pill badge-outline me-1"
+                >インフラ系</span
+              >
+            </p>
+          </div>
+
+          <!-- 貸出状況ブロック（2割） -->
+          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
+            <div
+              class="d-flex justify-content-between align-items-center border-bottom py-2"
+            >
+              <span>虎ノ門</span>
+              <span class="badge bg-danger badge-fixed">貸出中</span>
+            </div>
+
+            <div
+              class="d-flex justify-content-between align-items-center border-bottom py-2"
+            >
+              <span>新川</span>
+              <span class="badge bg-danger badge-fixed">貸出中</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center py-2">
+              <span>みなとみらい</span>
+              <span class="badge bg-danger badge-fixed">貸出中</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- カード4 -->
+      <div class="card card-hover search-card mb-4 shadow-sm border-0">
+        <a href="book6Detail.html" class="stretched-link"></a>
+        <div class="row g-0 align-items-stretch">
+          <!-- 画像ブロック（2割） -->
+          <div
+            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
+          >
+            <img
+              src="/images/book6.png"
+              class="img-fluid rounded"
+              alt="蔵書画像"
+            />
+          </div>
+
+          <!-- タイトル・評価・あらましブロック（6割） -->
+          <div class="col-md-6 p-3 border-end text-block">
+            <h4 class="fw-bold mb-2 title-clamp-2">
+              AWS　上級　プロレベルを目指す人へ　開発生産性を上げる
+            </h4>
+            <p class="rating mb-2">
+              <strong>評価：</strong>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-half text-warning"></i>
+              <span class="text-muted small mx-1">4.7 (15件)</span>
+            </p>
+            <p class="card-text tag-group">
+              <span class="badge rounded-pill badge-outline me-1"
+                >上級者向け</span
+              >
+              <span class="badge rounded-pill badge-outline me-1">AWS</span>
+              <span class="badge rounded-pill badge-outline me-1"
+                >インフラ系</span
+              >
+            </p>
+          </div>
+
+          <!-- 貸出状況ブロック（2割） -->
+          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
+            <div class="d-flex justify-content-between align-items-center py-2">
+              <span>虎ノ門</span>
+              <span class="badge bg-danger badge-fixed">貸出中</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- カード5 -->
+      <div class="card card-hover search-card mb-4 shadow-sm border-0">
+        <a href="book9Detail.html" class="stretched-link"></a>
+        <div class="row g-0 align-items-stretch">
+          <!-- 画像ブロック（2割） -->
+          <div
+            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
+          >
+            <img
+              src="/images/book9.png"
+              class="img-fluid rounded"
+              alt="蔵書画像"
+            />
+          </div>
+
+          <!-- タイトル・評価・あらましブロック（6割） -->
+          <div class="col-md-6 p-3 border-end text-block">
+            <h4 class="fw-bold mb-2 title-clamp-2">
+              AWS
+              Lambdaを正しく理解し、「サーバレス」を実現するプラットフォームを最大限に活用しよう
+            </h4>
+            <p class="rating mb-2">
+              <strong>評価：</strong>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-half text-warning"></i>
+              <span class="text-muted small mx-1">4.5 (14件)</span>
+            </p>
+            <p class="card-text tag-group">
+              <span class="badge rounded-pill badge-outline me-1"
+                >上級者向け</span
+              >
+              <span class="badge rounded-pill badge-outline me-1">AWS</span>
+              <span class="badge rounded-pill badge-outline me-1"
+                >インフラ系</span
+              >
+            </p>
+          </div>
+
+          <!-- 貸出状況ブロック（2割） -->
+          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
+            <div class="d-flex justify-content-between align-items-center py-2">
+              <span>みなとみらい</span>
+              <span class="badge bg-danger badge-fixed">貸出中</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 借りる確認モーダル -->
+    <div
+      class="modal fade"
+      id="borrowModal"
+      tabindex="-1"
+      aria-labelledby="borrowModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="borrowModalLabel">確認画面</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="閉じる"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p><strong>この本を借りますか？</strong></p>
+            <strong>タイトル：</strong>
+            図解AWSの仕組みとサービスがよく分かる！
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              キャンセル
+            </button>
+            <button
+              type="button"
+              class="btn btn-success"
+              data-bs-target="#borrowResultModal"
+              data-bs-toggle="modal"
+              data-bs-dismiss="modal"
+            >
+              借りる
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 借りた結果モーダル -->
+    <div
+      class="modal fade"
+      id="borrowResultModal"
+      tabindex="-1"
+      aria-labelledby="borrowResultModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="borrowResultModalLabel">
+              以下の本を借りました
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="閉じる"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              <strong>タイトル：</strong>
+              図解AWSの仕組みとサービスがよく分かる！
+            </p>
+
+            <strong>返却期限：</strong> 2025/09/30
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+            >
+              閉じる
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nav>
+      <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1">前へ</a>
+        </li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item disabled">
+          <a class="page-link" href="#">...</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">6</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">次へ</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      function handleSortChange() {
+        const sortValue = document.getElementById("sortSelect").value;
+
+        // 選択された値に応じて遷移先を変更
+        if (sortValue === "high") {
+          window.location.href = "booksearchReviewHigh.html";
+        } else if (sortValue === "low") {
+          window.location.href = "booksearchReviewLow.html";
+        } else if (sortValue === "none") {
+          window.location.href = "booksearch.html";
+        }
+      }
+    </script>
+    <script>
+      const tagContainer = document.getElementById("tagContainer");
+      const searchInput = document.getElementById("searchInput");
+
+      // フォーカス時に表示
+      searchInput.addEventListener("focus", () => {
+        tagContainer.style.display = "block";
+      });
+
+      // ドキュメント全体のクリックを監視
+      document.addEventListener("click", (event) => {
+        const isClickInside =
+          searchInput.contains(event.target) ||
+          tagContainer.contains(event.target);
+        if (!isClickInside) {
+          tagContainer.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>
