@@ -70,7 +70,7 @@
       <!-- カード1 -->
       <div
         class="card card-hover mb-4 shadow-sm border-0"
-        style="max-width: 1200px; margin: auto"
+        style="max-width: 1200px; margin: auto; padding: 0.5rem"
       >
         <a href="book1Detail.html" class="stretched-link"></a>
         <div class="row g-0 align-items-stretch">
@@ -93,24 +93,120 @@
 
           <!-- タイトル・評価・あらましブロック（6割） -->
           <div
-            class="col-md-6 d-flex flex-column justify-content-center p-3 border-end"
+            class="col-md-6 d-flex flex-column justify-content-start p-3 border-end"
           >
-            <h5 class="fw-bold mb-2">
+            <h3 class="fw-bold mb-2" style="margin-top: 0.2rem">
               図解 AWSの仕組みとサービスがよくわかる！
-            </h5>
-            <p class="mb-2">
+            </h3>
+            <p class="mb-2" style="font-size: 1.2rem; margin-top: 1rem">
               <strong>評価：</strong>
               <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-half text-warning"></i
-                  ></small>
-                <span class="text-muted small mx-1">4.6 (13件)</span>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-half text-warning"></i>
+              <span class="text-muted small mx-1">4.6 (13件)</span>
             </p>
 
-            <p class="text-muted small summary-text">
-              AWSの主要サービス（EC2、S3、Lambda、RDSなど）を図解でわかりやすく解説。インフラの構成図やデータフロー、料金体系などをビジュアルで理解できる構成になっており、初心者から中級者まで幅広く対応。
+            <p class="card-text" style="margin-top: 0.2rem">
+              <span
+                class="badge bg-info me-1"
+                style="font-size: 0.9rem; padding: 0.5em 0.75em"
+                >初心者向け</span
+              >
+              <span
+                class="badge bg-info me-1"
+                style="font-size: 0.9rem; padding: 0.5em 0.75em"
+                >AWS</span
+              >
+              <span
+                class="badge bg-info me-1"
+                style="font-size: 0.9rem; padding: 0.5em 0.75em"
+                >インフラ系</span
+              >
+            </p>
+          </div>
+
+          <!-- 貸出状況ブロック（2割） -->
+          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
+            <div
+              class="d-flex justify-content-between align-items-center border-bottom py-2"
+            >
+              <span>虎ノ門</span>
+              <span class="badge bg-success badge-fixed">借りる</span>
+            </div>
+
+            <div
+              class="d-flex justify-content-between align-items-center border-bottom py-2"
+            >
+              <span>新川</span>
+              <span class="badge bg-danger badge-fixed">貸出中</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center py-2">
+              <span>みなとみらい</span>
+              <span class="badge bg-success badge-fixed">借りる</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- カード1 -->
+      <div
+        class="card card-hover mb-4 shadow-sm border-0"
+        style="max-width: 1200px; margin: auto; padding: 0.5rem"
+      >
+        <a href="book1Detail.html" class="stretched-link"></a>
+        <div class="row g-0 align-items-stretch">
+          <!-- 画像ブロック（2割） -->
+          <div
+            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
+          >
+            <img
+              src="/images/book1.png"
+              class="img-fluid rounded"
+              alt="蔵書画像"
+              style="
+                max-height: 200px;
+                max-width: 100%;
+                width: 135px;
+                height: 180px;
+              "
+            />
+          </div>
+
+          <!-- タイトル・評価・あらましブロック（6割） -->
+          <div
+            class="col-md-6 d-flex flex-column justify-content-start p-3 border-end"
+          >
+            <h4 class="fw-bold mb-2" style="margin-top: 1rem">
+              図解 AWSの仕組みとサービスがよくわかる！
+            </h4>
+            <p class="mb-2" style="font-size: 1.1rem; margin-top: 1.5rem">
+              <strong>評価：</strong>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-half text-warning"></i>
+              <span class="text-muted small mx-1">4.6 (13件)</span>
+            </p>
+
+            <p class="card-text" style="margin-top: 0.4rem">
+              <span
+                class="badge bg-info me-1"
+                style="font-size: 0.9rem; padding: 0.5em 0.75em"
+                >初心者向け</span
+              >
+              <span
+                class="badge bg-info me-1"
+                style="font-size: 0.9rem; padding: 0.5em 0.75em"
+                >AWS</span
+              >
+              <span
+                class="badge bg-info me-1"
+                style="font-size: 0.9rem; padding: 0.5em 0.75em"
+                >インフラ系</span
+              >
             </p>
           </div>
 
@@ -169,12 +265,11 @@
             <p class="mb-2">
               <strong>評価：</strong>
               <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-half text-warning"></i
-                  ></small>
-                <span class="text-muted small mx-1">4.2 (9件)</span>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-half text-warning"></i>
+              <span class="text-muted small mx-1">4.2 (9件)</span>
             </p>
 
             <p class="text-muted small summary-text">
@@ -231,13 +326,12 @@
             <h5 class="fw-bold mb-2">はじめてのAWS</h5>
             <p class="mb-2">
               <strong>評価：</strong>
-<i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-half text-warning"></i
-                  ></small>
-                <span class="text-muted small mx-1">4.8 (20件)</span>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-half text-warning"></i>
+              <span class="text-muted small mx-1">4.8 (20件)</span>
             </p>
             <p class="text-muted small summary-text">
               「AWSって何？」という段階からスタートし、アカウント作成、無料枠の使い方、簡単なEC2の起動までを丁寧にガイド。クラウドの概念やオンプレとの違いも初心者目線で解説。
@@ -299,13 +393,12 @@
             </h5>
             <p class="mb-2">
               <strong>評価：</strong>
-               <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-half text-warning"></i
-                  ></small>
-                <span class="text-muted small mx-1">4.7 (15件)</span>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-half text-warning"></i>
+              <span class="text-muted small mx-1">4.7 (15件)</span>
             </p>
             <p class="text-muted small summary-text">
               AWSを使いこなす上級者向けに、開発効率を最大化するための設計・運用・自動化のノウハウを解説。CI/CD、Infrastructure
@@ -356,13 +449,12 @@
             </h5>
             <p class="mb-2">
               <strong>評価：</strong>
-                <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-half text-warning"></i
-                  ></small>
-                <span class="text-muted small mx-1">4.5 (14件)</span>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-half text-warning"></i>
+              <span class="text-muted small mx-1">4.5 (14件)</span>
             </p>
             <p class="text-muted small summary-text">
               AWS
