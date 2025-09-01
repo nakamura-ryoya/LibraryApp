@@ -56,6 +56,7 @@
               <i class="bi bi-search"></i>
             </button>
           </form>
+
           <!-- タグ検索チェックボックス（初期は非表示） -->
           <div
             id="tagContainer"
@@ -119,42 +120,62 @@
                     ジャンル
                   </td>
                   <td>
-                    <label class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        name="tag"
-                        value="AI"
-                      />
-                      <span class="form-check-label">資格</span>
-                    </label>
-                    <label class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        name="tag"
-                        value="Python"
-                      />
-                      <span class="form-check-label">ビジネス</span>
-                    </label>
-                    <label class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        name="tag"
-                        value="AWS"
-                      />
-                      <span class="form-check-label">自己啓発</span>
-                    </label>
-                    <label class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        name="tag"
-                        value="AWS"
-                      />
-                      <span class="form-check-label">自己啓発</span>
-                    </label>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px">
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="文学・評論"
+                        />
+                        <span class="form-check-label">文学・評論</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="ビジネス"
+                        />
+                        <span class="form-check-label">ビジネス</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="資格"
+                        />
+                        <span class="form-check-label">資格</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="自己啓発"
+                        />
+                        <span class="form-check-label">自己啓発</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="暮らし・健康"
+                        />
+                        <span class="form-check-label">暮らし・健康</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="アート・デザイン"
+                        />
+                        <span class="form-check-label">アート・デザイン</span>
+                      </label>
+                    </div>
                   </td>
                 </tr>
 
@@ -170,35 +191,62 @@
                     職種
                   </td>
                   <td>
-                    <label class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        name="tag"
-                        value="エンジニア"
-                      />
-                      <span class="form-check-label">エンジニア</span>
-                    </label>
-                    <label class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        name="tag"
-                        value="データサイエンティスト"
-                      />
-                      <span class="form-check-label"
-                        >データサイエンティスト</span
-                      >
-                    </label>
-                    <label class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        name="tag"
-                        value="クラウドアーキテクト"
-                      />
-                      <span class="form-check-label">クラウドアーキテクト</span>
-                    </label>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px">
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="インフラ"
+                        />
+                        <span class="form-check-label">インフラ</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="アプリ"
+                        />
+                        <span class="form-check-label">アプリ</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="コンサル"
+                        />
+                        <span class="form-check-label">コンサル</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="営業"
+                        />
+                        <span class="form-check-label">営業</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="マネジメント"
+                        />
+                        <span class="form-check-label">マネジメント</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="データ"
+                        />
+                        <span class="form-check-label">データ</span>
+                      </label>
+                    </div>
                   </td>
                 </tr>
               </tbody>
