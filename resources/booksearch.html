@@ -56,6 +56,7 @@
               <i class="bi bi-search"></i>
             </button>
           </form>
+
           <!-- タグ検索チェックボックス（初期は非表示） -->
           <div
             id="tagContainer"
@@ -119,42 +120,62 @@
                     ジャンル
                   </td>
                   <td>
-                    <label class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        name="tag"
-                        value="AI"
-                      />
-                      <span class="form-check-label">資格</span>
-                    </label>
-                    <label class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        name="tag"
-                        value="Python"
-                      />
-                      <span class="form-check-label">ビジネス</span>
-                    </label>
-                    <label class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        name="tag"
-                        value="AWS"
-                      />
-                      <span class="form-check-label">自己啓発</span>
-                    </label>
-                    <label class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        name="tag"
-                        value="AWS"
-                      />
-                      <span class="form-check-label">自己啓発</span>
-                    </label>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px">
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="文学・評論"
+                        />
+                        <span class="form-check-label">文学・評論</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="ビジネス"
+                        />
+                        <span class="form-check-label">ビジネス</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="資格"
+                        />
+                        <span class="form-check-label">資格</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="自己啓発"
+                        />
+                        <span class="form-check-label">自己啓発</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="暮らし・健康"
+                        />
+                        <span class="form-check-label">暮らし・健康</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="アート・デザイン"
+                        />
+                        <span class="form-check-label">アート・デザイン</span>
+                      </label>
+                    </div>
                   </td>
                 </tr>
 
@@ -170,35 +191,62 @@
                     職種
                   </td>
                   <td>
-                    <label class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        name="tag"
-                        value="エンジニア"
-                      />
-                      <span class="form-check-label">エンジニア</span>
-                    </label>
-                    <label class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        name="tag"
-                        value="データサイエンティスト"
-                      />
-                      <span class="form-check-label"
-                        >データサイエンティスト</span
-                      >
-                    </label>
-                    <label class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        name="tag"
-                        value="クラウドアーキテクト"
-                      />
-                      <span class="form-check-label">クラウドアーキテクト</span>
-                    </label>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px">
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="インフラ"
+                        />
+                        <span class="form-check-label">インフラ</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="アプリ"
+                        />
+                        <span class="form-check-label">アプリ</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="コンサル"
+                        />
+                        <span class="form-check-label">コンサル</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="営業"
+                        />
+                        <span class="form-check-label">営業</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="マネジメント"
+                        />
+                        <span class="form-check-label">マネジメント</span>
+                      </label>
+                      <label class="form-check" style="width: 45%">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="tag"
+                          value="データ"
+                        />
+                        <span class="form-check-label">データ</span>
+                      </label>
+                    </div>
                   </td>
                 </tr>
               </tbody>
@@ -208,16 +256,15 @@
         <!-- 右側：貸出履歴表示 -->
         <a
           href="/resources/booklog.html"
-          class="d-flex align-items-center user-info hover-outline text-decoration-none"
+          class="d-flex align-items-center text-decoration-none hover-outline rounded px-2"
         >
           <i class="bi bi-book fs-5 text-white me-2"></i>
-          <span class="text-white fw-light">貸出履歴</span>
+          <span class="text-white fw-light">貸出<br />履歴</span>
         </a>
 
-        <!-- 右側：ログインユーザー表示 -->
         <a
           href="/resources/mypage.html"
-          class="d-flex align-items-center user-info hover-outline text-decoration-none"
+          class="d-flex align-items-center text-decoration-none hover-outline rounded px-2"
         >
           <i class="bi bi-person-circle fs-5 text-white me-2"></i>
           <span class="text-white fw-light">田中 太郎</span>
@@ -238,7 +285,7 @@
             id="sortSelect"
             onchange="handleSortChange()"
           >
-            <option value="none" selected>-----</option>
+            <option value="none" selected>おすすめ順</option>
             <option value="high">評価の高い順</option>
             <option value="low">評価の低い順</option>
           </select>
@@ -252,7 +299,7 @@
               id="sortSelectMobile"
               onchange="handleSortChange()"
             >
-              <option value="none" selected>-----</option>
+              <option value="none" selected>おすすめ順</option>
               <option value="high">評価の高い順</option>
               <option value="low">評価の低い順</option>
             </select>
@@ -280,7 +327,7 @@
 
           <!-- タイトル・評価・あらましブロック（6割） -->
           <div class="col-md-6 p-3 border-end text-block">
-            <h4 class="fw-bold mb-2">
+            <h4 class="fw-bold mb-2 title-clamp-2">
               図解 AWSの仕組みとサービスがよくわかる！
             </h4>
             <p class="rating mb-2">
@@ -294,9 +341,13 @@
             </p>
 
             <p class="card-text tag-group">
-              <span class="badge bg-info me-1">初心者向け</span>
-              <span class="badge bg-info me-1">AWS</span>
-              <span class="badge bg-info me-1">インフラ系</span>
+              <span class="badge rounded-pill badge-outline me-1"
+                >初心者向け</span
+              >
+              <span class="badge rounded-pill badge-outline me-1">AWS</span>
+              <span class="badge rounded-pill badge-outline me-1"
+                >インフラ系</span
+              >
             </p>
           </div>
 
@@ -340,7 +391,9 @@
 
           <!-- タイトル・評価・あらましブロック（6割） -->
           <div class="col-md-6 p-3 border-end text-block">
-            <h4 class="fw-bold mb-2">AWSの仕組み・重要用語がわかる教科書</h4>
+            <h4 class="fw-bold mb-2 title-clamp-2">
+              AWSの仕組み・重要用語がわかる教科書
+            </h4>
             <p class="rating mb-2">
               <strong>評価：</strong>
               <i class="bi bi-star-fill text-warning"></i>
@@ -352,9 +405,13 @@
             </p>
 
             <p class="card-text tag-group">
-              <span class="badge bg-info me-1">中級者向け</span>
-              <span class="badge bg-info me-1">AWS</span>
-              <span class="badge bg-info me-1">インフラ系</span>
+              <span class="badge rounded-pill badge-outline me-1"
+                >中級者向け</span
+              >
+              <span class="badge rounded-pill badge-outline me-1">AWS</span>
+              <span class="badge rounded-pill badge-outline me-1"
+                >インフラ系</span
+              >
             </p>
           </div>
 
@@ -392,7 +449,7 @@
 
           <!-- タイトル・評価・あらましブロック（6割） -->
           <div class="col-md-6 p-3 border-end text-block">
-            <h4 class="fw-bold mb-2">はじめてのAWS</h4>
+            <h4 class="fw-bold mb-2 title-clamp-2">はじめてのAWS</h4>
             <p class="rating mb-2">
               <strong>評価：</strong>
               <i class="bi bi-star-fill text-warning"></i>
@@ -403,9 +460,13 @@
               <span class="text-muted small mx-1">4.8 (20件)</span>
             </p>
             <p class="card-text tag-group">
-              <span class="badge bg-info me-1">初心者向け</span>
-              <span class="badge bg-info me-1">AWS</span>
-              <span class="badge bg-info me-1">インフラ系</span>
+              <span class="badge rounded-pill badge-outline me-1"
+                >初心者向け</span
+              >
+              <span class="badge rounded-pill badge-outline me-1">AWS</span>
+              <span class="badge rounded-pill badge-outline me-1"
+                >インフラ系</span
+              >
             </p>
           </div>
 
@@ -448,7 +509,7 @@
 
           <!-- タイトル・評価・あらましブロック（6割） -->
           <div class="col-md-6 p-3 border-end text-block">
-            <h4 class="fw-bold mb-2">
+            <h4 class="fw-bold mb-2 title-clamp-2">
               AWS　上級　プロレベルを目指す人へ　開発生産性を上げる
             </h4>
             <p class="rating mb-2">
@@ -461,9 +522,13 @@
               <span class="text-muted small mx-1">4.7 (15件)</span>
             </p>
             <p class="card-text tag-group">
-              <span class="badge bg-info me-1">上級者向け</span>
-              <span class="badge bg-info me-1">AWS</span>
-              <span class="badge bg-info me-1">インフラ系</span>
+              <span class="badge rounded-pill badge-outline me-1"
+                >上級者向け</span
+              >
+              <span class="badge rounded-pill badge-outline me-1">AWS</span>
+              <span class="badge rounded-pill badge-outline me-1"
+                >インフラ系</span
+              >
             </p>
           </div>
 
@@ -493,7 +558,7 @@
 
           <!-- タイトル・評価・あらましブロック（6割） -->
           <div class="col-md-6 p-3 border-end text-block">
-            <h4 class="fw-bold mb-2">
+            <h4 class="fw-bold mb-2 title-clamp-2">
               AWS
               Lambdaを正しく理解し、「サーバレス」を実現するプラットフォームを最大限に活用しよう
             </h4>
@@ -507,9 +572,13 @@
               <span class="text-muted small mx-1">4.5 (14件)</span>
             </p>
             <p class="card-text tag-group">
-              <span class="badge bg-info me-1">上級者向け</span>
-              <span class="badge bg-info me-1">AWS</span>
-              <span class="badge bg-info me-1">インフラ系</span>
+              <span class="badge rounded-pill badge-outline me-1"
+                >上級者向け</span
+              >
+              <span class="badge rounded-pill badge-outline me-1">AWS</span>
+              <span class="badge rounded-pill badge-outline me-1"
+                >インフラ系</span
+              >
             </p>
           </div>
 
