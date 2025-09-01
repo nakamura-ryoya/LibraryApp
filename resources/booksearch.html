@@ -37,22 +37,63 @@
         </a>
 
         <!-- 中央：検索フォーム（伸縮対応） -->
-        <form
-          class="d-flex search-form mx-3"
-          role="search"
-          action="/resources/booksearch.html"
-        >
-          <input
-            id="searchInput"
-            type="text"
-            class="form-control me-2"
-            placeholder="書籍名・著者名など"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-light" type="submit">
-            <i class="bi bi-search"></i>
-          </button>
-        </form>
+        <!-- 検索フォーム -->
+        <div class="container position-relative" style="max-width: 600px">
+          <form
+            class="d-flex search-form mx-3"
+            role="search"
+            action="/resources/booksearch.html"
+          >
+            <input
+              id="searchInput"
+              type="text"
+              class="form-control me-2"
+              placeholder="書籍名・著者名など"
+              aria-label="Search"
+              onfocus="showTags()"
+              onblur="hideTags()"
+            />
+            <button class="btn btn-outline-light" type="submit">
+              <i class="bi bi-search"></i>
+            </button>
+          </form>
+
+          <!-- タグ検索チェックボックス（初期は非表示） -->
+          <div
+            id="tagContainer"
+            class="bg-light border rounded p-3 mt-2 shadow-sm"
+            style="display: none; position: absolute; width: 100%; z-index: 10"
+          >
+            <label class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                name="tag"
+                value="AWS"
+              />
+              <span class="form-check-label">AWS</span>
+            </label>
+            <label class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                name="tag"
+                value="Python"
+              />
+              <span class="form-check-label">Python</span>
+            </label>
+            <label class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                name="tag"
+                value="AI"
+              />
+              <span class="form-check-label">AI</span>
+            </label>
+            <!-- 必要に応じてタグを追加 -->
+          </div>
+        </div>
 
         <!-- 右側：ログインユーザー表示 -->
         <a href="mypage.html" class="text-decoration-none">
@@ -435,6 +476,25 @@
         // 例: クエリパラメータ付きURLに遷移
         window.location.href = `search.html?keyword=AWS&sort=${sortValue}`;
       }
+    </script>
+    <script>
+      const tagContainer = document.getElementById("tagContainer");
+      const searchInput = document.getElementById("searchInput");
+
+      // フォーカス時に表示
+      searchInput.addEventListener("focus", () => {
+        tagContainer.style.display = "block";
+      });
+
+      // ドキュメント全体のクリックを監視
+      document.addEventListener("click", (event) => {
+        const isClickInside =
+          searchInput.contains(event.target) ||
+          tagContainer.contains(event.target);
+        if (!isClickInside) {
+          tagContainer.style.display = "none";
+        }
+      });
     </script>
   </body>
 </html>
