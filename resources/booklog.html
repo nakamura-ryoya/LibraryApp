@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>社内図書館システム</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+
+    <link rel="stylesheet" href="/resources/style.css" />
+  </head>
+
+  <body>
+    <!-- ナビバー -->
+    <nav class="navbar sticky-top">
+      <div
+        class="container d-flex flex-wrap justify-content-between align-items-center"
+        style="max-width: 1200px; margin: auto"
+      >
+        <!-- 左側：システム名 -->
+        <a
+          class="navbar-brand fw-bold text-white"
+          href="/resources/toppage.html"
+        >
+          <i class="bi bi-star-fill text-warning"></i>NSLibrary<i
+            class="bi bi-star-fill text-warning"
+          ></i>
+        </a>
+
+        <!-- 中央：検索フォーム（伸縮対応） -->
+        <form
+          class="d-flex search-form mx-3"
+          role="search"
+          action="/resources/booksearch.html"
+        >
+          <input
+            id="searchInput"
+            type="text"
+            class="form-control me-2"
+            placeholder="書籍名・著者名など"
+            aria-label="Search"
+          />
+          <button class="btn btn-outline-light" type="submit">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
+
+        <!-- 右側：ログインユーザー表示 -->
+        <div class="d-flex align-items-center user-info">
+          <i class="bi bi-person-circle fs-4 text-white me-2"></i>
+          <span class="text-white fw-light">田中 太郎</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 検索結果タイトル -->
+    <h1 class="text-center mb-4 mt-4">貸出履歴</h1>
+
+    <!-- 検索結果カード -->
+    <div class="container">
+      <!-- カード1 -->
+      <div
+        class="card card-hover mb-4 shadow-sm border-0"
+        style="max-width: 1200px; max-height: 100px; margin: auto"
+      >
+        <a href="book1Detail.html" class="stretched-link"></a>
+        <div class="row g-0 align-items-stretch">
+          <!-- 画像ブロック（2割） -->
+          <div
+            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
+          >
+            <img
+              src="/images/book1.png"
+              class="img-fluid rounded"
+              alt="蔵書画像"
+              style="
+                max-height: 200px;
+                max-width: 100%;
+                width: 150px;
+                height: 200px;
+              "
+            />
+          </div>
+
+          <!-- タイトル・評価・あらましブロック（6割） -->
+          <div
+            class="col-md-6 d-flex flex-column justify-content-center p-3 border-end"
+          >
+            <h5 class="fw-bold mb-2">
+              図解 AWSの仕組みとサービスがよくわかる！
+            </h5>
+          </div>
+
+          <!-- 貸出状況ブロック（2割） -->
+          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
+              <span class="badge bg-primary badge-fixed">返却する</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- カード2 -->
+      <div
+        class="card card-hover mb-4 shadow-sm border-0"
+        style="max-width: 1200px; margin: auto"
+      >
+        <a href="book2Detail.html" class="stretched-link"></a>
+        <div class="row g-0 align-items-stretch">
+          <!-- 画像ブロック（2割） -->
+          <div
+            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
+          >
+            <img
+              src="/images/book2.png"
+              class="img-fluid rounded"
+              alt="蔵書画像"
+              style="
+                max-height: 200px;
+                max-width: 100%;
+                width: 150px;
+                height: 200px;
+              "
+            />
+          </div>
+
+          <!-- タイトル・評価・あらましブロック（6割） -->
+          <div
+            class="col-md-6 d-flex flex-column justify-content-center p-3 border-end"
+          >
+            <h5 class="fw-bold mb-2">AWSの仕組み・重要用語がわかる教科書</h5>
+          </div>
+
+          <!-- 貸出状況ブロック（2割） -->
+          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
+              <span class="badge bg-dark badge-fixed">返却済</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- カード3 -->
+      <div
+        class="card card-hover mb-4 shadow-sm border-0"
+        style="max-width: 1200px; margin: auto"
+      >
+        <a href="book3Detail.html" class="stretched-link"></a>
+        <div class="row g-0 align-items-stretch">
+          <!-- 画像ブロック（2割） -->
+          <div
+            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
+          >
+            <img
+              src="/images/book3.png"
+              class="img-fluid rounded"
+              alt="蔵書画像"
+              style="
+                max-height: 200px;
+                max-width: 100%;
+                width: 150px;
+                height: 200px;
+              "
+            />
+          </div>
+
+          <!-- タイトル・評価・あらましブロック（6割） -->
+          <div
+            class="col-md-6 d-flex flex-column justify-content-center p-3 border-end"
+          >
+            <h5 class="fw-bold mb-2">はじめてのAWS</h5>
+            <p class="mb-2">
+              <strong>評価：</strong>
+<i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-half text-warning"></i
+                  ></small>
+                <span class="text-muted small mx-1">4.8 (20件)</span>
+            </p>
+            <p class="text-muted small summary-text">
+              「AWSって何？」という段階からスタートし、アカウント作成、無料枠の使い方、簡単なEC2の起動までを丁寧にガイド。クラウドの概念やオンプレとの違いも初心者目線で解説。
+            </p>
+          </div>
+
+          <!-- 貸出状況ブロック（2割） -->
+          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
+            <div
+              class="d-flex justify-content-between align-items-center border-bottom py-2"
+            >
+              <span>虎ノ門</span>
+              <span class="badge bg-success badge-fixed">借りる</span>
+            </div>
+
+            <div
+              class="d-flex justify-content-between align-items-center border-bottom py-2"
+            >
+              <span>新川</span>
+              <span class="badge bg-success badge-fixed">借りる</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center py-2">
+              <span>みなとみらい</span>
+              <span class="badge bg-success badge-fixed">借りる</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- カード4 -->
+      <div
+        class="card card-hover mb-4 shadow-sm border-0"
+        style="max-width: 1200px; margin: auto"
+      >
+        <a href="book6Detail.html" class="stretched-link"></a>
+        <div class="row g-0 align-items-stretch">
+          <!-- 画像ブロック（2割） -->
+          <div
+            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
+          >
+            <img
+              src="/images/book6.png"
+              class="img-fluid rounded"
+              alt="蔵書画像"
+              style="
+                max-height: 200px;
+                max-width: 100%;
+                width: 150px;
+                height: 200px;
+              "
+            />
+          </div>
+
+          <!-- タイトル・評価・あらましブロック（6割） -->
+          <div
+            class="col-md-6 d-flex flex-column justify-content-center p-3 border-end"
+          >
+            <h5 class="fw-bold mb-2">
+              AWS　上級　プロレベルを目指す人へ　開発生産性を上げる
+            </h5>
+            <p class="mb-2">
+              <strong>評価：</strong>
+               <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-half text-warning"></i
+                  ></small>
+                <span class="text-muted small mx-1">4.7 (15件)</span>
+            </p>
+            <p class="text-muted small summary-text">
+              AWSを使いこなす上級者向けに、開発効率を最大化するための設計・運用・自動化のノウハウを解説。CI/CD、Infrastructure
+              as Code、監視・ログ設計など、実務に直結する内容が満載。
+            </p>
+          </div>
+
+          <!-- 貸出状況ブロック（2割） -->
+          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
+            <div class="d-flex justify-content-between align-items-center py-2">
+              <span>虎ノ門</span>
+              <span class="badge bg-danger badge-fixed">貸出中</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- カード5 -->
+      <div
+        class="card card-hover mb-4 shadow-sm border-0"
+        style="max-width: 1200px; margin: auto"
+      >
+        <a href="book9Detail.html" class="stretched-link"></a>
+        <div class="row g-0 align-items-stretch">
+          <!-- 画像ブロック（2割） -->
+          <div
+            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
+          >
+            <img
+              src="/images/book9.png"
+              class="img-fluid rounded"
+              alt="蔵書画像"
+              style="
+                max-height: 200px;
+                max-width: 100%;
+                width: 150px;
+                height: 200px;
+              "
+            />
+          </div>
+
+          <!-- タイトル・評価・あらましブロック（6割） -->
+          <div
+            class="col-md-6 d-flex flex-column justify-content-center p-3 border-end"
+          >
+            <h5 class="fw-bold mb-2">
+              AWS
+              Lambdaを正しく理解し、「サーバレス」を実現するプラットフォームを最大限に活用しよう
+            </h5>
+            <p class="mb-2">
+              <strong>評価：</strong>
+                <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-half text-warning"></i
+                  ></small>
+                <span class="text-muted small mx-1">4.5 (14件)</span>
+            </p>
+            <p class="text-muted small summary-text">
+              AWS
+              Lambdaの基本から応用までを体系的に解説。イベント駆動設計、セキュリティ、パフォーマンス最適化、他サービスとの連携など、サーバレスアーキテクチャを本気で活用したい人向け。
+            </p>
+          </div>
+
+          <!-- 貸出状況ブロック（2割） -->
+          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
+            <div class="d-flex justify-content-between align-items-center py-2">
+              <span>みなとみらい</span>
+              <span class="badge bg-success badge-fixed">借りる</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nav>
+      <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1">前へ</a>
+        </li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item disabled">
+          <a class="page-link" href="#">...</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">6</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">次へ</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
