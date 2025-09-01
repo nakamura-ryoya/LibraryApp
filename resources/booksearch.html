@@ -39,19 +39,28 @@
         </div>
         <!-- 中央：検索フォーム（伸縮対応） -->
         <div class="col-12 col-md-6 position-relative px-2">
+          <!-- 入力欄をdivに変更し、hidden inputを追加 -->
           <form
             class="d-flex search-form"
             role="search"
             action="/resources/booksearch.html"
           >
-            <input
-              id="searchInput"
-              type="text"
-              class="form-control me-2"
-              placeholder="書籍名・著者名など"
-              aria-label="Search"
-              onfocus="showTags()"
-            />
+            <!-- バッジ表示領域と実際の入力欄を分ける -->
+            <div
+              id="badgeInput"
+              class="form-control me-2 d-flex flex-wrap align-items-center"
+              style="min-height: 38px; cursor: text"
+              onclick="searchInput.focus()"
+            >
+              <!-- バッジがここに追加される -->
+              <input
+                id="searchInput"
+                type="text"
+                class="border-0 flex-grow-1"
+                style="outline: none"
+              />
+            </div>
+            <input type="hidden" name="tags" id="hiddenTags" />
             <button class="btn btn-outline-light" type="submit">
               <i class="bi bi-search"></i>
             </button>
@@ -67,19 +76,19 @@
             <div class="d-flex flex-wrap gap-2 mb-3">
               <button
                 type="button"
-                class="btn btn-outline-primary btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 初級
               </button>
               <button
                 type="button"
-                class="btn btn-outline-primary btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 中級
               </button>
               <button
                 type="button"
-                class="btn btn-outline-primary btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 上級
               </button>
@@ -89,37 +98,37 @@
             <div class="d-flex flex-wrap gap-2 mb-3">
               <button
                 type="button"
-                class="btn btn-outline-success btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 文学・評論
               </button>
               <button
                 type="button"
-                class="btn btn-outline-success btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 ビジネス
               </button>
               <button
                 type="button"
-                class="btn btn-outline-success btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 資格
               </button>
               <button
                 type="button"
-                class="btn btn-outline-success btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 自己啓発
               </button>
               <button
                 type="button"
-                class="btn btn-outline-success btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 暮らし・健康
               </button>
               <button
                 type="button"
-                class="btn btn-outline-success btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 アート・デザイン
               </button>
@@ -129,37 +138,37 @@
             <div class="d-flex flex-wrap gap-2">
               <button
                 type="button"
-                class="btn btn-outline-warning btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 インフラ
               </button>
               <button
                 type="button"
-                class="btn btn-outline-warning btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 アプリ
               </button>
               <button
                 type="button"
-                class="btn btn-outline-warning btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 コンサル
               </button>
               <button
                 type="button"
-                class="btn btn-outline-warning btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 営業
               </button>
               <button
                 type="button"
-                class="btn btn-outline-warning btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 マネジメント
               </button>
               <button
                 type="button"
-                class="btn btn-outline-warning btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 データ
               </button>
@@ -168,38 +177,57 @@
         </div>
         <script>
           const tagContainer = document.getElementById("tagContainer");
-          const searchInput = document.getElementById("searchInput");
+          const badgeInput = document.getElementById("badgeInput");
+          const hiddenTags = document.getElementById("hiddenTags");
 
-          // フォーカス時に表示
           searchInput.addEventListener("focus", () => {
             tagContainer.style.display = "block";
           });
 
           document.addEventListener("click", (event) => {
             const isClickInside =
-              searchInput.contains(event.target) ||
+              badgeInput.contains(event.target) ||
               tagContainer.contains(event.target);
             if (!isClickInside) {
               tagContainer.style.display = "none";
             }
           });
 
+          function addTagBadge(tag) {
+            const existingTags = Array.from(
+              badgeInput.querySelectorAll(".tag-badge")
+            ).map((b) => b.dataset.tag);
+            if (existingTags.includes(tag)) return;
+
+            const badge = document.createElement("span");
+            badge.className = "badge rounded-pill badge-outline me-1 tag-badge"; // Bootstrapのバッジクラス
+            badge.dataset.tag = tag;
+            badge.innerHTML = `${tag} <span class="ms-1 remove-btn" style="cursor:pointer;">&times;</span>`;
+
+            badge.querySelector(".remove-btn").addEventListener("click", () => {
+              badge.remove();
+              updateHiddenTags();
+            });
+
+            badgeInput.insertBefore(badge, searchInput); // 入力欄の左に追加
+            updateHiddenTags();
+          }
+
+          function updateHiddenTags() {
+            const tags = Array.from(
+              badgeInput.querySelectorAll(".tag-badge")
+            ).map((b) => b.dataset.tag);
+            hiddenTags.value = tags.join(" ");
+          }
+
           document.querySelectorAll(".tag-btn").forEach((button) => {
             button.addEventListener("click", () => {
-              const input = document.getElementById("searchInput");
               const tag = button.textContent.trim();
-
-              // すでに含まれていない場合のみ追加
-              if (!input.value.includes(tag)) {
-                input.value += (input.value ? " " : "") + tag;
-              }
+              addTagBadge(tag);
             });
           });
-
-          function showTags() {
-            document.getElementById("tagContainer").style.display = "block";
-          }
         </script>
+
         <!-- 右側：貸出履歴表示 -->
         <div class="d-flex align-items-center gap-1">
           <a
