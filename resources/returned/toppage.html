@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>トップページ</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Splide CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css"
+    />
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="/resources/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar sticky-top">
+      <div
+        class="container d-flex flex-wrap justify-content-between align-items-center"
+        style="max-width: 1200px; margin: auto"
+      >
+        <!-- 左側：システム名 -->
+        <a
+          class="navbar-brand fw-bold text-white"
+          href="/resources/toppage.html"
+        >
+          <i class="bi bi-star-fill text-warning"></i>NSLibrary<i
+            class="bi bi-star-fill text-warning"
+          ></i>
+        </a>
+
+        <!-- 中央：検索フォーム（伸縮対応） -->
+        <form
+          class="d-flex search-form mx-3"
+          role="search"
+          action="/resources/booksearch.html"
+        >
+          <input
+            id="searchInput"
+            type="text"
+            class="form-control me-2"
+            placeholder="書籍名・著者名など"
+            aria-label="Search"
+          />
+          <button class="btn btn-outline-light" type="submit">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
+
+        <!-- 右側：ログインユーザー表示 -->
+        <div class="d-flex align-items-center user-info">
+          <i class="bi bi-person-circle fs-4 text-white me-2"></i>
+          <span class="text-white fw-light">田中 太郎</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- レコメンド -->
+    <div class="container-fluid my-5" style="max-width: 1200px">
+      <div class="text-center mb-4 display-5 fw-bold">
+        <i class="bi bi-book me-1"></i> おすすめ書籍
+      </div>
+
+      <nav class="container mb-4">
+        <div class="d-flex flex-wrap justify-content-start gap-5">
+          おすすめタグ：
+          <a href="#" class="link-offset-3 link-opacity-25-hover">基本情報</a>
+          <a
+            href="/resources/booksearch.html"
+            class="link-offset-3 link-opacity-25-hover"
+            >AWS</a
+          >
+          <a href="#" class="link-offset-3 link-opacity-25-hover"
+            >アプリケーションエンジニア</a
+          >
+          <a href="#" class="link-offset-3 link-opacity-25-hover">インフラ系</a>
+          <a href="#" class="link-offset-3 link-opacity-25-hover">入門書</a>
+          <a href="#" class="link-offset-3 link-opacity-25-hover">単語集</a>
+        </div>
+      </nav>
+
+      <div id="splide-books" class="splide">
+        <div
+          class="splide__track"
+          style="padding-top: 1rem; padding-bottom: 1rem"
+        >
+          <ul class="splide__list">
+            <!-- Box 1 -->
+            <li class="splide__slide">
+              <a
+                href="/resources/book1Detail.html"
+                class="text-decoration-none text-dark"
+              >
+                <div
+                  class="card p-2 card-hover mb-4 shadow-sm border-0"
+                  style="min-height: 450px"
+                >
+                  <div
+                    class="d-flex justify-content-center align-items-center bg-light"
+                    style="height: 280px"
+                  >
+                    <img
+                      src="../images/book1.png"
+                      class="img-fluid"
+                      style="width: 200px; height: 280px; object-fit: cover"
+                      alt="図解 AWSの仕組みとサービスがよくわかる！"
+                    />
+                  </div>
+
+                  <div
+                    class="card-body d-flex flex-column justify-content-start p-3"
+                  >
+                    <h4 class="card-title mb-2 title-clamp-2">
+                      図解 AWSの仕組みとサービスがよくわかる！
+                    </h4>
+                    <div class="d-flex align-items-center gap-0 mb-1">
+                      <span>
+                        <!-- ⭐ 塗りつぶし星（SVG） -->
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-half text-warning"></i>
+                        <span class="text-muted small mx-1">4.6 (13件)</span>
+                      </span>
+                    </div>
+                    <p class="card-text mb-0 tag-clamp-2">
+                      <span class="badge rounded-pill badge-toppage me-1"
+                        >初心者向け</span
+                      >
+                      <span class="badge rounded-pill badge-toppage me-1">
+                        AWS
+                      </span>
+                      <span class="badge rounded-pill badge-toppage me-1"
+                        >インフラ系</span
+                      >
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </li>
+
+            <!-- Box 2 -->
+            <li class="splide__slide">
+              <a
+                href="/resources/book2Detail.html"
+                class="text-decoration-none text-dark"
+              >
+                <div
+                  class="card p-2 card-hover mb-4 shadow-sm border-0"
+                  style="min-height: 450px"
+                >
+                  <div
+                    class="d-flex justify-content-center align-items-center bg-light"
+                    style="height: 280px"
+                  >
+                    <img
+                      src="../images/book2.png"
+                      class="img-fluid"
+                      style="width: 200px; height: 280px; object-fit: cover"
+                      alt="AWSの仕組み・重要用語がわかる教科書"
+                    />
+                  </div>
+
+                  <div
+                    class="card-body d-flex flex-column justify-content-start p-3"
+                  >
+                    <h4 class="card-title mb-2 title-clamp-2">
+                      AWSの仕組み・重要用語がわかる教科書
+                    </h4>
+                    <div class="d-flex align-items-center gap-0 mb-1">
+                      <span>
+                        <!-- ⭐ 塗りつぶし星（SVG） -->
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star text-warning"></i>
+                        <span class="text-muted small mx-1">4.2 (9件)</span>
+                      </span>
+                    </div>
+                    <p class="card-text mb-0 tag-clamp-2">
+                      <span class="badge rounded-pill badge-toppage me-1"
+                        >中級者向け</span
+                      >
+                      <span class="badge rounded-pill badge-toppage me-1">
+                        AWS
+                      </span>
+                      <span class="badge rounded-pill badge-toppage me-1"
+                        >インフラ系</span
+                      >
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </li>
+
+            <!-- Box 3 -->
+            <li class="splide__slide">
+              <a
+                href="/resources/book3Detail.html"
+                class="text-decoration-none text-dark"
+              >
+                <div
+                  class="card p-2 card-hover mb-4 shadow-sm border-0"
+                  style="min-height: 450px"
+                >
+                  <div
+                    class="d-flex justify-content-center align-items-center bg-light"
+                    style="height: 280px"
+                  >
+                    <img
+                      src="../images/book3.png"
+                      class="img-fluid"
+                      style="width: 200px; height: 280px; object-fit: cover"
+                      alt="はじめてのAWS"
+                    />
+                  </div>
+
+                  <div
+                    class="card-body d-flex flex-column justify-content-start p-3"
+                  >
+                    <h4 class="card-title mb-2 title-clamp-2">はじめてのAWS</h4>
+                    <div class="d-flex align-items-center gap-0 mb-1">
+                      <span>
+                        <!-- ⭐ 塗りつぶし星（SVG） -->
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-half text-warning"></i>
+                        <span class="text-muted small mx-1">4.8 (20件)</span>
+                      </span>
+                    </div>
+                    <p class="card-text mb-0 tag-clamp-2">
+                      <span class="badge rounded-pill badge-toppage me-1"
+                        >初心者向け</span
+                      >
+                      <span class="badge rounded-pill badge-toppage me-1">
+                        AWS
+                      </span>
+                      <span class="badge rounded-pill badge-toppage me-1"
+                        >インフラ系</span
+                      >
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </li>
+
+            <!-- Box 4 -->
+            <li class="splide__slide">
+              <a
+                href="/resources/book4Detail.html"
+                class="text-decoration-none text-dark"
+              >
+                <div
+                  class="card p-2 card-hover mb-4 shadow-sm border-0"
+                  style="min-height: 450px"
+                >
+                  <div
+                    class="d-flex justify-content-center align-items-center bg-light"
+                    style="height: 280px"
+                  >
+                    <img
+                      src="../images/book4.png"
+                      class="img-fluid"
+                      style="width: 200px; height: 280px; object-fit: cover"
+                      alt="1日5分からはじめる資格勉強術"
+                    />
+                  </div>
+
+                  <div
+                    class="card-body d-flex flex-column justify-content-start p-3"
+                  >
+                    <h4 class="card-title mb-2 title-clamp-2">
+                      1日5分からはじめる資格勉強術
+                    </h4>
+                    <div class="d-flex align-items-center gap-0 mb-1">
+                      <span>
+                        <!-- ⭐ 塗りつぶし星（SVG） -->
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star text-warning"></i>
+                        <span class="text-muted small mx-1">4.0 (6件)</span>
+                      </span>
+                    </div>
+                    <p class="card-text mb-0 tag-clamp-2">
+                      <span class="badge rounded-pill badge-toppage me-1"
+                        >初心者向け</span
+                      >
+                      <span class="badge rounded-pill badge-toppage me-1">
+                        自己啓発
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </li>
+
+            <!-- Box 5 -->
+            <li class="splide__slide">
+              <a
+                href="/resources/book5Detail.html"
+                class="text-decoration-none text-dark"
+              >
+                <div
+                  class="card p-2 card-hover mb-4 shadow-sm border-0"
+                  style="min-height: 450px"
+                >
+                  <div
+                    class="d-flex justify-content-center align-items-center bg-light"
+                    style="height: 280px"
+                  >
+                    <img
+                      src="../images/book5.png"
+                      class="img-fluid"
+                      style="width: 200px; height: 280px; object-fit: cover"
+                      alt="独学の美学"
+                    />
+                  </div>
+
+                  <div
+                    class="card-body d-flex flex-column justify-content-start p-3"
+                  >
+                    <h4 class="card-title mb-2 title-clamp-2">独学の美学</h4>
+                    <div class="d-flex align-items-center gap-0 mb-1">
+                      <span>
+                        <!-- ⭐ 塗りつぶし星（SVG） -->
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <span class="text-muted small mx-1">4.9 (31件)</span>
+                      </span>
+                    </div>
+                    <p class="card-text mb-0 tag-clamp-2">
+                      <span class="badge rounded-pill badge-toppage me-1"
+                        >初心者向け</span
+                      >
+                      <span class="badge rounded-pill badge-toppage me-1">
+                        自己啓発
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </li>
+
+            <!-- Box 6 -->
+            <li class="splide__slide">
+              <a
+                href="/resources/book6Detail.html"
+                class="text-decoration-none text-dark"
+              >
+                <div
+                  class="card p-2 card-hover mb-4 shadow-sm border-0"
+                  style="min-height: 450px"
+                >
+                  <div
+                    class="d-flex justify-content-center align-items-center bg-light"
+                    style="height: 280px"
+                  >
+                    <img
+                      src="../images/book6.png"
+                      class="img-fluid"
+                      style="width: 200px; height: 280px; object-fit: cover"
+                      alt="AWS　上級　プロレベルを目指す人へ　開発生産性を上げる"
+                    />
+                  </div>
+
+                  <div
+                    class="card-body d-flex flex-column justify-content-start p-3"
+                  >
+                    <h4 class="card-title mb-2 title-clamp-2">
+                      AWS　上級　プロレベルを目指す人へ　開発生産性を上げる
+                    </h4>
+                    <div class="d-flex align-items-center gap-0 mb-1">
+                      <span>
+                        <!-- ⭐ 塗りつぶし星（SVG） -->
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-half text-warning"></i>
+                        <span class="text-muted small mx-1">4.7 (15件)</span>
+                      </span>
+                    </div>
+                    <p class="card-text mb-0 tag-clamp-2">
+                      <span class="badge rounded-pill badge-toppage me-1"
+                        >上級者向け</span
+                      >
+                      <span class="badge rounded-pill badge-toppage me-1">
+                        AWS
+                      </span>
+                      <span class="badge rounded-pill badge-toppage me-1"
+                        >インフラ系</span
+                      >
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <br />
+
+    <!-- 書籍イベントスライダー -->
+    <div class="container-fluid my-4" style="max-width: 1200px">
+      <!--  px-3 px-md-5 mt-5 mx-auto -->
+      <div class="text-center mb-4 display-5 fw-bold">
+        <i class="bi bi-calendar-event"></i> 書籍イベント
+      </div>
+      <div id="splide-event" class="splide">
+        <div
+          class="splide__track"
+          style="padding-top: 1rem; padding-bottom: 1rem"
+        >
+          <ul class="splide__list">
+            <li class="splide__slide">
+              <a href="#" class="text-decoration-none text-dark">
+                <div class="card p-0 card-hover mb-4 shadow-sm border-0">
+                  <img
+                    src="../images/event1.png"
+                    class="card-img-top"
+                    alt="イベント画像"
+                  />
+                </div>
+              </a>
+            </li>
+            <li class="splide__slide">
+              <a href="#" class="text-decoration-none text-dark">
+                <div class="card p-0 card-hover mb-4 shadow-sm border-0">
+                  <img
+                    src="../images/event2.png"
+                    class="card-img-top"
+                    alt="イベント画像"
+                  />
+                </div>
+              </a>
+            </li>
+            <li class="splide__slide">
+              <a href="#" class="text-decoration-none text-dark">
+                <div class="card p-0 card-hover mb-4 shadow-sm border-0">
+                  <img
+                    src="../images/event3.png"
+                    class="card-img-top"
+                    alt="イベント画像"
+                  />
+                </div>
+              </a>
+            </li>
+            <!-- 他のイベントも追加可能 -->
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Splide JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+
+    <script>
+      new Splide("#splide-books", {
+        type: "loop",
+        perPage: 3,
+        perMove: 1,
+        gap: "1rem",
+        focus: "center",
+        breakpoints: {
+          1024: { perPage: 2 },
+          768: { perPage: 1 },
+        },
+      }).mount();
+
+      new Splide("#splide-event", {
+        type: "loop",
+        perPage: 2,
+        perMove: 1,
+        gap: "1rem",
+        focus: "center",
+        breakpoints: {
+          1024: { perPage: 2 },
+          768: { perPage: 1 },
+        },
+      }).mount();
+    </script>
+  </body>
+</html>

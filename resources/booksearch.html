@@ -697,6 +697,14 @@
           window.location.href = "booksearch.html";
         }
       }
+
+      // モーダル閉じたあとにページ遷移
+      const closeBtn = document.getElementById("closeAndRedirectBtn");
+      const modalElement = document.getElementById("borrowResultModal");
+
+      modalElement.addEventListener("hidden.bs.modal", function () {
+        window.location.href = "/resources/Borrowed/booksearch.html";
+      });
     </script>
   </body>
 </html>
