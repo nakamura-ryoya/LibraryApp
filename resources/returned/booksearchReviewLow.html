@@ -28,10 +28,7 @@
       >
         <!-- 左側：システム名 -->
         <div class="col-4 col-md-3">
-          <a
-            class="navbar-brand fw-bold text-white"
-            href="/resources/toppage.html"
-          >
+          <a class="navbar-brand fw-bold text-white" href="toppage.html">
             <i class="bi bi-star-fill text-warning"></i>NSLibrary<i
               class="bi bi-star-fill text-warning"
             ></i>
@@ -43,7 +40,7 @@
           <form
             class="d-flex search-form"
             role="search"
-            action="/resources/booksearch.html"
+            action="booksearch.html"
           >
             <!-- バッジ表示領域と実際の入力欄を分ける -->
             <div
@@ -252,11 +249,11 @@
 
               // 条件分岐で action を変更
               if (tags.includes("初心者向け") && tags.includes("AWS")) {
-                form.action = "/resources/booksearchEasyAWS.html";
+                form.action = "booksearchEasyAWS.html";
               } else if (tags.includes("初心者向け")) {
-                form.action = "/resources/booksearchEasy.html";
+                form.action = "booksearchEasy.html";
               } else {
-                form.action = "/resources/booksearch.html"; // デフォルト
+                form.action = "booksearch.html"; // デフォルト
               }
             });
         </script>
@@ -264,14 +261,14 @@
         <!-- 右側：貸出履歴表示 -->
         <div class="d-flex align-items-center gap-1">
           <a
-            href="/resources/booklog.html"
+            href="booklog.html"
             class="d-flex align-items-center text-decoration-none hover-outline rounded px-2"
           >
             <i class="bi bi-book fs-5 text-white me-2"></i>
             <span class="text-white fw-light">貸出履歴</span>
           </a>
           <a
-            href="/resources/mypage.html"
+            href="mypage.html"
             class="d-flex align-items-center text-decoration-none hover-outline rounded px-2"
           >
             <i class="bi bi-person-circle fs-5 text-white me-2"></i>
@@ -636,6 +633,26 @@
           window.location.href = "booksearch.html";
         }
       }
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const badges = document.querySelectorAll(".badge");
+
+        badges.forEach(function (badge) {
+          if (badge.textContent.trim() === "初心者向け") {
+            badge.style.cursor = "pointer"; // 見た目でクリックできることを示す
+            badge.addEventListener("click", function () {
+              window.location.href = "booksearchEasy.html";
+            });
+          }
+          if (badge.textContent.trim() === "AWS") {
+            badge.style.cursor = "pointer"; // 見た目でクリックできることを示す
+            badge.addEventListener("click", function () {
+              window.location.href = "booksearch.html";
+            });
+          }
+        });
+      });
     </script>
   </body>
 </html>
