@@ -41,6 +41,7 @@ origin  https://github.com/nakamura-ryoya/LibraryApp.git (push)
 2. 以下のコマンドを作業ディレクトリで実行
 
 ```bash
+npm.cmd install -g json-server
 json-server.cmd --watch jsons/db.json --port 3000
 ```
 
