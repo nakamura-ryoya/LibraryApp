@@ -58,6 +58,7 @@
                 type="text"
                 class="border-0 flex-grow-1"
                 style="outline: none"
+                placeholder="書籍名・著者名など"
               />
             </div>
             <input type="hidden" name="tags" id="hiddenTags" />
@@ -78,19 +79,19 @@
                 type="button"
                 class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
-                初級
+                初心者向け
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
               >
-                中級
+                中級者向け
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
               >
-                上級
+                上級者向け
               </button>
             </div>
 
@@ -98,13 +99,13 @@
             <div class="d-flex flex-wrap gap-2 mb-3">
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
               >
                 文学・評論
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
               >
                 ビジネス
               </button>
@@ -112,23 +113,23 @@
                 type="button"
                 class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
-                資格
+                AWS
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
               >
                 自己啓発
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
               >
                 暮らし・健康
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
               >
                 アート・デザイン
               </button>
@@ -138,37 +139,37 @@
             <div class="d-flex flex-wrap gap-2">
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
               >
-                インフラ
+                インフラ系
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
               >
                 アプリ
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
               >
                 コンサル
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
               >
                 営業
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
               >
                 マネジメント
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn"
+                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
               >
                 データ
               </button>
@@ -205,6 +206,7 @@
             badge.innerHTML = `${tag} <span class="ms-1 remove-btn" style="cursor:pointer;">&times;</span>`;
 
             badge.querySelector(".remove-btn").addEventListener("click", () => {
+              event.stopPropagation();
               badge.remove();
               updateHiddenTags();
             });
@@ -226,6 +228,37 @@
               addTagBadge(tag);
             });
           });
+          searchInput.addEventListener("keydown", (event) => {
+            if (
+              event.key === "Backspace" &&
+              searchInput.value === "" // 入力欄が空のとき
+            ) {
+              const tagBadges = badgeInput.querySelectorAll(".tag-badge");
+              if (tagBadges.length > 0) {
+                const lastBadge = tagBadges[tagBadges.length - 1];
+                lastBadge.remove();
+                updateHiddenTags();
+              }
+            }
+          });
+          document
+            .querySelector(".search-form")
+            .addEventListener("submit", (event) => {
+              const tags = Array.from(
+                badgeInput.querySelectorAll(".tag-badge")
+              ).map((b) => b.dataset.tag);
+
+              const form = event.target;
+
+              // 条件分岐で action を変更
+              if (tags.includes("初心者向け") && tags.includes("AWS")) {
+                form.action = "/resources/booksearchEasyAWS.html";
+              } else if (tags.includes("初心者向け")) {
+                form.action = "/resources/booksearchEasy.html";
+              } else {
+                form.action = "/resources/booksearch.html"; // デフォルト
+              }
+            });
         </script>
 
         <!-- 右側：貸出履歴表示 -->
@@ -242,7 +275,7 @@
             class="d-flex align-items-center text-decoration-none hover-outline rounded px-2"
           >
             <i class="bi bi-person-circle fs-5 text-white me-2"></i>
-            <span class="text-white fw-light">田中 太郎</span>
+            <span class="text-white fw-light">石倉 加菜子</span>
           </a>
         </div>
       </div>

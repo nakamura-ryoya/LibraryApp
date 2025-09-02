@@ -614,6 +614,13 @@
       "department": "鉄鋼",
       "occupation": "営業",
       "position": "上級専門職"
+    },
+    {
+      "id": 7,
+      "name": "石倉 加菜子",
+      "department": "シス研",
+      "occupation": "アプリSE",
+      "position": "専門職"
     }
   ]
 }

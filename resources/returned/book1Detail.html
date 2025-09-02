@@ -269,7 +269,7 @@
             class="d-flex align-items-center text-decoration-none hover-outline rounded px-2"
           >
             <i class="bi bi-person-circle fs-5 text-white me-2"></i>
-            <span class="text-white fw-light">田中 太郎</span>
+            <span class="text-white fw-light">石倉 加菜子</span>
           </a>
         </div>
       </div>
@@ -327,13 +327,7 @@
                 <span class="badge rounded-pill badge-outline me-1"
                   >初心者向け</span
                 >
-                <span class="badge rounded-pill badge-outline me-1">
-                  <a
-                    href="booksearch.html"
-                    style="color: inherit; text-decoration: none"
-                    >AWS</a
-                  >
-                </span>
+                <span class="badge rounded-pill badge-outline me-1"> AWS </span>
                 <span class="badge rounded-pill badge-outline me-1"
                   >インフラ系</span
                 >
@@ -579,7 +573,7 @@
                     <i class="bi bi-star-fill text-warning"></i>
                     <i class="bi bi-star-fill text-warning"></i>
                     <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star text-warning"></i
+                    <i class="bi bi-star-half text-warning"></i
                   ></small>
                 </p>
               </div>
@@ -613,7 +607,7 @@
                     <i class="bi bi-star-fill text-warning"></i>
                     <i class="bi bi-star-fill text-warning"></i>
                     <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-half text-warning"></i
+                    <i class="bi bi-star text-warning"></i
                   ></small>
                 </p>
               </div>
@@ -749,7 +743,7 @@
                     <i class="bi bi-star-fill text-warning"></i>
                     <i class="bi bi-star-fill text-warning"></i>
                     <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-half text-warning"></i
+                    <i class="bi bi-star-fill text-warning"></i
                   ></small>
                 </p>
               </div>
@@ -896,7 +890,7 @@
             <div class="d-flex justify-content-between align-items-center mb-1">
               <div class="d-flex align-items-center">
                 <i class="bi bi-person-fill me-2"></i>
-                <strong>山田 太郎（流通・SE・上級専門職）</strong>
+                <strong>笠原 雅哉（流通・SE・上級専門職）</strong>
               </div>
               <small class="text-warning">
                 <i class="bi bi-star-fill text-warning"></i>
@@ -907,26 +901,7 @@
               ></small>
             </div>
             <p class="mb-0">
-              この本はとても面白くて、何度も読み返しました。おすすめです！
-            </p>
-          </div>
-
-          <div class="list-group-item">
-            <div class="d-flex justify-content-between align-items-center mb-1">
-              <div class="d-flex align-items-center">
-                <i class="bi bi-person-fill me-2"></i>
-                <strong>佐藤 花子（金融・営業・専門職）</strong>
-              </div>
-              <small class="text-warning">
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i
-              ></small>
-            </div>
-            <p class="mb-0">
-              文章が美しくて、情景が目に浮かびました。感動しました。
+              図解が豊富で、初心者でもスッと理解できました。AWSの全体像をつかむのに最適。
             </p>
           </div>
 
@@ -937,10 +912,29 @@
                 <strong>匿名（シス研・SE・専門職）</strong>
               </div>
               <small class="text-warning">
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i
+              ></small>
+            </div>
+            <p class="mb-0">
+              技術書なのに読みやすい！業務でAWSを使う前に読んでおいてよかった。
+            </p>
+          </div>
+
+          <div class="list-group-item">
+            <div class="d-flex justify-content-between align-items-center mb-1">
+              <div class="d-flex align-items-center">
+                <i class="bi bi-person-fill me-2"></i>
+                <strong>秋山 桃奈（金融・SE・専門職）</strong>
+              </div>
+              <small class="text-warning">
                 <i class="bi bi-star-fill"></i>
                 <i class="bi bi-star-fill"></i>
                 <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star"></i>
+                <i class="bi bi-star-fill"></i>
                 <i class="bi bi-star"></i>
               </small>
             </div>
@@ -954,5 +948,25 @@
 
     <!-- Bootstrap JS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const badges = document.querySelectorAll(".badge");
+
+        badges.forEach(function (badge) {
+          if (badge.textContent.trim() === "初心者向け") {
+            badge.style.cursor = "pointer"; // 見た目でクリックできることを示す
+            badge.addEventListener("click", function () {
+              window.location.href = "booksearchEasy.html";
+            });
+          }
+          if (badge.textContent.trim() === "AWS") {
+            badge.style.cursor = "pointer"; // 見た目でクリックできることを示す
+            badge.addEventListener("click", function () {
+              window.location.href = "booksearch.html";
+            });
+          }
+        });
+      });
+    </script>
   </body>
 </html>

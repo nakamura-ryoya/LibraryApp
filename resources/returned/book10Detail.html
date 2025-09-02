@@ -270,7 +270,7 @@
             class="d-flex align-items-center text-decoration-none hover-outline rounded px-2"
           >
             <i class="bi bi-person-circle fs-5 text-white me-2"></i>
-            <span class="text-white fw-light">田中 太郎</span>
+            <span class="text-white fw-light">石倉 加菜子</span>
           </a>
         </div>
       </div>
@@ -332,13 +332,7 @@
                 <span class="badge rounded-pill badge-outline me-1"
                   >中級者向け</span
                 >
-                <span class="badge rounded-pill badge-outline me-1">
-                  <a
-                    href="booksearch.html"
-                    style="color: inherit; text-decoration: none"
-                    >AWS</a
-                  >
-                </span>
+                <span class="badge rounded-pill badge-outline me-1"> AWS </span>
                 <span class="badge rounded-pill badge-outline me-1"
                   >インフラ系</span
                 >
@@ -407,7 +401,7 @@
             position: relative;
           "
         >
-          <!-- 1 -->
+          <!-- 0 -->
           <a href="book1Detail.html" class="text-decoration-none text-dark">
             <div
               class="card card-hover mb-4 shadow-sm border-0"
@@ -717,7 +711,7 @@
 
           <!-- 9 -->
           <!-- <a
-            href="book10Detail.html"
+            href="/resources/book10Detail.html"
             class="text-decoration-none text-dark"
           >
             <div
@@ -806,15 +800,27 @@
         <!-- 本の総合評価をここに再表示 -->
         <div class="mt-4">
           <h5>この本の評価</h5>
-          <span class="text-warning fs-4">★ ★ ★ ★ ☆</span>
+          <small class="text-warning fs-4">
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-half text-warning"></i
+          ></small>
           <span class="text-muted">(4.6)</span>
         </div>
 
         <div class="list-group">
           <div class="list-group-item">
             <div class="d-flex justify-content-between align-items-center mb-1">
-              <strong>田村 弘人（産業・SE・上級専門職）</strong>
-              <small class="text-warning">★ ★ ★ ★ ☆</small>
+              <strong>海老原 弘人（産業・SE・上級専門職）</strong>
+              <small class="text-warning">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star"></i>
+              </small>
             </div>
             <p class="mb-0">
               2025年の最新仕様に対応していて、Graviton3やNitro
@@ -825,7 +831,13 @@
           <div class="list-group-item">
             <div class="d-flex justify-content-between align-items-center mb-1">
               <strong>佐藤 美代子（シス研・SE・専門職） </strong>
-              <small class="text-warning">★ ★ ★ ★ ★</small>
+              <small class="text-warning">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+              </small>
             </div>
             <p class="mb-0">
               洋書ではあるが、EC2の全機能を網羅していて初心者から上級者まで使える。
@@ -834,8 +846,14 @@
 
           <div class="list-group-item">
             <div class="d-flex justify-content-between align-items-center mb-1">
-              <strong>友田 孝志（ITSE・SE・一般）</strong>
-              <small class="text-warning">★ ★ ★ ☆ ☆</small>
+              <strong>友田 鼓（ITSE・SE・一般）</strong>
+              <small class="text-warning">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star"></i>
+                <i class="bi bi-star"></i>
+              </small>
             </div>
             <p class="mb-0">
               洋書のため、専門用語が多く初心者には難しい。もう少し平易な表現が欲しい。
@@ -847,5 +865,25 @@
 
     <!-- Bootstrap JS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const badges = document.querySelectorAll(".badge");
+
+        badges.forEach(function (badge) {
+          if (badge.textContent.trim() === "初心者向け") {
+            badge.style.cursor = "pointer"; // 見た目でクリックできることを示す
+            badge.addEventListener("click", function () {
+              window.location.href = "booksearchEasy.html";
+            });
+          }
+          if (badge.textContent.trim() === "AWS") {
+            badge.style.cursor = "pointer"; // 見た目でクリックできることを示す
+            badge.addEventListener("click", function () {
+              window.location.href = "booksearch.html";
+            });
+          }
+        });
+      });
+    </script>
   </body>
 </html>
