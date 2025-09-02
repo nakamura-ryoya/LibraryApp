@@ -14,6 +14,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
     />
+
     <link rel="stylesheet" href="/resources/style.css" />
   </head>
   <body>
@@ -48,23 +49,11 @@
           </button>
         </form>
 
-        <!-- 右側：貸出履歴表示 -->
-        <a
-          href="booklog.html"
-          class="d-flex align-items-center user-info hover-outline"
-        >
-          <i class="bi bi-book fs-4 text-white me-2"></i>
-          <span class="text-white fw-light">貸出履歴</span>
-        </a>
-
         <!-- 右側：ログインユーザー表示 -->
-        <a
-          href="mypage.html"
-          class="d-flex align-items-center user-info hover-outline"
-        >
+        <div class="d-flex align-items-center user-info">
           <i class="bi bi-person-circle fs-4 text-white me-2"></i>
           <span class="text-white fw-light">田中 太郎</span>
-        </a>
+        </div>
       </div>
     </nav>
 
@@ -80,15 +69,15 @@
             class="col-md-3 d-flex justify-content-center align-items-center"
           >
             <img
-              src="/images/book1.png"
+              src="/images/book6.png"
               class="img-fluid rounded-start"
-              alt="図解AWSの仕組みとサービスがよく分かる！"
+              alt="本の表紙"
             />
           </div>
           <div class="col-md-5">
             <div class="card-body d-flex flex-column h-100">
               <h3 class="card-title">
-                図解AWSの仕組みとサービスがよく分かる！
+                AWS上級　プロレベルを目指す人へ～開発生産性を上げる
               </h3>
               <p class="card-text">
                 <strong>評価：</strong>
@@ -96,29 +85,25 @@
                   href="#review-section"
                   class="rating-link text-warning text-decoration-none"
                 >
-                  <i class="bi bi-star-fill text-warning"></i>
-                  <i class="bi bi-star-fill text-warning"></i>
-                  <i class="bi bi-star-fill text-warning"></i>
-                  <i class="bi bi-star-fill text-warning"></i>
-                  <i class="bi bi-star-half text-warning"></i>
-                  <span class="text-muted small mx-1">4.6 (13件)</span>
+                  ★ ★ ★ ★ ★
+                  <span class="text-muted">4.7 / 5.0（15件）</span>
                 </a>
               </p>
               <p class="card-text">
-                <strong><i class="bi bi-person-fill"></i> 著者：</strong> 佐藤
-                陽一
+                <strong><i class="bi bi-person-fill"></i> 著者：</strong>
+                村瀬 拓真
               </p>
               <p class="card-text">
                 <strong><i class="bi bi-diagram-2"></i> ISBN：</strong>
                 978-4-00-310101-8
               </p>
               <p class="card-text">
-                <strong><i class="bi bi-calendar"></i> 出版年：</strong> 2022年
+                <strong><i class="bi bi-calendar"></i> 出版年：</strong> 2024年
               </p>
               <p class="card-text">
                 <strong><i class="bi bi-bookshelf"></i> ジャンル：</strong>
                 <span class="badge rounded-pill badge-outline me-1"
-                  >初心者向け</span
+                  >上級者向け</span
                 >
                 <span class="badge rounded-pill badge-outline me-1">
                   <a
@@ -134,7 +119,7 @@
               <p class="card-text">
                 <strong><i class="bi bi-chat-left-text"></i> 概要：</strong
                 ><br />
-                AWSの主要サービス（EC2、S3、Lambda、RDSなど）を図解でわかりやすく解説。インフラの構成図やデータフロー、料金体系などをビジュアルで理解できる構成になっており、初心者から中級者まで幅広く対応。
+                実践的なコード例とベストプラクティスを通じて、AWSの高度な機能とサービスを深く理解し、効率的なクラウドソリューションの設計・運用方法を学ぶ。
               </p>
               <!-- <div class="mt-auto pt-3">
                 <button class="btn btn-primary me-2">
@@ -160,113 +145,7 @@
                     >貸出中</span
                   >
                 </li>
-
-                <li
-                  class="list-group-item d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center"
-                >
-                  <span class="text-body">住友ツインビル13F</span>
-                  <span class="badge bg-danger mt-2 mt-sm-0 badge-fixed"
-                    >貸出中</span
-                  >
-                </li>
-                <li
-                  class="list-group-item d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center"
-                >
-                  <span class="text-body">みなとみらい</span>
-                  <span class="badge bg-danger mt-2 mt-sm-0 badge-fixed"
-                    >貸出中</span
-                  >
-                </li>
               </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 借りる確認モーダル -->
-      <div
-        class="modal fade"
-        id="borrowModal"
-        tabindex="-1"
-        aria-labelledby="borrowModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="borrowModalLabel">確認画面</h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="閉じる"
-              ></button>
-            </div>
-            <div class="modal-body">
-              <p><strong>この本を借りますか？</strong></p>
-              <strong>タイトル：</strong>
-              図解AWSの仕組みとサービスがよく分かる！
-            </div>
-
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                キャンセル
-              </button>
-              <button
-                type="button"
-                class="btn btn-success"
-                data-bs-target="#borrowResultModal"
-                data-bs-toggle="modal"
-                data-bs-dismiss="modal"
-              >
-                借りる
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 借りた結果モーダル -->
-      <div
-        class="modal fade"
-        id="borrowResultModal"
-        tabindex="-1"
-        aria-labelledby="borrowResultModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="borrowResultModalLabel">
-                以下の本を借りました
-              </h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="閉じる"
-              ></button>
-            </div>
-            <div class="modal-body">
-              <p>
-                <strong>タイトル：</strong>
-                図解AWSの仕組みとサービスがよく分かる！
-              </p>
-
-              <strong>返却期限：</strong> 2025/09/30
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-primary"
-                data-bs-dismiss="modal"
-              >
-                閉じる
-              </button>
             </div>
           </div>
         </div>
@@ -279,7 +158,8 @@
         </div>
         <div class="card-body">
           <p class="card-text">
-            AWSの主要サービス（EC2、S3、Lambda、RDSなど）を図解でわかりやすく解説。インフラの構成図やデータフロー、料金体系などをビジュアルで理解できる構成になっており、初心者から中級者まで幅広く対応。
+            AWSを使いこなす上級者向けに、開発効率を最大化するための設計・運用・自動化のノウハウを解説。CI/CD、Infrastructure
+            as Code、監視・ログ設計など、実務に直結する内容が満載。
           </p>
         </div>
       </div>
@@ -299,6 +179,39 @@
             position: relative;
           "
         >
+          <!-- 0 -->
+          <a href="book1Detail.html" class="text-decoration-none text-dark">
+            <div
+              class="card card-hover mb-4 shadow-sm border-0"
+              style="min-width: 200px; max-width: 200px; height: 300px"
+            >
+              <img
+                src="/images/book1.png"
+                class="card-img-top"
+                alt="図解AWSの仕組みとサービスがよく分かる！"
+                style="height: 160px; object-fit: contain"
+              />
+              <div
+                class="card-body d-flex flex-column justify-content-start p-2"
+              >
+                <div>
+                  <h6 class="card-title mb-0 title-clamp-2">
+                    図解AWSの仕組みとサービスがよく分かる！
+                  </h6>
+                  <p class="card-text small text-muted mb-0 mt-1">佐藤 陽一</p>
+                </div>
+                <p class="card-text mb-0">
+                  <small class="text-warning">
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-half text-warning"></i
+                  ></small>
+                </p>
+              </div>
+            </div>
+          </a>
           <!-- 1 -->
           <a href="book2Detail.html" class="text-decoration-none text-dark">
             <div
@@ -436,9 +349,12 @@
           </a>
 
           <!-- 5 -->
-          <a href="book6Detail.html" class="text-decoration-none text-dark">
+          <!-- <a
+            href="book6Detail.html"
+            class="text-decoration-none text-dark"
+          >
             <div
-              class="card card-hover mb-4 shadow-sm border-0"
+              class="card"
               style="min-width: 200px; max-width: 200px; height: 300px"
             >
               <img
@@ -465,7 +381,7 @@
                 </p>
               </div>
             </div>
-          </a>
+          </a> -->
 
           <!-- 6 -->
           <a href="book7Detail.html" class="text-decoration-none text-dark">
@@ -662,30 +578,15 @@
         <!-- 本の総合評価をここに再表示 -->
         <div class="mt-4">
           <h5>この本の評価</h5>
-          <small class="text-warning fs-4">
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-half text-warning"></i
-          ></small>
-          <span class="text-muted">4.6</span>
+          <span class="text-warning fs-4">★ ★ ★ ★ ☆</span>
+          <span class="text-muted">(4.0)</span>
         </div>
 
         <div class="list-group">
           <div class="list-group-item">
             <div class="d-flex justify-content-between align-items-center mb-1">
-              <div class="d-flex align-items-center">
-                <i class="bi bi-person-fill me-2"></i>
-                <strong>山田 太郎（流通・SE・上級専門職）</strong>
-              </div>
-              <small class="text-warning">
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star text-warning"></i
-              ></small>
+              <strong>山田 太郎</strong>
+              <small class="text-warning">★ ★ ★ ★ ☆</small>
             </div>
             <p class="mb-0">
               この本はとても面白くて、何度も読み返しました。おすすめです！
@@ -694,17 +595,8 @@
 
           <div class="list-group-item">
             <div class="d-flex justify-content-between align-items-center mb-1">
-              <div class="d-flex align-items-center">
-                <i class="bi bi-person-fill me-2"></i>
-                <strong>佐藤 花子（金融・営業・専門職）</strong>
-              </div>
-              <small class="text-warning">
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i
-              ></small>
+              <strong>佐藤 花子</strong>
+              <small class="text-warning">★ ★ ★ ★ ★</small>
             </div>
             <p class="mb-0">
               文章が美しくて、情景が目に浮かびました。感動しました。
@@ -713,17 +605,8 @@
 
           <div class="list-group-item">
             <div class="d-flex justify-content-between align-items-center mb-1">
-              <div class="d-flex align-items-center">
-                <i class="bi bi-person-fill me-2"></i>
-                <strong>匿名（シス研・SE・専門職）</strong>
-              </div>
-              <small class="text-warning">
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star"></i>
-                <i class="bi bi-star"></i>
-              </small>
+              <strong>鈴木 一郎</strong>
+              <small class="text-warning">★ ★ ★ ☆ ☆</small>
             </div>
             <p class="mb-0">
               内容は良かったですが、一部難しい表現もありました。
