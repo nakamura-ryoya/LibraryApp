@@ -321,7 +321,7 @@
                 >初心者向け</span
               >
               <span class="badge rounded-pill badge-outline me-1">AWS</span>
-              <span class="badge rounded-pill badge-outline me-1"
+              <span class="badge rounded-pill badge-outline-disabled me-1"
                 >インフラ系</span
               >
             </p>
@@ -388,7 +388,7 @@
                 >初心者向け</span
               >
               <span class="badge rounded-pill badge-outline me-1">AWS</span>
-              <span class="badge rounded-pill badge-outline me-1"
+              <span class="badge rounded-pill badge-outline-disabled me-1"
                 >インフラ系</span
               >
             </p>
@@ -450,10 +450,12 @@
               <span class="badge rounded-pill badge-outline me-1"
                 >初心者向け</span
               >
-              <span class="badge rounded-pill badge-outline me-1"
+              <span class="badge rounded-pill badge-outline-disabled me-1"
                 >自己啓発</span
               >
-              <span class="badge rounded-pill badge-outline me-1">資格</span>
+              <span class="badge rounded-pill badge-outline-disabled me-1"
+                >資格</span
+              >
             </p>
           </div>
 
@@ -504,7 +506,7 @@
               <span class="badge rounded-pill badge-outline me-1"
                 >初心者向け</span
               >
-              <span class="badge rounded-pill badge-outline me-1"
+              <span class="badge rounded-pill badge-outline-disabled me-1"
                 >自己啓発</span
               >
             </p>
@@ -559,7 +561,7 @@
               <span class="badge rounded-pill badge-outline me-1"
                 >初心者向け</span
               >
-              <span class="badge rounded-pill badge-outline me-1"
+              <span class="badge rounded-pill badge-outline-disabled me-1"
                 >自己啓発</span
               >
             </p>
@@ -606,7 +608,7 @@
               <span class="badge rounded-pill badge-outline me-1"
                 >初心者向け</span
               >
-              <span class="badge rounded-pill badge-outline me-1"
+              <span class="badge rounded-pill badge-outline-disabled me-1"
                 >自己啓発</span
               >
             </p>
@@ -758,6 +760,26 @@
 
       modalElement.addEventListener("hidden.bs.modal", function () {
         window.location.href = "/resources/Borrowed/booksearch.html";
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const badges = document.querySelectorAll(".badge");
+
+        badges.forEach(function (badge) {
+          if (badge.textContent.trim() === "初心者向け") {
+            badge.style.cursor = "pointer"; // 見た目でクリックできることを示す
+            badge.addEventListener("click", function () {
+              window.location.href = "booksearchEasy.html";
+            });
+          }
+          if (badge.textContent.trim() === "AWS") {
+            badge.style.cursor = "pointer"; // 見た目でクリックできることを示す
+            badge.addEventListener("click", function () {
+              window.location.href = "booksearch.html";
+            });
+          }
+        });
       });
     </script>
   </body>
