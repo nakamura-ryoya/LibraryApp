@@ -261,8 +261,8 @@
             id="sortSelect"
             onchange="handleSortChange()"
           >
-            <option value="none" selected>おすすめ順</option>
-            <option value="high">評価の高い順</option>
+            <option value="none">おすすめ順</option>
+            <option value="high" selected>評価の高い順</option>
             <option value="low">評価の低い順</option>
           </select>
         </div>
@@ -286,6 +286,67 @@
 
     <!-- 検索結果カード -->
     <div class="container">
+      <!-- カード2 -->
+      <div class="card card-hover search-card mb-4 shadow-sm border-0">
+        <a href="book3Detail.html" class="stretched-link"></a>
+        <div class="row g-0 align-items-stretch">
+          <!-- 画像ブロック（2割） -->
+          <div
+            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
+          >
+            <img
+              src="/images/book3.png"
+              class="img-fluid rounded"
+              alt="蔵書画像"
+            />
+          </div>
+
+          <!-- タイトル・評価・あらましブロック（6割） -->
+          <div class="col-md-6 p-3 border-end text-block">
+            <h4 class="fw-bold mb-2 title-clamp-2">はじめてのAWS</h4>
+            <p class="rating mb-2">
+              <strong>評価：</strong>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-half text-warning"></i>
+              <span class="text-muted small mx-1">4.8 (20件)</span>
+            </p>
+            <p class="card-text tag-group">
+              <span class="badge rounded-pill badge-outline me-1"
+                >初心者向け</span
+              >
+              <span class="badge rounded-pill badge-outline me-1">AWS</span>
+              <span class="badge rounded-pill badge-outline me-1"
+                >インフラ系</span
+              >
+            </p>
+          </div>
+
+          <!-- 貸出状況ブロック（2割） -->
+          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
+            <div
+              class="d-flex justify-content-between align-items-center border-bottom py-2"
+            >
+              <span>虎ノ門</span>
+              <span class="badge bg-danger badge-fixed">貸出中</span>
+            </div>
+
+            <div
+              class="d-flex justify-content-between align-items-center border-bottom py-2"
+            >
+              <span>新川</span>
+              <span class="badge bg-danger badge-fixed">貸出中</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center py-2">
+              <span>みなとみらい</span>
+              <span class="badge bg-danger badge-fixed">貸出中</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- カード1 -->
       <div class="card card-hover search-card mb-4 shadow-sm border-0">
         <a href="book1Detail.html" class="stretched-link"></a>
@@ -340,67 +401,6 @@
               >
                 借りる
               </span>
-            </div>
-
-            <div
-              class="d-flex justify-content-between align-items-center border-bottom py-2"
-            >
-              <span>新川</span>
-              <span class="badge bg-danger badge-fixed">貸出中</span>
-            </div>
-            <div class="d-flex justify-content-between align-items-center py-2">
-              <span>みなとみらい</span>
-              <span class="badge bg-danger badge-fixed">貸出中</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- カード2 -->
-      <div class="card card-hover search-card mb-4 shadow-sm border-0">
-        <a href="book3Detail.html" class="stretched-link"></a>
-        <div class="row g-0 align-items-stretch">
-          <!-- 画像ブロック（2割） -->
-          <div
-            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
-          >
-            <img
-              src="/images/book3.png"
-              class="img-fluid rounded"
-              alt="蔵書画像"
-            />
-          </div>
-
-          <!-- タイトル・評価・あらましブロック（6割） -->
-          <div class="col-md-6 p-3 border-end text-block">
-            <h4 class="fw-bold mb-2 title-clamp-2">はじめてのAWS</h4>
-            <p class="rating mb-2">
-              <strong>評価：</strong>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-half text-warning"></i>
-              <span class="text-muted small mx-1">4.8 (20件)</span>
-            </p>
-            <p class="card-text tag-group">
-              <span class="badge rounded-pill badge-outline me-1"
-                >初心者向け</span
-              >
-              <span class="badge rounded-pill badge-outline me-1">AWS</span>
-              <span class="badge rounded-pill badge-outline me-1"
-                >インフラ系</span
-              >
-            </p>
-          </div>
-
-          <!-- 貸出状況ブロック（2割） -->
-          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
-            <div
-              class="d-flex justify-content-between align-items-center border-bottom py-2"
-            >
-              <span>虎ノ門</span>
-              <span class="badge bg-danger badge-fixed">貸出中</span>
             </div>
 
             <div
