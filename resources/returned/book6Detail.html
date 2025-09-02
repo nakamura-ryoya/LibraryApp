@@ -324,13 +324,7 @@
                 <span class="badge rounded-pill badge-outline me-1"
                   >上級者向け</span
                 >
-                <span class="badge rounded-pill badge-outline me-1">
-                  <a
-                    href="booksearch.html"
-                    style="color: inherit; text-decoration: none"
-                    >AWS</a
-                  >
-                </span>
+                <span class="badge rounded-pill badge-outline me-1"> AWS </span>
                 <span class="badge rounded-pill badge-outline me-1"
                   >インフラ系</span
                 >
@@ -837,5 +831,25 @@
 
     <!-- Bootstrap JS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const badges = document.querySelectorAll(".badge");
+
+        badges.forEach(function (badge) {
+          if (badge.textContent.trim() === "初心者向け") {
+            badge.style.cursor = "pointer"; // 見た目でクリックできることを示す
+            badge.addEventListener("click", function () {
+              window.location.href = "booksearchEasy.html";
+            });
+          }
+          if (badge.textContent.trim() === "AWS") {
+            badge.style.cursor = "pointer"; // 見た目でクリックできることを示す
+            badge.addEventListener("click", function () {
+              window.location.href = "booksearch.html";
+            });
+          }
+        });
+      });
+    </script>
   </body>
 </html>
