@@ -37,10 +37,11 @@ origin  https://github.com/nakamura-ryoya/LibraryApp.git (push)
 1. 以下の URL から Node.js をインストール  
    インストーラ：<https://nodejs.org/ja/>  
    （必ず参照：<https://qiita.com/ryome/items/eec08b28aff294e8c3d6>）  
-   ※npm などががうまく機能しない場合は、npm.cmd で実行してください。
-1. 以下のコマンドを作業ディレクトリで実行
+   ※npm などががうまく機能しない場合は、npm.cmd で実行してください。その他、コマンドがうまく認識されないときは、VsCode を再起動するとうまくいくかも？
+2. 以下のコマンドを作業ディレクトリで実行
 
 ```bash
+npm.cmd install -g json-server
 json-server.cmd --watch jsons/db.json --port 3000
 ```
 
@@ -65,4 +66,4 @@ http://localhost:3000/comments
 http://localhost:3000/profile
 ```
 
-2. index.html を開いて、書籍一覧に書籍が 2 冊表示されれば OK
+3. index.html を開いて、書籍一覧に書籍が 2 冊表示されれば OK

@@ -58,7 +58,6 @@
                 type="text"
                 class="border-0 flex-grow-1"
                 style="outline: none"
-                placeholder="書籍名・著者名など"
               />
             </div>
             <input type="hidden" name="tags" id="hiddenTags" />
@@ -79,19 +78,19 @@
                 type="button"
                 class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
-                初心者向け
+                初級
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
-                中級者向け
+                中級
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
-                上級者向け
+                上級
               </button>
             </div>
 
@@ -99,13 +98,13 @@
             <div class="d-flex flex-wrap gap-2 mb-3">
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 文学・評論
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 ビジネス
               </button>
@@ -113,23 +112,23 @@
                 type="button"
                 class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
-                AWS
+                資格
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 自己啓発
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 暮らし・健康
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 アート・デザイン
               </button>
@@ -139,37 +138,37 @@
             <div class="d-flex flex-wrap gap-2">
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
-                インフラ系
+                インフラ
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 アプリ
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 コンサル
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 営業
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 マネジメント
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 データ
               </button>
@@ -206,7 +205,6 @@
             badge.innerHTML = `${tag} <span class="ms-1 remove-btn" style="cursor:pointer;">&times;</span>`;
 
             badge.querySelector(".remove-btn").addEventListener("click", () => {
-              event.stopPropagation();
               badge.remove();
               updateHiddenTags();
             });
@@ -228,37 +226,6 @@
               addTagBadge(tag);
             });
           });
-          searchInput.addEventListener("keydown", (event) => {
-            if (
-              event.key === "Backspace" &&
-              searchInput.value === "" // 入力欄が空のとき
-            ) {
-              const tagBadges = badgeInput.querySelectorAll(".tag-badge");
-              if (tagBadges.length > 0) {
-                const lastBadge = tagBadges[tagBadges.length - 1];
-                lastBadge.remove();
-                updateHiddenTags();
-              }
-            }
-          });
-          document
-            .querySelector(".search-form")
-            .addEventListener("submit", (event) => {
-              const tags = Array.from(
-                badgeInput.querySelectorAll(".tag-badge")
-              ).map((b) => b.dataset.tag);
-
-              const form = event.target;
-
-              // 条件分岐で action を変更
-              if (tags.includes("初心者向け") && tags.includes("AWS")) {
-                form.action = "/resources/booksearchEasyAWS.html";
-              } else if (tags.includes("初心者向け")) {
-                form.action = "/resources/booksearchEasy.html";
-              } else {
-                form.action = "/resources/booksearch.html"; // デフォルト
-              }
-            });
         </script>
 
         <!-- 右側：貸出履歴表示 -->
@@ -294,8 +261,8 @@
             id="sortSelect"
             onchange="handleSortChange()"
           >
-            <option value="none">おすすめ順</option>
-            <option value="high" selected>評価の高い順</option>
+            <option value="none" selected>おすすめ順</option>
+            <option value="high">評価の高い順</option>
             <option value="low">評価の低い順</option>
           </select>
         </div>
@@ -308,8 +275,8 @@
               id="sortSelectMobile"
               onchange="handleSortChange()"
             >
-              <option value="none">おすすめ順</option>
-              <option value="high" selected>評価の高い順</option>
+              <option value="none" selected>おすすめ順</option>
+              <option value="high">評価の高い順</option>
               <option value="low">評価の低い順</option>
             </select>
           </div>
@@ -319,117 +286,6 @@
 
     <!-- 検索結果カード -->
     <div class="container">
-      <!-- カード3 -->
-      <div class="card card-hover search-card mb-4 shadow-sm border-0">
-        <a href="book3Detail.html" class="stretched-link"></a>
-        <div class="row g-0 align-items-stretch">
-          <!-- 画像ブロック（2割） -->
-          <div
-            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
-          >
-            <img
-              src="/images/book3.png"
-              class="img-fluid rounded"
-              alt="蔵書画像"
-            />
-          </div>
-
-          <!-- タイトル・評価・あらましブロック（6割） -->
-          <div class="col-md-6 p-3 border-end text-block">
-            <h4 class="fw-bold mb-2 title-clamp-2">はじめてのAWS</h4>
-            <p class="rating mb-2">
-              <strong>評価：</strong>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-half text-warning"></i>
-              <span class="text-muted small mx-1">4.8 (20件)</span>
-            </p>
-            <p class="card-text tag-group">
-              <span class="badge rounded-pill badge-outline me-1"
-                >初心者向け</span
-              >
-              <span class="badge rounded-pill badge-outline me-1">AWS</span>
-              <span class="badge rounded-pill badge-outline me-1"
-                >インフラ系</span
-              >
-            </p>
-          </div>
-
-          <!-- 貸出状況ブロック（2割） -->
-          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
-            <div
-              class="d-flex justify-content-between align-items-center border-bottom py-2"
-            >
-              <span>虎ノ門</span>
-              <span class="badge bg-danger badge-fixed">貸出中</span>
-            </div>
-
-            <div
-              class="d-flex justify-content-between align-items-center border-bottom py-2"
-            >
-              <span>新川</span>
-              <span class="badge bg-danger badge-fixed">貸出中</span>
-            </div>
-            <div class="d-flex justify-content-between align-items-center py-2">
-              <span>みなとみらい</span>
-              <span class="badge bg-danger badge-fixed">貸出中</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- カード4 -->
-      <div class="card card-hover search-card mb-4 shadow-sm border-0">
-        <a href="book6Detail.html" class="stretched-link"></a>
-        <div class="row g-0 align-items-stretch">
-          <!-- 画像ブロック（2割） -->
-          <div
-            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
-          >
-            <img
-              src="/images/book6.png"
-              class="img-fluid rounded"
-              alt="蔵書画像"
-            />
-          </div>
-
-          <!-- タイトル・評価・あらましブロック（6割） -->
-          <div class="col-md-6 p-3 border-end text-block">
-            <h4 class="fw-bold mb-2 title-clamp-2">
-              AWS　上級　プロレベルを目指す人へ　開発生産性を上げる
-            </h4>
-            <p class="rating mb-2">
-              <strong>評価：</strong>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-half text-warning"></i>
-              <span class="text-muted small mx-1">4.7 (15件)</span>
-            </p>
-            <p class="card-text tag-group">
-              <span class="badge rounded-pill badge-outline me-1"
-                >上級者向け</span
-              >
-              <span class="badge rounded-pill badge-outline me-1">AWS</span>
-              <span class="badge rounded-pill badge-outline me-1"
-                >インフラ系</span
-              >
-            </p>
-          </div>
-
-          <!-- 貸出状況ブロック（2割） -->
-          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
-            <div class="d-flex justify-content-between align-items-center py-2">
-              <span>虎ノ門</span>
-              <span class="badge bg-danger badge-fixed">貸出中</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- カード1 -->
       <div class="card card-hover search-card mb-4 shadow-sm border-0">
         <a href="book1Detail.html" class="stretched-link"></a>
@@ -477,7 +333,13 @@
               class="d-flex justify-content-between align-items-center border-bottom py-2"
             >
               <span>虎ノ門</span>
-              <span class="badge bg-success badge-fixed">借りる</span>
+              <span
+                class="badge bg-success mt-2 mt-sm-0 badge-fixed"
+                data-bs-toggle="modal"
+                data-bs-target="#borrowModal"
+              >
+                借りる
+              </span>
             </div>
 
             <div
@@ -486,57 +348,6 @@
               <span>新川</span>
               <span class="badge bg-danger badge-fixed">貸出中</span>
             </div>
-            <div class="d-flex justify-content-between align-items-center py-2">
-              <span>みなとみらい</span>
-              <span class="badge bg-danger badge-fixed">貸出中</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- カード5 -->
-      <div class="card card-hover search-card mb-4 shadow-sm border-0">
-        <a href="book9Detail.html" class="stretched-link"></a>
-        <div class="row g-0 align-items-stretch">
-          <!-- 画像ブロック（2割） -->
-          <div
-            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
-          >
-            <img
-              src="/images/book9.png"
-              class="img-fluid rounded"
-              alt="蔵書画像"
-            />
-          </div>
-
-          <!-- タイトル・評価・あらましブロック（6割） -->
-          <div class="col-md-6 p-3 border-end text-block">
-            <h4 class="fw-bold mb-2 title-clamp-2">
-              AWS
-              Lambdaを正しく理解し、「サーバレス」を実現するプラットフォームを最大限に活用しよう
-            </h4>
-            <p class="rating mb-2">
-              <strong>評価：</strong>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-half text-warning"></i>
-              <span class="text-muted small mx-1">4.5 (14件)</span>
-            </p>
-            <p class="card-text tag-group">
-              <span class="badge rounded-pill badge-outline me-1"
-                >上級者向け</span
-              >
-              <span class="badge rounded-pill badge-outline me-1">AWS</span>
-              <span class="badge rounded-pill badge-outline me-1"
-                >インフラ系</span
-              >
-            </p>
-          </div>
-
-          <!-- 貸出状況ブロック（2割） -->
-          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
             <div class="d-flex justify-content-between align-items-center py-2">
               <span>みなとみらい</span>
               <span class="badge bg-danger badge-fixed">貸出中</span>
@@ -602,6 +413,255 @@
           </div>
         </div>
       </div>
+
+      <!-- カード3 -->
+      <div class="card card-hover search-card mb-4 shadow-sm border-0">
+        <a href="book3Detail.html" class="stretched-link"></a>
+        <div class="row g-0 align-items-stretch">
+          <!-- 画像ブロック（2割） -->
+          <div
+            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
+          >
+            <img
+              src="/images/book3.png"
+              class="img-fluid rounded"
+              alt="蔵書画像"
+            />
+          </div>
+
+          <!-- タイトル・評価・あらましブロック（6割） -->
+          <div class="col-md-6 p-3 border-end text-block">
+            <h4 class="fw-bold mb-2 title-clamp-2">はじめてのAWS</h4>
+            <p class="rating mb-2">
+              <strong>評価：</strong>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-half text-warning"></i>
+              <span class="text-muted small mx-1">4.8 (20件)</span>
+            </p>
+            <p class="card-text tag-group">
+              <span class="badge rounded-pill badge-outline me-1"
+                >初心者向け</span
+              >
+              <span class="badge rounded-pill badge-outline me-1">AWS</span>
+              <span class="badge rounded-pill badge-outline me-1"
+                >インフラ系</span
+              >
+            </p>
+          </div>
+
+          <!-- 貸出状況ブロック（2割） -->
+          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
+            <div
+              class="d-flex justify-content-between align-items-center border-bottom py-2"
+            >
+              <span>虎ノ門</span>
+              <span class="badge bg-danger badge-fixed">貸出中</span>
+            </div>
+
+            <div
+              class="d-flex justify-content-between align-items-center border-bottom py-2"
+            >
+              <span>新川</span>
+              <span class="badge bg-danger badge-fixed">貸出中</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center py-2">
+              <span>みなとみらい</span>
+              <span class="badge bg-danger badge-fixed">貸出中</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- カード4 -->
+      <div class="card card-hover search-card mb-4 shadow-sm border-0">
+        <a href="book6Detail.html" class="stretched-link"></a>
+        <div class="row g-0 align-items-stretch">
+          <!-- 画像ブロック（2割） -->
+          <div
+            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
+          >
+            <img
+              src="/images/book6.png"
+              class="img-fluid rounded"
+              alt="蔵書画像"
+            />
+          </div>
+
+          <!-- タイトル・評価・あらましブロック（6割） -->
+          <div class="col-md-6 p-3 border-end text-block">
+            <h4 class="fw-bold mb-2 title-clamp-2">
+              AWS　上級　プロレベルを目指す人へ　開発生産性を上げる
+            </h4>
+            <p class="rating mb-2">
+              <strong>評価：</strong>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-half text-warning"></i>
+              <span class="text-muted small mx-1">4.7 (15件)</span>
+            </p>
+            <p class="card-text tag-group">
+              <span class="badge rounded-pill badge-outline me-1"
+                >上級者向け</span
+              >
+              <span class="badge rounded-pill badge-outline me-1">AWS</span>
+              <span class="badge rounded-pill badge-outline me-1"
+                >インフラ系</span
+              >
+            </p>
+          </div>
+
+          <!-- 貸出状況ブロック（2割） -->
+          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
+            <div class="d-flex justify-content-between align-items-center py-2">
+              <span>虎ノ門</span>
+              <span class="badge bg-danger badge-fixed">貸出中</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- カード5 -->
+      <div class="card card-hover search-card mb-4 shadow-sm border-0">
+        <a href="book9Detail.html" class="stretched-link"></a>
+        <div class="row g-0 align-items-stretch">
+          <!-- 画像ブロック（2割） -->
+          <div
+            class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end"
+          >
+            <img
+              src="/images/book9.png"
+              class="img-fluid rounded"
+              alt="蔵書画像"
+            />
+          </div>
+
+          <!-- タイトル・評価・あらましブロック（6割） -->
+          <div class="col-md-6 p-3 border-end text-block">
+            <h4 class="fw-bold mb-2 title-clamp-2">
+              AWS
+              Lambdaを正しく理解し、「サーバレス」を実現するプラットフォームを最大限に活用しよう
+            </h4>
+            <p class="rating mb-2">
+              <strong>評価：</strong>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-half text-warning"></i>
+              <span class="text-muted small mx-1">4.5 (14件)</span>
+            </p>
+            <p class="card-text tag-group">
+              <span class="badge rounded-pill badge-outline me-1"
+                >上級者向け</span
+              >
+              <span class="badge rounded-pill badge-outline me-1">AWS</span>
+              <span class="badge rounded-pill badge-outline me-1"
+                >インフラ系</span
+              >
+            </p>
+          </div>
+
+          <!-- 貸出状況ブロック（2割） -->
+          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
+            <div class="d-flex justify-content-between align-items-center py-2">
+              <span>みなとみらい</span>
+              <span class="badge bg-danger badge-fixed">貸出中</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 借りる確認モーダル -->
+    <div
+      class="modal fade"
+      id="borrowModal"
+      tabindex="-1"
+      aria-labelledby="borrowModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="borrowModalLabel">確認画面</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="閉じる"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p><strong>この本を借りますか？</strong></p>
+            <strong>タイトル：</strong>
+            図解AWSの仕組みとサービスがよく分かる！
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              キャンセル
+            </button>
+            <button
+              type="button"
+              class="btn btn-success"
+              data-bs-target="#borrowResultModal"
+              data-bs-toggle="modal"
+              data-bs-dismiss="modal"
+            >
+              借りる
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 借りた結果モーダル -->
+    <div
+      class="modal fade"
+      id="borrowResultModal"
+      tabindex="-1"
+      aria-labelledby="borrowResultModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="borrowResultModalLabel">
+              以下の本を借りました
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="閉じる"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              <strong>タイトル：</strong>
+              図解AWSの仕組みとサービスがよく分かる！
+            </p>
+
+            <strong>返却期限：</strong> 2025/09/30
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+            >
+              閉じる
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <nav>
@@ -627,6 +687,8 @@
     <script>
       function handleSortChange() {
         const sortValue = document.getElementById("sortSelect").value;
+
+        // 選択された値に応じて遷移先を変更
         if (sortValue === "high") {
           window.location.href = "booksearchReviewHigh.html";
         } else if (sortValue === "low") {
@@ -635,6 +697,14 @@
           window.location.href = "booksearch.html";
         }
       }
+
+      // モーダル閉じたあとにページ遷移
+      const closeBtn = document.getElementById("closeAndRedirectBtn");
+      const modalElement = document.getElementById("borrowResultModal");
+
+      modalElement.addEventListener("hidden.bs.modal", function () {
+        window.location.href = "/resources/Borrowed/booksearch.html";
+      });
     </script>
   </body>
 </html>
