@@ -622,5 +622,17 @@
       "occupation": "アプリSE",
       "position": "専門職"
     }
+  ],
+
+  "logs": [
+    {
+      "id": 1,
+      "memberId": 7,
+      "bookId": 2,
+      "loanDate": "2025/09/02",
+      "returnDate": "",
+      "returnLocation": "虎ノ門オフィス",
+      "returnFlag": false
+    }
   ]
 }
