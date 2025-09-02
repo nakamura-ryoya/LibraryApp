@@ -413,7 +413,17 @@
                 class="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="閉じる"
+                id="closeModalBtn"
               ></button>
+              <script>
+                document
+                  .getElementById("closeModalBtn")
+                  .addEventListener("click", function () {
+                    // モーダルを閉じた後にページ遷移
+                    window.location.href =
+                      "/resources/Borrowed/book1Detail.html"; // ← 遷移先のURLを指定
+                  });
+              </script>
             </div>
             <div class="modal-body">
               <p><strong>この本を借りますか？</strong></p>
