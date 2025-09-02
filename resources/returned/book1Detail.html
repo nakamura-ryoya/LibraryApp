@@ -411,17 +411,7 @@
                 class="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="閉じる"
-                id="closeModalBtn"
               ></button>
-              <script>
-                document
-                  .getElementById("closeModalBtn")
-                  .addEventListener("click", function () {
-                    // モーダルを閉じた後にページ遷移
-                    window.location.href =
-                      "/resources/Borrowed/book1Detail.html"; // ← 遷移先のURLを指定
-                  });
-              </script>
             </div>
             <div class="modal-body">
               <p><strong>この本を借りますか？</strong></p>
@@ -492,6 +482,14 @@
           </div>
         </div>
       </div>
+
+      <script>
+        const modal = document.getElementById("borrowResultModal");
+
+        modal.addEventListener("hidden.bs.modal", function () {
+          window.location.href = "/resources/Borrowed/book1Detail.html";
+        });
+      </script>
 
       <!-- オプション: 本の説明やあらすじ -->
       <div class="container card" style="max-width: 1200px; margin: auto">
