@@ -406,17 +406,17 @@
               <!-- 評価 -->
               <label class="form-label">評価（星1〜5）</label>
               <select id="rating" class="form-select mb-3">
-                <option value="1">★☆☆☆☆</option>
-                <option value="2">★★☆☆☆</option>
-                <option value="3">★★★☆☆</option>
-                <option value="4">★★★★☆</option>
                 <option value="5">★★★★★</option>
+                <option value="4">★★★★☆</option>
+                <option value="3">★★★☆☆</option>
+                <option value="2">★★☆☆☆</option>
+                <option value="1">★☆☆☆☆</option>
               </select>
 
               <label class="form-label"
                 >この本の難易度はどのレベルだと感じましたか？</label
               >
-              <div class="btn-group mb-3" role="group" aria-label="対象レベル">
+              <div class="d-flex flex-wrap gap-2 mb-3">
                 <input
                   type="radio"
                   class="btn-check"
@@ -425,9 +425,7 @@
                   value="初級者向け"
                   autocomplete="off"
                 />
-                <label class="btn btn-outline-primary" for="beginner"
-                  >初級者向け</label
-                >
+                <label class="btn badge-radio" for="beginner">初級者向け</label>
 
                 <input
                   type="radio"
@@ -437,7 +435,7 @@
                   value="中級者向け"
                   autocomplete="off"
                 />
-                <label class="btn btn-outline-primary" for="intermediate"
+                <label class="btn badge-radio" for="intermediate"
                   >中級者向け</label
                 >
 
@@ -449,9 +447,7 @@
                   value="上級者向け"
                   autocomplete="off"
                 />
-                <label class="btn btn-outline-primary" for="advanced"
-                  >上級者向け</label
-                >
+                <label class="btn badge-radio" for="advanced">上級者向け</label>
               </div>
               <br />
 

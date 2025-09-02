@@ -210,7 +210,8 @@ h1 {
   color: #fff;
 }
 
-.badge-toppage {
+.badge-toppage,
+.badge-radio {
   background-color: transparent;
   border: 1px solid #333;
   color: #333;
@@ -233,7 +234,8 @@ h1 {
   z-index: 2;
 }
 
-.badge-toppage:hover {
+.badge-toppage:hover,
+.btn-check:checked + .badge-radio {
   background-color: #333;
   color: #fff;
   padding: 0.4em 0.7em;
