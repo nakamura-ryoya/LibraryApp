@@ -459,6 +459,9 @@ h1 {
   border-color: white;
 }
 
+/* =============================
+   タグ系
+============================= */
 #badgeInput {
   display: flex;
   flex-wrap: wrap;
@@ -471,8 +474,17 @@ h1 {
 .tag-badge {
   order: 0;
 }
+
 #searchInput {
   order: 1;
   flex-grow: 1;
   min-width: 120px; /* 必要に応じて調整 */
+}
+
+.tag-btn-disabled {
+  background-color: #e0e0e0;
+  color: #999;
+  cursor: not-allowed;
+  pointer-events: none; /* 念のためクリック無効化 */
+  border: 1px dashed #ccc;
 }
