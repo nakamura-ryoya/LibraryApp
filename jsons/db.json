@@ -507,5 +507,113 @@
       "difficulty": 1,
       "comment": "図解が秀逸で、DynamoDBの仕組みが一気に理解できた。初心者にもおすすめ。"
     }
+  ],
+
+  "categories": [
+    {
+      "id": 1,
+      "category": "初心者向け"
+    },
+    {
+      "id": 2,
+      "category": "中級者向け"
+    },
+    {
+      "id": 3,
+      "category": "上級者向け"
+    },
+    {
+      "id": 4,
+      "category": "文学・評論"
+    },
+    {
+      "id": 5,
+      "category": "ビジネス"
+    },
+    {
+      "id": 6,
+      "category": "AWS"
+    },
+    {
+      "id": 7,
+      "category": "自己啓発"
+    },
+    {
+      "id": 8,
+      "category": "暮らし・健康"
+    },
+    {
+      "id": 9,
+      "category": "アート・デザイン"
+    },
+    {
+      "id": 10,
+      "category": "インフラ系"
+    },
+    {
+      "id": 11,
+      "category": "アプリ"
+    },
+    {
+      "id": 12,
+      "category": "コンサル"
+    },
+    {
+      "id": 13,
+      "category": "営業"
+    },
+    {
+      "id": 14,
+      "category": "マネジメント"
+    },
+    {
+      "id": 15,
+      "category": "データ"
+    }
+  ],
+
+  "members": [
+    {
+      "id": 1,
+      "name": "山田 太郎",
+      "department": "金融",
+      "occupation": "インフラSE",
+      "position": "専門職"
+    },
+    {
+      "id": 2,
+      "name": "山田 太郎",
+      "department": "ITSE",
+      "occupation": "インフラSE",
+      "position": "上級専門職"
+    },
+    {
+      "id": 3,
+      "name": "山田 太郎",
+      "department": "産業",
+      "occupation": "アプリSE",
+      "position": "一般"
+    },
+    {
+      "id": 4,
+      "name": "山田 太郎",
+      "department": "流通",
+      "occupation": "アプリSE",
+      "position": "主任"
+    },
+    {
+      "id": 5,
+      "name": "山田 太郎",
+      "department": "シス研",
+      "occupation": "アプリSE",
+      "position": "主任"
+    },
+    {
+      "id": 6,
+      "name": "山田 太郎",
+      "department": "鉄鋼",
+      "occupation": "営業",
+      "position": "上級専門職"
+    }
   ]
 }
