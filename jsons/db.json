@@ -176,5 +176,336 @@
       "library2": "0",
       "library3": "0"
     }
+  ],
+
+  "reviews": [
+    {
+      "id": 1,
+      "useId": 1,
+      "bookId": 1,
+      "stars": 3,
+      "difficulty": 0,
+      "comment": "図解が豊富で、初心者でもスッと理解できました。AWSの全体像をつかむのに最適。"
+    },
+    {
+      "id": 2,
+      "useId": 2,
+      "bookId": 1,
+      "stars": 4,
+      "difficulty": 1,
+      "comment": "技術書なのに読みやすい！業務でAWSを使う前に読んでおいてよかった。"
+    },
+    {
+      "id": 3,
+      "useId": 3,
+      "bookId": 2,
+      "stars": 5,
+      "difficulty": 0,
+      "comment": "原著の内容がしっかり訳されていて、専門用語の解説も丁寧。AWS初心者の辞書代わりになる。"
+    },
+    {
+      "id": 4,
+      "useId": 4,
+      "bookId": 2,
+      "stars": 3,
+      "difficulty": 2,
+      "comment": "少し翻訳調が強い部分もあるが、内容は網羅的で信頼できる。"
+    },
+    {
+      "id": 5,
+      "useId": 4,
+      "bookId": 3,
+      "stars": 4,
+      "difficulty": 0,
+      "comment": "AWSって難しそう…と思っていたけど、この本で一気にハードルが下がった！"
+    },
+    {
+      "id": 6,
+      "useId": 4,
+      "bookId": 3,
+      "stars": 5,
+      "difficulty": 0,
+      "comment": "実際に手を動かしながら学べる構成が最高。入門者に全力でおすすめしたい。"
+    },
+    {
+      "id": 7,
+      "useId": 4,
+      "bookId": 4,
+      "stars": 3,
+      "difficulty": 1,
+      "comment": "忙しい社会人でも続けられる工夫が満載。資格勉強のモチベーションが上がった。"
+    },
+    {
+      "id": 8,
+      "useId": 4,
+      "bookId": 4,
+      "stars": 4,
+      "difficulty": 2,
+      "comment": "内容はシンプルだけど、習慣化のヒントが詰まっている。訳文も自然で読みやすい。"
+    },
+    {
+      "id": 9,
+      "useId": 4,
+      "bookId": 5,
+      "stars": 5,
+      "difficulty": 1,
+      "comment": "独学に対する哲学的な視点が新鮮。学びの本質を突いている一冊。"
+    },
+    {
+      "id": 10,
+      "useId": 4,
+      "bookId": 5,
+      "stars": 3,
+      "difficulty": 1,
+      "comment": "読むたびに背筋が伸びる。自分の学び方を見直すきっかけになった。"
+    },
+    {
+      "id": 11,
+      "useId": 4,
+      "bookId": 6,
+      "stars": 4,
+      "difficulty": 2,
+      "comment": "単なる技術解説ではなく、チーム開発やCI/CDの観点からも生産性向上のヒントが満載。"
+    },
+    {
+      "id": 12,
+      "useId": 4,
+      "bookId": 6,
+      "stars": 5,
+      "difficulty": 1,
+      "comment": "中級者から上級者へのステップアップに最適。実務に直結する内容が多く、即活用できた。"
+    },
+    {
+      "id": 13,
+      "useId": 4,
+      "bookId": 7,
+      "stars": 3,
+      "difficulty": 1,
+      "comment": "会議やプレゼンで“伝わる”話し方が身につく。実践的なフレーズ集もありがたい。"
+    },
+    {
+      "id": 14,
+      "useId": 4,
+      "bookId": 7,
+      "stars": 4,
+      "difficulty": 0,
+      "comment": "訳文が自然で読みやすく、原著のテンポ感も損なわれていない。ビジネス初心者にもおすすめ。"
+    },
+    {
+      "id": 15,
+      "useId": 4,
+      "bookId": 8,
+      "stars": 5,
+      "difficulty": 1,
+      "comment": "技術力だけでなく、問題解決力やチームへの貢献姿勢など、総合的な“思考”が学べる。"
+    },
+    {
+      "id": 16,
+      "useId": 4,
+      "bookId": 8,
+      "stars": 3,
+      "difficulty": 2,
+      "comment": "読むたびに自分の視野が広がる。エンジニアとしての“あり方”を問い直す一冊。"
+    },
+    {
+      "id": 17,
+      "useId": 4,
+      "bookId": 9,
+      "stars": 4,
+      "difficulty": 2,
+      "comment": "Lambdaの仕組みだけでなく、実践的なユースケースが豊富。サーバレス開発の教科書的存在。"
+    },
+    {
+      "id": 18,
+      "useId": 4,
+      "bookId": 9,
+      "stars": 5,
+      "difficulty": 1,
+      "comment": "翻訳も技術的に正確で、英語が苦手でも安心して読める。CloudWatchやIAMとの連携も丁寧に解説。"
+    },
+    {
+      "id": 19,
+      "useId": 4,
+      "bookId": 10,
+      "stars": 3,
+      "difficulty": 2,
+      "comment": "2025年の最新仕様に対応していて、Graviton3やNitro Systemの解説も充実。現場で役立つ一冊。"
+    },
+    {
+      "id": 20,
+      "useId": 4,
+      "bookId": 10,
+      "stars": 4,
+      "difficulty": 1,
+      "comment": "洋書ではあるが、EC2の全機能を網羅していて初心者から上級者まで使える。"
+    },
+    {
+      "id": 21,
+      "useId": 4,
+      "bookId": 11,
+      "stars": 5,
+      "difficulty": 1,
+      "comment": "DynamoDBって難しそう…と思っていたけど、この本で一気に理解が進んだ。図解が秀逸！"
+    },
+    {
+      "id": 22,
+      "useId": 5,
+      "bookId": 1,
+      "stars": 5,
+      "difficulty": 1,
+      "comment": "AWSの基本から応用まで網羅されていて、実務にすぐ活かせた。図も豊富で理解しやすい。"
+    },
+    {
+      "id": 23,
+      "useId": 2,
+      "bookId": 3,
+      "stars": 3,
+      "difficulty": 2,
+      "comment": "少し専門的な内容もあるが、丁寧な解説で初心者でも読み進められる。実践的な構成が良い。"
+    },
+    {
+      "id": 24,
+      "useId": 6,
+      "bookId": 5,
+      "stars": 4,
+      "difficulty": 0,
+      "comment": "学びのモチベーションが上がる一冊。独学のヒントが詰まっていて、何度も読み返したくなる。"
+    },
+    {
+      "id": 25,
+      "useId": 1,
+      "bookId": 7,
+      "stars": 3,
+      "difficulty": 1,
+      "comment": "プレゼンの技術だけでなく、伝える力の本質に迫っていて、ビジネスにも役立つ内容だった。"
+    },
+    {
+      "id": 26,
+      "useId": 3,
+      "bookId": 9,
+      "stars": 5,
+      "difficulty": 2,
+      "comment": "Lambdaの実装例が豊富で、すぐに試したくなる内容。サーバレス開発の入門に最適。"
+    },
+    {
+      "id": 27,
+      "useId": 6,
+      "bookId": 4,
+      "stars": 4,
+      "difficulty": 0,
+      "comment": "資格取得に向けた学習計画の立て方が参考になった。社会人でも無理なく続けられる工夫が嬉しい。"
+    },
+    {
+      "id": 28,
+      "useId": 2,
+      "bookId": 6,
+      "stars": 5,
+      "difficulty": 2,
+      "comment": "CI/CDの実践例が豊富で、チーム開発にすぐ応用できた。中級者以上におすすめ。"
+    },
+    {
+      "id": 29,
+      "useId": 5,
+      "bookId": 8,
+      "stars": 4,
+      "difficulty": 1,
+      "comment": "エンジニアとしての思考法が学べる。技術だけでなく、姿勢や考え方にも触れていて刺激的だった。"
+    },
+    {
+      "id": 30,
+      "useId": 1,
+      "bookId": 10,
+      "stars": 3,
+      "difficulty": 2,
+      "comment": "最新のAWS仕様に対応しているが、やや専門的。中級者以上向けの内容。"
+    },
+    {
+      "id": 31,
+      "useId": 3,
+      "bookId": 11,
+      "stars": 4,
+      "difficulty": 1,
+      "comment": "DynamoDBの設計思想がよく分かる。図解と実例が豊富で、実務に役立つ知識が得られた。"
+    },
+    {
+      "id": 32,
+      "useId": 2,
+      "bookId": 2,
+      "stars": 4,
+      "difficulty": 1,
+      "comment": "翻訳の質が高く、専門用語も自然に理解できる。AWSの基礎固めにぴったり。"
+    },
+    {
+      "id": 33,
+      "useId": 6,
+      "bookId": 3,
+      "stars": 5,
+      "difficulty": 0,
+      "comment": "実際に手を動かしながら学べる構成が素晴らしい。初心者でも安心して取り組める。"
+    },
+    {
+      "id": 34,
+      "useId": 1,
+      "bookId": 4,
+      "stars": 3,
+      "difficulty": 0,
+      "comment": "資格対策としては十分な内容。もう少し実践例があるとさらに良かった。"
+    },
+    {
+      "id": 35,
+      "useId": 5,
+      "bookId": 5,
+      "stars": 4,
+      "difficulty": 1,
+      "comment": "独学のコツが詰まっていて、学習習慣を見直すきっかけになった。"
+    },
+    {
+      "id": 36,
+      "useId": 3,
+      "bookId": 6,
+      "stars": 5,
+      "difficulty": 2,
+      "comment": "CI/CDの実践的な内容が豊富で、現場で即活用できた。中級者以上におすすめ。"
+    },
+    {
+      "id": 37,
+      "useId": 2,
+      "bookId": 7,
+      "stars": 3,
+      "difficulty": 0,
+      "comment": "話し方のテクニックが体系的に学べる。プレゼンに自信が持てるようになった。"
+    },
+    {
+      "id": 38,
+      "useId": 4,
+      "bookId": 8,
+      "stars": 4,
+      "difficulty": 1,
+      "comment": "エンジニアとしての考え方に刺激を受けた。技術だけでなく人間力も磨ける。"
+    },
+    {
+      "id": 39,
+      "useId": 6,
+      "bookId": 9,
+      "stars": 5,
+      "difficulty": 2,
+      "comment": "サーバレス開発の全体像がつかめる。ユースケースが豊富で実践的。"
+    },
+    {
+      "id": 40,
+      "useId": 1,
+      "bookId": 10,
+      "stars": 4,
+      "difficulty": 2,
+      "comment": "Graviton3やNitro Systemの解説が丁寧で、最新技術に触れられる良書。"
+    },
+    {
+      "id": 41,
+      "useId": 5,
+      "bookId": 11,
+      "stars": 5,
+      "difficulty": 1,
+      "comment": "図解が秀逸で、DynamoDBの仕組みが一気に理解できた。初心者にもおすすめ。"
+    }
   ]
 }
