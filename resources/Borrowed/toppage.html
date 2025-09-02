@@ -273,7 +273,7 @@
             class="d-flex align-items-center text-decoration-none hover-outline rounded px-2"
           >
             <i class="bi bi-person-circle fs-5 text-white me-2"></i>
-            <span class="text-white fw-light">田中 太郎</span>
+            <span class="text-white fw-light">石倉 加菜子</span>
           </a>
         </div>
       </div>
@@ -286,18 +286,21 @@
       </div>
 
       <nav class="container mb-4">
-        <div class="d-flex flex-wrap justify-content-start gap-5">
-          おすすめタグ：
-          <a href="#" class="link-offset-3 link-opacity-25-hover">基本情報</a>
-          <a href="booksearch.html" class="link-offset-3 link-opacity-25-hover"
-            >AWS</a
+        <div class="d-flex flex-wrap justify-content-start gap-2">
+          <span class="fs-5 fw-bold me-2">おすすめタグ：</span>
+          <span class="badge rounded-pill badge-outline-disabled fs-6 me-1"
+            >基本情報</span
           >
-          <a href="#" class="link-offset-3 link-opacity-25-hover"
-            >アプリケーションエンジニア</a
+          <span class="badge rounded-pill badge-outline fs-6 me-1">AWS</span>
+          <span class="badge rounded-pill badge-outline-disabled fs-6 me-1"
+            >インフラ系</span
+          ><span class="badge rounded-pill badge-outline fs-6 me-1"
+            >初心者向け</span
+          ><span class="badge rounded-pill badge-outline-disabled fs-6 me-1"
+            >アプリケーションエンジニア</span
+          ><span class="badge rounded-pill badge-outline-disabled fs-6 me-1"
+            >単語集</span
           >
-          <a href="#" class="link-offset-3 link-opacity-25-hover">インフラ系</a>
-          <a href="#" class="link-offset-3 link-opacity-25-hover">入門書</a>
-          <a href="#" class="link-offset-3 link-opacity-25-hover">単語集</a>
         </div>
       </nav>
 
@@ -694,6 +697,26 @@
           768: { perPage: 1 },
         },
       }).mount();
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const badges = document.querySelectorAll(".badge");
+
+        badges.forEach(function (badge) {
+          if (badge.textContent.trim() === "初心者向け") {
+            badge.style.cursor = "pointer"; // 見た目でクリックできることを示す
+            badge.addEventListener("click", function () {
+              window.location.href = "booksearchEasy.html";
+            });
+          }
+          if (badge.textContent.trim() === "AWS") {
+            badge.style.cursor = "pointer"; // 見た目でクリックできることを示す
+            badge.addEventListener("click", function () {
+              window.location.href = "booksearch.html";
+            });
+          }
+        });
+      });
     </script>
   </body>
 </html>

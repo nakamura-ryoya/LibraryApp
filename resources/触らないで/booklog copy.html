@@ -57,9 +57,23 @@
         <!-- 右側：ログインユーザー表示 -->
         <div class="d-flex align-items-center user-info">
           <i class="bi bi-person-circle fs-4 text-white me-2"></i>
-          <span class="text-white fw-light">石倉 加菜子</span>
+          <span id="user-name" class="text-white fw-light"></span>
         </div>
       </div>
+
+      
+      <script>
+        // 例: ログイン中ユーザーID = 1 と仮定
+        const userId = 1;
+        const endpoint = `http://localhost:3000/members/${userId}`;
+
+        fetch(endpoint)
+          .then(res => res.json())
+          .then(member => {
+            document.getElementById("user-name").textContent = member.name;
+          })
+          .catch(err => console.error("Error fetching member:", err));
+      </script>
     </nav>
 
     <!-- 検索結果タイトル -->
