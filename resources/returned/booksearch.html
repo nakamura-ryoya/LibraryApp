@@ -363,7 +363,12 @@
               class="d-flex justify-content-between align-items-center border-bottom py-2"
             >
               <span>虎ノ門</span>
-              <span class="badge bg-success badge-fixed">借りる</span>
+              <span
+                class="badge bg-success badge-fixed"
+                data-bs-toggle="modal"
+                data-bs-target="#borrowModal"
+                >借りる</span
+              >
             </div>
 
             <div
@@ -721,6 +726,14 @@
           window.location.href = "booksearch.html";
         }
       }
+
+      // モーダル閉じたあとにページ遷移
+      const closeBtn = document.getElementById("closeAndRedirectBtn");
+      const modalElement = document.getElementById("borrowResultModal");
+
+      modalElement.addEventListener("hidden.bs.modal", function () {
+        window.location.href = "/resources/Borrowed/booksearch.html";
+      });
     </script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
