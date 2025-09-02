@@ -18,13 +18,26 @@
             const li = document.createElement("li");
             li.textContent = `
             ${book.title} （著者: ${book.author}）
-            評価： ${book.stars} （${book.reviews}件）
-          ${book}`;
+            評価： ${book.stars} （${book.reviews}件）`;
 
             list.appendChild(li);
           });
         })
         .catch((err) => console.error("エラー:", err));
+
+      fetch("http://localhost:3000/members")
+        .then((res) => res.json())
+        .then((data) => {
+          const list = document.getElementById("book-list");
+          data.forEach((member) => {
+            const li = document.createElement("li");
+            li.textContent = `
+            ${member.name} （部署： ${member.department}、職種: ${member.occupation}、役職： ${member.position}）
+            `;
+
+            list.appendChild(li);
+          });
+        });
     </script>
   </body>
 </html>
