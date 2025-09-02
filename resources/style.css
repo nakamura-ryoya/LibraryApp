@@ -153,6 +153,22 @@ h1 {
   box-shadow: 0 6px 12px rgba(0, 128, 0, 0.4);
 }
 
+.btn.bg-primary {
+  z-index: 2;
+  color: white;
+  font-weight: bold;
+}
+
+.btn.bg-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 41, 128, 0.3); /* 青系の影 */
+}
+
+.btn.bg-primary:active {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 41, 128 0.4);
+}
+
 .badge-outline-success {
   color: #198754;
   background-color: transparent;
