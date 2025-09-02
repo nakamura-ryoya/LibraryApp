@@ -278,6 +278,14 @@
         </div>
       </div>
 
+      <script>
+        const modal = document.getElementById("borrowResultModal");
+
+        modal.addEventListener("hidden.bs.modal", function () {
+          window.location.href = "/resources/Borrowed/book1Detail.html";
+        });
+      </script>
+
       <!-- オプション: 本の説明やあらすじ -->
       <div class="container card" style="max-width: 1200px; margin: auto">
         <div class="card-header">
