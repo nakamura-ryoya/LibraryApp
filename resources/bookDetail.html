@@ -289,28 +289,13 @@
           <div
             class="col-md-3 d-flex justify-content-center align-items-center"
           >
-            <img
-              src="/images/book1.png"
-              class="img-fluid rounded-start"
-              alt="図解AWSの仕組みとサービスがよく分かる！"
-            />
+            <img id="bookImage" src="" class="img-fluid rounded-start" alt="" />
           </div>
           <div class="col-md-5">
             <div class="card-body d-flex flex-column h-100">
               <h3 id="bookTitle" class="card-title">bookTitle</h3>
               <p class="card-text">
-                <strong>評価：</strong>
-                <a
-                  href="#review-section"
-                  class="rating-link text-warning text-decoration-none"
-                >
-                  <i class="bi bi-star-fill text-warning"></i>
-                  <i class="bi bi-star-fill text-warning"></i>
-                  <i class="bi bi-star-fill text-warning"></i>
-                  <i class="bi bi-star-fill text-warning"></i>
-                  <i class="bi bi-star-half text-warning"></i>
-                  <span class="text-muted small mx-1">4.6 (13件)</span>
-                </a>
+                <span id="book-rating"></span>
               </p>
               <p class="card-text">
                 <strong><i class="bi bi-person-fill"></i> 著者：</strong
@@ -325,28 +310,8 @@
                 ><span id="bookYear">Year</span>
               </p>
               <p class="card-text">
-                <strong><i class="bi bi-bookshelf"></i> ジャンル：</strong>
-                <span class="badge rounded-pill badge-outline me-1"
-                  >初心者向け</span
-                >
-                <span class="badge rounded-pill badge-outline me-1"> AWS </span>
-                <span class="badge rounded-pill badge-outline me-1"
-                  >インフラ系</span
-                >
+                <span id="book-categories"></span>
               </p>
-              <!-- <p class="card-text">
-                <strong><i class="bi bi-chat-left-text"></i> 概要：</strong
-                ><br />
-                AWSの主要サービス（EC2、S3、Lambda、RDSなど）を図解でわかりやすく解説。インフラの構成図やデータフロー、料金体系などをビジュアルで理解できる構成になっており、初心者から中級者まで幅広く対応。
-              </p> -->
-              <!-- <div class="mt-auto pt-3">
-                <button class="btn btn-primary me-2">
-                  <i class="bi bi-book-fill"></i> 借りる
-                </button>
-                <button class="btn btn-secondary">
-                  <i class="bi bi-arrow-left"></i> 戻る
-                </button>
-              </div> -->
             </div>
           </div>
 
@@ -354,36 +319,7 @@
           <div class="col-md-4 border-start">
             <div class="card-body">
               <h5 class="card-title">蔵書場所</h5>
-              <ul class="list-group list-group-flush">
-                <li
-                  class="list-group-item d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center"
-                >
-                  <span class="text-body">虎ノ門ヒルズビジネスタワー13F</span>
-                  <span
-                    class="badge bg-success mt-2 mt-sm-0 badge-fixed"
-                    data-bs-toggle="modal"
-                    data-bs-target="#borrowModal"
-                  >
-                    借りる
-                  </span>
-                </li>
-                <li
-                  class="list-group-item d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center"
-                >
-                  <span class="text-body">住友ツインビル13F</span>
-                  <span class="badge bg-danger mt-2 mt-sm-0 badge-fixed"
-                    >貸出中</span
-                  >
-                </li>
-                <li
-                  class="list-group-item d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center"
-                >
-                  <span class="text-body">みなとみらい</span>
-                  <span class="badge bg-danger mt-2 mt-sm-0 badge-fixed"
-                    >貸出中</span
-                  >
-                </li>
-              </ul>
+              <ul class="list-group list-group-flush" id="library-list"></ul>
             </div>
           </div>
         </div>
@@ -610,17 +546,113 @@
        */
       const bookId = 1;
       const bookEndpoint = `http://localhost:3000/books/${bookId}`;
+      const categoriesEndpoint = `http://localhost:3000/categories`;
 
-      fetch(bookEndpoint)
-        .then((res) => res.json())
-        .then((book) => {
+      Promise.all([
+        fetch(bookEndpoint).then((res) => res.json()),
+        fetch(categoriesEndpoint).then((res) => res.json()),
+      ])
+        .then(([book, categories]) => {
+          // タイトルを表示
           document.getElementById("bookTitle").textContent = book.title;
+          document.getElementById("bookAuthor").textContent = book.author;
           document.getElementById("bookIsbn").textContent = book.isbn;
           document.getElementById("bookYear").textContent = book.year;
           document.getElementById("bookDescription").textContent =
             book.description;
+          document.getElementById("bookImage").src = book.image;
+          document.getElementById("bookImage").alt = book.title;
+
+          const categoryIds = Array.isArray(book.category)
+            ? book.category
+            : [book.category];
+
+          const categoryNames = categoryIds.map((catId) => {
+            const match = categories.find(
+              (c) => Number(c.id) === Number(catId)
+            );
+            return match ? match.category : `不明（ID: ${catId}）`;
+          });
+
+          // カテゴリをバッジ形式で表示
+          const categoryContainer = document.getElementById("book-categories");
+          categoryContainer.innerHTML = `
+      <strong><i class="bi bi-bookshelf"></i> タグ：</strong>
+      ${categoryNames
+        .map(
+          (name) =>
+            `<span class="badge rounded-pill badge-outline me-1">${name}</span>`
+        )
+        .join("")}
+    `;
+          // 評価（星）を表示
+          const ratingElement = document.getElementById("book-rating");
+          if (ratingElement) {
+            ratingElement.innerHTML = `
+    <strong>評価：</strong>
+    <a
+                  href="#review-section"
+                  class="rating-link text-warning text-decoration-none"
+                >
+    <span class="text-warning">
+      ${generateStarRating(book.stars)}
+    </span>
+    <span class="text-muted small ms-1">${book.stars.toFixed(1)} (${
+              book.reviews
+            }件)</span>
+            </a>
+  `;
+            const libraryStatusMap = {
+              library1: { name: "虎ノ門", value: book.library1 },
+              library2: { name: "新川", value: book.library2 },
+              library3: { name: "みなとみらい", value: book.library3 },
+            };
+
+            const libraryList = document.getElementById("library-list");
+            libraryList.innerHTML = ""; // 初期化
+
+            Object.values(libraryStatusMap).forEach((library) => {
+              const { name, value } = library;
+
+              // -1 の場合は表示しない
+              if (value === "-1" || value === -1) return;
+
+              const li = document.createElement("li");
+              li.className =
+                "list-group-item d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center";
+
+              let badgeHtml = "";
+
+              if (value === "1" || value === 1) {
+                badgeHtml = `
+      <span
+        class="badge bg-success mt-2 mt-sm-0 badge-fixed"
+        data-bs-toggle="modal"
+        data-bs-target="#borrowModal"
+      >
+        借りる
+      </span>
+    `;
+              } else if (value === "0" || value === 0) {
+                badgeHtml = `
+      <span class="badge bg-danger mt-2 mt-sm-0 badge-fixed">
+        貸出中
+      </span>
+    `;
+              }
+
+              li.innerHTML = `
+    <span class="text-body">${name}</span>
+    ${badgeHtml}
+  `;
+
+              libraryList.appendChild(li);
+            });
+          }
         })
-        .catch((err) => console.error("Error fetching member data:", err));
+        .catch((err) =>
+          console.error("Error fetching book or categories:", err)
+        );
 
       /**
        * あなたへのおすすめの本を表示
