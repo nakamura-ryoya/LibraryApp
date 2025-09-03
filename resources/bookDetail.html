@@ -536,8 +536,11 @@
        * 書籍情報を表示
        * @param {number} bookId - 書籍ID
        */
-      const bookId = 1;
-      const bookEndpoint = `http://localhost:3000/books/${bookId}`;
+      // 現在のURL: http://example.com/page?id=3
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id"); // → "3"（文字列として取得される）
+      const bookEndpoint = `http://localhost:3000/books/${id}`; // 例外処理は無
+
       const categoriesEndpoint = `http://localhost:3000/categories`;
 
       Promise.all([
