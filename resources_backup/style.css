@@ -1,0 +1,538 @@
+/* =============================
+   基本設定
+============================= */
+body {
+  background-color: #e5e5e5;
+  color: #212529;
+  font-family: "Noto Sans", sans-serif;
+}
+
+/* =============================
+   ナビバー
+============================= */
+.navbar {
+  background-color: #131921;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  color: #ffffff !important;
+}
+
+.nav-item span,
+.nav-item i {
+  color: #ffffff !important;
+}
+
+.nav-link {
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #f8f9fa;
+}
+
+h1 {
+  /* スマホサイズにすると、検索結果が隠れる */
+  font-size: 2rem;
+}
+
+.navbar-brand,
+.user-info {
+  flex-shrink: 0;
+}
+.search-form {
+  flex-grow: 1;
+  max-width: 600px;
+}
+
+/* =============================
+   カードスタイル
+============================= */
+.card {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease,
+    background-color 0.3s ease;
+  will-change: transform;
+  margin: auto;
+  max-width: 1000px;
+}
+
+.card-hover:hover {
+  transform: perspective(800px) translateZ(20px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  background-color: #f8f8f8;
+  border: 1px solid #000;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.card-title {
+  color: #000000;
+  font-weight: 700;
+}
+
+.card h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #333;
+  text-align: center;
+}
+
+.stretched-link {
+  z-index: 1;
+}
+
+/* =============================
+   検索フォーム
+============================= */
+.input-group .form-control {
+  border-radius: 50px 0 0 50px;
+}
+
+.input-group .btn {
+  border-radius: 0 50px 50px 0;
+}
+
+/* =============================
+   ボタン
+============================= */
+.btn-primary {
+  background-color: #000000;
+  border-color: #000000;
+}
+
+.btn-primary:hover {
+  background-color: #333333;
+  border-color: #333333;
+}
+
+/* =============================
+   バッジカラー（貸出状況）
+============================= */
+
+.badge {
+  position: relative;
+  z-index: 2;
+}
+
+.badge.bg-success {
+  background-color: #198754;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.badge.bg-danger {
+  background-color: #dc3545;
+}
+
+.badge-fixed.bg-danger {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.badge-fixed.bg-success:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 128, 0, 0.3); /* 緑系の影 */
+}
+
+.badge-fixed {
+  text-align: center;
+  display: inline-block;
+  padding: 0.8em 1.2em; /* ← ここを調整 */
+  font-size: 0.9rem; /* ← 文字サイズはそのまま */
+  border-radius: 0.5rem;
+}
+
+.badge-fixed.bg-success:active {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 128, 0, 0.4);
+}
+
+.btn.bg-primary {
+  z-index: 2;
+  color: white;
+  font-weight: bold;
+}
+
+.btn.bg-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 41, 128, 0.3); /* 青系の影 */
+}
+
+.btn.bg-primary:active {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 41, 128 0.4);
+}
+
+.badge-outline-success {
+  color: #198754;
+  background-color: transparent;
+  border: 1px solid #198754;
+  padding: 0.35em 0.65em;
+  border-radius: 0.375rem;
+}
+
+.badge-outline-warning {
+  color: #ffc107;
+  background-color: transparent;
+  border: 1px solid #ffc107;
+}
+
+.badge-outline-danger {
+  color: #dc3545;
+  background-color: transparent;
+  border: 1px solid #dc3545;
+}
+
+.badge-outline {
+  background-color: transparent;
+  border: 1px solid #333;
+  color: #333;
+  padding: 0.35em 0.65em;
+  border-radius: 0.375rem;
+  font-weight: 500;
+}
+
+.badge-outline-disabled {
+  background-color: #e0e0e0;
+  color: #999;
+  cursor: not-allowed;
+  border: 1px dashed #ccc;
+}
+
+.badge-outline:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.badge-toppage,
+.badge-radio {
+  background-color: transparent;
+  border: 1px solid #333;
+  color: #333;
+  padding: 0.4em 0.7em;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  z-index: 2;
+}
+
+.badge-toppage-disabled {
+  background-color: #e0e0e0;
+  color: #999;
+  cursor: not-allowed;
+  border: 1px dashed #ccc;
+  padding: 0.4em 0.7em;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  z-index: 2;
+}
+
+.badge-toppage:hover,
+.btn-check:checked + .badge-radio {
+  background-color: #333;
+  color: #fff;
+  padding: 0.4em 0.7em;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  z-index: 2;
+}
+
+/* =============================
+   あらすじテキストの切り詰め
+============================= */
+.summary-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.85rem;
+}
+
+/* =============================
+   貸出状況アイコン
+============================= */
+.status-icon {
+  font-size: 1.4rem;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+/* =============================
+   検索結果カード
+============================= */
+.search-card {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0.5rem;
+}
+
+.search-card img {
+  max-height: 200px;
+  max-width: 100%;
+  width: 135px;
+  height: 180px;
+}
+
+.search-card h4 {
+  margin-top: 0.5rem;
+  min-height: 3.5rem;
+  -webkit-line-clamp: 2; /* 表示する最大行数 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.search-card .tag-group .badge {
+  font-size: 0.9rem;
+  padding: 0.5em 0.75em;
+}
+
+.search-card .text-block {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.search-card .text-block .rating {
+  font-size: 1.1rem;
+  margin-top: auto;
+  margin-bottom: 0.8rem;
+}
+
+.search-card .text-block .tag-group {
+  margin-top: 0.8rem;
+}
+
+/* =============================
+   地区別ステータスブロック
+============================= */
+.area-status {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.area-status span {
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.status-ok {
+  color: #198754;
+}
+
+.status-ng {
+  color: #dc3545;
+}
+
+/* =============================
+   地区ステータスカード
+============================= */
+.area-status-card {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.area-status-card h4 {
+  margin-bottom: 0.75rem;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+/* =============================
+   地区リスト
+============================= */
+.area-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.area-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: background-color 0.3s ease;
+}
+
+.area-item:hover {
+  background-color: #e9ecef;
+}
+
+.area-name {
+  font-weight: 600;
+  color: #555;
+  font-size: 1rem;
+}
+
+.available {
+  background-color: #d1e7dd;
+  color: #198754;
+}
+
+.unavailable {
+  background-color: #f8d7da;
+  color: #dc3545;
+}
+
+.pagination li a {
+  color: #007185;
+}
+.pagination .active .page-link {
+  background-color: #ffffff;
+  border-color: #131921;
+  color: #131921;
+}
+.pagination .page-link:hover {
+  background-color: #e2e2e2;
+}
+
+/* =============================
+   行数制限
+============================= */
+.review-clamp-2 {
+  display: box;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 表示する最大行数 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 3em; /* 2行分の高さを確保 */
+  max-height: 3em; /* 2行分の高さを確保 */
+}
+.tag-clamp-2 {
+  display: box;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 表示する最大行数 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 3em; /* 2行分の高さを確保 */
+  max-height: 3em; /* 2行分の高さを確保 */
+}
+.tag-clamp-2 i,
+.tag-clamp-2 .badge {
+  position: relative;
+  top: 10px; /* 2pxだけ下にずらす（お好みで調整） */
+}
+.title-clamp-2 {
+  display: box;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 表示する最大行数 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.5em; /* 2行分の高さを確保 */
+  max-height: 2.5em; /* 2行分の高さを確保 */
+}
+/* =============================
+   スライドアニメーション
+============================= */
+.splide__list {
+  transition: transform 0.8s ease-in-out !important;
+}
+
+/* =============================
+   ★★★評価リンクのホバー表現
+============================= */
+.rating-link:hover {
+  color: #0d6efd !important;
+  text-decoration: underline !important;
+}
+
+.rating-link:hover span.text-muted {
+  color: #0d6efd !important;
+}
+
+/* =============================
+   スクロールバーの調整
+============================= */
+.scroll-container::-webkit-scrollbar {
+  height: 20px; /* 横スクロールバーの高さ */
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background-color: #e5e5e5; /* 背景色（バーの背面） */
+  border-radius: 4px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: #999; /* スクロールつまみの色 */
+  border-radius: 4px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background-color: #666; /* ホバー時の色 */
+}
+
+/* =============================
+   戻るボタンのホバー表現
+============================= */
+.return-btn {
+  transition: all 0.3s ease-in-out;
+}
+
+.return-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(220, 53, 69, 0.4);
+}
+
+/* navbarのホバー表現 */
+.hover-outline {
+  border: 1px solid transparent;
+  transition: border-color 0.2s ease;
+  border-radius: 6px;
+  padding: 6px 12px;
+}
+
+.hover-outline:hover {
+  border-color: white;
+}
+
+/* =============================
+   タグ系
+============================= */
+#badgeInput {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start; /* ← これがポイント！ */
+  min-height: 38px;
+  cursor: text;
+}
+
+.tag-badge {
+  order: 0;
+}
+
+#searchInput {
+  order: 1;
+  flex-grow: 1;
+  min-width: 120px; /* 必要に応じて調整 */
+}
+
+.tag-btn-disabled {
+  background-color: #e0e0e0;
+  color: #999;
+  cursor: not-allowed;
+  pointer-events: none; /* 念のためクリック無効化 */
+  border: 1px dashed #ccc;
+}

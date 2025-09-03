@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>社内図書館システム</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+
+    <link rel="stylesheet" href="/resources/style.css" />
+  </head>
+
+  <body>
+    <!-- ナビバー -->
+    <nav class="navbar sticky-top">
+      <div
+        class="container d-flex flex-wrap justify-content-between align-items-center"
+        style="max-width: 1200px; margin: auto"
+      >
+        <!-- 左側：システム名 -->
+        <a
+          class="navbar-brand fw-bold text-white"
+          href="/resources/toppage.html"
+        >
+          <i class="bi bi-star-fill text-warning"></i>NSLibrary<i
+            class="bi bi-star-fill text-warning"
+          ></i>
+        </a>
+
+        <!-- 中央：検索フォーム（伸縮対応） -->
+        <form
+          class="d-flex search-form mx-3"
+          role="search"
+          action="/resources/booksearch.html"
+        >
+          <input
+            id="searchInput"
+            type="text"
+            class="form-control me-2"
+            placeholder="書籍名・著者名など"
+            aria-label="Search"
+          />
+          <button class="btn btn-outline-light" type="submit">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
+
+        <!-- 右側：ログインユーザー表示 -->
+        <div class="d-flex align-items-center user-info">
+          <i class="bi bi-person-circle fs-4 text-white me-2"></i>
+          <span id="memberName" class="text-white fw-light"></span>
+        </div>
+        <script>
+          // 例: ログイン中ユーザーID = 1 と仮定
+          const userId = 7;
+          const endpoint = `http://localhost:3000/members/${userId}`;
+
+          fetch(endpoint)
+            .then((res) => res.json())
+            .then((member) => {
+              document.getElementById("memberName").textContent = member.name;
+            })
+            .catch((err) => console.error("Error fetching member:", err));
+        </script>
+      </div>
+    </nav>
+
+    <!-- 検索結果タイトル -->
+    <h1 class="text-center mb-4 mt-4">貸出履歴</h1>
+
+    <!-- 検索結果カード -->
+    <div class="container" id="logCardContainer"></div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        Promise.all([
+          fetch("http://localhost:3000/logs").then((res) => res.json()),
+          fetch("http://localhost:3000/books").then((res) => res.json()),
+          fetch("http://localhost:3000/members/7").then((res) => res.json()),
+        ])
+          .then(([logs, books, member]) => {
+            const container = document.getElementById("logCardContainer");
+
+            // memberIdが7のログだけ抽出
+            console.log("取得したメンバーID:", member.id);
+            console.log("取得したログ一覧:", logs);
+            // 石倉さんの貸出履歴
+            const filteredLogs = logs.filter(
+              (log) => Number(log.memberId) === Number(member.id)
+            );
+            console.log(filteredLogs);
+
+            filteredLogs.forEach((log) => {
+              const book = books.find(
+                (b) => Number(b.id) === Number(log.bookId)
+              );
+              console.log(book);
+              if (!book) return;
+
+              const card = document.createElement("div");
+              card.className = "card card-hover mb-4 shadow-sm border-0";
+              card.style.maxWidth = "1200px";
+              card.style.margin = "auto";
+
+              card.innerHTML = `
+          <div class="row g-0 align-items-stretch">
+            <!-- 画像 -->
+            <div class="col-md-2 d-flex justify-content-center align-items-center py-2 px-1 border-end">
+              <img src="${
+                book.image || "/images/default.png"
+              }" class="img-fluid rounded" alt="蔵書画像" style="max-height: 100px; width: 75px; height: 100px" />
+            </div>
+
+            <!-- タイトル -->
+            <div class="col-md-5 d-flex flex-column justify-content-center p-3 border-end">
+              <small class="text-muted fw-semibold">タイトル</small>
+              <h5 class="fw-bold text-dark mt-2 text-truncate">${
+                book.title
+              }</h5>
+              
+            </div>
+
+            <!-- 貸出日 -->
+            <div class="col-md-2 d-flex flex-column justify-content-center p-3 border-end">
+              <small class="text-muted text-center fw-semibold">貸出日</small>
+              <h6 class="fw-bold text-primary text-center mt-2 mb-0">${
+                log.loanDate
+              }</h6>
+            </div>
+
+            <!-- 返却日 -->
+            <div class="col-md-2 d-flex flex-column justify-content-center p-3 border-end">
+              <small class="text-muted text-center fw-semibold">返却日</small>
+              <h6 class="fw-bold text-center mt-2 mb-0">
+                ${log.returnDate || "ー"}<br />（${log.returnLocation}）
+              </h6>
+            </div>
+
+            <!-- 返却ボタン -->
+            <div class="col-md-1 d-flex flex-column justify-content-center p-3">
+              <button
+                class="btn btn-outline-primary btn-sm mb-2"
+                style="width: 5rem"
+                data-bs-toggle="modal"
+                data-bs-target="#returnModal"
+              >
+                返却する
+              </button>
+            </div>
+          </div>
+        `;
+
+              container.appendChild(card);
+            });
+          })
+          .catch((error) => {
+            console.error("データの取得に失敗しました:", error);
+          });
+      });
+    </script>
+
+    <script>
+      // 「確定」ボタン押下時の処理
+      document
+        .getElementById("confirmReturn")
+        .addEventListener("click", function () {
+          const rating = document.getElementById("rating").value;
+          const comment = document.getElementById("comment").value;
+
+          // 今日の日付
+          const today = new Date();
+          const formattedDate =
+            today.getFullYear() +
+            "/" +
+            String(today.getMonth() + 1).padStart(2, "0") +
+            "/" +
+            String(today.getDate()).padStart(2, "0");
+
+          // 返却日欄を更新
+          document.getElementById("returnDate").textContent = formattedDate;
+
+          // 評価の星を生成
+          const stars = "★".repeat(rating) + "☆".repeat(5 - rating);
+
+          // カード内の reviewSection を表示して更新
+          const reviewSection = document.querySelector(
+            ".col-md-5 #reviewSection"
+          );
+          reviewSection.classList.remove("d-none");
+          reviewSection.querySelector("#stars").textContent = stars;
+          reviewSection.querySelector("#difficultyLabel").textContent =
+            rating + "/5";
+          reviewSection.querySelector("#commentText").textContent = comment;
+
+          // ボタンを「返却済み」に変更 & 無効化
+          const returnBtn = document.getElementById("returnBtn");
+          returnBtn.textContent = "返却済み";
+          returnBtn.classList.remove("btn-outline-primary");
+          returnBtn.classList.add("btn-success");
+          returnBtn.disabled = true;
+          returnBtn.removeAttribute("data-bs-toggle");
+          returnBtn.removeAttribute("data-bs-target");
+
+          // モーダルを閉じる
+          const modal = bootstrap.Modal.getInstance(
+            document.getElementById("returnModal")
+          );
+          modal.hide();
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
