@@ -404,30 +404,42 @@
             if (!book) return; // 書籍情報が見つからない場合はスキップ
 
             const reviewCard = document.createElement("div");
-            reviewCard.className = "d-flex mb-4";
+            reviewCard.className = "d-flex mb-5";
 
             reviewCard.innerHTML = `
-    <!-- 左：本の画像 -->
-    <div class="me-3" style="width: 100px; flex-shrink: 0;">
-      <img src="${book.image}" alt="${
+  <!-- 左：本の画像 -->
+  <div class="me-3" style="width: 123px; flex-shrink: 0;">
+    <img src="${book.image}" alt="${
               book.title
             }" class="img-fluid rounded shadow-sm" />
+  </div>
+
+  <!-- 右：レビュー内容 -->
+  <div class="flex-grow-1">
+    <h6 class="fw-bold mb-1">${book.title}</h6>
+
+    <!-- 書籍全体の評価 -->
+    <div class="mb-1 text-muted">
+      評価：${"★".repeat(Math.round(book.stars))}${"☆".repeat(
+              5 - Math.round(book.stars)
+            )} ${book.stars.toFixed(1)} (${book.reviews}件)
     </div>
 
-    <!-- 右：レビュー内容 -->
-    <div class="flex-grow-1">
-      <h6 class="fw-bold mb-1">${book.title}</h6>
-      <div class="mb-2">
-        <span class="text-warning">${"★".repeat(review.stars)}${"☆".repeat(
+    <!-- この人の評価（枠で囲む） -->
+    <div class="border rounded p-3 bg-light">
+      <div class="text-muted mb-1">${member.name}さんのレビュー</div>
+      <div class="d-flex align-items-center justify-content-start mb-1">
+        <div class="text-muted me-2">評価：</div>
+        <span class="text-warning me-1">${"★".repeat(review.stars)}${"☆".repeat(
               5 - review.stars
             )}</span>
-        <span class="badge bg-secondary ms-2">難易度: ${
-          ["易", "中", "難"][review.difficulty]
-        }</span>
+        <span class="me-2">${review.stars.toFixed(1)}</span>
+        <span class="badge bg-secondary"></span>
       </div>
-      <p class="mb-0 text-muted">${review.comment}</p>
+      <p class="mb-1 text-muted">${review.comment}</p>
     </div>
-  `;
+  </div>
+`;
 
             reviewList.appendChild(reviewCard);
           });
