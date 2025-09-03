@@ -461,6 +461,113 @@
       });
 
       /**
+       * 検索結果の書籍を表示
+       */
+      // 書籍データを取得してカードを生成
+      Promise.all([
+        fetch("http://localhost:3000/books").then((res) => res.json()),
+        fetch("http://localhost:3000/categories").then((res) => res.json()),
+      ])
+        .then(([books, categories]) => {
+          const container = document.getElementById("searchResult");
+          container.innerHTML = "";
+
+          // categories を id: name のマップにする
+          const categoryMap = {};
+          categories.forEach((cat) => {
+            categoryMap[cat.id] = cat.category;
+          });
+
+          books.forEach((book) => {
+            // 星アイコン
+            const stars = [];
+            const fullStars = Math.floor(book.stars);
+            const hasHalf = book.stars % 1 !== 0;
+
+            for (let i = 0; i < fullStars; i++) {
+              stars.push('<i class="bi bi-star-fill text-warning"></i>');
+            }
+            if (hasHalf)
+              stars.push('<i class="bi bi-star-half text-warning"></i>');
+            while (stars.length < 5) {
+              stars.push('<i class="bi bi-star text-warning"></i>');
+            }
+
+            // 貸出状況（-1は非表示）
+            const libraryStatus = [
+              { name: "虎ノ門", status: book.library1 },
+              { name: "新川", status: book.library2 },
+              { name: "みなとみらい", status: book.library3 },
+            ]
+              .filter((lib) => lib.status !== "-1")
+              .map(
+                (lib) => `
+        <div class="d-flex justify-content-between align-items-center border-bottom py-2">
+          <span>${lib.name}</span>
+          <span class="badge ${
+            lib.status === "1" ? "bg-success" : "bg-danger"
+          } badge-fixed"
+            ${
+              lib.status === "1"
+                ? 'data-bs-toggle="modal" data-bs-target="#borrowModal"'
+                : ""
+            }>
+            ${lib.status === "1" ? "借りる" : "貸出中"}
+          </span>
+        </div>
+      `
+              )
+              .join("");
+
+            // カテゴリ（複数対応）
+            const categoryBadges = (book.category || [])
+              .map((catId) => {
+                const name = categoryMap[catId];
+                return name
+                  ? `<span class="badge rounded-pill badge-outline me-1">${name}</span>`
+                  : "";
+              })
+              .join("");
+
+            // カードHTML
+            const card = `
+      <div class="card card-hover search-card mb-4 shadow-sm border-0">
+        <a href="book${book.id}Detail.html" class="stretched-link"></a>
+        <div class="row g-0 align-items-stretch">
+          <!-- 画像 -->
+          <div class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end">
+            <img src="${book.image}" class="img-fluid rounded" alt="蔵書画像" />
+          </div>
+
+          <!-- タイトル・評価・カテゴリ -->
+          <div class="col-md-6 p-3 border-end text-block">
+            <h4 class="fw-bold mb-2 title-clamp-2">${book.title}</h4>
+            <p class="rating mb-2">
+              <strong>評価：</strong>
+              ${stars.join("")}
+              <span class="text-muted small mx-1">${book.stars} (${
+              book.reviews
+            }件)</span>
+            </p>
+            <p class="card-text tag-group">
+              ${categoryBadges}
+            </p>
+          </div>
+
+          <!-- 貸出状況 -->
+          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
+            ${libraryStatus}
+          </div>
+        </div>
+      </div>
+    `;
+
+            container.insertAdjacentHTML("beforeend", card);
+          });
+        })
+        .catch((err) => console.error("データ取得エラー:", err));
+
+      /**
        * ログイン中のメンバーを表示
        */
       const memberId = 7;
