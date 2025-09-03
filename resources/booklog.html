@@ -80,12 +80,124 @@
     <!-- 検索結果カード -->
     <div class="container" id="logCardContainer"></div>
 
+    <!-- 返却するボタン・モーダル(確定するボタンを内包している)-->
+    <div
+      class="modal fade"
+      id="returnModal"
+      tabindex="-1"
+      aria-labelledby="returnModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="returnModalLabel">
+              本の返却とレビュー
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="閉じる"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- 評価 -->
+            <label class="form-label">評価（星1〜5）</label>
+            <select id="rating" class="form-select mb-3">
+              <option value="1">★☆☆☆☆</option>
+              <option value="2">★★☆☆☆</option>
+              <option value="3">★★★☆☆</option>
+              <option value="4">★★★★☆</option>
+              <option value="5">★★★★★</option>
+            </select>
+
+            <label class="form-label"
+              >この本の難易度はどのレベルだと感じましたか？</label
+            >
+            <div class="btn-group mb-3" role="group" aria-label="対象レベル">
+              <input
+                type="radio"
+                class="btn-check"
+                name="level"
+                id="beginner"
+                value="0"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-primary" for="beginner"
+                >初級者向け</label
+              >
+
+              <input
+                type="radio"
+                class="btn-check"
+                name="level"
+                id="intermediate"
+                value="1"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-primary" for="intermediate"
+                >中級者向け</label
+              >
+
+              <input
+                type="radio"
+                class="btn-check"
+                name="level"
+                id="advanced"
+                value="2"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-primary" for="advanced"
+                >上級者向け</label
+              >
+            </div>
+            <br />
+
+            <!-- コメント -->
+            <label class="form-label">コメント</label>
+            <textarea
+              id="comment"
+              class="form-control"
+              rows="3"
+              placeholder="この本の感想を入力してください"
+            ></textarea>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              キャンセル
+            </button>
+            <button type="button" class="btn btn-primary" id="confirmReturn">
+              確定
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 確定するを押したときのアクション、選択しているlogs.logのbookIdを取得する。
+     jsonの
+     logs.logのreturnDate=今日の日付とreturnFlag=1
+     logs.logのreturnLocationが「虎ノ門オフィス」だったら、books.bookのlibrary1を1に変更
+
+     1 借りる
+     0 貸出中
+     -1 蔵書なし
+     -->
+    <!-- containerをforeach表示 javascript-->
     <script>
       document.addEventListener("DOMContentLoaded", () => {
+        const loginMember = 7;
         Promise.all([
           fetch("http://localhost:3000/logs").then((res) => res.json()),
           fetch("http://localhost:3000/books").then((res) => res.json()),
-          fetch("http://localhost:3000/members/7").then((res) => res.json()),
+          fetch(`http://localhost:3000/members/${loginMember}`).then((res) =>
+            res.json()
+          ),
         ])
           .then(([logs, books, member]) => {
             const container = document.getElementById("logCardContainer");
@@ -95,15 +207,14 @@
             console.log("取得したログ一覧:", logs);
             // 石倉さんの貸出履歴
             const filteredLogs = logs.filter(
-              (log) => Number(log.memberId) === Number(member.id)
+              (log) => log.memberId === Number(member.id)
             );
             console.log(filteredLogs);
 
             filteredLogs.forEach((log) => {
-              const book = books.find(
-                (b) => Number(b.id) === Number(log.bookId)
-              );
-              console.log(book);
+              console.log(log.bookId);
+              const book = books.find((b) => Number(b.id) === log.bookId);
+              console.log("book", book);
               if (!book) return;
 
               const card = document.createElement("div");
@@ -112,54 +223,73 @@
               card.style.margin = "auto";
 
               card.innerHTML = `
-          <div class="row g-0 align-items-stretch">
-            <!-- 画像 -->
-            <div class="col-md-2 d-flex justify-content-center align-items-center py-2 px-1 border-end">
-              <img src="${
-                book.image || "/images/default.png"
-              }" class="img-fluid rounded" alt="蔵書画像" style="max-height: 100px; width: 75px; height: 100px" />
-            </div>
+                        <div class="row g-0">
+                          <a href="book1Detail.html" class="stretched-link"></a>
+                          <!-- 画像 -->
+                          <div class="col-md-2 d-flex justify-content-center align-items-center py-2 px-1 border-end">
+                            <img src="${
+                              book.image
+                            }" class="img-fluid rounded" alt="蔵書画像" style="max-height: 100px; width: 75px; height: 100px" />
+                          </div>
 
-            <!-- タイトル -->
-            <div class="col-md-5 d-flex flex-column justify-content-center p-3 border-end">
-              <small class="text-muted fw-semibold">タイトル</small>
-              <h5 class="fw-bold text-dark mt-2 text-truncate">${
-                book.title
-              }</h5>
-              
-            </div>
+                          <!-- タイトル -->
+                          <div class="col-md-5 d-flex flex-column justify-content-center p-3 border-end">
+                            <small class="text-muted fw-semibold">タイトル</small>
+                            <h4 class="fw-bold text-dark mt-2 title-clamp-2">${
+                              book.title
+                            }</h4>
+                          </div>
 
-            <!-- 貸出日 -->
-            <div class="col-md-2 d-flex flex-column justify-content-center p-3 border-end">
-              <small class="text-muted text-center fw-semibold">貸出日</small>
-              <h6 class="fw-bold text-primary text-center mt-2 mb-0">${
-                log.loanDate
-              }</h6>
-            </div>
+                          <!-- 貸出日 -->
+                          <div class="col-md-2 d-flex flex-column justify-content-center p-3 border-end">
+                            <small class="text-muted text-center fw-semibold">貸出日</small>
+                            <h6 class="fw-bold text-primary text-center mt-2 mb-0">${
+                              log.loanDate
+                            }</h6>
+                          </div>
 
-            <!-- 返却日 -->
-            <div class="col-md-2 d-flex flex-column justify-content-center p-3 border-end">
-              <small class="text-muted text-center fw-semibold">返却日</small>
-              <h6 class="fw-bold text-center mt-2 mb-0">
-                ${log.returnDate || "ー"}<br />（${log.returnLocation}）
-              </h6>
-            </div>
+                          <!-- 返却日 -->
+                          <div class="col-md-2 d-flex flex-column justify-content-center p-3 border-end">
+                            <small class="text-muted text-center fw-semibold">返却日</small>
+                            <h6 class="fw-bold text-center mt-2 mb-0">
+                              <span class="returnInfo">
+                                ${log.returnDate || "ー"}<br/>（${
+                log.returnLocation
+              }）
+                              </span>
+                            </h6>
+                          </div>
 
-            <!-- 返却ボタン -->
-            <div class="col-md-1 d-flex flex-column justify-content-center p-3">
-              <button
-                class="btn btn-outline-primary btn-sm mb-2"
-                style="width: 5rem"
-                data-bs-toggle="modal"
-                data-bs-target="#returnModal"
-              >
-                返却する
-              </button>
-            </div>
-          </div>
-        `;
+                          <!-- 返却ボタン -->
+                            ${
+                              log.returnFlag
+                                ? `<div class="col-md-1 d-flex flex-column justify-content-center p-3 border-end">
+                                    <span class="btn btn-outline-success mt-2 mt-sm-0">
+                                      返却済
+                                    </span>
+                                  </div>`
+                                : `<div class="col-md-1 d-flex flex-column justify-content-center p-3 border-end">
+                                    <span class="btn bg-primary return-button mt-2 mt-sm-0" data-bs-toggle="modal" data-bs-target="#returnModal">
+                                      返却する
+                                    </span>
+                                  </div>`
+                            }
+                        </div>
+                      </div>`;
 
               container.appendChild(card);
+
+              const returnBtn = card.querySelector(".return-button");
+              if (returnBtn) {
+                returnBtn.addEventListener("click", function () {
+                  document.querySelectorAll(".card").forEach((c) => {
+                    c.removeAttribute("data-active");
+                  });
+                  card.setAttribute("data-active", "true");
+                  card.setAttribute("data-book-id", book.id);
+                  card.setAttribute("data-log-id", log.id);
+                });
+              }
             });
           })
           .catch((error) => {
@@ -169,14 +299,18 @@
     </script>
 
     <script>
-      // 「確定」ボタン押下時の処理
+      // ID：confirmReturnにクリックイベントを追加（確定ボタンを押したときの処理）
       document
         .getElementById("confirmReturn")
         .addEventListener("click", function () {
-          const rating = document.getElementById("rating").value;
-          const comment = document.getElementById("comment").value;
+          // 選択したカードを特定
+          const activeCard = document.querySelector(
+            ".card[data-active='true']"
+          );
+          console.log(activeCard);
+          if (!activeCard) return;
 
-          // 今日の日付
+          // 今日の日付を取得
           const today = new Date();
           const formattedDate =
             today.getFullYear() +
@@ -185,36 +319,83 @@
             "/" +
             String(today.getDate()).padStart(2, "0");
 
-          // 返却日欄を更新
-          document.getElementById("returnDate").textContent = formattedDate;
+          // 返却日＋場所の表示を日付だけに置き換える
+          const returnInfoEl = activeCard.querySelector(".returnInfo");
 
-          // 評価の星を生成
-          const stars = "★".repeat(rating) + "☆".repeat(5 - rating);
+          // ユーザが入力した評価と難易度とコメントの取得
+          const rating = document.getElementById("rating").value;
+          const difficulty =
+            document.querySelector('input[name="level"]:checked')?.value || "";
+          const comment = document.getElementById("comment").value;
+          const bookId = parseInt(activeCard.getAttribute("data-book-id"));
+          const logId = parseInt(activeCard.getAttribute("data-log-id"));
 
-          // カード内の reviewSection を表示して更新
-          const reviewSection = document.querySelector(
-            ".col-md-5 #reviewSection"
-          );
-          reviewSection.classList.remove("d-none");
-          reviewSection.querySelector("#stars").textContent = stars;
-          reviewSection.querySelector("#difficultyLabel").textContent =
-            rating + "/5";
-          reviewSection.querySelector("#commentText").textContent = comment;
+          // 最後のレビューIDを取得して新しいIDを決定（仮にAPIがIDを自動生成しない場合）
+          fetch("http://localhost:3000/reviews")
+            .then((response) => response.json())
+            .then((reviews) => {
+              const maxId =
+                reviews.length > 0 ? Math.max(...reviews.map((r) => r.id)) : 0;
+              const newId = maxId + 1;
+              const memberId = 7;
 
-          // ボタンを「返却済み」に変更 & 無効化
-          const returnBtn = document.getElementById("returnBtn");
-          returnBtn.textContent = "返却済み";
-          returnBtn.classList.remove("btn-outline-primary");
-          returnBtn.classList.add("btn-success");
-          returnBtn.disabled = true;
-          returnBtn.removeAttribute("data-bs-toggle");
-          returnBtn.removeAttribute("data-bs-target");
+              // 新しいレビューオブジェクトを作成
+              const newReview = {
+                id: String(newId),
+                memberId: parseInt(memberId),
+                bookId: parseInt(bookId),
+                stars: parseInt(rating),
+                difficulty: parseInt(difficulty),
+                comment: comment,
+              };
 
-          // モーダルを閉じる
-          const modal = bootstrap.Modal.getInstance(
-            document.getElementById("returnModal")
-          );
-          modal.hide();
+              // POSTリクエストでレビューを追加
+              fetch("http://localhost:3000/reviews", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(newReview),
+              })
+                .then((res) => {
+                  if (!res.ok) throw new Error("レビューの追加に失敗しました");
+                  return res.json();
+                })
+                .then((data) => {
+                  console.log("レビュー追加成功:", data);
+                  fetch(`http://localhost:3000/logs/${logId}`, {
+                    method: "PATCH",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      returnFlag: true,
+                      returnDate: String(formattedDate),
+                    }),
+                  })
+                    .then((res) => {
+                      debugger;
+                      if (!res.ok) throw new Error("ログの更新に失敗しました");
+                      return res.json();
+                    })
+                    .then((updatedLog) => {
+                      console.log("ログ更新成功:", updatedLog);
+                      if (returnInfoEl) {
+                        returnInfoEl.textContent = formattedDate;
+                      }
+                      const modal = bootstrap.Modal.getInstance(
+                        document.getElementById("returnModal")
+                      );
+                      modal.hide();
+                    })
+                    .catch((error) => {
+                      console.error("ログ更新エラー:", error);
+                    });
+                })
+                .catch((error) => {
+                  console.error("エラー:", error);
+                });
+            });
         });
     </script>
 
