@@ -304,7 +304,7 @@
               >
                 名前
               </td>
-              <td style="vertical-align: middle" id="name">石倉 加菜子</td>
+              <td style="vertical-align: middle" id="name">name</td>
             </tr>
             <tr style="height: 60px">
               <td
@@ -316,7 +316,7 @@
               >
                 部署
               </td>
-              <td style="vertical-align: middle" id="department">シス研</td>
+              <td style="vertical-align: middle" id="department">department</td>
             </tr>
             <tr style="height: 60px">
               <td
@@ -328,7 +328,7 @@
               >
                 職種
               </td>
-              <td style="vertical-align: middle" id="occupation">インフラSE</td>
+              <td style="vertical-align: middle" id="occupation">occupation</td>
             </tr>
             <tr style="height: 60px">
               <td
@@ -340,7 +340,7 @@
               >
                 役職
               </td>
-              <td style="vertical-align: middle" id="position">専門職</td>
+              <td style="vertical-align: middle" id="position">position</td>
             </tr>
           </tbody>
         </table>
@@ -416,7 +416,14 @@
 
   <!-- 右：レビュー内容 -->
   <div class="flex-grow-1">
-    <h6 class="fw-bold mb-1">${book.title}</h6>
+    <h6 class="fw-bold mb-1">
+    <a href="bookDetail.html?id=${book.id}"
+                  class="rating-link link-dark text-decoration-none"
+                >
+    ${book.title}
+    </a></h6>
+
+    
 
     <!-- 書籍全体の評価 -->
     <div class="mb-1 text-muted">
