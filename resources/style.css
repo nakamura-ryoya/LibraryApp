@@ -536,3 +536,9 @@ h1 {
   pointer-events: none; /* 念のためクリック無効化 */
   border: 1px dashed #ccc;
 }
+
+.tag-btn-selected {
+  background-color: #0d6efd; /* Bootstrapのprimary色 */
+  color: white;
+  border-color: #0d6efd;
+}
