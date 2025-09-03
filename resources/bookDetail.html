@@ -297,9 +297,7 @@
           </div>
           <div class="col-md-5">
             <div class="card-body d-flex flex-column h-100">
-              <h3 class="card-title">
-                図解AWSの仕組みとサービスがよく分かる！
-              </h3>
+              <h3 id="bookTitle" class="card-title">bookTitle</h3>
               <p class="card-text">
                 <strong>評価：</strong>
                 <a
@@ -315,15 +313,16 @@
                 </a>
               </p>
               <p class="card-text">
-                <strong><i class="bi bi-person-fill"></i> 著者：</strong> 佐藤
-                陽一
+                <strong><i class="bi bi-person-fill"></i> 著者：</strong
+                ><span id="bookAuthor">Author</span>
               </p>
               <p class="card-text">
                 <strong><i class="bi bi-diagram-2"></i> ISBN：</strong>
-                978-4-00-310101-8
+                <span id="bookIsbn">ISBN</span>
               </p>
               <p class="card-text">
-                <strong><i class="bi bi-calendar"></i> 出版年：</strong> 2022年
+                <strong><i class="bi bi-calendar"></i> 出版年：</strong
+                ><span id="bookYear">Year</span>
               </p>
               <p class="card-text">
                 <strong><i class="bi bi-bookshelf"></i> ジャンル：</strong>
@@ -335,11 +334,11 @@
                   >インフラ系</span
                 >
               </p>
-              <p class="card-text">
+              <!-- <p class="card-text">
                 <strong><i class="bi bi-chat-left-text"></i> 概要：</strong
                 ><br />
                 AWSの主要サービス（EC2、S3、Lambda、RDSなど）を図解でわかりやすく解説。インフラの構成図やデータフロー、料金体系などをビジュアルで理解できる構成になっており、初心者から中級者まで幅広く対応。
-              </p>
+              </p> -->
               <!-- <div class="mt-auto pt-3">
                 <button class="btn btn-primary me-2">
                   <i class="bi bi-book-fill"></i> 借りる
@@ -494,7 +493,7 @@
         </div>
         <div class="card-body">
           <p class="card-text">
-            AWSの主要サービス（EC2、S3、Lambda、RDSなど）を図解でわかりやすく解説。インフラの構成図やデータフロー、料金体系などをビジュアルで理解できる構成になっており、初心者から中級者まで幅広く対応。
+            <span id="bookDescription">Description</span>
           </p>
         </div>
       </div>
@@ -561,21 +560,33 @@
        * @returns {string} - 星評価のHTML
        */
       function generateStarRating(rating) {
-        const fullStars = Math.floor(rating);
-        const halfStar = rating % 1 >= 0.5 ? 1 : 0;
-        const emptyStars = 5 - fullStars - halfStar;
+        const fullStars = Math.floor(rating); // 整数部分
+        const decimal = Math.round((rating % 1) * 10); // 小数点第一位（0〜9）
 
         let starsHtml = "";
 
+        // 完全な星（整数部分）
         for (let i = 0; i < fullStars; i++) {
           starsHtml += '<i class="bi bi-star-fill text-warning"></i>';
         }
-        if (halfStar) {
-          starsHtml += '<i class="bi bi-star-half text-warning"></i>';
+
+        // 小数点の星（1つだけ追加、ただし最大5個まで）
+        if (fullStars < 5) {
+          if (decimal >= 0 && decimal <= 2) {
+            starsHtml += '<i class="bi bi-star text-warning"></i>';
+          } else if (decimal >= 3 && decimal <= 7) {
+            starsHtml += '<i class="bi bi-star-half text-warning"></i>';
+          } else if (decimal >= 8 && decimal <= 9) {
+            starsHtml += '<i class="bi bi-star-fill text-warning"></i>';
+          }
         }
-        for (let i = 0; i < emptyStars; i++) {
+
+        // 残りの空白星（最大5個まで）
+        const currentStars = starsHtml.match(/<i/g)?.length || 0;
+        for (let i = currentStars; i < 5; i++) {
           starsHtml += '<i class="bi bi-star text-warning"></i>';
         }
+
         return starsHtml;
       }
 
@@ -590,6 +601,24 @@
         .then((res) => res.json())
         .then((member) => {
           document.getElementById("loginMember").textContent = member.name;
+        })
+        .catch((err) => console.error("Error fetching member data:", err));
+
+      /**
+       * 書籍情報を表示
+       * @param {number} bookId - 書籍ID
+       */
+      const bookId = 1;
+      const bookEndpoint = `http://localhost:3000/books/${bookId}`;
+
+      fetch(bookEndpoint)
+        .then((res) => res.json())
+        .then((book) => {
+          document.getElementById("bookTitle").textContent = book.title;
+          document.getElementById("bookIsbn").textContent = book.isbn;
+          document.getElementById("bookYear").textContent = book.year;
+          document.getElementById("bookDescription").textContent =
+            book.description;
         })
         .catch((err) => console.error("Error fetching member data:", err));
 
@@ -637,14 +666,12 @@
        * レビュー一覧と平均評価を表示
        * @param {number} bookId - 本のID
        */
-      const bookId = 1; // 表示したい本のID
+      // const bookId = 1; 上で使っているのでコメントアウト
       const reviewsEndpoint = `http://localhost:3000/reviews?bookId=${bookId}`;
       const membersEndpoint = `http://localhost:3000/members`;
 
-      // メンバー情報をキャッシュ
       let members = [];
 
-      // メンバー一覧を取得してからレビューを取得
       fetch(membersEndpoint)
         .then((res) => res.json())
         .then((data) => {
@@ -657,49 +684,55 @@
           reviewList.innerHTML = "";
 
           let totalStars = 0;
+          let count = 0;
 
           reviews.forEach((review) => {
+            // 平均点の計算にはすべてのレビューを含める
             totalStars += review.stars;
+            count++;
 
-            // memberId に一致するメンバーを探す
+            // コメントが空白なら表示しない
+            if (!review.comment || review.comment.trim() === "") return;
+
             const member = members.find(
               (m) => Number(m.id) === review.memberId
             );
 
-            // name（department・occupation・position）形式
-            const reviewerName = member
-              ? `${member.name}（${member.department}・${member.occupation}・${member.position}）`
-              : "匿名";
+            const reviewerName = `${member.name}（${member.department}・${member.occupation}・${member.position}）`;
 
             const item = document.createElement("div");
             item.className = "list-group-item";
 
             item.innerHTML = `
-          <div class="d-flex justify-content-between align-items-center mb-1">
-            <div class="d-flex align-items-center">
-              <i class="bi bi-person-fill me-2"></i>
-              <strong>${reviewerName}</strong>
-            </div>
-            <small class="text-warning">
-              ${generateStarRating(review.stars)}
-            </small>
+        <div class="d-flex justify-content-between align-items-center mb-1">
+          <div class="d-flex align-items-center">
+            <i class="bi bi-person-fill me-2"></i>
+            <strong>${reviewerName}</strong>
           </div>
-          <p class="mb-0">${review.comment}</p>
-        `;
+          <small class="text-warning">
+            ${generateStarRating(review.stars)}
+          </small>
+        </div>
+        <p class="mb-0">${review.comment}</p>
+      `;
 
             reviewList.appendChild(item);
           });
 
-          // 平均点を計算して表示
-          const avg = (totalStars / reviews.length).toFixed(1);
+          // 平均点を表示（すべてのレビュー対象）
           const avgContainer = document.getElementById("average-rating");
-          avgContainer.innerHTML = `
-        <h5>この本の評価</h5>
-        <small class="text-warning fs-4">
-          ${generateStarRating(Math.round(avg))}
-        </small>
-        <span class="text-muted">${avg}</span>
-      `;
+          if (count > 0) {
+            const avg = (totalStars / count).toFixed(1);
+            avgContainer.innerHTML = `
+    <h5>この本の評価</h5>
+    <small class="text-warning fs-4">
+      ${generateStarRating(avg)}
+    </small>
+    <span class="text-muted mx-1">${avg} (${count}件)</span>
+  `;
+          } else {
+            avgContainer.innerHTML = `<p class="text-muted">レビューがまだありません。</p>`;
+          }
         })
         .catch((err) =>
           console.error("Error fetching reviews or members:", err)

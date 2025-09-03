@@ -183,17 +183,41 @@
       "id": 1,
       "memberId": 1,
       "bookId": 1,
-      "stars": 3,
+      "stars": 5,
       "difficulty": 0,
-      "comment": "図解が豊富で、初心者でもスッと理解できました。AWSの全体像をつかむのに最適。"
+      "comment": "いろいろなＡＷＳ初心者本を読んできましたが、これが一番良いですね！図解が豊富で、AWSの全体像をつかむのに最適！"
     },
     {
       "id": 2,
       "memberId": 2,
       "bookId": 1,
+      "stars": 5,
+      "difficulty": 0,
+      "comment": "初心者には業務でAWSを使う前に読んでおいてほしい必読書。"
+    },
+    {
+      "id": 22,
+      "memberId": 5,
+      "bookId": 1,
       "stars": 4,
-      "difficulty": 1,
-      "comment": "技術書なのに読みやすい！業務でAWSを使う前に読んでおいてよかった。"
+      "difficulty": 0,
+      "comment": "AWSの基本については十分に網羅されており図も豊富で理解しやすいが、応用部分が若干足りない。"
+    },
+    {
+      "id": 42,
+      "memberId": 3,
+      "bookId": 1,
+      "stars": 2,
+      "difficulty": 0,
+      "comment": "簡単すぎ"
+    },
+    {
+      "id": 43,
+      "memberId": 4,
+      "bookId": 1,
+      "stars": 5,
+      "difficulty": 0,
+      "comment": "最近出てきたサービスまで取り扱っててたすかる"
     },
     {
       "id": 3,
@@ -348,14 +372,6 @@
       "comment": "DynamoDBって難しそう…と思っていたけど、この本で一気に理解が進んだ。図解が秀逸！"
     },
     {
-      "id": 22,
-      "memberId": 5,
-      "bookId": 1,
-      "stars": 5,
-      "difficulty": 1,
-      "comment": "AWSの基本から応用まで網羅されていて、実務にすぐ活かせた。図も豊富で理解しやすい。"
-    },
-    {
       "id": 23,
       "memberId": 2,
       "bookId": 3,
@@ -506,6 +522,78 @@
       "stars": 5,
       "difficulty": 1,
       "comment": "図解が秀逸で、DynamoDBの仕組みが一気に理解できた。初心者にもおすすめ。"
+    },
+    {
+      "id": 44,
+      "memberId": 8,
+      "bookId": 1,
+      "stars": 4,
+      "difficulty": 0,
+      "comment": ""
+    },
+    {
+      "id": 45,
+      "memberId": 8,
+      "bookId": 1,
+      "stars": 4,
+      "difficulty": 0,
+      "comment": ""
+    },
+    {
+      "id": 46,
+      "memberId": 8,
+      "bookId": 1,
+      "stars": 4,
+      "difficulty": 0,
+      "comment": ""
+    },
+    {
+      "id": 47,
+      "memberId": 8,
+      "bookId": 1,
+      "stars": 5,
+      "difficulty": 0,
+      "comment": ""
+    },
+    {
+      "id": 48,
+      "memberId": 8,
+      "bookId": 1,
+      "stars": 5,
+      "difficulty": 0,
+      "comment": ""
+    },
+    {
+      "id": 49,
+      "memberId": 8,
+      "bookId": 1,
+      "stars": 5,
+      "difficulty": 0,
+      "comment": ""
+    },
+    {
+      "id": 50,
+      "memberId": 8,
+      "bookId": 1,
+      "stars": 5,
+      "difficulty": 0,
+      "comment": ""
+    },
+    {
+      "id": 51,
+      "memberId": 8,
+      "bookId": 1,
+      "stars": 5,
+      "difficulty": 0,
+      "comment": ""
+    },
+    {
+      "id": 52,
+      "memberId": 8,
+      "bookId": 1,
+      "stars": 5,
+      "difficulty": 0,
+      "comment": ""
     }
   ],
 
@@ -621,6 +709,13 @@
       "department": "シス研",
       "occupation": "インフラSE",
       "position": "専門職"
+    },
+    {
+      "id": 8,
+      "name": "コメント つけな子",
+      "department": "代表取締役",
+      "occupation": "社長",
+      "position": "社内ニート"
     }
   ],
 
