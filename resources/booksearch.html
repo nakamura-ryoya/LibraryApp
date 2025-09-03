@@ -285,7 +285,9 @@
     <div class="container mt-4 mb-4" style="max-width: 1200px">
       <div class="position-relative">
         <!-- タイトル（中央揃え） -->
-        <h1 class="text-center">「AWS」の検索結果（28件）</h1>
+        <h1 class="text-center">
+          「<span id="selectedCategory"></span>」の検索結果（28件）
+        </h1>
 
         <!-- プルダウンメニュー（右上に配置、PC表示） -->
         <div class="d-none d-md-block position-absolute top-0 end-0 mt-2 me-2">
@@ -768,6 +770,18 @@
         .then((res) => res.json())
         .then((member) => {
           document.getElementById("loginMember").textContent = member.name;
+        });
+
+      /**
+       * 選択したタグを表示
+       */
+      const categoryId = 6;
+      const categoriesEndpoint = `http://localhost:3000/categories/${categoryId}`;
+      fetch(categoriesEndpoint)
+        .then((res) => res.json())
+        .then((category) => {
+          document.getElementById("selectedCategory").textContent =
+            category.category;
         });
     </script>
   </body>
