@@ -25,7 +25,7 @@
       "translator": "田中　健太郎",
       "isbn": "978-4-00-310101-8",
       "year": "2023年",
-      "category": [1, 6, 10],
+      "category": [2, 6, 10],
       "description": "AWSを使う上で必須となる用語や概念（VPC、IAM、Auto Scaling、CloudFormationなど）を体系的に整理した“辞書的”な一冊。各用語に対して、定義・使い方・注意点・関連サービスを網羅。",
       "image": "/images/book2.png",
       "library1": "1",
@@ -57,7 +57,7 @@
       "translator": "",
       "isbn": "978-4-00-310101-8",
       "year": "2024年",
-      "category": [1, 6, 10],
+      "category": [1, 7],
       "description": "忙しい社会人でも続けられる「短時間×継続型」の資格勉強法を紹介。AWS認定資格や基本情報技術者試験など、IT系資格を中心に、勉強の習慣化・モチベーション維持・効率的なインプット方法を解説。",
       "image": "/images/book4.png",
       "library1": "1",
@@ -73,7 +73,7 @@
       "translator": "",
       "isbn": "978-4-00-310101-8",
       "year": "2021年",
-      "category": [1, 6, 10],
+      "category": [2, 7],
       "description": "「誰かに教わらなくても、自分で学べる」という信念を軸に、独学の哲学・技術・実践方法を語る一冊。著者の体験談や、歴史上の独学者たちのエピソードも交えながら、学びの本質に迫る。",
       "image": "/images/book5.png",
       "library1": "1",
@@ -89,7 +89,7 @@
       "translator": "",
       "isbn": "978-4-00-310101-8",
       "year": "2024年",
-      "category": [1, 6, 10],
+      "category": [3, 6, 10],
       "description": "AWSを使いこなす上級者向けに、開発効率を最大化するための設計・運用・自動化のノウハウを解説。CI/CD、Infrastructure as Code、監視・ログ設計など、実務に直結する内容が満載。",
       "image": "/images/book6.png",
       "library1": "1",
@@ -105,7 +105,7 @@
       "translator": "小林　直人",
       "isbn": "978-4-00-310101-8",
       "year": "2019年",
-      "category": [1, 6, 10],
+      "category": [1, 7],
       "description": "会議・商談・プレゼン・雑談まで、あらゆるビジネスシーンで「伝わる」「好かれる」話し方のコツを紹介。心理学・言語学の知見をベースに、実践的なフレーズや話し方の型を学べる。",
       "image": "/images/book7.png",
       "library1": "1",
@@ -121,7 +121,7 @@
       "translator": "",
       "isbn": "978-4-00-310101-8",
       "year": "2014年",
-      "category": [1, 6, 10],
+      "category": [1, 7],
       "description": "技術力だけでなく、問題解決力・設計力・チーム貢献力など、総合的な「思考力」を磨くための指南書。著者の経験談や、業界トップエンジニアの思考パターンを分析しながら、読者自身の成長を促す。",
       "image": "/images/book8.png",
       "library1": "1",
@@ -137,7 +137,7 @@
       "translator": "高橋　由紀子",
       "isbn": "978-4-00-310101-8",
       "year": "2019年",
-      "category": [1, 6, 10],
+      "category": [2, 6, 10],
       "description": "AWS Lambdaの基本から応用までを体系的に解説。イベント駆動設計、セキュリティ、パフォーマンス最適化、他サービスとの連携など、サーバレスアーキテクチャを本気で活用したい人向け。",
       "image": "/images/book9.png",
       "library1": "1",
@@ -146,15 +146,15 @@
     },
     {
       "id": 10,
-      "title": "ビジネスでの話し方　全部、うまくいく",
-      "stars": 4.3,
-      "reviews": 10,
-      "author": "アリシア・グレイ",
-      "translator": "小林　直人",
+      "title": "Amazon EC2 (Elastic Compute Cloud) Complete Guide 2025",
+      "stars": 4.6,
+      "reviews": 2,
+      "author": "Andrea Morett",
+      "translator": "",
       "isbn": "978-4-00-310101-8",
-      "year": "2019年",
-      "category": [1, 6, 10],
-      "description": "会議・商談・プレゼン・雑談まで、あらゆるビジネスシーンで「伝わる」「好かれる」話し方のコツを紹介。心理学・言語学の知見をベースに、実践的なフレーズや話し方の型を学べる。",
+      "year": "2025年",
+      "category": [3, 6, 10],
+      "description": "最新機能の詳細な解説から、実践的な設定・運用方法までを網羅。初心者から上級者まで、AmazonEC2を使いこなすための必携ガイド。",
       "image": "/images/book10.png",
       "library1": "1",
       "library2": "0",
@@ -169,7 +169,7 @@
       "translator": "伊藤　翔太",
       "isbn": "978-4-00-310101-8",
       "year": "2019年",
-      "category": [1, 6, 10],
+      "category": [2, 6, 10],
       "description": "DynamoDBの基本概念から実践的な使い方までを、初心者向けに丁寧に解説した入門書。NoSQLの考え方、テーブル設計、クエリの書き方、パーティションキーとソートキーの使い分けなど、初学者がつまずきやすいポイントを図解とサンプルコードでわかりやすく紹介。AWSコンソールとCLIの両方に対応し、実際に手を動かしながら学べる構成。",
       "image": "/images/book11.png",
       "library1": "1",
@@ -183,17 +183,41 @@
       "id": 1,
       "memberId": 1,
       "bookId": 1,
-      "stars": 3,
+      "stars": 5,
       "difficulty": 0,
-      "comment": "図解が豊富で、初心者でもスッと理解できました。AWSの全体像をつかむのに最適。"
+      "comment": "いろいろなＡＷＳ初心者本を読んできましたが、これが一番良いですね！図解が豊富で、AWSの全体像をつかむのに最適！"
     },
     {
       "id": 2,
       "memberId": 2,
       "bookId": 1,
+      "stars": 5,
+      "difficulty": 0,
+      "comment": "初心者には業務でAWSを使う前に読んでおいてほしい必読書。"
+    },
+    {
+      "id": 22,
+      "memberId": 5,
+      "bookId": 1,
       "stars": 4,
-      "difficulty": 1,
-      "comment": "技術書なのに読みやすい！業務でAWSを使う前に読んでおいてよかった。"
+      "difficulty": 0,
+      "comment": "AWSの基本については十分に網羅されており図も豊富で理解しやすいが、応用部分が若干足りない。"
+    },
+    {
+      "id": 42,
+      "memberId": 3,
+      "bookId": 1,
+      "stars": 2,
+      "difficulty": 0,
+      "comment": "簡単すぎ"
+    },
+    {
+      "id": 43,
+      "memberId": 4,
+      "bookId": 1,
+      "stars": 5,
+      "difficulty": 0,
+      "comment": "最近出てきたサービスまで取り扱っててたすかる"
     },
     {
       "id": 3,
@@ -348,14 +372,6 @@
       "comment": "DynamoDBって難しそう…と思っていたけど、この本で一気に理解が進んだ。図解が秀逸！"
     },
     {
-      "id": 22,
-      "memberId": 5,
-      "bookId": 1,
-      "stars": 5,
-      "difficulty": 1,
-      "comment": "AWSの基本から応用まで網羅されていて、実務にすぐ活かせた。図も豊富で理解しやすい。"
-    },
-    {
       "id": 23,
       "memberId": 2,
       "bookId": 3,
@@ -506,6 +522,78 @@
       "stars": 5,
       "difficulty": 1,
       "comment": "図解が秀逸で、DynamoDBの仕組みが一気に理解できた。初心者にもおすすめ。"
+    },
+    {
+      "id": 44,
+      "memberId": 8,
+      "bookId": 1,
+      "stars": 4,
+      "difficulty": 0,
+      "comment": ""
+    },
+    {
+      "id": 45,
+      "memberId": 8,
+      "bookId": 1,
+      "stars": 4,
+      "difficulty": 0,
+      "comment": ""
+    },
+    {
+      "id": 46,
+      "memberId": 8,
+      "bookId": 1,
+      "stars": 4,
+      "difficulty": 0,
+      "comment": ""
+    },
+    {
+      "id": 47,
+      "memberId": 8,
+      "bookId": 1,
+      "stars": 5,
+      "difficulty": 0,
+      "comment": ""
+    },
+    {
+      "id": 48,
+      "memberId": 8,
+      "bookId": 1,
+      "stars": 5,
+      "difficulty": 0,
+      "comment": ""
+    },
+    {
+      "id": 49,
+      "memberId": 8,
+      "bookId": 1,
+      "stars": 5,
+      "difficulty": 0,
+      "comment": ""
+    },
+    {
+      "id": 50,
+      "memberId": 8,
+      "bookId": 1,
+      "stars": 5,
+      "difficulty": 0,
+      "comment": ""
+    },
+    {
+      "id": 51,
+      "memberId": 8,
+      "bookId": 1,
+      "stars": 5,
+      "difficulty": 0,
+      "comment": ""
+    },
+    {
+      "id": 52,
+      "memberId": 8,
+      "bookId": 1,
+      "stars": 5,
+      "difficulty": 0,
+      "comment": ""
     }
   ],
 
@@ -621,6 +709,13 @@
       "department": "シス研",
       "occupation": "インフラSE",
       "position": "専門職"
+    },
+    {
+      "id": 8,
+      "name": "コメント つけな子",
+      "department": "代表取締役",
+      "occupation": "社長",
+      "position": "社内ニート"
     }
   ],
 
