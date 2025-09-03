@@ -272,7 +272,7 @@
             class="d-flex align-items-center text-decoration-none hover-outline rounded px-2"
           >
             <i class="bi bi-person-circle fs-5 text-white me-2"></i>
-            <span class="text-white fw-light">石倉 加菜子</span>
+            <span id="loginMember" class="text-white fw-light"></span>
           </a>
         </div>
       </div>
@@ -326,12 +326,12 @@
                 <strong><i class="bi bi-calendar"></i> 出版年：</strong> 2022年
               </p>
               <p class="card-text">
-                <strong><i class="bi bi-bookshelf"></i> タグ：</strong>
+                <strong><i class="bi bi-bookshelf"></i> ジャンル：</strong>
                 <span class="badge rounded-pill badge-outline me-1"
                   >初心者向け</span
                 >
                 <span class="badge rounded-pill badge-outline me-1"> AWS </span>
-                <span class="badge rounded-pill badge-outline-disabled me-1"
+                <span class="badge rounded-pill badge-outline me-1"
                   >インフラ系</span
                 >
               </p>
@@ -503,6 +503,7 @@
       <div class="mt-5" style="max-width: 1200px; margin: auto">
         <h4 class="mb-3"><i class="bi bi-list-stars"></i> こちらもおすすめ</h4>
         <div
+          id="recommendedBooks"
           class="scroll-container"
           style="
             display: flex;
@@ -513,357 +514,8 @@
             scroll-behavior: smooth;
             position: relative;
           "
-        >
-          <!-- 1 -->
-          <a href="book2Detail.html" class="text-decoration-none text-dark">
-            <div
-              class="card card-hover mb-4 shadow-sm border-0"
-              style="min-width: 200px; max-width: 200px; height: 300px"
-            >
-              <img
-                src="/images/book2.png"
-                class="card-img-top"
-                alt="AWSの仕組み 重要用語がわかる教科書"
-                style="height: 160px; object-fit: contain"
-              />
-              <div
-                class="card-body d-flex flex-column justify-content-start p-2"
-              >
-                <div>
-                  <h6 class="card-title mb-0 title-clamp-2">
-                    AWSの仕組み 重要用語がわかる教科書
-                  </h6>
-                  <p class="card-text small text-muted mb-0 mt-1">
-                    エミリー・チェン
-                  </p>
-                </div>
-                <p class="card-text mb-0">
-                  <small class="text-warning">
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star text-warning"></i
-                  ></small>
-                </p>
-              </div>
-            </div>
-          </a>
-
-          <!-- 2 -->
-          <a href="book3Detail.html" class="text-decoration-none text-dark">
-            <div
-              class="card card-hover mb-4 shadow-sm border-0"
-              style="min-width: 200px; max-width: 200px; height: 300px"
-            >
-              <img
-                src="/images/book3.png"
-                class="card-img-top"
-                alt="はじめてのAWS"
-                style="height: 160px; object-fit: contain"
-              />
-              <div
-                class="card-body d-flex flex-column justify-content-start p-2"
-              >
-                <div>
-                  <h6 class="card-title mb-0 title-clamp-2">はじめてのAWS</h6>
-                  <p class="card-text small text-muted mb-0 mt-1">中村 美咲</p>
-                </div>
-                <p class="card-text mb-0">
-                  <small class="text-warning">
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-half text-warning"></i
-                  ></small>
-                </p>
-              </div>
-            </div>
-          </a>
-
-          <!-- 3 -->
-          <a href="book4Detail.html" class="text-decoration-none text-dark">
-            <div
-              class="card card-hover mb-4 shadow-sm border-0"
-              style="min-width: 200px; max-width: 200px; height: 300px"
-            >
-              <img
-                src="/images/book4.png"
-                class="card-img-top"
-                alt="1日5分からはじめる資格勉強術 超コスパ独術学"
-                style="height: 160px; object-fit: contain"
-              />
-              <div
-                class="card-body d-flex flex-column justify-content-start p-2"
-              >
-                <div>
-                  <h6 class="card-title mb-0 title-clamp-2">
-                    1日5分からはじめる資格勉強術 超コスパ独術学
-                  </h6>
-                  <p class="card-text small text-muted mb-0 mt-1">山口 由香</p>
-                </div>
-                <p class="card-text mb-0">
-                  <small class="text-warning">
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star text-warning"></i
-                  ></small>
-                </p>
-              </div>
-            </div>
-          </a>
-
-          <!-- 4 -->
-          <a href="book5Detail.html" class="text-decoration-none text-dark">
-            <div
-              class="card card-hover mb-4 shadow-sm border-0"
-              style="min-width: 200px; max-width: 200px; height: 300px"
-            >
-              <img
-                src="/images/book5.png"
-                class="card-img-top"
-                alt="独学の美学"
-                style="height: 160px; object-fit: contain"
-              />
-              <div
-                class="card-body d-flex flex-column justify-content-start p-2"
-              >
-                <div>
-                  <h6 class="card-title mb-0 title-clamp-2">独学の美学</h6>
-                  <p class="card-text small text-muted mb-0 mt-1">
-                    黒川 慎一郎
-                  </p>
-                </div>
-                <p class="card-text mb-0">
-                  <small class="text-warning">
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i
-                  ></small>
-                </p>
-              </div>
-            </div>
-          </a>
-
-          <!-- 5 -->
-          <a href="book6Detail.html" class="text-decoration-none text-dark">
-            <div
-              class="card card-hover mb-4 shadow-sm border-0"
-              style="min-width: 200px; max-width: 200px; height: 300px"
-            >
-              <img
-                src="/images/book6.png"
-                class="card-img-top"
-                alt="AWS上級"
-                style="height: 160px; object-fit: contain"
-              />
-              <div
-                class="card-body d-flex flex-column justify-content-start p-2"
-              >
-                <div>
-                  <h6 class="card-title mb-0 title-clamp-2">AWS上級</h6>
-                  <p class="card-text small text-muted mb-0 mt-1">村瀬 拓真</p>
-                </div>
-                <p class="card-text mb-0">
-                  <small class="text-warning">
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-half text-warning"></i
-                  ></small>
-                </p>
-              </div>
-            </div>
-          </a>
-
-          <!-- 6 -->
-          <a href="book7Detail.html" class="text-decoration-none text-dark">
-            <div
-              class="card card-hover mb-4 shadow-sm border-0"
-              style="min-width: 200px; max-width: 200px; height: 300px"
-            >
-              <img
-                src="/images/book7.png"
-                class="card-img-top"
-                alt="ビジネスでの話し方 全部、うまくいく"
-                style="height: 160px; object-fit: contain"
-              />
-              <div
-                class="card-body d-flex flex-column justify-content-start p-2"
-              >
-                <div>
-                  <h6 class="card-title mb-0 title-clamp-2">
-                    ビジネスでの話し方 全部、うまくいく
-                  </h6>
-                  <p class="card-text small text-muted mb-0 mt-1">
-                    アリシア・グレイ
-                  </p>
-                </div>
-                <p class="card-text mb-0">
-                  <small class="text-warning">
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-half text-warning"></i
-                  ></small>
-                </p>
-              </div>
-            </div>
-          </a>
-
-          <!-- 7 -->
-          <a href="book8Detail.html" class="text-decoration-none text-dark">
-            <div
-              class="card card-hover mb-4 shadow-sm border-0"
-              style="min-width: 200px; max-width: 200px; height: 300px"
-            >
-              <img
-                src="/images/book8.png"
-                class="card-img-top"
-                alt="一流エンジニアの思考法 どこへ行っても通用する"
-                style="height: 160px; object-fit: contain"
-              />
-              <div
-                class="card-body d-flex flex-column justify-content-start p-2"
-              >
-                <div>
-                  <h6 class="card-title mb-0 title-clamp-2">
-                    一流エンジニアの思考法 どこへ行っても通用する
-                  </h6>
-                  <p class="card-text small text-muted mb-0 mt-1">白石 悠真</p>
-                </div>
-                <p class="card-text mb-0">
-                  <small class="text-warning">
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i
-                  ></small>
-                </p>
-              </div>
-            </div>
-          </a>
-
-          <!-- 8 -->
-          <a href="book9Detail.html" class="text-decoration-none text-dark">
-            <div
-              class="card card-hover mb-4 shadow-sm border-0"
-              style="min-width: 200px; max-width: 200px; height: 300px"
-            >
-              <img
-                src="/images/book9.png"
-                class="card-img-top"
-                alt="AWS Lambdaを正しく理解し、「サーバレス」を実現するプラットフォームを最大限に活用しよう"
-                style="height: 160px; object-fit: contain"
-              />
-              <div
-                class="card-body d-flex flex-column justify-content-start p-2"
-              >
-                <div>
-                  <h6 class="card-title mb-0 title-clamp-2">
-                    AWS
-                    Lambdaを正しく理解し、「サーバレス」を実現するプラットフォームを最大限に活用しよう
-                  </h6>
-                  <p class="card-text small text-muted mb-0 mt-1">
-                    マーク・デラニー
-                  </p>
-                </div>
-                <p class="card-text mb-0">
-                  <small class="text-warning">
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-half text-warning"></i
-                  ></small>
-                </p>
-              </div>
-            </div>
-          </a>
-
-          <!-- 9 -->
-          <a href="book10Detail.html" class="text-decoration-none text-dark">
-            <div
-              class="card card-hover mb-4 shadow-sm border-0"
-              style="min-width: 200px; max-width: 200px; height: 300px"
-            >
-              <img
-                src="/images/book10.png"
-                class="card-img-top"
-                alt="Amazon EC2 (Elastic Compute Cloud) Complete Guide 2025"
-                style="height: 160px; object-fit: contain"
-              />
-              <div
-                class="card-body d-flex flex-column justify-content-start p-2"
-              >
-                <div>
-                  <h6 class="card-title mb-0 title-clamp-2">
-                    Amazon EC2 (Elastic Compute Cloud) Complete Guide 2025
-                  </h6>
-                  <p class="card-text small text-muted mb-0 mt-1">
-                    Andrea Morett
-                  </p>
-                </div>
-                <p class="card-text mb-0">
-                  <small class="text-warning">
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-half text-warning"></i
-                  ></small>
-                </p>
-              </div>
-            </div>
-          </a>
-
-          <!-- 10 -->
-          <a href="book11Detail.html" class="text-decoration-none text-dark">
-            <div
-              class="card card-hover mb-4 shadow-sm border-0"
-              style="min-width: 200px; max-width: 200px; height: 300px"
-            >
-              <img
-                src="/images/book11.png"
-                class="card-img-top"
-                alt="Amazon DynamoDB for Beginners"
-                style="height: 160px; object-fit: contain"
-              />
-              <div
-                class="card-body d-flex flex-column justify-content-start p-2"
-              >
-                <div>
-                  <h6 class="card-title mb-0 title-clamp-2">
-                    Amazon DynamoDB for Beginners
-                  </h6>
-                  <p class="card-text small text-muted mb-0 mt-1">
-                    Rachel Monroe
-                  </p>
-                </div>
-                <p class="card-text mb-0">
-                  <small class="text-warning">
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star text-warning"></i
-                  ></small>
-                </p>
-              </div>
-            </div>
-          </a>
-        </div>
+        ></div>
       </div>
-
-      <!-- 読者レビュー セクション -->
 
       <div
         id="review-section"
@@ -874,77 +526,10 @@
           <i class="bi bi-chat-square-heart"></i> 読者レビュー
         </h4>
 
-        <!-- 本の総合評価をここに再表示 -->
-        <div class="mt-4">
-          <h5>この本の評価</h5>
-          <small class="text-warning fs-4">
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-half text-warning"></i
-          ></small>
-          <span class="text-muted">4.6</span>
-        </div>
+        <!-- 本の総合評価をここに表示 -->
+        <div id="average-rating" class="mt-4"></div>
 
-        <div class="list-group">
-          <div class="list-group-item">
-            <div class="d-flex justify-content-between align-items-center mb-1">
-              <div class="d-flex align-items-center">
-                <i class="bi bi-person-fill me-2"></i>
-                <strong>笠原 雅哉（流通・SE・上級専門職）</strong>
-              </div>
-              <small class="text-warning">
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star text-warning"></i
-              ></small>
-            </div>
-            <p class="mb-0">
-              図解が豊富で、初心者でもスッと理解できました。AWSの全体像をつかむのに最適。
-            </p>
-          </div>
-
-          <div class="list-group-item">
-            <div class="d-flex justify-content-between align-items-center mb-1">
-              <div class="d-flex align-items-center">
-                <i class="bi bi-person-fill me-2"></i>
-                <strong>匿名（シス研・SE・専門職）</strong>
-              </div>
-              <small class="text-warning">
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i
-              ></small>
-            </div>
-            <p class="mb-0">
-              技術書なのに読みやすい！業務でAWSを使う前に読んでおいてよかった。
-            </p>
-          </div>
-
-          <div class="list-group-item">
-            <div class="d-flex justify-content-between align-items-center mb-1">
-              <div class="d-flex align-items-center">
-                <i class="bi bi-person-fill me-2"></i>
-                <strong>秋山 桃奈（金融・SE・専門職）</strong>
-              </div>
-              <small class="text-warning">
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star"></i>
-              </small>
-            </div>
-            <p class="mb-0">
-              内容は良かったですが、一部難しい表現もありました。
-            </p>
-          </div>
-        </div>
+        <div id="review-list" class="list-group"></div>
       </div>
     </div>
 
@@ -969,6 +554,156 @@
           }
         });
       });
+
+      /**
+       * 星評価のHTMLを生成する関数
+       * @param {number} rating - 星評価（例: 4.5）
+       * @returns {string} - 星評価のHTML
+       */
+      function generateStarRating(rating) {
+        const fullStars = Math.floor(rating);
+        const halfStar = rating % 1 >= 0.5 ? 1 : 0;
+        const emptyStars = 5 - fullStars - halfStar;
+
+        let starsHtml = "";
+
+        for (let i = 0; i < fullStars; i++) {
+          starsHtml += '<i class="bi bi-star-fill text-warning"></i>';
+        }
+        if (halfStar) {
+          starsHtml += '<i class="bi bi-star-half text-warning"></i>';
+        }
+        for (let i = 0; i < emptyStars; i++) {
+          starsHtml += '<i class="bi bi-star text-warning"></i>';
+        }
+        return starsHtml;
+      }
+
+      /**
+       * ログインユーザー名を表示
+       * @param {number} loginMember - ログイン中の会員ID
+       */
+      const loginMember = 7;
+      const memberEndpoint = `http://localhost:3000/members/${loginMember}`;
+
+      fetch(memberEndpoint)
+        .then((res) => res.json())
+        .then((member) => {
+          document.getElementById("loginMember").textContent = member.name;
+        })
+        .catch((err) => console.error("Error fetching member data:", err));
+
+      /**
+       * あなたへのおすすめの本を表示
+       * @param {number} loginMember - ログイン中の会員ID
+       */
+      const booksEndpoint = `http://localhost:3000/books`;
+
+      fetch(booksEndpoint)
+        .then((res) => res.json())
+        .then((books) => {
+          const recommendedBooksContainer =
+            document.getElementById("recommendedBooks");
+          books.forEach((book) => {
+            const bookCard = document.createElement("div");
+            bookCard.className = "card card-hover mb-4 shadow-sm border-0";
+            bookCard.style =
+              "min-width: 200px; max-width: 200px; height: 300px";
+
+            bookCard.innerHTML = `
+              <img src="${book.image}" class="card-img-top" alt="${
+              book.title
+            }" style="height: 160px; object-fit: contain" />
+              <div class="card-body d-flex flex-column justify-content-start p-2">
+                <div>
+                  <h6 class="card-title mb-0 title-clamp-2">${book.title}</h6>
+                  <p class="card-text small text-muted mb-0 mt-1">${
+                    book.author
+                  }</p>
+                </div>
+                <p class="card-text mb-0">
+                  <small class="text-warning">
+                    ${generateStarRating(book.stars)}
+                  </small>
+                </p>
+              </div>
+            `;
+            recommendedBooksContainer.appendChild(bookCard);
+          });
+        })
+        .catch((err) => console.error("Error fetching books data:", err));
+
+      /**
+       * レビュー一覧と平均評価を表示
+       * @param {number} bookId - 本のID
+       */
+      const bookId = 1; // 表示したい本のID
+      const reviewsEndpoint = `http://localhost:3000/reviews?bookId=${bookId}`;
+      const membersEndpoint = `http://localhost:3000/members`;
+
+      // メンバー情報をキャッシュ
+      let members = [];
+
+      // メンバー一覧を取得してからレビューを取得
+      fetch(membersEndpoint)
+        .then((res) => res.json())
+        .then((data) => {
+          members = data;
+          return fetch(reviewsEndpoint);
+        })
+        .then((res) => res.json())
+        .then((reviews) => {
+          const reviewList = document.getElementById("review-list");
+          reviewList.innerHTML = "";
+
+          let totalStars = 0;
+
+          reviews.forEach((review) => {
+            totalStars += review.stars;
+
+            // memberId に一致するメンバーを探す
+            const member = members.find(
+              (m) => Number(m.id) === review.memberId
+            );
+
+            // name（department・occupation・position）形式
+            const reviewerName = member
+              ? `${member.name}（${member.department}・${member.occupation}・${member.position}）`
+              : "匿名";
+
+            const item = document.createElement("div");
+            item.className = "list-group-item";
+
+            item.innerHTML = `
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <div class="d-flex align-items-center">
+              <i class="bi bi-person-fill me-2"></i>
+              <strong>${reviewerName}</strong>
+            </div>
+            <small class="text-warning">
+              ${generateStarRating(review.stars)}
+            </small>
+          </div>
+          <p class="mb-0">${review.comment}</p>
+        `;
+
+            reviewList.appendChild(item);
+          });
+
+          // 平均点を計算して表示
+          const avg = (totalStars / reviews.length).toFixed(1);
+          const avgContainer = document.getElementById("average-rating");
+          avgContainer.innerHTML = `
+        <h5>この本の評価</h5>
+        <small class="text-warning fs-4">
+          ${generateStarRating(Math.round(avg))}
+        </small>
+        <span class="text-muted">${avg}</span>
+      `;
+        })
+        .catch((err) =>
+          console.error("Error fetching reviews or members:", err)
+        );
     </script>
   </body>
 </html>
