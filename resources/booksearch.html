@@ -286,7 +286,10 @@
       <div class="position-relative">
         <!-- タイトル（中央揃え） -->
         <h1 class="text-center">
-          「<span id="selectedCategory"></span>」の検索結果（28件）
+          <span id="selectedCategory"></span>の検索結果（<span
+            id="resultBooksNumber"
+          ></span
+          >件）
         </h1>
 
         <!-- プルダウンメニュー（右上に配置、PC表示） -->
@@ -583,13 +586,44 @@
       /**
        * 検索結果のカテゴリ表示
        */
-      const categoryId = 6;
-      const categoryEndpoint = `http://localhost:3000/categories/${categoryId}`;
-      fetch(categoryEndpoint)
+      fetch("http://localhost:3000/categories")
         .then((res) => res.json())
-        .then((category) => {
+        .then((categories) => {
+          const params = new URLSearchParams(window.location.search);
+          const tagIds = (params.get("tags") || "")
+            .split(",")
+            .map((id) => parseInt(id, 10))
+            .filter((id) => !isNaN(id));
+
+          const selectedNames = categories
+            .filter((cat) => tagIds.includes(Number(cat.id))) // 🔹ここを修正
+            .map((cat) => `「${cat.category}」`);
+
           document.getElementById("selectedCategory").textContent =
-            category.category;
+            selectedNames.join("") || "すべて";
+        });
+
+      /**
+       * 表示件数
+       */
+      fetch("http://localhost:3000/books")
+        .then((res) => res.json())
+        .then((books) => {
+          const params = new URLSearchParams(window.location.search);
+          const tagIds = (params.get("tags") || "")
+            .split(",")
+            .map((id) => parseInt(id))
+            .filter((id) => !isNaN(id));
+
+          let filteredBooks = books;
+          if (tagIds.length > 0) {
+            filteredBooks = books.filter((book) =>
+              tagIds.every((tagId) => book.category.includes(tagId))
+            );
+          }
+
+          document.getElementById("resultBooksNumber").textContent =
+            filteredBooks.length;
         });
     </script>
   </body>

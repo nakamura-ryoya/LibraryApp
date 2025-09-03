@@ -454,12 +454,12 @@ h1 {
    ★★★評価リンクのホバー表現
 ============================= */
 .rating-link:hover {
-  color: #0d6efd !important;
-  text-decoration: underline !important;
+  color: inherit !important;
+  text-decoration: none !important;
 }
 
 .rating-link:hover span.text-muted {
-  color: #0d6efd !important;
+  color: inherit !important;
 }
 
 /* =============================
@@ -541,4 +541,16 @@ h1 {
   background-color: #0d6efd; /* Bootstrapのprimary色 */
   color: white;
   border-color: #0d6efd;
+}
+
+a.text-decoration-none {
+  text-decoration: none; /* ホバー時も下線なし */
+  color: inherit; /* ホバー時も色変更なし */
+}
+
+a.text-decoration-none:hover,
+a.text-decoration-none:focus,
+a.text-decoration-none:active {
+  text-decoration: none; /* ホバー時も下線なし */
+  color: inherit; /* ホバー時も色変更なし */
 }
