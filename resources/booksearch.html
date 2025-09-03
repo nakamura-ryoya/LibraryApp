@@ -411,24 +411,6 @@
       </div>
     </div>
 
-    <nav>
-      <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-          <a class="page-link" href="#" tabindex="-1">前へ</a>
-        </li>
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item disabled">
-          <a class="page-link" href="#">...</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">6</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#">次へ</a>
-        </li>
-      </ul>
-    </nav>
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -463,6 +445,13 @@
       /**
        * 検索結果の書籍を表示
        */
+      // URLパラメータからカテゴリIDを取得
+      const params = new URLSearchParams(window.location.search);
+      const tagIds = (params.get("tags") || "")
+        .split(",")
+        .map((id) => parseInt(id))
+        .filter((id) => !isNaN(id));
+
       // 書籍データを取得してカードを生成
       Promise.all([
         fetch("http://localhost:3000/books").then((res) => res.json()),
@@ -478,7 +467,15 @@
             categoryMap[cat.id] = cat.category;
           });
 
-          books.forEach((book) => {
+          // 🔹 選択されたタグIDをすべて含む本だけ残す (AND検索)
+          let filteredBooks = books;
+          if (tagIds.length > 0) {
+            filteredBooks = books.filter((book) =>
+              tagIds.every((tagId) => book.category.includes(tagId))
+            );
+          }
+
+          filteredBooks.forEach((book) => {
             // 星アイコン
             const stars = [];
             const fullStars = Math.floor(book.stars);
@@ -502,20 +499,20 @@
               .filter((lib) => lib.status !== "-1")
               .map(
                 (lib) => `
-        <div class="d-flex justify-content-between align-items-center border-bottom py-2">
-          <span>${lib.name}</span>
-          <span class="badge ${
-            lib.status === "1" ? "bg-success" : "bg-danger"
-          } badge-fixed"
-            ${
-              lib.status === "1"
-                ? 'data-bs-toggle="modal" data-bs-target="#borrowModal"'
-                : ""
-            }>
-            ${lib.status === "1" ? "借りる" : "貸出中"}
-          </span>
-        </div>
-      `
+      <div class="d-flex justify-content-between align-items-center border-bottom py-2">
+        <span>${lib.name}</span>
+        <span class="badge ${
+          lib.status === "1" ? "bg-success" : "bg-danger"
+        } badge-fixed"
+          ${
+            lib.status === "1"
+              ? 'data-bs-toggle="modal" data-bs-target="#borrowModal"'
+              : ""
+          }>
+          ${lib.status === "1" ? "借りる" : "貸出中"}
+        </span>
+      </div>
+    `
               )
               .join("");
 
@@ -531,39 +528,44 @@
 
             // カードHTML
             const card = `
-      <div class="card card-hover search-card mb-4 shadow-sm border-0">
-        <a href="book${book.id}Detail.html" class="stretched-link"></a>
-        <div class="row g-0 align-items-stretch">
-          <!-- 画像 -->
-          <div class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end">
-            <img src="${book.image}" class="img-fluid rounded" alt="蔵書画像" />
-          </div>
+    <div class="card card-hover search-card mb-4 shadow-sm border-0"
+         onclick="window.location.href='bookDetail.html?id=${book.id}'"
+         style="cursor: pointer;">
+      <div class="row g-0 align-items-stretch">
+        <!-- 画像 -->
+        <div class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end">
+          <img src="${book.image}" class="img-fluid rounded" alt="蔵書画像" />
+        </div>
 
-          <!-- タイトル・評価・カテゴリ -->
-          <div class="col-md-6 p-3 border-end text-block">
-            <h4 class="fw-bold mb-2 title-clamp-2">${book.title}</h4>
-            <p class="rating mb-2">
-              <strong>評価：</strong>
-              ${stars.join("")}
-              <span class="text-muted small mx-1">${book.stars} (${
+        <!-- タイトル・評価・カテゴリ -->
+        <div class="col-md-6 p-3 border-end text-block">
+          <h4 class="fw-bold mb-2 title-clamp-2">${book.title}</h4>
+          <p class="rating mb-2">
+            <strong>評価：</strong>
+            ${stars.join("")}
+            <span class="text-muted small mx-1">${book.stars} (${
               book.reviews
             }件)</span>
-            </p>
-            <p class="card-text tag-group">
-              ${categoryBadges}
-            </p>
-          </div>
+          </p>
+          <p class="card-text tag-group">${categoryBadges}</p>
+        </div>
 
-          <!-- 貸出状況 -->
-          <div class="col-md-3 d-flex flex-column justify-content-center p-3">
-            ${libraryStatus}
-          </div>
+        <!-- 貸出状況 -->
+        <div class="col-md-3 d-flex flex-column justify-content-center p-3">
+          ${libraryStatus}
         </div>
       </div>
-    `;
+    </div>
+  `;
 
             container.insertAdjacentHTML("beforeend", card);
           });
+
+          // 該当書籍なし
+          if (filteredBooks.length === 0) {
+            container.innerHTML =
+              "<p class='text-muted'>該当する本が見つかりませんでした。</p>";
+          }
         })
         .catch((err) => console.error("データ取得エラー:", err));
 

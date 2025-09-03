@@ -9,7 +9,7 @@
       "translator": "",
       "isbn": "978-4-00-310101-8",
       "year": "2022年",
-      "category": [1, 6, 10],
+      "category": [6, 10],
       "description": "AWSの主要サービス（EC2、S3、Lambda、RDSなど）を図解でわかりやすく解説。インフラの構成図やデータフロー、料金体系などをビジュアルで理解できる構成になっており、初心者から中級者まで幅広く対応。",
       "image": "/images/book1.png",
       "library1": "1",
