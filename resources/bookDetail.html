@@ -358,21 +358,13 @@
               >
                 キャンセル
               </button>
-              <button
-                type="button"
-                class="btn btn-success"
-                data-bs-target="#borrowResultModal"
-                data-bs-toggle="modal"
-                data-bs-dismiss="modal"
-              >
-                借りる
-              </button>
+              <button id="confirmBorrow" class="btn btn-primary">確定</button>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 借りた結果モーダル -->
+      <!-- 借りた結果モーダル
       <div
         class="modal fade"
         id="borrowResultModal"
@@ -412,15 +404,15 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <script>
+      <!-- <script>
         const modal = document.getElementById("borrowResultModal");
 
         modal.addEventListener("hidden.bs.modal", function () {
           window.location.href = "/resources/Borrowed/book1Detail.html";
         });
-      </script>
+      </script> -->
 
       <!-- オプション: 本の説明やあらすじ -->
       <div class="container card" style="max-width: 1200px; margin: auto">
@@ -653,6 +645,56 @@
         .catch((err) =>
           console.error("Error fetching book or categories:", err)
         );
+
+      let selectedBookId = null;
+      let selectedLocation = null;
+
+      // 借りるボタンをクリックしたときに情報を取得
+      document.querySelectorAll(".borrow-button").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          selectedBookId = Number(btn.dataset.bookId);
+          selectedLocation = btn.dataset.location;
+          console.log(selectedBookId);
+          console.log(selectedLocation);
+        });
+      });
+
+      // 確定ボタンで borrow メソッドを実行
+      document.getElementById("confirmBorrow").addEventListener("click", () => {
+        console.log("いけてます");
+        debugger;
+        if (!selectedBookId || !selectedLocation) return;
+
+        const logData = {
+          bookId: selectedBookId,
+          returnLocation: selectedLocation,
+        };
+
+        fetch("http://localhost:3000/logs", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(logData),
+        })
+          .then((res) => {
+            if (!res.ok) throw new Error("ログ登録に失敗しました");
+            return res.json();
+          })
+          .then((data) => {
+            console.log("ログ登録成功:", data);
+            // モーダルを閉じる（Bootstrap 5）
+            const modal = bootstrap.Modal.getInstance(
+              document.getElementById("borrowModal")
+            );
+            modal.hide();
+            alert("借りる処理が完了しました！");
+          })
+          .catch((err) => {
+            console.error("Error posting log:", err);
+            alert("借りる処理に失敗しました");
+          });
+      });
 
       /**
        * あなたへのおすすめの本を表示
