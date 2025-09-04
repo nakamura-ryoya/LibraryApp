@@ -428,4 +428,4 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   paint(Number(input.value));
-});
+})();
