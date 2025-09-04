@@ -463,6 +463,19 @@ h1 {
 }
 
 /* =============================
+   mypageの本のタイトルリンクのホバー表現
+============================= */
+.review-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.review-link:hover {
+  color: blue;
+  text-decoration: underline;
+}
+
+/* =============================
    スクロールバーの調整
 ============================= */
 .scroll-container::-webkit-scrollbar {
