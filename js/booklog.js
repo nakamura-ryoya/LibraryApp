@@ -267,99 +267,118 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// ID：confirmReturnにクリックイベントを追加（確定ボタンを押したときの処理）
-document.getElementById("confirmReturn").addEventListener("click", function () {
-  // 選択したカードを特定
-  const activeCard = document.querySelector(".card[data-active='true']");
-  console.log(activeCard);
-  if (!activeCard) return;
+document.addEventListener("DOMContentLoaded", () => {
+  const ratingSelect = document.getElementById("rating");
+  const levelRadios = document.querySelectorAll("input[name='level']");
+  const confirmButton = document.getElementById("confirmReturn");
+  const ratingError = document.getElementById("ratingError");
+  const levelError = document.getElementById("levelError");
 
-  // 今日の日付を取得
-  const today = new Date();
-  const formattedDate =
-    today.getFullYear() +
-    "/" +
-    String(today.getMonth() + 1).padStart(2, "0") +
-    "/" +
-    String(today.getDate()).padStart(2, "0");
+  confirmButton.addEventListener("click", () => {
+    // --- バリデーション ---
+    const ratingSelected = ratingSelect.value !== "0";
+    const levelSelected = Array.from(levelRadios).some(
+      (radio) => radio.checked
+    );
 
-  // 返却日＋場所の表示を日付だけに置き換える
-  const returnInfoEl = activeCard.querySelector(".returnInfo");
+    let hasError = false;
 
-  // ユーザが入力した評価と難易度とコメントの取得
-  const rating = document.getElementById("rating").value;
-  const difficulty =
-    document.querySelector('input[name="level"]:checked')?.value || "";
-  const comment = document.getElementById("comment").value;
-  const bookId = parseInt(activeCard.getAttribute("data-book-id"));
-  const logId = parseInt(activeCard.getAttribute("data-log-id"));
+    if (!ratingSelected) {
+      ratingError.textContent = "評価（星）を選択してください。";
+      ratingError.style.display = "block";
+      hasError = true;
+    } else {
+      ratingError.textContent = "";
+      ratingError.style.display = "none";
+    }
 
-  // 最後のレビューIDを取得して新しいIDを決定（仮にAPIがIDを自動生成しない場合）
-  fetch("http://localhost:3000/reviews")
-    .then((response) => response.json())
-    .then((reviews) => {
-      const maxId =
-        reviews.length > 0 ? Math.max(...reviews.map((r) => r.id)) : 0;
-      const newId = maxId + 1;
-      const memberId = 7;
+    if (!levelSelected) {
+      levelError.textContent = "難易度を選択してください。";
+      levelError.style.display = "block";
+      hasError = true;
+    } else {
+      levelError.textContent = "";
+      levelError.style.display = "none";
+    }
 
-      // 新しいレビューオブジェクトを作成
-      const newReview = {
-        id: String(newId),
-        memberId: parseInt(memberId),
-        bookId: parseInt(bookId),
-        stars: parseInt(rating),
-        difficulty: parseInt(difficulty),
-        comment: comment,
-      };
+    // エラーがあれば処理中断
+    if (hasError) return;
 
-      // POSTリクエストでレビューを追加（reviewsに新規データ追加）
-      fetch("http://localhost:3000/reviews", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newReview),
-      })
-        .then((res) => {
-          if (!res.ok) throw new Error("レビューの追加に失敗しました");
-          return res.json();
-        })
-        .then((data) => {
-          console.log("レビュー追加成功:", data);
-          fetch(`http://localhost:3000/logs/${logId}`, {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              returnFlag: true,
-              returnDate: String(formattedDate),
-            }),
-          })
-            .then((res) => {
-              debugger;
-              if (!res.ok) throw new Error("ログの更新に失敗しました");
-              return res.json();
-            })
-            .then((updatedLog) => {
-              console.log("ログ更新成功:", updatedLog);
-              if (returnInfoEl) {
-                returnInfoEl.textContent = formattedDate;
-              }
-              const modal = bootstrap.Modal.getInstance(
-                document.getElementById("returnModal")
-              );
-              modal.hide();
-            })
-            .catch((error) => {
-              console.error("ログ更新エラー:", error);
-            });
-        })
-        .catch((error) => {
-          console.error("エラー:", error);
+    // --- レビュー送信処理 ---
+    const activeCard = document.querySelector(".card[data-active='true']");
+    if (!activeCard) return;
+
+    const today = new Date();
+    const formattedDate =
+      today.getFullYear() +
+      "/" +
+      String(today.getMonth() + 1).padStart(2, "0") +
+      "/" +
+      String(today.getDate()).padStart(2, "0");
+
+    const returnInfoEl = activeCard.querySelector(".returnInfo");
+    const rating = document.getElementById("rating").value;
+    const difficulty =
+      document.querySelector('input[name="level"]:checked')?.value || "";
+    const comment = document.getElementById("comment").value;
+    const bookId = parseInt(activeCard.getAttribute("data-book-id"));
+    const logId = parseInt(activeCard.getAttribute("data-log-id"));
+
+    fetch("http://localhost:3000/reviews")
+      .then((response) => response.json())
+      .then((reviews) => {
+        const maxId =
+          reviews.length > 0 ? Math.max(...reviews.map((r) => r.id)) : 0;
+        const newId = maxId + 1;
+        const memberId = 7;
+
+        const newReview = {
+          id: String(newId),
+          memberId: memberId,
+          bookId: bookId,
+          stars: parseInt(rating),
+          difficulty: parseInt(difficulty),
+          comment: comment,
+        };
+
+        return fetch("http://localhost:3000/reviews", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newReview),
         });
-    });
+      })
+      .then((res) => {
+        if (!res.ok) throw new Error("レビューの追加に失敗しました");
+        return res.json();
+      })
+      .then(() => {
+        return fetch(`http://localhost:3000/logs/${logId}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            returnFlag: true,
+            returnDate: formattedDate,
+          }),
+        });
+      })
+      .then((res) => {
+        if (!res.ok) throw new Error("ログの更新に失敗しました");
+        return res.json();
+      })
+      .then((updatedLog) => {
+        console.log("ログ更新成功:", updatedLog);
+        if (returnInfoEl) {
+          returnInfoEl.textContent = formattedDate;
+        }
+        const modal = bootstrap.Modal.getInstance(
+          document.getElementById("returnModal")
+        );
+        modal.hide();
+      })
+      .catch((error) => {
+        console.error("エラー:", error);
+      });
+  });
 });
 
 // =========================
@@ -403,53 +422,8 @@ document.getElementById("confirmReturn").addEventListener("click", function () {
   });
 
   paint(Number(input.value));
-})();
+});
 
 // =========================
 // 評価と難易度の入力チェックとモーダル閉じる処理
 // =========================
-document.addEventListener("DOMContentLoaded", () => {
-  const ratingSelect = document.getElementById("rating");
-  const levelRadios = document.querySelectorAll("input[name='level']");
-  const confirmButton = document.getElementById("confirmReturn");
-
-  const ratingError = document.getElementById("ratingError");
-  const levelError = document.getElementById("levelError");
-
-  confirmButton.addEventListener("click", () => {
-    const ratingSelected = ratingSelect.value !== "";
-    const levelSelected = Array.from(levelRadios).some(
-      (radio) => radio.checked
-    );
-
-    let hasError = false;
-
-    if (!ratingSelected) {
-      ratingError.textContent = "評価（星）を選択してください。";
-      ratingError.style.display = "block";
-      hasError = true;
-    } else {
-      ratingError.textContent = "";
-      ratingError.style.display = "none";
-    }
-
-    if (!levelSelected) {
-      levelError.textContent = "難易度を選択してください。";
-      levelError.style.display = "block";
-      hasError = true;
-    } else {
-      levelError.textContent = "";
-      levelError.style.display = "none";
-    }
-
-    if (hasError) return;
-
-    // ✅ 条件を満たした場合のみモーダルを閉じる
-    const modalElement = document.getElementById("returnModal");
-    const modalInstance = bootstrap.Modal.getInstance(modalElement);
-    modalInstance.hide();
-
-    // ここにレビュー送信処理などを記述
-    console.log("レビュー送信処理を実行します");
-  });
-});
