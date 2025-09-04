@@ -457,14 +457,15 @@
       const params = new URLSearchParams(window.location.search);
       const id = params.get("id"); // → "3"（文字列として取得される）
       const bookEndpoint = `http://localhost:3000/books/${id}`; // 例外処理は無
-
       const categoriesEndpoint = `http://localhost:3000/categories`;
+      const bookAllEndpoint = `http://localhost:3000/books`;
 
       Promise.all([
         fetch(bookEndpoint).then((res) => res.json()),
         fetch(categoriesEndpoint).then((res) => res.json()),
+        fetch(bookAllEndpoint).then((res) => res.json()),
       ])
-        .then(([bookData, categories]) => {
+        .then(([bookData, categories, booksData]) => {
           // タイトルを表示
           book = bookData;
           document.getElementById("bookTitle").textContent = book.title;
@@ -561,6 +562,63 @@
 
             libraryList.appendChild(li);
           });
+          // ここからレコメンド
+          const recommendedBooks = booksData.filter((b) => {
+            const bCategories = Array.isArray(b.category)
+              ? b.category.map((id) => Number(id))
+              : [Number(b.category)];
+
+            const sameLength = bCategories.length === categoryIds.length;
+            const sameContent = categoryIds.every((id) =>
+              bCategories.includes(id)
+            );
+
+            return sameLength && sameContent && b.id !== book.id;
+          });
+
+          const recommendedBooksContainer =
+            document.getElementById("recommendedBooks");
+          const recommendedSection = recommendedBooksContainer.parentElement;
+          if (recommendedBooks.length === 0) {
+            // おすすめがない場合はセクションを非表示
+            recommendedSection.style.display = "none";
+          } else {
+            // 表示する場合は初期化してカードを追加
+            recommendedBooksContainer.innerHTML = "";
+            recommendedBooks.forEach((books) => {
+              const bookCard = document.createElement("div");
+              bookCard.className = "card card-hover mb-4 shadow-sm border-0";
+              bookCard.style =
+                "min-width: 200px; max-width: 200px; height: 300px";
+
+              bookCard.innerHTML = `
+              <a href="?id=${books.id}" class="text-decoration-none text-reset">
+                  <img src="${books.image}" class="card-img-top" alt="${
+                books.title
+              }" style="height: 160px; object-fit: contain" />
+                  <div class="card-body d-flex flex-column justify-content-start p-2">
+                    <div>
+                      <h6 class="card-title mb-0 title-clamp-2">${
+                        books.title
+                      }</h6>
+                      <p class="card-text small text-muted mb-0 mt-1">${
+                        books.author
+                      }</p>
+                    </div>
+                    <p class="card-text mb-0">
+                      <small class="text-warning">
+                        ${generateStarRating(books.stars)}
+                      </small>
+                    </p>
+                  </div>
+                  </a>
+                `;
+              recommendedBooksContainer.appendChild(bookCard);
+            });
+
+            // 念のため表示を有効化
+            recommendedSection.style.display = "block";
+          }
         })
         .catch((err) =>
           console.error("Error fetching book or categories:", err)
@@ -739,48 +797,6 @@
         const bsToast = new bootstrap.Toast(toast, { delay: 3000 });
         bsToast.show();
       }
-
-      /**
-       * あなたへのおすすめの本を表示
-       * @param {number} loginMember - ログイン中の会員ID
-       */
-      const booksEndpoint = `http://localhost:3000/books`;
-
-      fetch(booksEndpoint)
-        .then((res) => res.json())
-        .then((books) => {
-          const recommendedBooksContainer =
-            document.getElementById("recommendedBooks");
-          books.forEach((book) => {
-            const bookCard = document.createElement("div");
-            bookCard.className = "card card-hover mb-4 shadow-sm border-0";
-            bookCard.style =
-              "min-width: 200px; max-width: 200px; height: 300px";
-
-            bookCard.innerHTML = `
-                    <img src="${book.image}" class="card-img-top" alt="${
-              book.title
-            }" style="height: 160px; object-fit: contain" />
-                    <div class="card-body d-flex flex-column justify-content-start p-2">
-                      <div>
-                        <h6 class="card-title mb-0 title-clamp-2">${
-                          book.title
-                        }</h6>
-                        <p class="card-text small text-muted mb-0 mt-1">${
-                          book.author
-                        }</p>
-                      </div>
-                      <p class="card-text mb-0">
-                        <small class="text-warning">
-                          ${generateStarRating(book.stars)}
-                        </small>
-                      </p>
-                    </div>
-                  `;
-            recommendedBooksContainer.appendChild(bookCard);
-          });
-        })
-        .catch((err) => console.error("Error fetching books data:", err));
 
       /**
        * レビュー一覧と平均評価を表示
