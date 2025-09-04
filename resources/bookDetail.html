@@ -336,6 +336,10 @@
                 ><span id="bookAuthor">Author</span>
               </p>
               <p class="card-text">
+                <strong><i class="bi bi-person"></i> 訳者：</strong
+                ><span id="bookTranslator">Translator</span>
+              </p>
+              <p class="card-text">
                 <strong><i class="bi bi-diagram-2"></i> ISBN：</strong>
                 <span id="bookIsbn">ISBN</span>
               </p>
@@ -499,12 +503,24 @@
           book = bookData;
           document.getElementById("bookTitle").textContent = book.title;
           document.getElementById("bookAuthor").textContent = book.author;
+          document.getElementById("bookTranslator").textContent =
+            book.translator;
           document.getElementById("bookIsbn").textContent = book.isbn;
           document.getElementById("bookYear").textContent = book.year;
           document.getElementById("bookDescription").textContent =
             book.description;
           document.getElementById("bookImage").src = book.image;
           document.getElementById("bookImage").alt = book.title;
+
+          //訳者非表示
+          const translatorElement = document.getElementById("bookTranslator");
+          const translatorBlock = translatorElement.parentElement;
+
+          if (book.translator && book.translator.trim() !== "") {
+            translatorElement.textContent = book.translator;
+          } else {
+            translatorBlock.style.display = "none";
+          }
 
           const categoryIds = Array.isArray(book.category)
             ? book.category
