@@ -602,3 +602,32 @@ a.text-decoration-none:active {
   width: 750px; /* 任意のpx指定 */
   max-width: 90vw; /* 画面幅に応じて制限 */
 }
+/* =============================
+   スターセレクト
+============================= */
+.rating {
+  display: inline-flex;
+  gap: 0.25rem;
+}
+.star {
+  font-size: 2.2rem;
+  line-height: 1;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.2rem;
+  color: #ccc; /* 未選択 */
+  transition: transform 0.05s ease;
+}
+.star.active {
+  color: #f5b301;
+} /* 選択済み */
+.star:focus-visible {
+  outline: 2px solid #4a90e2;
+  border-radius: 0.4rem;
+}
+small.hint {
+  display: block;
+  color: #666;
+  margin-top: 0.25rem;
+}
