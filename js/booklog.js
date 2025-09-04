@@ -361,3 +361,46 @@ document.getElementById("confirmReturn").addEventListener("click", function () {
         });
     });
 });
+
+// =========================
+// 星評価 UI
+// =========================
+(function () {
+  const stars = Array.from(document.querySelectorAll(".star"));
+  const input = document.getElementById("rating");
+  const readout = document.getElementById("readout");
+
+  function paint(value) {
+    stars.forEach((s, i) => {
+      const on = i < value;
+      s.classList.toggle("active", on);
+      s.setAttribute("aria-checked", i + 1 === value ? "true" : "false");
+    });
+    input.value = value;
+    readout.textContent = value ? `${value} / 5` : "未選択";
+  }
+
+  stars.forEach((star) => {
+    const v = Number(star.dataset.value);
+    star.addEventListener("mouseenter", () => paint(v));
+    star.addEventListener("click", () => paint(v));
+    star.addEventListener("touchstart", () => paint(v), { passive: true });
+    star.addEventListener("focus", () => paint(v));
+  });
+
+  document.querySelector(".rating").addEventListener("keydown", (e) => {
+    let v = Number(input.value) || 0;
+    if (e.key === "ArrowRight") {
+      v = Math.min(5, v + 1);
+      paint(v);
+      e.preventDefault();
+    }
+    if (e.key === "ArrowLeft") {
+      v = Math.max(0, v - 1);
+      paint(v);
+      e.preventDefault();
+    }
+  });
+
+  paint(Number(input.value));
+})();
