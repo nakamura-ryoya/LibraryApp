@@ -252,7 +252,7 @@ Promise.all([
 
       // カードHTML
       const card = `
-        <div class="card card-hover search-card mb-4 shadow-sm border-0" style="cursor: pointer;">
+        <div class="card card-hover search-card mb-4 shadow-sm border-0" style="cursor: pointer" data-id="${book.id}">
           <div class="row g-0 align-items-stretch">
             <div class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end">
               <img src="${book.image}" class="img-fluid rounded" alt="蔵書画像" />
@@ -294,6 +294,23 @@ Promise.all([
         window.location.href = `/resources/booksearch.html${query}`;
       });
     });
+
+    // カードクリックで詳細ページへ遷移
+    document.querySelectorAll(".search-card").forEach((card) => {
+      card.addEventListener("click", (e) => {
+        // 借りる・貸出中ボタンやモーダル用の要素がクリックされた場合は除外
+        if (
+          e.target.closest(".badge-fixed") || // 貸出ステータスのボタン
+          e.target.closest("[data-bs-toggle]") // モーダルを開く要素
+        ) {
+          return; // 詳細画面に飛ばさない
+        }
+
+        const id = card.getAttribute("data-id");
+        window.location.href = `/resources/bookDetail.html?id=${id}`;
+      });
+    });
+
 
     // 最初の描画時にスタイル反映
     updateCategoryBadgeStyles();
