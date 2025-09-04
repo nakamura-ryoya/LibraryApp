@@ -223,10 +223,10 @@ document.addEventListener("DOMContentLoaded", () => {
                             <small class="text-muted text-center fw-semibold">返却日</small>
                             <h6 class="fw-bold text-center mt-2 mb-0">
                               <span class="returnInfo">
-                                ${log.returnDate || "ー"}<br/>（${
+                                ${log.returnDate || "ー"}</span><br/>（${
           log.returnLocation
         }）
-                              </span>
+                              
                             </h6>
                           </div>
 
@@ -293,6 +293,14 @@ document.getElementById("confirmReturn").addEventListener("click", function () {
   const comment = document.getElementById("comment").value;
   const bookId = parseInt(activeCard.getAttribute("data-book-id"));
   const logId = parseInt(activeCard.getAttribute("data-log-id"));
+
+  // UIを更新（例：ボタンを「返却済」に変更）
+  const btnContainer = activeCard.querySelector(".return-button").parentElement;
+  btnContainer.innerHTML = `
+        <span class="btn btn-outline-success mt-2 mt-sm-0">
+          返却済
+        </span>
+      `;
 
   // 最後のレビューIDを取得して新しいIDを決定（仮にAPIがIDを自動生成しない場合）
   fetch("http://localhost:3000/reviews")
