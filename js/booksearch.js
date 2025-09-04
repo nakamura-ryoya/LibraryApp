@@ -506,6 +506,18 @@ function renderLibraryList() {
   fetch("http://localhost:3000/books")
     .then((res) => res.json())
     .then((books) => {
+      const params = new URLSearchParams(window.location.search);
+      const tagIds = (params.get("tags") || "")
+      .split(",")
+      .map((id) => parseInt(id))
+      .filter((id) => !isNaN(id));
+
+    let filteredBooks = books;
+    if (tagIds.length > 0) {
+      filteredBooks = books.filter((book) =>
+        tagIds.every((tagId) => book.category.includes(tagId))
+      );
+    }
       filteredBooks = books; // 必要に応じてフィルタリング処理を追加
       renderBooks(filteredBooks, allCategories);
     })
