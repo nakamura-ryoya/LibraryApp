@@ -177,136 +177,168 @@
           </div>
         </div>
         <script>
-                const tagContainer = document.getElementById("tagContainer");
-                const badgeInput = document.getElementById("badgeInput");
-                const hiddenTags = document.getElementById("hiddenTags");
+                        const tagContainer = document.getElementById("tagContainer");
+                        const badgeInput = document.getElementById("badgeInput");
+                        const hiddenTags = document.getElementById("hiddenTags");
 
-                searchInput.addEventListener("focus", () => {
-                  tagContainer.style.display = "block";
-                });
+                        searchInput.addEventListener("focus", () => {
+                          tagContainer.style.display = "block";
+                        });
 
-                document.addEventListener("click", (event) => {
-                  const isClickInside =
-                    badgeInput.contains(event.target) ||
-                    tagContainer.contains(event.target);
-                  if (!isClickInside) {
-                    tagContainer.style.display = "none";
-                  }
-                });
+                        document.addEventListener("click", (event) => {
+                          const isClickInside =
+                            badgeInput.contains(event.target) ||
+                            tagContainer.contains(event.target);
+                          if (!isClickInside) {
+                            tagContainer.style.display = "none";
+                          }
+                        });
 
-                function updateHiddenTags() {
-                  const tags = Array.from(
-                    badgeInput.querySelectorAll(".tag-badge")
-                  ).map((b) => b.dataset.tag);
-                  hiddenTags.value = tags.join(" ");
-                }
+                        function updateHiddenTags() {
+                          const tags = Array.from(
+                            badgeInput.querySelectorAll(".tag-badge")
+                          ).map((b) => b.dataset.tag);
+                          hiddenTags.value = tags.join(" ");
+                        }
 
-                function updateTagButtonStyles() {
+                        function updateTagButtonStyles() {
+                          const selectedTags = Array.from(
+                            badgeInput.querySelectorAll(".tag-badge")
+                          ).map((b) => b.dataset.tag);
+
+                          document.querySelectorAll(".tag-btn").forEach((button) => {
+                            const tag = button.textContent.trim();
+                            if (selectedTags.includes(tag)) {
+                              button.classList.add("tag-btn-selected");
+                            } else {
+                              button.classList.remove("tag-btn-selected");
+                            }
+                          });
+                        }
+
+                        function toggleTagBadge(tag) {
+                          const existingBadge = Array.from(
+                            badgeInput.querySelectorAll(".tag-badge")
+                          ).find((b) => b.dataset.tag === tag);
+
+                          if (existingBadge) {
+                            existingBadge.remove();
+                          } else {
+                            const badge = document.createElement("span");
+                            badge.className =
+                              "badge rounded-pill badge-outline me-1 tag-badge";
+                            badge.dataset.tag = tag;
+                            badge.innerHTML = `${tag} <span class="ms-1 remove-btn" style="cursor:pointer;">&times;</span>`;
+
+                            badge
+                              .querySelector(".remove-btn")
+                              .addEventListener("click", (event) => {
+                                event.stopPropagation();
+                                badge.remove();
+                                updateHiddenTags();
+                                updateTagButtonStyles();
+                              });
+
+                            badgeInput.insertBefore(badge, searchInput);
+                          }
+
+                          updateHiddenTags();
+                          updateTagButtonStyles();
+                        }
+
+                        document.querySelectorAll(".tag-btn").forEach((button) => {
+                          button.addEventListener("click", () => {
+                            const tag = button.textContent.trim();
+                            toggleTagBadge(tag);
+                          });
+                        });
+                        searchInput.addEventListener("keydown", (event) => {
+                          if (
+                            event.key === "Backspace" &&
+                            searchInput.value === "" // 入力欄が空のとき
+                          ) {
+                            const tagBadges = badgeInput.querySelectorAll(".tag-badge");
+                            if (tagBadges.length > 0) {
+                              const lastBadge = tagBadges[tagBadges.length - 1];
+                              lastBadge.remove();
+                              updateHiddenTags();
+                              updateTagButtonStyles();
+                            }
+                          }
+                        });
+                        document
+                          .querySelector(".search-form")
+                          .addEventListener("submit", (event) => {
+                            event.preventDefault(); // デフォルトの送信を防止
+                            // タグ名とクエリパラメータのマッピング
+                            const tagQueryMap = {
+                              初心者向け: "1",
+                              中級者向け: "2",
+                              上級者向け: "3",
+                              文学・評論: "4",
+                              ビジネス: "5",
+                              AWS: "6",
+                              自己啓発: "7",
+                              暮らし・健康: "8",
+                              アート・デザイン: "9",
+                              インフラ系: "10",
+                              アプリ: "11",
+                              コンサル: "12",
+                              営業: "13",
+                              マネジメント: "14",
+                              データ: "15",
+                              // 必要に応じて追加
+                            };
+                            // 選択されたタグを取得
                   const selectedTags = Array.from(
-                    badgeInput.querySelectorAll(".tag-badge")
-                  ).map((b) => b.dataset.tag);
+                    document.querySelectorAll(".tag-badge")
+                  ).map((badge) => badge.dataset.tag);
 
-                  document.querySelectorAll(".tag-btn").forEach((button) => {
-                    const tag = button.textContent.trim();
-                    if (selectedTags.includes(tag)) {
-                      button.classList.add("tag-btn-selected");
-                    } else {
-                      button.classList.remove("tag-btn-selected");
-                    }
-                  });
+                  // 対応するIDを取得
+                  const selectedIds = selectedTags
+                    .map((tag) => tagQueryMap[tag])
+                    .filter((id) => id !== undefined);
+
+                  // クエリパラメータを生成
+                  const queryString = selectedIds.length > 0 ? `?tags=${selectedIds.join(",")}` : "";
+
+                  // URLを設定して送信
+                  const form = event.target;
+                  const targetUrl = `/resources/booksearch.html${queryString}`;
+                  window.location.href = targetUrl;
+                          });
+                    document.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search);
+            const tagsParam = params.get("tags");
+
+            if (tagsParam) {
+              const selectedIds = tagsParam.split(",");
+              const idTagMap = {
+                1: "初心者向け",
+                2: "中級者向け",
+                3: "上級者向け",
+                4: "文学・評論",
+                5: "ビジネス",
+                6: "AWS",
+                7: "自己啓発",
+                8: "暮らし・健康",
+                9: "アート・デザイン",
+                10: "インフラ系",
+                11: "アプリ",
+                12: "コンサル",
+                13: "営業",
+                14: "マネジメント",
+                15: "データ"
+              };
+
+              selectedIds.forEach((id) => {
+                const tag = idTagMap[id];
+                if (tag) {
+                  toggleTagBadge(tag); // 既存関数を再利用
                 }
-
-                function toggleTagBadge(tag) {
-                  const existingBadge = Array.from(
-                    badgeInput.querySelectorAll(".tag-badge")
-                  ).find((b) => b.dataset.tag === tag);
-
-                  if (existingBadge) {
-                    existingBadge.remove();
-                  } else {
-                    const badge = document.createElement("span");
-                    badge.className =
-                      "badge rounded-pill badge-outline me-1 tag-badge";
-                    badge.dataset.tag = tag;
-                    badge.innerHTML = `${tag} <span class="ms-1 remove-btn" style="cursor:pointer;">&times;</span>`;
-
-                    badge
-                      .querySelector(".remove-btn")
-                      .addEventListener("click", (event) => {
-                        event.stopPropagation();
-                        badge.remove();
-                        updateHiddenTags();
-                        updateTagButtonStyles();
-                      });
-
-                    badgeInput.insertBefore(badge, searchInput);
-                  }
-
-                  updateHiddenTags();
-                  updateTagButtonStyles();
-                }
-
-                document.querySelectorAll(".tag-btn").forEach((button) => {
-                  button.addEventListener("click", () => {
-                    const tag = button.textContent.trim();
-                    toggleTagBadge(tag);
-                  });
-                });
-                searchInput.addEventListener("keydown", (event) => {
-                  if (
-                    event.key === "Backspace" &&
-                    searchInput.value === "" // 入力欄が空のとき
-                  ) {
-                    const tagBadges = badgeInput.querySelectorAll(".tag-badge");
-                    if (tagBadges.length > 0) {
-                      const lastBadge = tagBadges[tagBadges.length - 1];
-                      lastBadge.remove();
-                      updateHiddenTags();
-                      updateTagButtonStyles();
-                    }
-                  }
-                });
-                document
-                  .querySelector(".search-form")
-                  .addEventListener("submit", (event) => {
-                    event.preventDefault(); // デフォルトの送信を防止
-                    // タグ名とクエリパラメータのマッピング
-                    const tagQueryMap = {
-                      初心者向け: "1",
-                      中級者向け: "2",
-                      上級者向け: "3",
-                      文学・評論: "4",
-                      ビジネス: "5",
-                      AWS: "6",
-                      自己啓発: "7",
-                      暮らし・健康: "8",
-                      アート・デザイン: "9",
-                      インフラ系: "10",
-                      アプリ: "11",
-                      コンサル: "12",
-                      営業: "13",
-                      マネジメント: "14",
-                      データ: "15",
-                      // 必要に応じて追加
-                    };
-                    // 選択されたタグを取得
-          const selectedTags = Array.from(
-            document.querySelectorAll(".tag-badge")
-          ).map((badge) => badge.dataset.tag);
-
-          // 対応するIDを取得
-          const selectedIds = selectedTags
-            .map((tag) => tagQueryMap[tag])
-            .filter((id) => id !== undefined);
-
-          // クエリパラメータを生成
-          const queryString = selectedIds.length > 0 ? `?tags=${selectedIds.join(",")}` : "";
-
-          // URLを設定して送信
-          const form = event.target;
-          const targetUrl = `/resources/booksearch.html${queryString}`;
-          window.location.href = targetUrl;
-                  });
+              });
+            }
+          });
         </script>
 
         <!-- 右側：貸出履歴表示 -->
@@ -474,205 +506,293 @@
       });
     </script>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const badges = document.querySelectorAll(".badge");
+                  document.addEventListener("DOMContentLoaded", function () {
+                    const badges = document.querySelectorAll(".badge");
 
-        badges.forEach(function (badge) {
-          if (badge.textContent.trim() === "初心者向け") {
-            badge.style.cursor = "pointer"; // 見た目でクリックできることを示す
-            badge.addEventListener("click", function () {
-              window.location.href = "booksearchEasy.html";
-            });
-          }
-          if (badge.textContent.trim() === "AWS") {
-            badge.style.cursor = "pointer"; // 見た目でクリックできることを示す
-            badge.addEventListener("click", function () {
-              window.location.href = "booksearch.html";
-            });
-          }
+                    badges.forEach(function (badge) {
+                      if (badge.textContent.trim() === "初心者向け") {
+                        badge.style.cursor = "pointer"; // 見た目でクリックできることを示す
+                        badge.addEventListener("click", function () {
+                          window.location.href = "booksearchEasy.html";
+                        });
+                      }
+                      if (badge.textContent.trim() === "AWS") {
+                        badge.style.cursor = "pointer"; // 見た目でクリックできることを示す
+                        badge.addEventListener("click", function () {
+                          window.location.href = "booksearch.html";
+                        });
+                      }
+                    });
+                  });
+
+                  /**
+                   * 検索結果の書籍を表示
+                   */
+                  // URLパラメータからカテゴリIDを取得
+                  const params = new URLSearchParams(window.location.search);
+                  const tagIds = (params.get("tags") || "")
+                    .split(",")
+                    .map((id) => parseInt(id))
+                    .filter((id) => !isNaN(id));
+
+                  // 書籍データを取得してカードを生成
+                  Promise.all([
+                    fetch("http://localhost:3000/books").then((res) => res.json()),
+                    fetch("http://localhost:3000/categories").then((res) => res.json()),
+                  ])
+                    .then(([books, categories]) => {
+                      const container = document.getElementById("searchResult");
+                      container.innerHTML = "";
+
+                      // categories を id: name のマップにする
+                      const categoryMap = {};
+                      categories.forEach((cat) => {
+                        categoryMap[cat.id] = cat.category;
+                      });
+
+                      // 🔹 選択されたタグIDをすべて含む本だけ残す (AND検索)
+                      let filteredBooks = books;
+                      if (tagIds.length > 0) {
+                        filteredBooks = books.filter((book) =>
+                          tagIds.every((tagId) => book.category.includes(tagId))
+                        );
+                      }
+
+                      filteredBooks.forEach((book) => {
+                        // 星アイコン
+                        const stars = [];
+                        const fullStars = Math.floor(book.stars);
+                        const hasHalf = book.stars % 1 !== 0;
+
+                        for (let i = 0; i < fullStars; i++) {
+                          stars.push('<i class="bi bi-star-fill text-warning"></i>');
+                        }
+                        if (hasHalf)
+                          stars.push('<i class="bi bi-star-half text-warning"></i>');
+                        while (stars.length < 5) {
+                          stars.push('<i class="bi bi-star text-warning"></i>');
+                        }
+
+                        // 貸出状況（-1は非表示）
+                        const libraryStatus = [
+                          { name: "虎ノ門", status: book.library1 },
+                          { name: "新川", status: book.library2 },
+                          { name: "みなとみらい", status: book.library3 },
+                        ]
+                          .filter((lib) => lib.status !== "-1")
+                          .map(
+                            (lib) => `
+                      <div class="d-flex justify-content-between align-items-center border-bottom py-2">
+                        <span>${lib.name}</span>
+                        <span class="badge ${
+                          lib.status === "1" ? "bg-success" : "bg-danger"
+                        } badge-fixed"
+                          ${
+                            lib.status === "1"
+                              ? 'data-bs-toggle="modal" data-bs-target="#borrowModal"'
+                              : ""
+                          }>
+                          ${lib.status === "1" ? "借りる" : "貸出中"}
+                        </span>
+                      </div>
+                    `
+                          )
+                          .join("");
+
+                        // カテゴリ（複数対応）
+                        const categoryBadges = (book.category || [])
+                          .map((catId) => {
+                            const name = categoryMap[catId];
+                            return name
+                              ? `<span class="badge rounded-pill badge-outline me-1 category-badge"
+                            data-tag="${name}" data-id="${catId}">${name}</span>`
+                              : "";
+                          })
+                          .join("");
+
+                        // カードHTML
+                        const card = `
+                    <div class="card card-hover search-card mb-4 shadow-sm border-0"
+                          onclick="window.location.href='bookDetail.html?id=${book.id}'"
+                          style="cursor: pointer;">
+                      <div class="row g-0 align-items-stretch">
+                        <!-- 画像 -->
+                        <div class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end">
+                          <img src="${
+                            book.image
+                          }" class="img-fluid rounded" alt="蔵書画像" />
+                        </div>
+
+                        <!-- タイトル・評価・カテゴリ -->
+                        <div class="col-md-6 p-3 border-end text-block">
+                          <h4 class="fw-bold mb-2 title-clamp-2">${book.title}</h4>
+                          <p class="rating mb-2">
+                            <strong>評価：</strong>
+                            ${stars.join("")}
+                            <span class="text-muted small mx-1">${book.stars} (${
+                          book.reviews
+                        }件)</span>
+                          </p>
+                          <p class="card-text tag-group">${categoryBadges}</p>
+                        </div>
+
+                        <!-- 貸出状況 -->
+                        <div class="col-md-3 d-flex flex-column justify-content-center p-3">
+                          ${libraryStatus}
+                        </div>
+                      </div>
+                    </div>
+                  `;
+
+                        container.insertAdjacentHTML("beforeend", card);
+                      });
+
+                      // 該当書籍なし
+                      if (filteredBooks.length === 0) {
+                        container.innerHTML =
+                          "<p class='text-muted'>該当する本が見つかりませんでした。</p>";
+                      }
+
+            // カード描画後に選択済みタグを反映する関数
+            function updateCategoryBadgeStyles() {
+              const selectedTags = Array.from(
+                document.querySelectorAll(".tag-badge")
+              ).map((b) => b.dataset.tag);
+
+              document.querySelectorAll(".category-badge").forEach((badge) => {
+                if (selectedTags.includes(badge.dataset.tag)) {
+                  badge.classList.remove("badge-outline");
+                  badge.classList.add("bg-primary", "text-white");
+                } else {
+                  badge.classList.add("badge-outline");
+                  badge.classList.remove("bg-primary", "text-white");
+                }
+              });
+            }
+
+                  // カード生成が終わったあとにイベントを付与
+                  document.querySelectorAll(".category-badge").forEach((badge) => {
+                    badge.addEventListener("click", (event) => {
+                      event.stopPropagation(); // カードクリック遷移を防止
+                      const tag = badge.dataset.tag;
+                      toggleTagBadge(tag); // 検索窓に追加
+
+                      // 現在のタグ一覧をIDに変換
+                      const tagQueryMap = {
+                        初心者向け: "1",
+                        中級者向け: "2",
+                        上級者向け: "3",
+                        文学・評論: "4",
+                        ビジネス: "5",
+                        AWS: "6",
+                        自己啓発: "7",
+                        暮らし・健康: "8",
+                        アート・デザイン: "9",
+                        インフラ系: "10",
+                        アプリ: "11",
+                        コンサル: "12",
+                        営業: "13",
+                        マネジメント: "14",
+                        データ: "15",
+                      };
+
+                      const selectedTags = Array.from(
+                        document.querySelectorAll(".tag-badge")
+                      ).map((b) => b.dataset.tag);
+
+                      const selectedIds = selectedTags
+                        .map((t) => tagQueryMap[t])
+                        .filter((id) => id !== undefined);
+
+                      const queryString =
+                        selectedIds.length > 0 ? `?tags=${selectedIds.join(",")}` : "";
+
+                      // 即時リロード（再検索）
+                      window.location.href = `/resources/booksearch.html${queryString}`;
+                    });
+                  });
+
+      // カード生成が終わったあとにイベントを付与
+      document.querySelectorAll(".category-badge").forEach((badge) => {
+        badge.addEventListener("click", (event) => {
+          event.stopPropagation();
+          const tag = badge.dataset.tag;
+          toggleTagBadge(tag);
+
+          // タグ追加後にスタイル更新
+          updateCategoryBadgeStyles();
+
+          // 遷移処理
+          const selectedTags = Array.from(
+            document.querySelectorAll(".tag-badge")
+          ).map((b) => b.dataset.tag);
+          const selectedIds = selectedTags
+            .map((t) => tagQueryMap[t])
+            .filter((id) => id !== undefined);
+          const queryString =
+            selectedIds.length > 0 ? `?tags=${selectedIds.join(",")}` : "";
+          window.location.href = `/resources/booksearch.html${queryString}`;
         });
       });
 
-      /**
-       * 検索結果の書籍を表示
-       */
-      // URLパラメータからカテゴリIDを取得
-      const params = new URLSearchParams(window.location.search);
-      const tagIds = (params.get("tags") || "")
-        .split(",")
-        .map((id) => parseInt(id))
-        .filter((id) => !isNaN(id));
+      // 最初の描画時点でも反映
+      updateCategoryBadgeStyles();
+                          })
+                          .catch((err) => console.error("データ取得エラー:", err));
 
-      // 書籍データを取得してカードを生成
-      Promise.all([
-        fetch("http://localhost:3000/books").then((res) => res.json()),
-        fetch("http://localhost:3000/categories").then((res) => res.json()),
-      ])
-        .then(([books, categories]) => {
-          const container = document.getElementById("searchResult");
-          container.innerHTML = "";
+                        /**
+                         * ログイン中のメンバーを表示
+                         */
+                        const memberId = 7;
+                        const booksEndpoint = `http://localhost:3000/members/${memberId}`;
+                        fetch(booksEndpoint)
+                          .then((res) => res.json())
+                          .then((member) => {
+                            document.getElementById("loginMember").textContent = member.name;
+                          });
 
-          // categories を id: name のマップにする
-          const categoryMap = {};
-          categories.forEach((cat) => {
-            categoryMap[cat.id] = cat.category;
-          });
+                        /**
+                         * 検索結果のカテゴリ表示
+                         */
+                        fetch("http://localhost:3000/categories")
+                          .then((res) => res.json())
+                          .then((categories) => {
+                            const params = new URLSearchParams(window.location.search);
+                            const tagIds = (params.get("tags") || "")
+                              .split(",")
+                              .map((id) => parseInt(id, 10))
+                              .filter((id) => !isNaN(id));
 
-          // 🔹 選択されたタグIDをすべて含む本だけ残す (AND検索)
-          let filteredBooks = books;
-          if (tagIds.length > 0) {
-            filteredBooks = books.filter((book) =>
-              tagIds.every((tagId) => book.category.includes(tagId))
-            );
-          }
+                            const selectedNames = categories
+                              .filter((cat) => tagIds.includes(Number(cat.id))) // 🔹ここを修正
+                              .map((cat) => `「${cat.category}」`);
 
-          filteredBooks.forEach((book) => {
-            // 星アイコン
-            const stars = [];
-            const fullStars = Math.floor(book.stars);
-            const hasHalf = book.stars % 1 !== 0;
+                            document.getElementById("selectedCategory").textContent =
+                              selectedNames.join("") || "すべて";
+                          });
 
-            for (let i = 0; i < fullStars; i++) {
-              stars.push('<i class="bi bi-star-fill text-warning"></i>');
-            }
-            if (hasHalf)
-              stars.push('<i class="bi bi-star-half text-warning"></i>');
-            while (stars.length < 5) {
-              stars.push('<i class="bi bi-star text-warning"></i>');
-            }
+                        /**
+                         * 表示件数
+                         */
+                        fetch("http://localhost:3000/books")
+                          .then((res) => res.json())
+                          .then((books) => {
+                            const params = new URLSearchParams(window.location.search);
+                            const tagIds = (params.get("tags") || "")
+                              .split(",")
+                              .map((id) => parseInt(id))
+                              .filter((id) => !isNaN(id));
 
-            // 貸出状況（-1は非表示）
-            const libraryStatus = [
-              { name: "虎ノ門", status: book.library1 },
-              { name: "新川", status: book.library2 },
-              { name: "みなとみらい", status: book.library3 },
-            ]
-              .filter((lib) => lib.status !== "-1")
-              .map(
-                (lib) => `
-      <div class="d-flex justify-content-between align-items-center border-bottom py-2">
-        <span>${lib.name}</span>
-        <span class="badge ${
-          lib.status === "1" ? "bg-success" : "bg-danger"
-        } badge-fixed"
-          ${
-            lib.status === "1"
-              ? 'data-bs-toggle="modal" data-bs-target="#borrowModal"'
-              : ""
-          }>
-          ${lib.status === "1" ? "借りる" : "貸出中"}
-        </span>
-      </div>
-    `
-              )
-              .join("");
+                            let filteredBooks = books;
+                            if (tagIds.length > 0) {
+                              filteredBooks = books.filter((book) =>
+                                tagIds.every((tagId) => book.category.includes(tagId))
+                              );
+                            }
 
-            // カテゴリ（複数対応）
-            const categoryBadges = (book.category || [])
-              .map((catId) => {
-                const name = categoryMap[catId];
-                return name
-                  ? `<span class="badge rounded-pill badge-outline me-1">${name}</span>`
-                  : "";
-              })
-              .join("");
-
-            // カードHTML
-            const card = `
-    <div class="card card-hover search-card mb-4 shadow-sm border-0"
-         onclick="window.location.href='bookDetail.html?id=${book.id}'"
-         style="cursor: pointer;">
-      <div class="row g-0 align-items-stretch">
-        <!-- 画像 -->
-        <div class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end">
-          <img src="${book.image}" class="img-fluid rounded" alt="蔵書画像" />
-        </div>
-
-        <!-- タイトル・評価・カテゴリ -->
-        <div class="col-md-6 p-3 border-end text-block">
-          <h4 class="fw-bold mb-2 title-clamp-2">${book.title}</h4>
-          <p class="rating mb-2">
-            <strong>評価：</strong>
-            ${stars.join("")}
-            <span class="text-muted small mx-1">${book.stars} (${
-              book.reviews
-            }件)</span>
-          </p>
-          <p class="card-text tag-group">${categoryBadges}</p>
-        </div>
-
-        <!-- 貸出状況 -->
-        <div class="col-md-3 d-flex flex-column justify-content-center p-3">
-          ${libraryStatus}
-        </div>
-      </div>
-    </div>
-  `;
-
-            container.insertAdjacentHTML("beforeend", card);
-          });
-
-          // 該当書籍なし
-          if (filteredBooks.length === 0) {
-            container.innerHTML =
-              "<p class='text-muted'>該当する本が見つかりませんでした。</p>";
-          }
-        })
-        .catch((err) => console.error("データ取得エラー:", err));
-
-      /**
-       * ログイン中のメンバーを表示
-       */
-      const memberId = 7;
-      const booksEndpoint = `http://localhost:3000/members/${memberId}`;
-      fetch(booksEndpoint)
-        .then((res) => res.json())
-        .then((member) => {
-          document.getElementById("loginMember").textContent = member.name;
-        });
-
-      /**
-       * 検索結果のカテゴリ表示
-       */
-      fetch("http://localhost:3000/categories")
-        .then((res) => res.json())
-        .then((categories) => {
-          const params = new URLSearchParams(window.location.search);
-          const tagIds = (params.get("tags") || "")
-            .split(",")
-            .map((id) => parseInt(id, 10))
-            .filter((id) => !isNaN(id));
-
-          const selectedNames = categories
-            .filter((cat) => tagIds.includes(Number(cat.id))) // 🔹ここを修正
-            .map((cat) => `「${cat.category}」`);
-
-          document.getElementById("selectedCategory").textContent =
-            selectedNames.join("") || "すべて";
-        });
-
-      /**
-       * 表示件数
-       */
-      fetch("http://localhost:3000/books")
-        .then((res) => res.json())
-        .then((books) => {
-          const params = new URLSearchParams(window.location.search);
-          const tagIds = (params.get("tags") || "")
-            .split(",")
-            .map((id) => parseInt(id))
-            .filter((id) => !isNaN(id));
-
-          let filteredBooks = books;
-          if (tagIds.length > 0) {
-            filteredBooks = books.filter((book) =>
-              tagIds.every((tagId) => book.category.includes(tagId))
-            );
-          }
-
-          document.getElementById("resultBooksNumber").textContent =
-            filteredBooks.length;
-        });
+                            document.getElementById("resultBooksNumber").textContent =
+                              filteredBooks.length;
+                          });
     </script>
   </body>
 </html>
