@@ -246,6 +246,40 @@ function renderBooks(books, categories) {
       })
       .join("");
 
+
+// お気に入りに追加or削除を絶対に切り替える！
+      document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".favorite-btn, .remove-favorite");
+  if (!btn) return;
+
+  e.stopPropagation(); // カード遷移を防ぐ
+  const bookId = btn.dataset.id;
+  const favoritesKey = "favorites";
+  let favorites = JSON.parse(localStorage.getItem(favoritesKey)) || [];
+
+  const isFavorite = favorites.includes(bookId);
+
+  if (isFavorite) {
+    // 削除処理
+    favorites = favorites.filter((id) => id !== bookId);
+    localStorage.setItem(favoritesKey, JSON.stringify(favorites));
+
+    // ボタンを「追加」に切り替え
+    btn.innerHTML = `<i class="bi bi-heart"></i> お気に入りに追加`;
+    btn.classList.remove("btn-outline-secondary", "remove-favorite");
+    btn.classList.add("btn-outline-danger", "favorite-btn");
+  } else {
+    // 追加処理
+    favorites.push(bookId);
+    localStorage.setItem(favoritesKey, JSON.stringify(favorites));
+
+    // ボタンを「削除」に切り替え
+    btn.innerHTML = `<i class="bi bi-x"></i> お気に入りから削除`;
+    btn.classList.remove("btn-outline-danger", "favorite-btn");
+    btn.classList.add("btn-outline-secondary", "remove-favorite");
+  }
+});
+
       // お気に入り追加or削除
       const favoritesKey = "favorites";
 let favorites = JSON.parse(localStorage.getItem(favoritesKey)) || [];
