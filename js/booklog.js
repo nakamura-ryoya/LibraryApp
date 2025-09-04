@@ -404,3 +404,52 @@ document.getElementById("confirmReturn").addEventListener("click", function () {
 
   paint(Number(input.value));
 })();
+
+// =========================
+// 評価と難易度の入力チェックとモーダル閉じる処理
+// =========================
+document.addEventListener("DOMContentLoaded", () => {
+  const ratingSelect = document.getElementById("rating");
+  const levelRadios = document.querySelectorAll("input[name='level']");
+  const confirmButton = document.getElementById("confirmReturn");
+
+  const ratingError = document.getElementById("ratingError");
+  const levelError = document.getElementById("levelError");
+
+  confirmButton.addEventListener("click", () => {
+    const ratingSelected = ratingSelect.value !== "";
+    const levelSelected = Array.from(levelRadios).some(
+      (radio) => radio.checked
+    );
+
+    let hasError = false;
+
+    if (!ratingSelected) {
+      ratingError.textContent = "評価（星）を選択してください。";
+      ratingError.style.display = "block";
+      hasError = true;
+    } else {
+      ratingError.textContent = "";
+      ratingError.style.display = "none";
+    }
+
+    if (!levelSelected) {
+      levelError.textContent = "難易度を選択してください。";
+      levelError.style.display = "block";
+      hasError = true;
+    } else {
+      levelError.textContent = "";
+      levelError.style.display = "none";
+    }
+
+    if (hasError) return;
+
+    // ✅ 条件を満たした場合のみモーダルを閉じる
+    const modalElement = document.getElementById("returnModal");
+    const modalInstance = bootstrap.Modal.getInstance(modalElement);
+    modalInstance.hide();
+
+    // ここにレビュー送信処理などを記述
+    console.log("レビュー送信処理を実行します");
+  });
+});
