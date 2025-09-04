@@ -81,10 +81,10 @@ function updateCategoryBadgeStyles() {
   document.querySelectorAll(".category-badge").forEach((badge) => {
     if (selectedTags.includes(badge.dataset.tag)) {
       badge.classList.remove("badge-outline");
-      badge.classList.add("bg-primary", "text-white");
+      badge.classList.add("tag-btn-selected", "text-white");
     } else {
       badge.classList.add("badge-outline");
-      badge.classList.remove("bg-primary", "text-white");
+      badge.classList.remove("tag-btn-selected", "text-white");
     }
   });
 }

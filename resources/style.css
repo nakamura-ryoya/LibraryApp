@@ -577,9 +577,9 @@ favorite-title {
 }
 
 .tag-btn-selected {
-  background-color: #0d6efd; /* Bootstrapのprimary色 */
+  background-color: #333; /* Bootstrapのprimary色 */
   color: white;
-  border-color: #0d6efd;
+  border-color: #333;
 }
 
 a.text-decoration-none {
