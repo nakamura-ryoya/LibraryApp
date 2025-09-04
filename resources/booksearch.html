@@ -37,22 +37,20 @@
             ></i>
           </a>
         </div>
-        <!-- 中央：検索フォーム（伸縮対応） -->
+
+        <!-- 中央：検索フォーム -->
         <div class="col-12 col-md-6 position-relative px-2">
-          <!-- 入力欄をdivに変更し、hidden inputを追加 -->
           <form
             class="d-flex search-form"
             role="search"
             action="/resources/booksearch.html"
           >
-            <!-- バッジ表示領域と実際の入力欄を分ける -->
             <div
               id="badgeInput"
               class="form-control me-2 d-flex flex-wrap align-items-center"
               style="min-height: 38px; cursor: text"
               onclick="searchInput.focus()"
             >
-              <!-- バッジがここに追加される -->
               <input
                 id="searchInput"
                 type="text"
@@ -67,7 +65,7 @@
             </button>
           </form>
 
-          <!-- タグボタン表示 -->
+          <!-- タグ選択エリア -->
           <div
             id="tagContainer"
             class="bg-light border rounded p-3 mt-2 shadow-sm"
@@ -176,174 +174,39 @@
             </div>
           </div>
         </div>
-        <script>
-                const tagContainer = document.getElementById("tagContainer");
-                const badgeInput = document.getElementById("badgeInput");
-                const hiddenTags = document.getElementById("hiddenTags");
 
-                searchInput.addEventListener("focus", () => {
-                  tagContainer.style.display = "block";
-                });
-
-                document.addEventListener("click", (event) => {
-                  const isClickInside =
-                    badgeInput.contains(event.target) ||
-                    tagContainer.contains(event.target);
-                  if (!isClickInside) {
-                    tagContainer.style.display = "none";
-                  }
-                });
-
-                function updateHiddenTags() {
-                  const tags = Array.from(
-                    badgeInput.querySelectorAll(".tag-badge")
-                  ).map((b) => b.dataset.tag);
-                  hiddenTags.value = tags.join(" ");
-                }
-
-                function updateTagButtonStyles() {
-                  const selectedTags = Array.from(
-                    badgeInput.querySelectorAll(".tag-badge")
-                  ).map((b) => b.dataset.tag);
-
-                  document.querySelectorAll(".tag-btn").forEach((button) => {
-                    const tag = button.textContent.trim();
-                    if (selectedTags.includes(tag)) {
-                      button.classList.add("tag-btn-selected");
-                    } else {
-                      button.classList.remove("tag-btn-selected");
-                    }
-                  });
-                }
-
-                function toggleTagBadge(tag) {
-                  const existingBadge = Array.from(
-                    badgeInput.querySelectorAll(".tag-badge")
-                  ).find((b) => b.dataset.tag === tag);
-
-                  if (existingBadge) {
-                    existingBadge.remove();
-                  } else {
-                    const badge = document.createElement("span");
-                    badge.className =
-                      "badge rounded-pill badge-outline me-1 tag-badge";
-                    badge.dataset.tag = tag;
-                    badge.innerHTML = `${tag} <span class="ms-1 remove-btn" style="cursor:pointer;">&times;</span>`;
-
-                    badge
-                      .querySelector(".remove-btn")
-                      .addEventListener("click", (event) => {
-                        event.stopPropagation();
-                        badge.remove();
-                        updateHiddenTags();
-                        updateTagButtonStyles();
-                      });
-
-                    badgeInput.insertBefore(badge, searchInput);
-                  }
-
-                  updateHiddenTags();
-                  updateTagButtonStyles();
-                }
-
-                document.querySelectorAll(".tag-btn").forEach((button) => {
-                  button.addEventListener("click", () => {
-                    const tag = button.textContent.trim();
-                    toggleTagBadge(tag);
-                  });
-                });
-                searchInput.addEventListener("keydown", (event) => {
-                  if (
-                    event.key === "Backspace" &&
-                    searchInput.value === "" // 入力欄が空のとき
-                  ) {
-                    const tagBadges = badgeInput.querySelectorAll(".tag-badge");
-                    if (tagBadges.length > 0) {
-                      const lastBadge = tagBadges[tagBadges.length - 1];
-                      lastBadge.remove();
-                      updateHiddenTags();
-                      updateTagButtonStyles();
-                    }
-                  }
-                });
-                document
-                  .querySelector(".search-form")
-                  .addEventListener("submit", (event) => {
-                    event.preventDefault(); // デフォルトの送信を防止
-                    // タグ名とクエリパラメータのマッピング
-                    const tagQueryMap = {
-                      初心者向け: "1",
-                      中級者向け: "2",
-                      上級者向け: "3",
-                      文学・評論: "4",
-                      ビジネス: "5",
-                      AWS: "6",
-                      自己啓発: "7",
-                      暮らし・健康: "8",
-                      アート・デザイン: "9",
-                      インフラ系: "10",
-                      アプリ: "11",
-                      コンサル: "12",
-                      営業: "13",
-                      マネジメント: "14",
-                      データ: "15",
-                      // 必要に応じて追加
-                    };
-                    // 選択されたタグを取得
-          const selectedTags = Array.from(
-            document.querySelectorAll(".tag-badge")
-          ).map((badge) => badge.dataset.tag);
-
-          // 対応するIDを取得
-          const selectedIds = selectedTags
-            .map((tag) => tagQueryMap[tag])
-            .filter((id) => id !== undefined);
-
-          // クエリパラメータを生成
-          const queryString = selectedIds.length > 0 ? `?tags=${selectedIds.join(",")}` : "";
-
-          // URLを設定して送信
-          const form = event.target;
-          const targetUrl = `/resources/booksearch.html${queryString}`;
-          window.location.href = targetUrl;
-                  });
-        </script>
-
-        <!-- 右側：貸出履歴表示 -->
+        <!-- 右側：貸出履歴とマイページ -->
         <div class="d-flex align-items-center gap-1">
           <a
             href="/resources/booklog.html"
             class="d-flex align-items-center text-decoration-none hover-outline rounded px-2"
           >
-            <i class="bi bi-book fs-5 text-white me-2"></i>
-            <span class="text-white fw-light">貸出履歴</span>
+            <i class="bi bi-book fs-5 text-white me-2"></i
+            ><span class="text-white fw-light">貸出履歴</span>
           </a>
           <a
-            href="/resources/mypage.html"
+            href="/resources/mypage.html?id=7"
             class="d-flex align-items-center text-decoration-none hover-outline rounded px-2"
           >
-            <i class="bi bi-person-circle fs-5 text-white me-2"></i>
-            <span id="loginMember" class="text-white fw-light"></span>
+            <i class="bi bi-person-circle fs-5 text-white me-2"></i
+            ><span id="loginMember" class="text-white fw-light"></span>
           </a>
         </div>
       </div>
     </nav>
 
-    <!-- タイトルとプルダウンを同じ段に表示 -->
+    <!-- タイトルとソートメニュー -->
     <div class="container mt-4 mb-4" style="max-width: 1200px">
       <div class="position-relative">
-        <!-- タイトル（中央揃え） -->
         <h1 class="text-center">
           <span id="selectedCategory"></span>の検索結果（<span
             id="resultBooksNumber"
           ></span
           >件）
         </h1>
-
-        <!-- プルダウンメニュー（右上に配置、PC表示） -->
         <div class="d-none d-md-block position-absolute top-0 end-0 mt-2 me-2">
           <select
-            class="form-select form-select w-auto"
+            class="form-select w-auto"
             id="sortSelect"
             onchange="handleSortChange()"
           >
@@ -352,39 +215,18 @@
             <option value="low">評価の低い順</option>
           </select>
         </div>
-
-        <!-- スマホ用：下に表示（右寄せ） -->
-        <div class="d-block d-md-none mt-3">
-          <div class="d-flex justify-content-end w-100">
-            <select
-              class="form-select form-select w-auto"
-              id="sortSelectMobile"
-              onchange="handleSortChange()"
-            >
-              <option value="none" selected>おすすめ順</option>
-              <option value="high">評価の高い順</option>
-              <option value="low">評価の低い順</option>
-            </select>
-          </div>
-        </div>
       </div>
     </div>
 
-    <!-- 検索結果カード -->
+    <!-- 検索結果 -->
     <div id="searchResult" class="container"></div>
 
     <!-- 借りる確認モーダル -->
-    <div
-      class="modal fade"
-      id="borrowModal"
-      tabindex="-1"
-      aria-labelledby="borrowModalLabel"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="borrowModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="borrowModalLabel">確認画面</h5>
+            <h5 class="modal-title">確認画面</h5>
             <button
               type="button"
               class="btn-close"
@@ -394,10 +236,8 @@
           </div>
           <div class="modal-body">
             <p><strong>この本を借りますか？</strong></p>
-            <strong>タイトル：</strong>
-            図解AWSの仕組みとサービスがよく分かる！
+            <strong>タイトル：</strong>図解AWSの仕組みとサービスがよく分かる！
           </div>
-
           <div class="modal-footer">
             <button
               type="button"
@@ -425,15 +265,12 @@
       class="modal fade"
       id="borrowResultModal"
       tabindex="-1"
-      aria-labelledby="borrowResultModalLabel"
       aria-hidden="true"
     >
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="borrowResultModalLabel">
-              以下の本を借りました
-            </h5>
+            <h5 class="modal-title">以下の本を借りました</h5>
             <button
               type="button"
               class="btn-close"
@@ -443,10 +280,8 @@
           </div>
           <div class="modal-body">
             <p>
-              <strong>タイトル：</strong>
-              図解AWSの仕組みとサービスがよく分かる！
+              <strong>タイトル：</strong>図解AWSの仕組みとサービスがよく分かる！
             </p>
-
             <strong>返却期限：</strong> 2025/09/30
           </div>
           <div class="modal-footer">
@@ -464,215 +299,6 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-      // モーダル閉じたあとにページ遷移
-      const closeBtn = document.getElementById("closeAndRedirectBtn");
-      const modalElement = document.getElementById("borrowResultModal");
-
-      modalElement.addEventListener("hidden.bs.modal", function () {
-        window.location.href = "/resources/Borrowed/booksearch.html";
-      });
-    </script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const badges = document.querySelectorAll(".badge");
-
-        badges.forEach(function (badge) {
-          if (badge.textContent.trim() === "初心者向け") {
-            badge.style.cursor = "pointer"; // 見た目でクリックできることを示す
-            badge.addEventListener("click", function () {
-              window.location.href = "booksearchEasy.html";
-            });
-          }
-          if (badge.textContent.trim() === "AWS") {
-            badge.style.cursor = "pointer"; // 見た目でクリックできることを示す
-            badge.addEventListener("click", function () {
-              window.location.href = "booksearch.html";
-            });
-          }
-        });
-      });
-
-      /**
-       * 検索結果の書籍を表示
-       */
-      // URLパラメータからカテゴリIDを取得
-      const params = new URLSearchParams(window.location.search);
-      const tagIds = (params.get("tags") || "")
-        .split(",")
-        .map((id) => parseInt(id))
-        .filter((id) => !isNaN(id));
-
-      // 書籍データを取得してカードを生成
-      Promise.all([
-        fetch("http://localhost:3000/books").then((res) => res.json()),
-        fetch("http://localhost:3000/categories").then((res) => res.json()),
-      ])
-        .then(([books, categories]) => {
-          const container = document.getElementById("searchResult");
-          container.innerHTML = "";
-
-          // categories を id: name のマップにする
-          const categoryMap = {};
-          categories.forEach((cat) => {
-            categoryMap[cat.id] = cat.category;
-          });
-
-          // 🔹 選択されたタグIDをすべて含む本だけ残す (AND検索)
-          let filteredBooks = books;
-          if (tagIds.length > 0) {
-            filteredBooks = books.filter((book) =>
-              tagIds.every((tagId) => book.category.includes(tagId))
-            );
-          }
-
-          filteredBooks.forEach((book) => {
-            // 星アイコン
-            const stars = [];
-            const fullStars = Math.floor(book.stars);
-            const hasHalf = book.stars % 1 !== 0;
-
-            for (let i = 0; i < fullStars; i++) {
-              stars.push('<i class="bi bi-star-fill text-warning"></i>');
-            }
-            if (hasHalf)
-              stars.push('<i class="bi bi-star-half text-warning"></i>');
-            while (stars.length < 5) {
-              stars.push('<i class="bi bi-star text-warning"></i>');
-            }
-
-            // 貸出状況（-1は非表示）
-            const libraryStatus = [
-              { name: "虎ノ門", status: book.library1 },
-              { name: "新川", status: book.library2 },
-              { name: "みなとみらい", status: book.library3 },
-            ]
-              .filter((lib) => lib.status !== "-1")
-              .map(
-                (lib) => `
-      <div class="d-flex justify-content-between align-items-center border-bottom py-2">
-        <span>${lib.name}</span>
-        <span class="badge ${
-          lib.status === "1" ? "bg-success" : "bg-danger"
-        } badge-fixed"
-          ${
-            lib.status === "1"
-              ? 'data-bs-toggle="modal" data-bs-target="#borrowModal"'
-              : ""
-          }>
-          ${lib.status === "1" ? "借りる" : "貸出中"}
-        </span>
-      </div>
-    `
-              )
-              .join("");
-
-            // カテゴリ（複数対応）
-            const categoryBadges = (book.category || [])
-              .map((catId) => {
-                const name = categoryMap[catId];
-                return name
-                  ? `<span class="badge rounded-pill badge-outline me-1">${name}</span>`
-                  : "";
-              })
-              .join("");
-
-            // カードHTML
-            const card = `
-    <div class="card card-hover search-card mb-4 shadow-sm border-0"
-         onclick="window.location.href='bookDetail.html?id=${book.id}'"
-         style="cursor: pointer;">
-      <div class="row g-0 align-items-stretch">
-        <!-- 画像 -->
-        <div class="col-md-3 d-flex justify-content-center align-items-center py-2 px-1 border-end">
-          <img src="${book.image}" class="img-fluid rounded" alt="蔵書画像" />
-        </div>
-
-        <!-- タイトル・評価・カテゴリ -->
-        <div class="col-md-6 p-3 border-end text-block">
-          <h4 class="fw-bold mb-2 title-clamp-2">${book.title}</h4>
-          <p class="rating mb-2">
-            <strong>評価：</strong>
-            ${stars.join("")}
-            <span class="text-muted small mx-1">${book.stars} (${
-              book.reviews
-            }件)</span>
-          </p>
-          <p class="card-text tag-group">${categoryBadges}</p>
-        </div>
-
-        <!-- 貸出状況 -->
-        <div class="col-md-3 d-flex flex-column justify-content-center p-3">
-          ${libraryStatus}
-        </div>
-      </div>
-    </div>
-  `;
-
-            container.insertAdjacentHTML("beforeend", card);
-          });
-
-          // 該当書籍なし
-          if (filteredBooks.length === 0) {
-            container.innerHTML =
-              "<p class='text-muted'>該当する本が見つかりませんでした。</p>";
-          }
-        })
-        .catch((err) => console.error("データ取得エラー:", err));
-
-      /**
-       * ログイン中のメンバーを表示
-       */
-      const memberId = 7;
-      const booksEndpoint = `http://localhost:3000/members/${memberId}`;
-      fetch(booksEndpoint)
-        .then((res) => res.json())
-        .then((member) => {
-          document.getElementById("loginMember").textContent = member.name;
-        });
-
-      /**
-       * 検索結果のカテゴリ表示
-       */
-      fetch("http://localhost:3000/categories")
-        .then((res) => res.json())
-        .then((categories) => {
-          const params = new URLSearchParams(window.location.search);
-          const tagIds = (params.get("tags") || "")
-            .split(",")
-            .map((id) => parseInt(id, 10))
-            .filter((id) => !isNaN(id));
-
-          const selectedNames = categories
-            .filter((cat) => tagIds.includes(Number(cat.id))) // 🔹ここを修正
-            .map((cat) => `「${cat.category}」`);
-
-          document.getElementById("selectedCategory").textContent =
-            selectedNames.join("") || "すべて";
-        });
-
-      /**
-       * 表示件数
-       */
-      fetch("http://localhost:3000/books")
-        .then((res) => res.json())
-        .then((books) => {
-          const params = new URLSearchParams(window.location.search);
-          const tagIds = (params.get("tags") || "")
-            .split(",")
-            .map((id) => parseInt(id))
-            .filter((id) => !isNaN(id));
-
-          let filteredBooks = books;
-          if (tagIds.length > 0) {
-            filteredBooks = books.filter((book) =>
-              tagIds.every((tagId) => book.category.includes(tagId))
-            );
-          }
-
-          document.getElementById("resultBooksNumber").textContent =
-            filteredBooks.length;
-        });
-    </script>
+    <script src="/js/booksearch.js"></script>
   </body>
 </html>
