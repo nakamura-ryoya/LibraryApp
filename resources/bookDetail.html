@@ -743,8 +743,7 @@
        * レビュー一覧と平均評価を表示
        * @param {number} bookId - 本のID
        */
-      // const bookId = 1; 上で使っているのでコメントアウト
-      const reviewsEndpoint = `http://localhost:3000/reviews?bookId=${bookId}`;
+      const reviewsEndpoint = `http://localhost:3000/reviews?bookId=${id}`; // 例外処理は無
       const membersEndpoint = `http://localhost:3000/members`;
 
       let members = [];
