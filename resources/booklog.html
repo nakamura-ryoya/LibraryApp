@@ -27,53 +27,307 @@
         style="max-width: 1200px; margin: auto"
       >
         <!-- 左側：システム名 -->
-        <a
-          class="navbar-brand fw-bold text-white"
-          href="/resources/toppage.html"
-        >
-          <i class="bi bi-star-fill text-warning"></i>NSLibrary<i
-            class="bi bi-star-fill text-warning"
-          ></i>
-        </a>
-
+        <div class="col-4 col-md-3">
+          <a
+            class="navbar-brand fw-bold text-white"
+            href="/resources/toppage.html"
+          >
+            <i class="bi bi-star-fill text-warning"></i>NSLibrary<i
+              class="bi bi-star-fill text-warning"
+            ></i>
+          </a>
+        </div>
         <!-- 中央：検索フォーム（伸縮対応） -->
-        <form
-          class="d-flex search-form mx-3"
-          role="search"
-          action="/resources/booksearch.html"
-        >
-          <input
-            id="searchInput"
-            type="text"
-            class="form-control me-2"
-            placeholder="書籍名・著者名など"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-light" type="submit">
-            <i class="bi bi-search"></i>
-          </button>
-        </form>
+        <div class="col-12 col-md-6 position-relative px-2">
+          <!-- 入力欄をdivに変更し、hidden inputを追加 -->
+          <form
+            class="d-flex search-form"
+            role="search"
+            action="/resources/booksearch.html"
+          >
+            <!-- バッジ表示領域と実際の入力欄を分ける -->
+            <div
+              id="badgeInput"
+              class="form-control me-2 d-flex flex-wrap align-items-center"
+              style="min-height: 38px; cursor: text"
+              onclick="searchInput.focus()"
+            >
+              <!-- バッジがここに追加される -->
+              <input
+                id="searchInput"
+                type="text"
+                class="border-0 flex-grow-1"
+                style="outline: none"
+                placeholder="書籍名・著者名など"
+              />
+            </div>
+            <input type="hidden" name="tags" id="hiddenTags" />
+            <button class="btn btn-outline-light" type="submit">
+              <i class="bi bi-search"></i>
+            </button>
+          </form>
 
-        <!-- 右側：ログインユーザー表示 -->
-        <div class="d-flex align-items-center user-info">
-          <i class="bi bi-person-circle fs-4 text-white me-2"></i>
-          <span id="memberName" class="text-white fw-light"></span>
+          <!-- タグボタン表示 -->
+          <div
+            id="tagContainer"
+            class="bg-light border rounded p-3 mt-2 shadow-sm"
+            style="display: none; position: absolute; width: 100%; z-index: 10"
+          >
+            <div class="mb-2 fw-bold">難易度</div>
+            <div class="d-flex flex-wrap gap-2 mb-3">
+              <button
+                type="button"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
+              >
+                初心者向け
+              </button>
+              <button
+                type="button"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
+              >
+                中級者向け
+              </button>
+              <button
+                type="button"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
+              >
+                上級者向け
+              </button>
+            </div>
+
+            <div class="mb-2 fw-bold">ジャンル</div>
+            <div class="d-flex flex-wrap gap-2 mb-3">
+              <button
+                type="button"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
+              >
+                文学・評論
+              </button>
+              <button
+                type="button"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
+              >
+                ビジネス
+              </button>
+              <button
+                type="button"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
+              >
+                AWS
+              </button>
+              <button
+                type="button"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
+              >
+                自己啓発
+              </button>
+              <button
+                type="button"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
+              >
+                暮らし・健康
+              </button>
+              <button
+                type="button"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
+              >
+                アート・デザイン
+              </button>
+            </div>
+
+            <div class="mb-2 fw-bold">職種</div>
+            <div class="d-flex flex-wrap gap-2">
+              <button
+                type="button"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
+              >
+                インフラ系
+              </button>
+              <button
+                type="button"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
+              >
+                アプリ
+              </button>
+              <button
+                type="button"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
+              >
+                コンサル
+              </button>
+              <button
+                type="button"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
+              >
+                営業
+              </button>
+              <button
+                type="button"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
+              >
+                マネジメント
+              </button>
+              <button
+                type="button"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
+              >
+                データ
+              </button>
+            </div>
+          </div>
         </div>
         <script>
-          // 例: ログイン中ユーザーID = 1 と仮定
-          const userId = 7;
-          const endpoint = `http://localhost:3000/members/${userId}`;
+                const tagContainer = document.getElementById("tagContainer");
+                const badgeInput = document.getElementById("badgeInput");
+                const hiddenTags = document.getElementById("hiddenTags");
 
-          fetch(endpoint)
-            .then((res) => res.json())
-            .then((member) => {
-              document.getElementById("memberName").textContent = member.name;
-            })
-            .catch((err) => console.error("Error fetching member:", err));
+                searchInput.addEventListener("focus", () => {
+                  tagContainer.style.display = "block";
+                });
+
+                document.addEventListener("click", (event) => {
+                  const isClickInside =
+                    badgeInput.contains(event.target) ||
+                    tagContainer.contains(event.target);
+                  if (!isClickInside) {
+                    tagContainer.style.display = "none";
+                  }
+                });
+
+                function updateHiddenTags() {
+                  const tags = Array.from(
+                    badgeInput.querySelectorAll(".tag-badge")
+                  ).map((b) => b.dataset.tag);
+                  hiddenTags.value = tags.join(" ");
+                }
+
+                function updateTagButtonStyles() {
+                  const selectedTags = Array.from(
+                    badgeInput.querySelectorAll(".tag-badge")
+                  ).map((b) => b.dataset.tag);
+
+                  document.querySelectorAll(".tag-btn").forEach((button) => {
+                    const tag = button.textContent.trim();
+                    if (selectedTags.includes(tag)) {
+                      button.classList.add("tag-btn-selected");
+                    } else {
+                      button.classList.remove("tag-btn-selected");
+                    }
+                  });
+                }
+
+                function toggleTagBadge(tag) {
+                  const existingBadge = Array.from(
+                    badgeInput.querySelectorAll(".tag-badge")
+                  ).find((b) => b.dataset.tag === tag);
+
+                  if (existingBadge) {
+                    existingBadge.remove();
+                  } else {
+                    const badge = document.createElement("span");
+                    badge.className =
+                      "badge rounded-pill badge-outline me-1 tag-badge";
+                    badge.dataset.tag = tag;
+                    badge.innerHTML = `${tag} <span class="ms-1 remove-btn" style="cursor:pointer;">&times;</span>`;
+
+                    badge
+                      .querySelector(".remove-btn")
+                      .addEventListener("click", (event) => {
+                        event.stopPropagation();
+                        badge.remove();
+                        updateHiddenTags();
+                        updateTagButtonStyles();
+                      });
+
+                    badgeInput.insertBefore(badge, searchInput);
+                  }
+
+                  updateHiddenTags();
+                  updateTagButtonStyles();
+                }
+
+                document.querySelectorAll(".tag-btn").forEach((button) => {
+                  button.addEventListener("click", () => {
+                    const tag = button.textContent.trim();
+                    toggleTagBadge(tag);
+                  });
+                });
+                searchInput.addEventListener("keydown", (event) => {
+                  if (
+                    event.key === "Backspace" &&
+                    searchInput.value === "" // 入力欄が空のとき
+                  ) {
+                    const tagBadges = badgeInput.querySelectorAll(".tag-badge");
+                    if (tagBadges.length > 0) {
+                      const lastBadge = tagBadges[tagBadges.length - 1];
+                      lastBadge.remove();
+                      updateHiddenTags();
+                      updateTagButtonStyles();
+                    }
+                  }
+                });
+                document
+                  .querySelector(".search-form")
+                  .addEventListener("submit", (event) => {
+                    event.preventDefault(); // デフォルトの送信を防止
+                    // タグ名とクエリパラメータのマッピング
+                    const tagQueryMap = {
+                      初心者向け: "1",
+                      中級者向け: "2",
+                      上級者向け: "3",
+                      文学・評論: "4",
+                      ビジネス: "5",
+                      AWS: "6",
+                      自己啓発: "7",
+                      暮らし・健康: "8",
+                      アート・デザイン: "9",
+                      インフラ系: "10",
+                      アプリ: "11",
+                      コンサル: "12",
+                      営業: "13",
+                      マネジメント: "14",
+                      データ: "15",
+                      // 必要に応じて追加
+                    };
+                    // 選択されたタグを取得
+          const selectedTags = Array.from(
+            document.querySelectorAll(".tag-badge")
+          ).map((badge) => badge.dataset.tag);
+
+          // 対応するIDを取得
+          const selectedIds = selectedTags
+            .map((tag) => tagQueryMap[tag])
+            .filter((id) => id !== undefined);
+
+          // クエリパラメータを生成
+          const queryString = selectedIds.length > 0 ? `?tags=${selectedIds.join(",")}` : "";
+
+          // URLを設定して送信
+          const form = event.target;
+          const targetUrl = `/resources/booksearch.html${queryString}`;
+          window.location.href = targetUrl;
+                  });
         </script>
+
+        <!-- 右側：貸出履歴表示 -->
+        <div class="d-flex align-items-center gap-1">
+          <a
+            href="/resources/booklog.html"
+            class="d-flex align-items-center text-decoration-none hover-outline rounded px-2"
+          >
+            <i class="bi bi-book fs-5 text-white me-2"></i>
+            <span class="text-white fw-light">貸出履歴</span>
+          </a>
+          <a
+            href="/resources/mypage.html"
+            class="d-flex align-items-center text-decoration-none hover-outline rounded px-2"
+          >
+            <i class="bi bi-person-circle fs-5 text-white me-2"></i>
+            <span class="text-white fw-light">石倉 加菜子</span>
+          </a>
+        </div>
       </div>
     </nav>
-
     <!-- 検索結果タイトル -->
     <h1 class="text-center mb-4 mt-4">貸出履歴</h1>
 

@@ -448,6 +448,8 @@ h1 {
 ============================= */
 .splide__list {
   transition: transform 0.8s ease-in-out !important;
+  display: flex;
+  justify-content: flex-start; /* 左寄せ */
 }
 
 /* =============================
@@ -460,6 +462,19 @@ h1 {
 
 .rating-link:hover span.text-muted {
   color: inherit !important;
+}
+
+/* =============================
+   mypageの本のタイトルリンクのホバー表現
+============================= */
+.review-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.review-link:hover {
+  color: blue;
+  text-decoration: underline;
 }
 
 /* =============================
