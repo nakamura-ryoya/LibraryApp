@@ -435,6 +435,15 @@ h1 {
   position: relative;
   top: 10px; /* 2pxだけ下にずらす（お好みで調整） */
 }
+.title-clamp-1 {
+  display: box;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* 表示する最大行数 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 1.5em; /* 2行分の高さを確保 */
+  max-height: 1.5em; /* 2行分の高さを確保 */
+}
 .title-clamp-2 {
   display: box;
   display: -webkit-box;
@@ -569,4 +578,27 @@ a.text-decoration-none:focus,
 a.text-decoration-none:active {
   text-decoration: none; /* ホバー時も下線なし */
   color: inherit; /* ホバー時も色変更なし */
+}
+
+/* =============================
+   借りましたアラート
+============================= */
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.toast.animate-slide-up {
+  animation: slideUp 0.4s ease-out;
+}
+
+.toast.custom-width {
+  width: 750px; /* 任意のpx指定 */
+  max-width: 90vw; /* 画面幅に応じて制限 */
 }
