@@ -118,6 +118,7 @@ h1 {
 .badge {
   position: relative;
   z-index: 2;
+  cursor: pointer;
 }
 
 .badge.bg-success {

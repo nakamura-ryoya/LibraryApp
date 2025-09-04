@@ -553,7 +553,7 @@
              const splideList = document.querySelector(".splide__list");
              splideList.innerHTML = "";
 
-             // OR検索：いずれかのタグIDを含む本を表示
+             // AND検索：すべてのタグIDを含む本を表示
              const filteredBooks = books.filter((book) =>
                tagIds.every((tagId) => book.category.includes(tagId))
              );
