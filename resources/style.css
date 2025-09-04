@@ -448,6 +448,8 @@ h1 {
 ============================= */
 .splide__list {
   transition: transform 0.8s ease-in-out !important;
+  display: flex;
+  justify-content: flex-start; /* 左寄せ */
 }
 
 /* =============================
