@@ -297,7 +297,15 @@ Promise.all([
 
     // カードクリックで詳細ページへ遷移
     document.querySelectorAll(".search-card").forEach((card) => {
-      card.addEventListener("click", () => {
+      card.addEventListener("click", (e) => {
+        // 借りる・貸出中ボタンやモーダル用の要素がクリックされた場合は除外
+        if (
+          e.target.closest(".badge-fixed") || // 貸出ステータスのボタン
+          e.target.closest("[data-bs-toggle]") // モーダルを開く要素
+        ) {
+          return; // 詳細画面に飛ばさない
+        }
+
         const id = card.getAttribute("data-id");
         window.location.href = `/resources/bookDetail.html?id=${id}`;
       });
