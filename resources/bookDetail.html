@@ -520,7 +520,7 @@
           // カテゴリをバッジ形式で表示
           const categoryContainer = document.getElementById("book-categories");
 
-          // ★ここに追加する！
+          // ★ここにお気に入りに追加or削除ボタンのHTMLを追加する！
           const favoritesKey = "favorites";
           let favorites = JSON.parse(localStorage.getItem(favoritesKey)) || [];
           const isFavorite = favorites.includes(book.id);
