@@ -441,6 +441,7 @@ document.addEventListener("click", (e) => {
         )
         .then(() => {
           selectedLocation = location;
+          renderLibraryList();
           showBorrowToast(title, bookId);
         });
     })
@@ -462,9 +463,9 @@ function showBorrowToast(title, bookId) {
 
   const toast = document.createElement("div");
   toast.className =
-    "toast fade show text-bg-secondary border-0 fs-6 px-4 py-3 rounded shadow";
+    "toast fade animate-slide-up align-items-center custom-width text-bg-secondary border-0 show fs-5 px-4 py-3 rounded shadow";
   toast.innerHTML = `
-    <div class="d-flex justify-content-between align-items-center w-100">
+    <div class="d-flex justify-content-between align-items-center">
       <div class="toast-body"><strong>『${title}』を借りました。</strong></div>
       <button type="button" class="btn btn-outline-light me-2" id="cancelBorrow">取り消す</button>
       <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
@@ -491,7 +492,8 @@ function showBorrowToast(title, bookId) {
       })
       .then(() => {
         toast.remove();
-        alert("借りる処理を取り消しました");
+        renderLibraryList();
+        showToast("借りる処理を取り消しました", "outline-secondary");
         lastLogId = null;
       })
       .catch(() => alert("取り消しに失敗しました"));
@@ -499,3 +501,39 @@ function showBorrowToast(title, bookId) {
 
   new bootstrap.Toast(toast, { autohide: false }).show();
 }
+
+function renderLibraryList() {
+  fetch("http://localhost:3000/books")
+    .then((res) => res.json())
+    .then((books) => {
+      filteredBooks = books; // 必要に応じてフィルタリング処理を追加
+      renderBooks(filteredBooks, allCategories);
+    })
+    .catch((err) => {
+      console.error("蔵書情報の取得に失敗:", err);
+      alert("蔵書情報の取得に失敗しました");
+    });
+}
+
+
+function showToast(message, type = "dark") {
+        const toastContainer = document.getElementById("toast-container");
+
+        const toast = document.createElement("div");
+        toast.className = `toast fade animate-slide-up custom-width align-items-center text-bg-${type} border-0 show fs-5 px-4 py-3 rounded shadow`;
+        toast.setAttribute("role", "alert");
+        toast.setAttribute("aria-live", "assertive");
+        toast.setAttribute("aria-atomic", "true");
+
+        toast.innerHTML = `
+          <div class="d-flex">
+            <div class="toast-body">${message}</div>
+            <button type="button" class="btn-close btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+        `;
+
+        toastContainer.appendChild(toast);
+
+        const bsToast = new bootstrap.Toast(toast, { delay: 3000 });
+        bsToast.show();
+      }

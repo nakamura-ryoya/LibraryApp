@@ -1201,14 +1201,6 @@
       "stars": 5,
       "difficulty": 0,
       "comment": ""
-    },
-    {
-      "id": "53",
-      "memberId": 7,
-      "bookId": 2,
-      "stars": 1,
-      "difficulty": 2,
-      "comment": "uyyyghcj"
     }
   ],
   "categories": [
@@ -1331,24 +1323,5 @@
       "position": "副主任"
     }
   ],
-  "logs": [
-    {
-      "id": "1",
-      "memberId": 7,
-      "bookId": 2,
-      "loanDate": "2025/09/02",
-      "returnDate": "",
-      "returnLocation": "虎ノ門オフィス",
-      "returnFlag": false
-    },
-    {
-      "id": "2",
-      "memberId": 7,
-      "bookId": 5,
-      "loanDate": "2025/09/01",
-      "returnDate": "2025/09/10",
-      "returnLocation": "渋谷オフィス",
-      "returnFlag": true
-    }
-  ]
+  "logs": []
 }
