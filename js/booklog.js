@@ -177,6 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const filteredLogs = logs.filter(
         (log) => log.memberId === Number(member.id)
       );
+      filteredLogs.sort((a, b) => new Date(b.loanDate) - new Date(a.loanDate));
       console.log(filteredLogs);
 
       filteredLogs.forEach((log) => {
