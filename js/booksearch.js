@@ -246,6 +246,21 @@ function renderBooks(books, categories) {
       })
       .join("");
 
+      // お気に入り追加or削除
+      const favoritesKey = "favorites";
+let favorites = JSON.parse(localStorage.getItem(favoritesKey)) || [];
+const isFavorite = favorites.includes(book.id);
+
+const buttonHTML = isFavorite
+  ? `<button class="btn btn-outline-secondary btn-sm mt-2 remove-favorite" data-id="${book.id}"
+  style="width: 170px;">
+       <i class="bi bi-x"></i> お気に入りから削除
+     </button>`
+  : `<button class="btn btn-outline-danger btn-sm mt-2 favorite-btn" data-id="${book.id}"
+  style="width: 170px;">
+       <i class="bi bi-heart"></i> お気に入りに追加
+     </button>`;
+
     // カードHTML
     const card = `
       <div class="card card-hover search-card mb-4 shadow-sm border-0" style="cursor: pointer" data-id="${book.id}">
@@ -261,6 +276,7 @@ function renderBooks(books, categories) {
               <span class="text-muted small mx-1">${book.stars} (${book.reviews}件)</span>
             </p>
             <p class="card-text tag-group">${categoryBadges}</p>
+             ${buttonHTML} 
           </div>
           <div class="col-md-3 d-flex flex-column justify-content-center p-3">
             ${libraryStatus}
@@ -293,7 +309,9 @@ function renderBooks(books, categories) {
   // カードクリックで詳細ページへ遷移
   document.querySelectorAll(".search-card").forEach((card) => {
     card.addEventListener("click", (e) => {
-      if (e.target.closest(".badge-fixed") || e.target.closest("[data-bs-toggle]")) {
+      if (e.target.closest(".badge-fixed") || e.target.closest("[data-bs-toggle]") ||   e.target.closest(".favorite-btn") || // ← 追加！
+    e.target.closest(".remove-favorite") // ← 追加！
+) {
         return;
       }
       const id = card.getAttribute("data-id");
