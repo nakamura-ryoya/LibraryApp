@@ -58,7 +58,7 @@ h1 {
   transition: transform 0.3s ease, box-shadow 0.3s ease,
     background-color 0.3s ease;
   will-change: transform;
-  margin: auto;
+  /* margin: auto; */
   max-width: 1000px;
 }
 
