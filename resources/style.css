@@ -58,7 +58,7 @@ h1 {
   transition: transform 0.3s ease, box-shadow 0.3s ease,
     background-color 0.3s ease;
   will-change: transform;
-  margin: auto;
+  /* margin: auto; */
   max-width: 1000px;
 }
 
@@ -168,6 +168,7 @@ h1 {
 .btn.bg-primary:active {
   transform: translateY(-4px) scale(1.05);
   box-shadow: 0 6px 12px rgba(0, 41, 128 0.4);
+  color: white;
 }
 
 .badge-outline-success {

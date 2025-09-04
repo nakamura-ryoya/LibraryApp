@@ -224,10 +224,14 @@ function renderBooks(books, categories) {
       .map((lib) => `
         <div class="d-flex justify-content-between align-items-center border-bottom py-2">
           <span>${lib.name}</span>
-          <span class="badge ${lib.status === "1" ? "bg-success" : "bg-danger"} badge-fixed"
-            ${lib.status === "1" ? 'data-bs-toggle="modal" data-bs-target="#borrowModal"' : ""}>
-            ${lib.status === "1" ? "借りる" : "貸出中"}
-          </span>
+          ${lib.status === "1"
+            ? `<span class="badge bg-success badge-fixed borrow-button"
+                  data-book-id="${book.id}"
+                  data-location="${lib.name}"
+                  data-book-title="${book.title}">
+                  借りる
+                </span>`
+            : `<span class="badge bg-danger badge-fixed">貸出中</span>`}
         </div>
       `)
       .join("");
@@ -241,6 +245,21 @@ function renderBooks(books, categories) {
           : "";
       })
       .join("");
+
+      // お気に入り追加or削除
+      const favoritesKey = "favorites";
+let favorites = JSON.parse(localStorage.getItem(favoritesKey)) || [];
+const isFavorite = favorites.includes(book.id);
+
+const buttonHTML = isFavorite
+  ? `<button class="btn btn-outline-secondary btn-sm mt-2 remove-favorite" data-id="${book.id}"
+  style="width: 170px;">
+       <i class="bi bi-x"></i> お気に入りから削除
+     </button>`
+  : `<button class="btn btn-outline-danger btn-sm mt-2 favorite-btn" data-id="${book.id}"
+  style="width: 170px;">
+       <i class="bi bi-heart"></i> お気に入りに追加
+     </button>`;
 
     // カードHTML
     const card = `
@@ -257,6 +276,7 @@ function renderBooks(books, categories) {
               <span class="text-muted small mx-1">${book.stars} (${book.reviews}件)</span>
             </p>
             <p class="card-text tag-group">${categoryBadges}</p>
+             ${buttonHTML} 
           </div>
           <div class="col-md-3 d-flex flex-column justify-content-center p-3">
             ${libraryStatus}
@@ -289,7 +309,9 @@ function renderBooks(books, categories) {
   // カードクリックで詳細ページへ遷移
   document.querySelectorAll(".search-card").forEach((card) => {
     card.addEventListener("click", (e) => {
-      if (e.target.closest(".badge-fixed") || e.target.closest("[data-bs-toggle]")) {
+      if (e.target.closest(".badge-fixed") || e.target.closest("[data-bs-toggle]") ||   e.target.closest(".favorite-btn") || // ← 追加！
+    e.target.closest(".remove-favorite") // ← 追加！
+) {
         return;
       }
       const id = card.getAttribute("data-id");
@@ -335,3 +357,111 @@ function handleSortChange() {
   renderBooks(sortedBooks, allCategories);
 }
 
+let selectedLocation = null;
+let lastLogId = null;
+let currentBook = null;
+
+// 「借りる」ボタンクリック処理
+document.addEventListener("click", (e) => {
+  const target = e.target.closest(".borrow-button");
+  if (!target) return;
+
+  const bookId = Number(target.dataset.bookId);
+  const location = target.dataset.location;
+  const title = target.dataset.bookTitle;
+
+  fetch("http://localhost:3000/logs")
+    .then((res) => res.json())
+    .then((logs) => {
+      const maxId = logs.reduce((max, log) => Math.max(max, log.id || 0), 0);
+      const newId = maxId + 1;
+      lastLogId = String(newId);
+
+      const logData = {
+        id: lastLogId,
+        memberId: 7,
+        bookId: bookId,
+        loanDate: new Date().toISOString().slice(0, 10), // 今日の日付
+        returnDate: null,
+        returnLocation: location,
+        returnFlag: false,
+      };
+
+      // booksテーブルを更新
+      let updateField = {};
+      if (location === "虎ノ門") updateField = { library1: "0" };
+      if (location === "新川") updateField = { library2: "0" };
+      if (location === "みなとみらい") updateField = { library3: "0" };
+
+      return fetch(`http://localhost:3000/books/${bookId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updateField),
+      })
+        .then(() =>
+          fetch("http://localhost:3000/logs", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(logData),
+          })
+        )
+        .then(() => {
+          selectedLocation = location;
+          showBorrowToast(title, bookId);
+        });
+    })
+    .catch((err) => {
+      console.error("借りる処理に失敗:", err);
+      alert("借りる処理に失敗しました");
+    });
+});
+
+// 借りた通知トースト
+function showBorrowToast(title, bookId) {
+  const container = document.getElementById("toast-container") || (() => {
+    const div = document.createElement("div");
+    div.id = "toast-container";
+    div.className = "toast-container position-fixed start-50 translate-middle-x bottom-0 p-3";
+    document.body.appendChild(div);
+    return div;
+  })();
+
+  const toast = document.createElement("div");
+  toast.className =
+    "toast fade show text-bg-secondary border-0 fs-6 px-4 py-3 rounded shadow";
+  toast.innerHTML = `
+    <div class="d-flex justify-content-between align-items-center w-100">
+      <div class="toast-body"><strong>『${title}』を借りました。</strong></div>
+      <button type="button" class="btn btn-outline-light me-2" id="cancelBorrow">取り消す</button>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+    </div>
+  `;
+  container.appendChild(toast);
+
+  // 取り消し処理
+  toast.querySelector("#cancelBorrow").addEventListener("click", () => {
+    if (!lastLogId) return;
+
+    fetch(`http://localhost:3000/logs/${lastLogId}`, { method: "DELETE" })
+      .then(() => {
+        let updateField = {};
+        if (selectedLocation === "虎ノ門") updateField = { library1: "1" };
+        if (selectedLocation === "新川") updateField = { library2: "1" };
+        if (selectedLocation === "みなとみらい") updateField = { library3: "1" };
+
+        return fetch(`http://localhost:3000/books/${bookId}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updateField),
+        });
+      })
+      .then(() => {
+        toast.remove();
+        alert("借りる処理を取り消しました");
+        lastLogId = null;
+      })
+      .catch(() => alert("取り消しに失敗しました"));
+  });
+
+  new bootstrap.Toast(toast, { autohide: false }).show();
+}

@@ -336,6 +336,10 @@
                 ><span id="bookAuthor">Author</span>
               </p>
               <p class="card-text">
+                <strong><i class="bi bi-person"></i> 訳者：</strong
+                ><span id="bookTranslator">Translator</span>
+              </p>
+              <p class="card-text">
                 <strong><i class="bi bi-diagram-2"></i> ISBN：</strong>
                 <span id="bookIsbn">ISBN</span>
               </p>
@@ -499,12 +503,24 @@
           book = bookData;
           document.getElementById("bookTitle").textContent = book.title;
           document.getElementById("bookAuthor").textContent = book.author;
+          document.getElementById("bookTranslator").textContent =
+            book.translator;
           document.getElementById("bookIsbn").textContent = book.isbn;
           document.getElementById("bookYear").textContent = book.year;
           document.getElementById("bookDescription").textContent =
             book.description;
           document.getElementById("bookImage").src = book.image;
           document.getElementById("bookImage").alt = book.title;
+
+          //訳者非表示
+          const translatorElement = document.getElementById("bookTranslator");
+          const translatorBlock = translatorElement.parentElement;
+
+          if (book.translator && book.translator.trim() !== "") {
+            translatorElement.textContent = book.translator;
+          } else {
+            translatorBlock.style.display = "none";
+          }
 
           const categoryIds = Array.isArray(book.category)
             ? book.category
@@ -519,6 +535,20 @@
 
           // カテゴリをバッジ形式で表示
           const categoryContainer = document.getElementById("book-categories");
+
+          // ★ここにお気に入りに追加or削除ボタンのHTMLを追加する！
+          const favoritesKey = "favorites";
+          let favorites = JSON.parse(localStorage.getItem(favoritesKey)) || [];
+          const isFavorite = favorites.includes(book.id);
+
+          const buttonHTML = isFavorite
+            ? `<button class="btn btn-outline-secondary btn-sm mt-2 remove-favorite" data-id="${book.id}">
+         <i class="bi bi-x"></i> お気に入りから削除
+       </button>`
+            : `<button class="btn btn-outline-danger btn-sm mt-2 favorite-btn" data-id="${book.id}">
+         <i class="bi bi-heart"></i> お気に入りに追加
+       </button>`;
+
           categoryContainer.innerHTML = `
             <strong><i class="bi bi-bookshelf"></i> タグ：</strong>
              ${categoryIds
@@ -530,12 +560,8 @@
                  return `<span class="badge rounded-pill badge-outline fs-6 me-1" data-id="${catId}">${name}</span>`;
                })
                .join("")}
-                            <br/><button
-      class="btn btn-outline-danger btn-sm mt-2 favorite-btn"
-      data-id="${book.id}"
-    >
-      <i class="bi bi-heart"></i> お気に入りに追加
-    </button>
+               <!-- ← お気に入りに追加or削除ボタンを表示！ -->
+          <br/>${buttonHTML}
           `;
           // カテゴリバッジをクリック可能にする
           document.addEventListener("click", function (e) {
@@ -695,6 +721,7 @@
               );
               const newId = maxId + 1;
               lastLogId = String(newId);
+
               const logData = {
                 id: lastLogId,
                 memberId: 7,
@@ -704,30 +731,51 @@
                 returnLocation: location,
                 returnFlag: false,
               };
+
               selectedLocation = location;
-              // 状態を更新
+
+              // どのライブラリを更新するか決定
+              let updateField = {};
               if (location === "虎ノ門") {
-                book.library1 = 0;
+                updateField = { library1: "0" };
               } else if (location === "新川") {
-                book.library2 = 0;
+                updateField = { library2: "0" };
               } else if (location === "みなとみらい") {
-                book.library3 = 0;
+                updateField = { library3: "0" };
               }
 
-              // 再描画
-              renderLibraryList();
-              showBorrowAlert(title);
-
-              return fetch("http://localhost:3000/logs", {
-                method: "POST",
+              // booksテーブルをPATCHで更新
+              return fetch(`http://localhost:3000/books/${bookId}`, {
+                method: "PATCH",
                 headers: {
                   "Content-Type": "application/json",
                 },
-                body: JSON.stringify(logData),
-              });
+                body: JSON.stringify(updateField),
+              })
+                .then((res) => {
+                  if (!res.ok) throw new Error("本の状態更新に失敗しました");
+                  return res.json();
+                })
+                .then((updatedBook) => {
+                  // ローカルの book オブジェクトにも反映（必要なら）
+                  Object.assign(book, updatedBook);
+
+                  // 再描画とアラート表示
+                  renderLibraryList();
+                  showBorrowAlert(title);
+
+                  // logsテーブルにPOST
+                  return fetch("http://localhost:3000/logs", {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(logData),
+                  });
+                });
             })
             .catch((err) => {
-              console.error("Error posting log:", err);
+              console.error("Error updating book or posting log:", err);
               alert("借りる処理に失敗しました");
             });
         }
@@ -774,50 +822,62 @@
         toast.setAttribute("aria-atomic", "true");
 
         toast.innerHTML = `
-        <div class="d-flex justify-content-between align-items-center w-100">
-          <div class="toast-body">
-            <strong>『${title}』を借りました。</strong>
-          </div>
-            <button type="button" class="btn btn-outline-light me-2" id="cancelBorrow">取り消す</button>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-      `;
+    <div class="d-flex justify-content-between align-items-center w-100">
+      <div class="toast-body">
+        <strong>『${title}』を借りました。</strong>
+      </div>
+      <button type="button" class="btn btn-outline-light me-2" id="cancelBorrow">取り消す</button>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  `;
 
         toastContainer.appendChild(toast);
 
-        // BootstrapのToastインスタンスを作成（自動消去したい場合は options に delay を指定）
         const bsToast = new bootstrap.Toast(toast, { autohide: false });
         bsToast.show();
 
-        // 取り消しボタンの処理
         toast.querySelector("#cancelBorrow").addEventListener("click", () => {
           if (!lastLogId) return;
 
+          // ログ削除
           fetch(`http://localhost:3000/logs/${lastLogId}`, {
             method: "DELETE",
           })
             .then((res) => {
               if (!res.ok) throw new Error("取り消しに失敗しました");
 
-              // 状態を元に戻す
+              // どのライブラリを元に戻すか決定
+              let updateField = {};
               if (selectedLocation === "虎ノ門") {
-                book.library1 = 1;
+                updateField = { library1: "1" };
               } else if (selectedLocation === "新川") {
-                book.library2 = 1;
+                updateField = { library2: "1" };
               } else if (selectedLocation === "みなとみらい") {
-                book.library3 = 1;
+                updateField = { library3: "1" };
               }
 
+              // booksテーブルをPATCHで更新
+              return fetch(`http://localhost:3000/books/${book.id}`, {
+                method: "PATCH",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(updateField),
+              });
+            })
+            .then((res) => {
+              if (!res.ok) throw new Error("本の状態更新に失敗しました");
+              return res.json();
+            })
+            .then((updatedBook) => {
+              Object.assign(book, updatedBook);
               renderLibraryList();
-
-              // 成功トーストを表示
               showToast("借りる処理を取り消しました", "outline-secondary");
-
               lastLogId = null;
               bsToast.hide();
             })
             .catch((err) => {
-              console.error("Error deleting log:", err);
+              console.error("Error deleting log or updating book:", err);
               alert("取り消しに失敗しました");
             });
         });
@@ -951,7 +1011,7 @@
             <span class="favorite-title"" style="max-width: 160px;">${book.title}</span>
           </a>
           <button class="btn btn-sm btn-outline-secondary remove-favorite" data-id="${book.id}">
-            <i class="bi bi-x"></i>
+            削除
           </button>
         </div>
       `

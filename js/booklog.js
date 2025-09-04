@@ -223,10 +223,10 @@ document.addEventListener("DOMContentLoaded", () => {
                             <small class="text-muted text-center fw-semibold">返却日</small>
                             <h6 class="fw-bold text-center mt-2 mb-0">
                               <span class="returnInfo">
-                                ${log.returnDate || "ー"}<br/>（${
+                                ${log.returnDate || "ー"}</span><br/>（${
           log.returnLocation
         }）
-                              </span>
+                              
                             </h6>
                           </div>
 
