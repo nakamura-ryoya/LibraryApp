@@ -324,6 +324,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const bookId = parseInt(activeCard.getAttribute("data-book-id"));
     const logId = parseInt(activeCard.getAttribute("data-log-id"));
 
+    const btnContainer =
+      activeCard.querySelector(".return-button").parentElement;
+    btnContainer.innerHTML = `<span class="btn btn-outline-success mt-2 mt-sm-0">
+                                      返却済
+                                    </span>`;
+
     fetch("http://localhost:3000/reviews")
       .then((response) => response.json())
       .then((reviews) => {
@@ -423,7 +429,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
   paint(Number(input.value));
 });
-
-// =========================
-// 評価と難易度の入力チェックとモーダル閉じる処理
-// =========================
