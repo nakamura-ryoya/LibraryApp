@@ -478,6 +478,19 @@ h1 {
 }
 
 /* =============================
+   お気に入りゾーンのホバー表現
+============================= */
+favorite-title {
+  color: inherit;
+  text-decoration: none;
+}
+
+.favorite-title:hover {
+  color: blue;
+  text-decoration: underline;
+}
+
+/* =============================
    スクロールバーの調整
 ============================= */
 .scroll-container::-webkit-scrollbar {
