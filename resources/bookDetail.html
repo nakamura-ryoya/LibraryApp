@@ -486,6 +486,7 @@
             }
           });
           // 評価（星）を表示
+          const reviewsEndpoint = `http://localhost:3000/reviews?bookId=${id}`; // 例外処理は無
           const ratingElement = document.getElementById("book-rating");
           ratingElement.innerHTML = `
           <strong>評価：</strong>
@@ -604,11 +605,53 @@
 
             // 念のため表示を有効化
             recommendedSection.style.display = "block";
+            // ★ ここからレビュー取得して評価を表示する処理を追加！
+            const reviewsEndpoint = `http://localhost:3000/reviews?bookId=${id}`;
+
+            fetch(reviewsEndpoint)
+              .then((res) => res.json())
+              .then((reviews) => {
+                const ratingElement = document.getElementById("book-rating");
+                const avgContainer = document.getElementById("average-rating");
+
+                let totalStars = 0;
+                let count = reviews.length;
+
+                reviews.forEach((review) => {
+                  totalStars += review.stars;
+                });
+
+                if (count > 0) {
+                  const avg = (totalStars / count).toFixed(1);
+                  const starsHtml = generateStarRating(avg);
+
+                  // 上部の評価表示
+                  ratingElement.innerHTML = `
+        <strong>評価：</strong>
+        <a href="#review-section" class="rating-link text-warning text-decoration-none">
+          <span class="text-warning">${starsHtml}</span>
+          <span class="text-muted small ms-1">${avg} (${count}件)</span>
+        </a>
+      `;
+
+                  // 下部の平均表示
+                  avgContainer.innerHTML = `
+        <h5>この本の評価</h5>
+        <small class="text-warning fs-4">${starsHtml}</small>
+        <span class="text-muted mx-1">${avg} (${count}件)</span>
+      `;
+                } else {
+                  ratingElement.innerHTML = `
+        <strong>評価：</strong>
+        <span class="text-muted small">レビューがまだありません。</span>
+      `;
+                  avgContainer.innerHTML = `<p class="text-muted">レビューがまだありません。</p>`;
+                }
+              })
+              .catch((err) => console.error("Error fetching reviews:", err));
           }
         })
-        .catch((err) =>
-          console.error("Error fetching book or categories:", err)
-        );
+        .catch((err) => console.error("Error fetching book data:", err));
 
       let selectedLocation = null;
 

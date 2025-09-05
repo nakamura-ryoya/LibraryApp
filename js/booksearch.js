@@ -378,7 +378,15 @@ function renderLibraryList() {
           tagIds.every((tagId) => book.category.includes(tagId))
         );
       }
-      renderBooks(filteredBooks, allCategories);
+      const sortValue = document.getElementById("sortSelect").value;
+
+      let sortedBooks = [...filteredBooks];
+      if (sortValue === "high") {
+        sortedBooks.sort((a, b) => b.stars - a.stars);
+      } else if (sortValue === "low") {
+        sortedBooks.sort((a, b) => a.stars - b.stars);
+      }
+      renderBooks(sortedBooks, allCategories);
     })
     .catch((err) => {
       console.error("蔵書情報の取得に失敗:", err);
