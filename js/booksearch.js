@@ -135,21 +135,6 @@ function renderBooks(books, categories) {
       }
     });
 
-    // お気に入り追加or削除
-    const favoritesKey = "favorites";
-    let favorites = JSON.parse(localStorage.getItem(favoritesKey)) || [];
-    const isFavorite = favorites.includes(book.id);
-
-    const buttonHTML = isFavorite
-      ? `<button class="btn btn-outline-secondary btn-sm mt-2 remove-favorite" data-id="${book.id}"
-  style="width: 170px;">
-       <i class="bi bi-x"></i> お気に入りから削除
-     </button>`
-      : `<button class="btn btn-outline-danger btn-sm mt-2 favorite-btn" data-id="${book.id}"
-  style="width: 170px;">
-       <i class="bi bi-heart"></i> お気に入りに追加
-     </button>`;
-
     // カードHTML
     const card = `
       <div class="card card-hover search-card mb-4 shadow-sm border-0" style="cursor: pointer" data-id="${
@@ -169,7 +154,6 @@ function renderBooks(books, categories) {
     }件)</span>
             </p>
             <p class="card-text tag-group">${categoryBadges}</p>
-             ${buttonHTML} 
           </div>
           <div class="col-md-3 d-flex flex-column justify-content-center p-3">
             ${libraryStatus}
