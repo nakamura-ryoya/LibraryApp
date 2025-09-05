@@ -34,22 +34,20 @@
             ></i>
           </a>
         </div>
-        <!-- 中央：検索フォーム（伸縮対応） -->
+
+        <!-- 中央：検索フォーム -->
         <div class="col-12 col-md-6 position-relative px-2">
-          <!-- 入力欄をdivに変更し、hidden inputを追加 -->
           <form
             class="d-flex search-form"
             role="search"
             action="/resources/booksearch.html"
           >
-            <!-- バッジ表示領域と実際の入力欄を分ける -->
             <div
               id="badgeInput"
               class="form-control me-2 d-flex flex-wrap align-items-center"
               style="min-height: 38px; cursor: text"
               onclick="searchInput.focus()"
             >
-              <!-- バッジがここに追加される -->
               <input
                 id="searchInput"
                 type="text"
@@ -64,7 +62,7 @@
             </button>
           </form>
 
-          <!-- タグボタン表示 -->
+          <!-- タグ選択エリア -->
           <div
             id="tagContainer"
             class="bg-light border rounded p-3 mt-2 shadow-sm"
@@ -80,13 +78,13 @@
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 中級者向け
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 上級者向け
               </button>
@@ -96,13 +94,13 @@
             <div class="d-flex flex-wrap gap-2 mb-3">
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 文学・評論
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 ビジネス
               </button>
@@ -114,19 +112,19 @@
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 自己啓発
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 暮らし・健康
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 アート・デザイン
               </button>
@@ -136,143 +134,59 @@
             <div class="d-flex flex-wrap gap-2">
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 インフラ系
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 アプリ
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 コンサル
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 営業
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 マネジメント
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 データ
               </button>
             </div>
           </div>
         </div>
-        <script>
-          const tagContainer = document.getElementById("tagContainer");
-          const badgeInput = document.getElementById("badgeInput");
-          const hiddenTags = document.getElementById("hiddenTags");
 
-          searchInput.addEventListener("focus", () => {
-            tagContainer.style.display = "block";
-          });
-
-          document.addEventListener("click", (event) => {
-            const isClickInside =
-              badgeInput.contains(event.target) ||
-              tagContainer.contains(event.target);
-            if (!isClickInside) {
-              tagContainer.style.display = "none";
-            }
-          });
-
-          function addTagBadge(tag) {
-            const existingTags = Array.from(
-              badgeInput.querySelectorAll(".tag-badge")
-            ).map((b) => b.dataset.tag);
-            if (existingTags.includes(tag)) return;
-
-            const badge = document.createElement("span");
-            badge.className = "badge rounded-pill badge-outline me-1 tag-badge"; // Bootstrapのバッジクラス
-            badge.dataset.tag = tag;
-            badge.innerHTML = `${tag} <span class="ms-1 remove-btn" style="cursor:pointer;">&times;</span>`;
-
-            badge.querySelector(".remove-btn").addEventListener("click", () => {
-              event.stopPropagation();
-              badge.remove();
-              updateHiddenTags();
-            });
-
-            badgeInput.insertBefore(badge, searchInput); // 入力欄の左に追加
-            updateHiddenTags();
-          }
-
-          function updateHiddenTags() {
-            const tags = Array.from(
-              badgeInput.querySelectorAll(".tag-badge")
-            ).map((b) => b.dataset.tag);
-            hiddenTags.value = tags.join(" ");
-          }
-
-          document.querySelectorAll(".tag-btn").forEach((button) => {
-            button.addEventListener("click", () => {
-              const tag = button.textContent.trim();
-              addTagBadge(tag);
-            });
-          });
-          searchInput.addEventListener("keydown", (event) => {
-            if (
-              event.key === "Backspace" &&
-              searchInput.value === "" // 入力欄が空のとき
-            ) {
-              const tagBadges = badgeInput.querySelectorAll(".tag-badge");
-              if (tagBadges.length > 0) {
-                const lastBadge = tagBadges[tagBadges.length - 1];
-                lastBadge.remove();
-                updateHiddenTags();
-              }
-            }
-          });
-          document
-            .querySelector(".search-form")
-            .addEventListener("submit", (event) => {
-              const tags = Array.from(
-                badgeInput.querySelectorAll(".tag-badge")
-              ).map((b) => b.dataset.tag);
-
-              const form = event.target;
-
-              // 条件分岐で action を変更
-              if (tags.includes("初心者向け") && tags.includes("AWS")) {
-                form.action = "/resources/booksearchEasyAWS.html";
-              } else if (tags.includes("初心者向け")) {
-                form.action = "/resources/booksearchEasy.html";
-              } else {
-                form.action = "/resources/booksearch.html"; // デフォルト
-              }
-            });
-        </script>
-
-        <!-- 右側：貸出履歴表示 -->
+        <!-- 右側：貸出履歴とマイページ -->
         <div class="d-flex align-items-center gap-1">
           <a
             href="/resources/booklog.html"
             class="d-flex align-items-center text-decoration-none hover-outline rounded px-2"
           >
-            <i class="bi bi-book fs-5 text-white me-2"></i>
-            <span class="text-white fw-light">貸出履歴</span>
+            <i class="bi bi-book fs-5 text-white me-2"></i
+            ><span class="text-white fw-light">貸出履歴</span>
           </a>
           <a
-            href="/resources/mypage.html"
+            href="/resources/mypage.html?id=7"
             class="d-flex align-items-center text-decoration-none hover-outline rounded px-2"
           >
-            <i class="bi bi-person-circle fs-5 text-white me-2"></i>
-            <span id="loginMember" class="text-white fw-light"></span>
+            <i class="bi bi-person-circle fs-5 text-white me-2"></i
+            ><span id="loginMember" class="text-white fw-light"></span>
           </a>
         </div>
       </div>
@@ -1082,5 +996,6 @@
           : "bi bi-chevron-up text-dark";
       });
     </script>
+    <script src="/js/navbar.js"></script>
   </body>
 </html>
