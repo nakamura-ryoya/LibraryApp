@@ -81,13 +81,13 @@
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 中級者向け
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 上級者向け
               </button>
@@ -97,13 +97,13 @@
             <div class="d-flex flex-wrap gap-2 mb-3">
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 文学・評論
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 ビジネス
               </button>
@@ -115,19 +115,19 @@
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 自己啓発
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 暮らし・健康
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 アート・デザイン
               </button>
@@ -137,37 +137,37 @@
             <div class="d-flex flex-wrap gap-2">
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 インフラ系
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 アプリ
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 コンサル
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 営業
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 マネジメント
               </button>
               <button
                 type="button"
-                class="btn badge-outline rounded-pill btn-sm tag-btn-disabled"
+                class="btn badge-outline rounded-pill btn-sm tag-btn"
               >
                 データ
               </button>
@@ -175,88 +175,136 @@
           </div>
         </div>
         <script>
-          const tagContainer = document.getElementById("tagContainer");
-          const badgeInput = document.getElementById("badgeInput");
-          const hiddenTags = document.getElementById("hiddenTags");
+                const tagContainer = document.getElementById("tagContainer");
+                const badgeInput = document.getElementById("badgeInput");
+                const hiddenTags = document.getElementById("hiddenTags");
 
-          searchInput.addEventListener("focus", () => {
-            tagContainer.style.display = "block";
-          });
+                searchInput.addEventListener("focus", () => {
+                  tagContainer.style.display = "block";
+                });
 
-          document.addEventListener("click", (event) => {
-            const isClickInside =
-              badgeInput.contains(event.target) ||
-              tagContainer.contains(event.target);
-            if (!isClickInside) {
-              tagContainer.style.display = "none";
-            }
-          });
+                document.addEventListener("click", (event) => {
+                  const isClickInside =
+                    badgeInput.contains(event.target) ||
+                    tagContainer.contains(event.target);
+                  if (!isClickInside) {
+                    tagContainer.style.display = "none";
+                  }
+                });
 
-          function addTagBadge(tag) {
-            const existingTags = Array.from(
-              badgeInput.querySelectorAll(".tag-badge")
-            ).map((b) => b.dataset.tag);
-            if (existingTags.includes(tag)) return;
+                function updateHiddenTags() {
+                  const tags = Array.from(
+                    badgeInput.querySelectorAll(".tag-badge")
+                  ).map((b) => b.dataset.tag);
+                  hiddenTags.value = tags.join(" ");
+                }
 
-            const badge = document.createElement("span");
-            badge.className = "badge rounded-pill badge-outline me-1 tag-badge"; // Bootstrapのバッジクラス
-            badge.dataset.tag = tag;
-            badge.innerHTML = `${tag} <span class="ms-1 remove-btn" style="cursor:pointer;">&times;</span>`;
+                function updateTagButtonStyles() {
+                  const selectedTags = Array.from(
+                    badgeInput.querySelectorAll(".tag-badge")
+                  ).map((b) => b.dataset.tag);
 
-            badge.querySelector(".remove-btn").addEventListener("click", () => {
-              event.stopPropagation();
-              badge.remove();
-              updateHiddenTags();
-            });
+                  document.querySelectorAll(".tag-btn").forEach((button) => {
+                    const tag = button.textContent.trim();
+                    if (selectedTags.includes(tag)) {
+                      button.classList.add("tag-btn-selected");
+                    } else {
+                      button.classList.remove("tag-btn-selected");
+                    }
+                  });
+                }
 
-            badgeInput.insertBefore(badge, searchInput); // 入力欄の左に追加
-            updateHiddenTags();
-          }
+                function toggleTagBadge(tag) {
+                  const existingBadge = Array.from(
+                    badgeInput.querySelectorAll(".tag-badge")
+                  ).find((b) => b.dataset.tag === tag);
 
-          function updateHiddenTags() {
-            const tags = Array.from(
-              badgeInput.querySelectorAll(".tag-badge")
-            ).map((b) => b.dataset.tag);
-            hiddenTags.value = tags.join(" ");
-          }
+                  if (existingBadge) {
+                    existingBadge.remove();
+                  } else {
+                    const badge = document.createElement("span");
+                    badge.className =
+                      "badge rounded-pill badge-outline me-1 tag-badge";
+                    badge.dataset.tag = tag;
+                    badge.innerHTML = `${tag} <span class="ms-1 remove-btn" style="cursor:pointer;">&times;</span>`;
 
-          document.querySelectorAll(".tag-btn").forEach((button) => {
-            button.addEventListener("click", () => {
-              const tag = button.textContent.trim();
-              addTagBadge(tag);
-            });
-          });
-          searchInput.addEventListener("keydown", (event) => {
-            if (
-              event.key === "Backspace" &&
-              searchInput.value === "" // 入力欄が空のとき
-            ) {
-              const tagBadges = badgeInput.querySelectorAll(".tag-badge");
-              if (tagBadges.length > 0) {
-                const lastBadge = tagBadges[tagBadges.length - 1];
-                lastBadge.remove();
-                updateHiddenTags();
-              }
-            }
-          });
-          document
-            .querySelector(".search-form")
-            .addEventListener("submit", (event) => {
-              const tags = Array.from(
-                badgeInput.querySelectorAll(".tag-badge")
-              ).map((b) => b.dataset.tag);
+                    badge
+                      .querySelector(".remove-btn")
+                      .addEventListener("click", (event) => {
+                        event.stopPropagation();
+                        badge.remove();
+                        updateHiddenTags();
+                        updateTagButtonStyles();
+                      });
 
-              const form = event.target;
+                    badgeInput.insertBefore(badge, searchInput);
+                  }
 
-              // 条件分岐で action を変更
-              if (tags.includes("初心者向け") && tags.includes("AWS")) {
-                form.action = "/resources/booksearchEasyAWS.html";
-              } else if (tags.includes("初心者向け")) {
-                form.action = "/resources/booksearchEasy.html";
-              } else {
-                form.action = "/resources/booksearch.html"; // デフォルト
-              }
-            });
+                  updateHiddenTags();
+                  updateTagButtonStyles();
+                }
+
+                document.querySelectorAll(".tag-btn").forEach((button) => {
+                  button.addEventListener("click", () => {
+                    const tag = button.textContent.trim();
+                    toggleTagBadge(tag);
+                  });
+                });
+                searchInput.addEventListener("keydown", (event) => {
+                  if (
+                    event.key === "Backspace" &&
+                    searchInput.value === "" // 入力欄が空のとき
+                  ) {
+                    const tagBadges = badgeInput.querySelectorAll(".tag-badge");
+                    if (tagBadges.length > 0) {
+                      const lastBadge = tagBadges[tagBadges.length - 1];
+                      lastBadge.remove();
+                      updateHiddenTags();
+                      updateTagButtonStyles();
+                    }
+                  }
+                });
+                document
+                  .querySelector(".search-form")
+                  .addEventListener("submit", (event) => {
+                    event.preventDefault(); // デフォルトの送信を防止
+                    // タグ名とクエリパラメータのマッピング
+                    const tagQueryMap = {
+                      初心者向け: "1",
+                      中級者向け: "2",
+                      上級者向け: "3",
+                      文学・評論: "4",
+                      ビジネス: "5",
+                      AWS: "6",
+                      自己啓発: "7",
+                      暮らし・健康: "8",
+                      アート・デザイン: "9",
+                      インフラ系: "10",
+                      アプリ: "11",
+                      コンサル: "12",
+                      営業: "13",
+                      マネジメント: "14",
+                      データ: "15",
+                      // 必要に応じて追加
+                    };
+                    // 選択されたタグを取得
+          const selectedTags = Array.from(
+            document.querySelectorAll(".tag-badge")
+          ).map((badge) => badge.dataset.tag);
+
+          // 対応するIDを取得
+          const selectedIds = selectedTags
+            .map((tag) => tagQueryMap[tag])
+            .filter((id) => id !== undefined);
+
+          // クエリパラメータを生成
+          const queryString = selectedIds.length > 0 ? `?tags=${selectedIds.join(",")}` : "";
+
+          // URLを設定して送信
+          const form = event.target;
+          const targetUrl = `/resources/booksearch.html${queryString}`;
+          window.location.href = targetUrl;
+                  });
         </script>
 
         <!-- 右側：貸出履歴表示 -->
@@ -269,7 +317,7 @@
             <span class="text-white fw-light">貸出履歴</span>
           </a>
           <a
-            href="/resources/mypage.html"
+            href="/resources/mypage.html?id=7"
             class="d-flex align-items-center text-decoration-none hover-outline rounded px-2"
           >
             <i class="bi bi-person-circle fs-5 text-white me-2"></i>
@@ -318,7 +366,7 @@
     </h1>
 
     <!--表にしてみた-->
-    <div class="card shadow-sm">
+    <div class="card-mypage shadow-sm">
       <div class="card-body">
         <table class="table table-bordered mb-0">
           <tbody>
@@ -384,7 +432,7 @@
       <i class="bi bi-chat-left-text me-2"></i>過去のレビュー
     </h1>
     <!-- レビュー表示カード -->
-    <div class="card shadow-sm mt-4">
+    <div class="card-mypage shadow-sm mt-4">
       <div class="card-body">
         <!-- レビューリスト（ここにJSで追加される） -->
         <div id="reviewList" class="mt-3"></div>
