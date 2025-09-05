@@ -268,6 +268,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+// 確定ボタンを押したときの処理
+// 評価と難易度が選択されているかのチェック
+//
 document.addEventListener("DOMContentLoaded", () => {
   const ratingSelect = document.getElementById("rating");
   const levelRadios = document.querySelectorAll("input[name='level']");
@@ -331,6 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                       返却済
                                     </span>`;
 
+    // reviewsテーブルへの書き込み
     fetch("http://localhost:3000/reviews")
       .then((response) => response.json())
       .then((reviews) => {
@@ -372,11 +376,41 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!res.ok) throw new Error("ログの更新に失敗しました");
         return res.json();
       })
+      // .then((updatedLog) => {
+      //   console.log("ログ更新成功:", updatedLog);
+      //   if (returnInfoEl) {
+      //     returnInfoEl.textContent = formattedDate;
+      //   }
+      //   const modal = bootstrap.Modal.getInstance(
+      //     document.getElementById("returnModal")
+      //   );
+      //   modal.hide();
+      // })
       .then((updatedLog) => {
         console.log("ログ更新成功:", updatedLog);
         if (returnInfoEl) {
           returnInfoEl.textContent = formattedDate;
         }
+
+        // 🟡 返却場所が「虎ノ門」の場合、booksテーブルのlibrary1を"1"に更新
+        if (updatedLog.returnLocation === "虎ノ門") {
+          fetch(`http://localhost:3000/books/${bookId}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ library1: "1" }),
+          })
+            .then((res) => {
+              if (!res.ok) throw new Error("library1の更新に失敗しました");
+              return res.json();
+            })
+            .then((updatedBook) => {
+              console.log("library1更新成功:", updatedBook);
+            })
+            .catch((error) => {
+              console.error("library1更新エラー:", error);
+            });
+        }
+
         const modal = bootstrap.Modal.getInstance(
           document.getElementById("returnModal")
         );
