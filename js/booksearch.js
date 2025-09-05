@@ -518,7 +518,6 @@ function renderLibraryList() {
         tagIds.every((tagId) => book.category.includes(tagId))
       );
     }
-      filteredBooks = books; // 必要に応じてフィルタリング処理を追加
       renderBooks(filteredBooks, allCategories);
     })
     .catch((err) => {
